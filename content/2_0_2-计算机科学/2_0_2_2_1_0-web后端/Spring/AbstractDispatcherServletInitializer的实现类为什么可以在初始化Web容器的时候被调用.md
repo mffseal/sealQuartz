@@ -22,7 +22,7 @@ Servlet3.0环境中，容器会在类路径中查找实现ServletContainerInitia
 Spring提供了这个接口的实现类 SpringServletContainerInitializer , 通过`@HandlesTypes(WebApplicationInitializer.class)` 设置，这个类反过来会查找实现WebApplicationInitializer 的类，并将配置的任务交给他们来完成。  
 AbstractAnnotationConfigDispatcherServletInitializer 类扩展了WebApplicationInitializer 。这样就可以通过实现AbstractAnnotationConfigDispatcherServletInitializer 来进行配置Servlet的上下文了。
 
-DispatcherServletInitializer 配置类能够被加载的核心是 Java 的 [[2_0_2-计算机科学/2_0_2_1_2_0-软件语言/2_0_2_1_2_0_0-Java/2_0_2_1_2_0_0_1-高级特性/SPI|SPI]] 服务发现机制。
+DispatcherServletInitializer 配置类能够被加载的核心是 Java 的 [[2_0_2-计算机科学/2_0_2_1_2_0-软件语言/Java/1-高级特性/SPI|SPI]] 服务发现机制。
 
 1. 服务接口的定义：Servlet 规范定义了服务接口 `javax-servlet-api-xxx.jar/javax.servlet.ServletContainerInitializer`
 2. 注册服务接口的实现： Spring MVC 注册服务。在 `spring-web-xxx.jar` 包下 有 `META-INF/services/javax.servlet.ServletContainerInitializer` 文件，内容为 `org.springframework.web.SpringServletContainerInitializer`

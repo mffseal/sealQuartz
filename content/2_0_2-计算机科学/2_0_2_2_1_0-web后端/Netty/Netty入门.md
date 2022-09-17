@@ -106,7 +106,7 @@ new ServerBootstrap()
 
 代码解读
 
-* 1 处，创建 NioEventLoopGroup，可以简单理解为 `线程池 + Selector` ，包含[[2_0_2-计算机科学/2_0_2_1_2_0-软件语言/2_0_2_1_2_0_0-Java/NIO/NIO基础#💡 利用多线程优化|NIO]]部分的Boss和Worker两个选择器及对应的线程等。
+* 1 处，创建 NioEventLoopGroup，可以简单理解为 `线程池 + Selector` ，包含[[2_0_2-计算机科学/2_0_2_1_2_0-软件语言/Java/NIO/NIO基础#💡 利用多线程优化|NIO]]部分的Boss和Worker两个选择器及对应的线程等。
 
 * 2 处，选择服务 Scoket 实现类，其中 NioServerSocketChannel 表示基于 NIO 的服务器端实现，其它实现还有
 
@@ -684,7 +684,7 @@ public class CloseFutureClient {
 
 在异步处理时，经常用到这两个接口
 
-首先要说明 netty 中的 Future 与 jdk 中的 [[2_0_2-计算机科学/2_0_2_1_2_0-软件语言/2_0_2_1_2_0_0-Java/2_0_2_1_2_0_0_2-并发编程/FutureTask|Future]] 同名，但是是两个接口，netty 的 Future 继承自 jdk 的 Future，而 Promise 又对 netty Future 进行了扩展
+首先要说明 netty 中的 Future 与 jdk 中的 [[2_0_2-计算机科学/2_0_2_1_2_0-软件语言/Java/2-并发编程/FutureTask|Future]] 同名，但是是两个接口，netty 的 Future 继承自 jdk 的 Future，而 Promise 又对 netty Future 进行了扩展
 
 * jdk Future 只能同步等待任务结束（或成功、或失败）才能得到结果
 * netty Future 可以同步等待任务结束得到结果，也可以异步方式得到结果，但都是要等任务结束
