@@ -1,6 +1,6 @@
 baseURL = "https://harbor.mffseal.top/"
 # baseURL = "http://localhost:1313/"
-languageCode = "en-us"
+languageCode = "zh-cn"
 googleAnalytics = "G-NV58SYWRZD"
 relativeURLs = false
 disablePathToLower = true
@@ -15,7 +15,7 @@ ignoreFiles = [
     "content/z-oblib/z1-from-templates/",
     "content/z-oblib/z3-frames/"
 ]
-summaryLength = 20
+summaryLength = 70
 paginate = 20
 enableGitInfo = true
 
