@@ -1,14 +1,22 @@
-baseURL = "https://quartz.jzhao.xyz/"
+baseURL = "https://harbor.mffseal.top/"
+# baseURL = "http://localhost:1313/"
 languageCode = "en-us"
-googleAnalytics = "G-XYFD95KB4J"
+googleAnalytics = "G-NV58SYWRZD"
 relativeURLs = false
 disablePathToLower = true
 ignoreFiles = [
-    "/content/templates/*",
-    "/content/private/*",
+    "content/templates/",
+    "content/private/",
+    "content/.obsidian/",
+    "content/.trash/",
+    "content/0_0-收集/",
+    "content/0_1-私密/",
+    "content/z-oblib/z0-templates/",
+    "content/z-oblib/z1-from-templates/",
+    "content/z-oblib/z3-frames/"
 ]
 summaryLength = 20
-paginate = 10
+paginate = 20
 enableGitInfo = true
 
 [markup]
@@ -28,7 +36,8 @@ enableGitInfo = true
         lineNumbersInTable = true
         style = "dracula"
     [frontmatter]
-        lastmod = ["lastmod", ":git", "date", "publishDate"]
+        # lastmod = ["lastmod", ":git", "date", "publishDate"]
+        lastmod = [":lastmod", "updated"]
         publishDate = ["publishDate", "date"]
     [markup.goldmark.renderer]
         unsafe = true
