@@ -10,7 +10,39 @@
 你说嘴巴吸不了磁盘上的字节。你说甚至一G的文件在磁盘上很可能是分在不连续的扇区存储的，怎么有连续的流呢？
 你说得很对。。。也许你看本地片子时，突然某处稍卡了一下，你怀疑是不是正好上个字节和下个字节之间 隔了几个扇区几个 磁道
 。。。但其实通常不是的。操作系统不会这么直接。它会趁你慢慢欣赏某些片段时，早就将数据从慢腾腾的磁盘预读到快如闪电的内存中了，这个位于磁盘和播放器程序之间的缓存区，是很像你说的管子，但它真的和流这个对象没有什么关系，在代码中的流对象看来 那缓存区就是操作系统提供的文件。
-JAVA代码是在 虚拟机"><title>流</title><meta name=viewport content="width=device-width,initial-scale=1"><link rel="shortcut icon" type=image/png href=https://harbor.mffseal.top//icon.png><link href=https://harbor.mffseal.top/styles.7153093e4d1bbb584a28469cadfa3f88.min.css rel=stylesheet><link href=https://harbor.mffseal.top/styles/_light_syntax.86a48a52faebeaaf42158b72922b1c90.min.css rel=stylesheet id=theme-link><script src=https://harbor.mffseal.top/js/darkmode.9841b88d44c115f7419d485ee72d23a2.min.js></script>
+JAVA代码是在 虚拟机
+上跑的，所以在操作系统自带的缓存区这管子后面，可能还要再接一截虚拟机提供的管子。并且，看过净水机的广告吧？ 什么十八过滤芯层层净化，那就是JAVA虚拟机或运行时提供的，用于转换数据编码什么的。
+流这个比喻的本质就是为了让某个对象可以均匀持续地吐出无间隔的数据，或者你可以向这个对象毫无压力地持续不断塞进数据。。。。至于那些管子。。。恰恰是因为现实世界不够符合这个要求，所以必须有。经典例子改成网上看超大的片子。我们希望网络是一个符合我们说的条件的流，它必须连续出数据，但它做不到，它卡卡卡的，太像是在咳嗽吐结石了……认真回答我，看片子很卡，你会有“流”的任何联想和感受吗。。怎么办？你先等等，操作系统已经准备了个长管子，帮你缓存一大段你再看，这回就很流很流的感觉了。
+所以，管子什么的，那不是流，那是不得不要靠它们来装（装逼的装 不是装放的装）流的枝节。通常是伟大的C程序员们要管的事。
+最后有关网线。。。你要从公司回家，公司是A端，家是B端，你是数据，两个问题请回答：
+一，你回家不从任何路上经过，你闭上眼睛心里默念我要回家，然后就瞬间转移到家里出现了？？
+二，你拉开家门，你老婆会说：哟，从公司回来了呀？ 还是她很认真严谨地说：哟，从马路上回来了呀？
+再说三点：一，物理上你无法直接从公司转移到家，所以需要马路管子。二，你老婆关心以及认知你是从公司还是某些她不喜欢的店回来的，通常不关心你从哪条马路回来了。三，但你也不是一个流，除非哪天你有个孩子，并且孩子日志里写到：下午，爸爸陆陆续续地回来了。。。。。。。。。
+java中的流 Java所有的I/O机制都是基于数据流进行输入输出，这些数据流表示了字符或者字节数据的流动序列。Java的I/O流提供了读写数据的标准方法。任何Java中表示数据源的对象都会提供以数据流的方式读写它的数据的方法。
+标准输入输出，文件的操作，网络上的数据流，字符串流，对象流，zip文件流等等，java中将输入输出抽象称为流，就好像水管，将两个容器连接起来。将数据冲外存中读取到内存中（供Java程序使用）的称为 输入流
+，将数据从内存写入外存中的称为 输出流
+。
+流是一个很形象的概念，当程序需要读取数据的时候，就会开启一个通向数据源的流，这个数据源可以是文件，内存，或是网络连接。类似的，当程序需要写入数据的时候，就会开启一个通向目的地的流。
+流是一组有顺序的，有起点和终点的字节集合，是对数据传输的总称或抽象。即数据在两设备间的传输称为流，流的本质是数据传输，根据数据传输特性将流抽象为各种类，方便更直观的进行数据操作。
+流的分类：
+流的分类，Java的流分类比较丰富，刚接触的人看了后会感觉很晕。流分类的方式很多：
+1、按照输入的方向分，输入流和输出流，输入输出的参照对象是Java程序。
+2、按照处理数据的单位不同分，字节流和 字符流
+，字节流读取的最小单位是一个字节（1byte=8bit），而字符流一次可以读取一个字符（1char = 2byte = 16bit）。
+3、按照功能的不同分，分节点流和处理流，节点流是直接从一个源读写数据的流（这个流没有经过包装和修饰），处理流是在对节点流封装的基础上的 一种流，FileInputStream是一个节点流，可以直接从文件读取数据，但是BufferedInputStream可以包装 FileInputStream，使得其有缓冲功能。
+流的类结构图：
+![[z-oblib/z2-attachments/20191013212051298.png]]
+![[z-oblib/z2-attachments/20191014111930276.png]]
+Java中“流”的概念与简介
+字节流与字符流：
+字符流的由来： 因为数据编码的不同，而有了对字符进行高效操作的流对象。本质其实就是基于字节流读取时，去查了指定的码表。 字节流和字符流的区别：
+读写单位不同：字节流以字节（8bit）为单位，字符流以字符为单位，根据码表映射字符，一次可能读多个字节。
+处理对象不同：字节流能处理所有类型的数据（如图片、avi等），而字符流只能处理字符类型的数据。
+结论：只要是处理纯文本数据，就优先考虑使用字符流。除此之外都使用字节流。
+这里需要提到的一句是：一个英文字符的长度是1byte，而汉字的长度是2byte. 如果我们把英汉混合的文档统一按照字节流处理，就会出现分割混乱，出现乱码。这是，我们需要使用字符流来处理。这就是为什么在处理文档的时候，都要把inputstream放到FileReader中。
+方向性：
+流分为输入流和输出流。但这都是相对的。特别是在Hadoop的序列化时，总是不知道到底使用输入流还是输出流。这里，我们可以做个区分：
+序列化，就是把数据做字节流处理。而字节流只是一种存储形式。他不会被程序识别，需要把字节流反序列化为java识别的对象，才可以被java程序识别。所以，序列化就是字节流化，就是从java代码或内存中输出到外存。而反序列化就是对象化，就是从外存中将字节流数据转化为程序识别的对象。"><title>流</title><meta name=viewport content="width=device-width,initial-scale=1"><link rel="shortcut icon" type=image/png href=https://harbor.mffseal.top//icon.png><link href=https://harbor.mffseal.top/styles.7153093e4d1bbb584a28469cadfa3f88.min.css rel=stylesheet><link href=https://harbor.mffseal.top/styles/_light_syntax.86a48a52faebeaaf42158b72922b1c90.min.css rel=stylesheet id=theme-link><script src=https://harbor.mffseal.top/js/darkmode.9841b88d44c115f7419d485ee72d23a2.min.js></script>
 <script src=https://harbor.mffseal.top/js/util.9825137f5e7825e8553c68ce39ac9e44.min.js></script>
 <link rel=stylesheet href=https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.css integrity=sha384-R4558gYOUz8mP9YWpZJjofhk+zx0AS11p36HnD2ZKj/6JR5z27gSSULCNHIRReVs crossorigin=anonymous><script defer src=https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.js integrity=sha384-z1fJDqw8ZApjGO3/unPWUPsIymfsJmyrDVWC8Tv/a1HeOtGmkwNd/7xUS0Xcnvsx crossorigin=anonymous></script>
 <script defer src=https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/contrib/auto-render.min.js integrity=sha384-+XBljXPPiv+OzfbB3cVmLHf4hdUFHlWNZN5spNQ7rmHTXpd7WvJum6fIACpNNfIR crossorigin=anonymous></script>
@@ -21,7 +53,7 @@ JAVA代码是在 虚拟机"><title>流</title><meta name=viewport content="width
 <script src=https://harbor.mffseal.top/js/code-title.b35124ad8db0ba37162b886afb711cbc.min.js></script>
 <script src=https://harbor.mffseal.top/js/clipboard.c20857734e53a3fb733b7443879efa61.min.js></script>
 <script src=https://harbor.mffseal.top/js/callouts.7723cac461d613d118ee8bb8216b9838.min.js></script>
-<script>const BASE_URL="https://harbor.mffseal.top/",fetchData=Promise.all([fetch("https://harbor.mffseal.top/indices/linkIndex.ec6b7a4b9710e839c3949572ac2dcac8.min.json").then(e=>e.json()).then(e=>({index:e.index,links:e.links})),fetch("https://harbor.mffseal.top/indices/contentIndex.fbe7f53f0a2c073793edc87749d25bfe.min.json").then(e=>e.json())]).then(([{index:e,links:t},n])=>({index:e,links:t,content:n})),render=()=>{const e=new URL(BASE_URL),t=e.pathname,n=window.location.pathname,s=t==n;addCopyButtons(),addTitleToCodeBlocks(),addCollapsibleCallouts(),initPopover("https://harbor.mffseal.top",!0,!0);const o=document.getElementById("footer");if(o){const e=document.getElementById("graph-container");if(!e)return requestAnimationFrame(render);e.textContent="";const t=s&&!1;drawGraph("https://harbor.mffseal.top",t,[{"/moc":"#4388cc"}],t?{centerForce:1,depth:-1,enableDrag:!0,enableLegend:!1,enableZoom:!0,fontSize:.5,linkDistance:1,opacityScale:3,repelForce:1,scale:1.4}:{centerForce:1,depth:1,enableDrag:!0,enableLegend:!1,enableZoom:!0,fontSize:.6,linkDistance:1,opacityScale:3,repelForce:2,scale:1.2})}},init=(e=document)=>{addCopyButtons(),addTitleToCodeBlocks(),renderMathInElement(e.body,{delimiters:[{left:"$$",right:"$$",display:!0},{left:"$",right:"$",display:!1}],macros:{'’':"'"},throwOnError:!1})}</script><script type=module>
+<script>const BASE_URL="https://harbor.mffseal.top/",fetchData=Promise.all([fetch("https://harbor.mffseal.top/indices/linkIndex.50149d4f06f7f6d699f2eab42c3848b3.min.json").then(e=>e.json()).then(e=>({index:e.index,links:e.links})),fetch("https://harbor.mffseal.top/indices/contentIndex.8f0b0ea048a0c6513f6fa3db082048ce.min.json").then(e=>e.json())]).then(([{index:e,links:t},n])=>({index:e,links:t,content:n})),render=()=>{const e=new URL(BASE_URL),t=e.pathname,n=window.location.pathname,s=t==n;addCopyButtons(),addTitleToCodeBlocks(),addCollapsibleCallouts(),initPopover("https://harbor.mffseal.top",!0,!0);const o=document.getElementById("footer");if(o){const e=document.getElementById("graph-container");if(!e)return requestAnimationFrame(render);e.textContent="";const t=s&&!1;drawGraph("https://harbor.mffseal.top",t,[{"/moc":"#4388cc"}],t?{centerForce:1,depth:-1,enableDrag:!0,enableLegend:!1,enableZoom:!0,fontSize:.5,linkDistance:1,opacityScale:3,repelForce:1,scale:1.4}:{centerForce:1,depth:1,enableDrag:!0,enableLegend:!1,enableZoom:!0,fontSize:.6,linkDistance:1,opacityScale:3,repelForce:2,scale:1.2})}},init=(e=document)=>{addCopyButtons(),addTitleToCodeBlocks(),renderMathInElement(e.body,{delimiters:[{left:"$$",right:"$$",display:!0},{left:"$",right:"$",display:!1}],macros:{'’':"'"},throwOnError:!1})}</script><script type=module>
     import { attachSPARouting } from "https:\/\/harbor.mffseal.top\/js\/router.9d4974281069e9ebb189f642ae1e3ca2.min.js"
     attachSPARouting(init, render)
   </script></head><script async src="https://www.googletagmanager.com/gtag/js?id=G-NV58SYWRZD"></script>
