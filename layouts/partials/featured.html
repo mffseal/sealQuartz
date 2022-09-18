@@ -6,6 +6,6 @@
     is a collection of pages.
     https://gohugo.io/content-management/related/
     -->
-    {{$notes := .Site.Taxonomies.tags.featured.Pages.ByLastmod}}
+    {{$notes := .Site.Taxonomies.tags.featured.Pages.ByLastmod.Reverse}}
     {{partial "page-list.html" (first 10 $notes)}}
   </div>
