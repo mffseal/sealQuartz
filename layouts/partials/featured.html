@@ -1,0 +1,11 @@
+<div class="content-list">
+    <h2>{{ i18n "featured_notes" }}</h2>
+    <!--
+    You can also configure this to find related pages!
+    All you need to pass into the "page-list.html" partial
+    is a collection of pages.
+    https://gohugo.io/content-management/related/
+    -->
+    {{$notes := .Site.Taxonomies.tags.featured.Pages.ByLastmod}}
+    {{partial "page-list.html" (first 10 $notes)}}
+  </div>

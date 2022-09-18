@@ -1,7 +1,7 @@
 ---
 title: 🦭海豹湾
 created: 2022-09-17 02:34:34
-updated: 2022-09-18 20:17:28
+updated: 2022-09-18 20:43:12
 ---
 
 **海豹港湾，第二大脑**
@@ -14,12 +14,4 @@ updated: 2022-09-18 20:17:28
 
 知识最小单位为 atom，由多个 atom 组合成 article，构建知识图谱，降低内容冗余度，不断精炼内容输出。
 
-## 精选文章
-
-- [[2_0_2-计算机科学/2_0_2_1_3_0-网络安全/二进制安全/pwn/ubuntu环境配置 | Ubuntu下PWN环境配置]]
-
-## 所有文章
-
-[所有article文章](https://harbor.mffseal.top/tags/article)
-
-[所有atom项](https://harbor.mffseal.top/tags/atom)
+[所有article文章](https://harbor.mffseal.top/tags/article) | [所有atom项](https://harbor.mffseal.top/tags/atom)

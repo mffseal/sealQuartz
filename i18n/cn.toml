@@ -50,7 +50,10 @@ other = "搜索图标"
 other = "打开搜索图标"
 
 [recent_notes]
-other = "最新笔记"
+other = "最新创建"
+
+[featured_notes]
+other = "最新精选"
 
 [first_3_notes]
 other = "前三项 {{ .notes }}"

@@ -1,10 +1,12 @@
 ---
 title: ubuntu环境配置
 created: 2022-09-06 22:49:14
-updated: 2022-09-10 00:07:14
+updated: 2022-09-18 20:46:19
 tags: 
 - article
+- featured
 ---
+
 # ubuntu环境配置
 
 ```sh

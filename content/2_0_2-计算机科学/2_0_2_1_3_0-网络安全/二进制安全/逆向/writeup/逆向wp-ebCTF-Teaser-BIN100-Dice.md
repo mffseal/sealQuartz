@@ -1,10 +1,12 @@
 ---
 title: 逆向wp-ebCTF-Teaser-BIN100-Dice
 created: 2022-09-17 21:45:47
-updated: 2022-09-17 22:06:00
+updated: 2022-09-18 20:48:52
 tags: 
 - article
+- featured
 ---
+
 # 逆向wp-ebCTF-Teaser-BIN100-Dice
 
 [杭电 CTF 平台逆向第一题.](http://sec.hdu.edu.cn/question/reverse/5780?sort=default)
@@ -158,12 +160,12 @@ int __stdcall WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdL
 
 因为每次都是随机产生数字, 而且将处理完的数据保存在 `EAX` 寄存器用于投掷骰子, 那么可以修改 `EAX` 内容来实现精准投掷.  
 
-![](eax1.png)  
+![[2_0_2-计算机科学/2_0_2_1_3_0-网络安全/二进制安全/逆向/writeup/z-attachments/Pasted image 20220918204747.png]]
 
 - 将 EAX 的数字分别修改为 3, 1, 3, 3, 操作重复 4 次即可
 - 此时发现, 第五个 7 不是通过寄存器来取值的, 而是通过栈取值
 
-![](eax2.png)  
+![[2_0_2-计算机科学/2_0_2_1_3_0-网络安全/二进制安全/逆向/writeup/z-attachments/Pasted image 20220918204801.png]]
 
 - 观察后续代码, 发现有大量对栈 [ebp-0x5c] 位置的 cmp (比较) 操作
 - 可以大胆猜测程序用 7 对 [ebp-0x5c] 比较, 真则投掷出 7 点
@@ -171,11 +173,11 @@ int __stdcall WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdL
 - [ebp-0x5c] 则为 `0028FE6C`
 - 修改此处栈值为 7
 
-![](ebp1.png)  
+![[2_0_2-计算机科学/2_0_2_1_3_0-网络安全/二进制安全/逆向/writeup/z-attachments/Pasted image 20220918204815.png]]
 
 继续执行程序, 确实投掷出了 7 点, 但是程序似乎还有一个检测机制, 阻止了我们获取 flag.  
 
-![](failed1.png)  
+![[2_0_2-计算机科学/2_0_2_1_3_0-网络安全/二进制安全/逆向/writeup/z-attachments/Pasted image 20220918204839.png]]
 
 ### 利用 IDA 修改程序
 
