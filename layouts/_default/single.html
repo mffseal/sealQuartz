@@ -18,7 +18,9 @@
           <li><a href="{{ .Permalink }}">{{ .LinkTitle | humanize }}</a></li>
           {{ end }}
       </ul>
-      {{partial "toc.html" .}}
+      <div class = "toc-wrapper">
+        {{ partial "toc.html" . }}
+        </div>
       {{partial "textprocessing.html" . }}
     </article>
     {{partial "footer.html" .}}

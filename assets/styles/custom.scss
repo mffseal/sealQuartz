@@ -25,5 +25,20 @@
   --outlinegray: #343434 !important;
 }
 
-
-
+.mainTOC{
+  position: fixed; right:20px;max-width:400px; overflow:auto; top: 50px; bottom:50px;
+}
+.toc-wrapper {
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 8px;
+  }
+  ::-webkit-scrollbar-thumb {
+    height: 40px;
+    background-color: #eee;
+    border-radius: 16px;
+    &:hover {
+      background-color: #ddd;
+    }
+  }
+}
