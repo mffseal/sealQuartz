@@ -1,5 +1,5 @@
-baseURL = "https://harbor.mffseal.top/"
-# baseURL = "http://localhost:1313/"
+# baseURL = "https://harbor.mffseal.top/"
+baseURL = "http://localhost:1313/"
 languageCode = "zh-cn"
 DefaultContentLanguage = "cn"
 googleAnalytics = "G-NV58SYWRZD"
@@ -14,7 +14,7 @@ ignoreFiles = [
     "content/0_1-私密/*",
     "content/z-oblib/z0-templates/*",
     "content/z-oblib/z1-from-templates/*",
-    "content/z-oblib/z3-frames/*"
+    "content/z-oblib/z3-frames/*",
 ]
 summaryLength = 20
 paginate = 20
@@ -39,6 +39,6 @@ enableGitInfo = true
     [frontmatter]
         lastmod = ["updated", ":git"]
         # lastmod = [":lastmod", "updated"]
-        publishDate = ["publishDate", "updated"]
+        # publishDate = ["publishDate", "updated"]
     [markup.goldmark.renderer]
         unsafe = true

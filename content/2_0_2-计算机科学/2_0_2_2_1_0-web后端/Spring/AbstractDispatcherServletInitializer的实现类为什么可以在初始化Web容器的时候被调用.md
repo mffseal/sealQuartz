@@ -1,26 +1,25 @@
 ---
-title: AbstractDispatcherServletInitializer的实现类为什么可以在初始化Web容器的时候被调用
+title: AbstractDispatcherServletInitializer 的实现类为什么可以在初始化 Web 容器的时候被调用
 created: 2022-08-19 23:41:11
-updated: 2022-08-20 01:05:44
+updated: 2022-09-18 20:28:39
 tags: 
 - article
 ---
-# AbstractDispatcherServletInitializer的实现类为什么可以在初始化Web容器的时候被调用
+
+# AbstractDispatcherServletInitializer 的实现类为什么可以在初始化 Web 容器的时候被调用
 
 [(33条消息) AbstractDispatcherServletInitializer 的实现类为什么可以在初始化Web容器的时候被调用_Nishkata的博客-CSDN博客](https://blog.csdn.net/Nishkata/article/details/125432352)
 
 [Spring MVC 之 AbstractAnnotationConfigDispatcherServletInitializer剖析_Spring MVC 之 AbstractAnnotationConfigDispatcherServletInitializer剖析|Samuel个人博客 (yangshuaibin.com)](https://www.yangshuaibin.com/detail/392696)
 
+## Servlet 做的事
 
-## Servlet做的事
+Servlet3.0 环境中，容器会在类路径中查找实现 ServletContainerInitializer 接口的类，如果发现的话，就用它来配置 Servlet 容器。  
 
-Servlet3.0环境中，容器会在类路径中查找实现ServletContainerInitializer 接口的类，如果发现的话，就用它来配置Servlet容器。  
+## SpringMvc 做的事
 
-
-## SpringMvc做的事
-
-Spring提供了这个接口的实现类 SpringServletContainerInitializer , 通过`@HandlesTypes(WebApplicationInitializer.class)` 设置，这个类反过来会查找实现WebApplicationInitializer 的类，并将配置的任务交给他们来完成。  
-AbstractAnnotationConfigDispatcherServletInitializer 类扩展了WebApplicationInitializer 。这样就可以通过实现AbstractAnnotationConfigDispatcherServletInitializer 来进行配置Servlet的上下文了。
+Spring 提供了这个接口的实现类 SpringServletContainerInitializer , 通过 `@HandlesTypes(WebApplicationInitializer.class)` 设置，这个类反过来会查找实现 WebApplicationInitializer 的类，并将配置的任务交给他们来完成。  
+AbstractAnnotationConfigDispatcherServletInitializer 类扩展了 WebApplicationInitializer 。这样就可以通过实现 AbstractAnnotationConfigDispatcherServletInitializer 来进行配置 Servlet 的上下文了。
 
 DispatcherServletInitializer 配置类能够被加载的核心是 Java 的 [[2_0_2-计算机科学/2_0_2_1_2_0-软件语言/Java/1-高级特性/SPI|SPI]] 服务发现机制。
 
