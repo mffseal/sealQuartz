@@ -25,6 +25,14 @@
   --outlinegray: #343434 !important;
 }
 
+
+// 浮动TOC导航栏
+@media only screen and (max-width: 1224px) {
+  .mainTOC {
+      display: none;
+  }
+} 
+
 .mainTOC{
   position: fixed; right:20px;max-width:400px; overflow:auto; top: 50px; bottom:50px;
 }
