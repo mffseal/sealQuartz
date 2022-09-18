@@ -1,5 +1,5 @@
-# baseURL = "https://harbor.mffseal.top/"
-baseURL = "http://localhost:1313/"
+baseURL = "https://harbor.mffseal.top/"
+# baseURL = "http://localhost:1313/"
 languageCode = "zh-cn"
 DefaultContentLanguage = "cn"
 googleAnalytics = "G-NV58SYWRZD"
