@@ -1,10 +1,11 @@
 ---
 title: Netty入门
 created: 2022-06-20 21:14:28
-updated: 2022-06-21 21:58:19
+updated: 2022-09-18 22:16:20
 tags: 
-- #atom
+- article
 ---
+
 # Netty入门
 
 ## 1. 概述
@@ -18,14 +19,11 @@ for rapid development of maintainable high performance protocol servers & client
 
 Netty 是一个异步的、基于事件驱动的网络应用框架，用于快速开发可维护、高性能的网络服务器和客户端
 
-
-
 ### 1.2 Netty 的作者
 
 ![[z-oblib/z2-attachments/64fc67105d460cb23e0bcc014ba4c21f.png]]
 
 他还是另一个著名网络应用框架 Mina 的重要贡献者
-
 
 ### 1.3 Netty 的地位
 
@@ -43,8 +41,6 @@ Netty 在 Java 网络应用框架中的地位就好比：Spring 框架在 JavaEE
 * Spring 5.x - flux api 完全抛弃了 tomcat ，使用 netty 作为服务器端
 * Zookeeper - 分布式协调框架
 
-
-
 ### 1.4 Netty 的优势
 
 * Netty vs NIO，工作量大，bug 多
@@ -59,8 +55,6 @@ Netty 在 Java 网络应用框架中的地位就好比：Spring 框架在 JavaEE
     * 3.x 2008
     * 4.x 2013
     * 5.x 已废弃（没有明显的性能提升，维护成本高）
-
-
 
 ## 2. Hello World
 
@@ -154,8 +148,6 @@ new Bootstrap()
 * 8 处，消息会经过通道 handler 处理，这里是将 String => ByteBuf 发出
 * 数据经过网络传输，到达服务器端，服务器端 5 和 6 处的 handler 先后被触发，走完一个流程
 
-
-
 ### 2.4 流程梳理
 
 ![[z-oblib/z2-attachments/adea72dac7ceb3d0f0158cd3d7acdd57.png]]
@@ -173,8 +165,6 @@ new Bootstrap()
 >   * 工人可以管理多个 channel 的 io 操作，并且一旦工人负责了某个 channel，就要负责到底（绑定）
 >   * 工人既可以执行 io 操作，也可以进行任务处理，每位工人有任务队列，队列里可以堆放多个 channel 的待处理任务，任务分为普通任务、定时任务
 >   * 工人按照 pipeline 顺序，依次按照 handler 的规划（代码）处理数据，可以为每道工序指定不同的工人
-
-
 
 ## 3. 组件
 
@@ -239,13 +229,9 @@ io.netty.channel.DefaultEventLoop@60f82f98
 io.netty.channel.DefaultEventLoop@35f983a6
 ```
 
-
-
 #### 💡 优雅关闭
 
 优雅关闭 `shutdownGracefully` 方法。该方法会首先切换 `EventLoopGroup` 到关闭状态从而拒绝新的任务的加入，然后在任务队列的任务都处理完成后，停止线程的运行。从而确保整体应用是在正常有序的状态下退出的
-
-
 
 #### 演示 NioEventLoop 处理 io 事件
 
@@ -406,8 +392,6 @@ new ServerBootstrap()
 
 ![[z-oblib/z2-attachments/7de561abc15cda8879ac2cf85700066b.png]]
 
-
-
 #### 💡 handler 执行中如何换人？
 
 > pipline中的线程切换。
@@ -442,8 +426,6 @@ static void invokeChannelRead(final AbstractChannelHandlerContext next, Object m
 * 如果两个 handler 绑定的是同一个线程，那么就直接调用
 * 否则，把要调用的代码封装为一个任务对象，由下一个 handler 的线程来调用
 
-
-
 #### 演示 NioEventLoop 处理普通任务
 
 NioEventLoop 除了可以处理 io 事件，同样可以向它提交普通任务
@@ -466,8 +448,6 @@ nioWorkers.execute(()->{
 ```
 
 > 可以用来执行耗时较长的任务
-
-
 
 #### 演示 NioEventLoop 处理定时任务
 
@@ -493,8 +473,6 @@ nioWorkers.scheduleAtFixedRate(() -> {
 ```
 
 > 可以用来执行定时任务
-
-
 
 ### 3.2 Channel
 
@@ -705,8 +683,6 @@ public class CloseFutureClient {
 | setSuccess   | -                              | -                                                            | 设置成功结果 |
 | setFailure   | -                              | -                                                            | 设置失败结果 |
 
-
-
 #### 例1
 
 同步处理任务成功
@@ -738,8 +714,6 @@ log.debug("{}",promise.get());
 11:51:54 [DEBUG] [defaultEventLoop-1-1] c.i.o.DefaultPromiseTest2 - set success, 10
 11:51:54 [DEBUG] [main] c.i.o.DefaultPromiseTest2 - 10
 ```
-
-
 
 #### 例2
 
@@ -776,8 +750,6 @@ log.debug("start...");
 11:49:31 [DEBUG] [defaultEventLoop-1-1] c.i.o.DefaultPromiseTest2 - set success, 10
 11:49:31 [DEBUG] [defaultEventLoop-1-1] c.i.o.DefaultPromiseTest2 - 10
 ```
-
-
 
 #### 例3
 
@@ -821,8 +793,6 @@ Caused by: java.lang.RuntimeException: error...
 	at java.lang.Thread.run(Thread.java:745)
 ```
 
-
-
 #### 例4
 
 同步处理任务失败 - await
@@ -857,8 +827,6 @@ log.debug("result {}", (promise.isSuccess() ? promise.getNow() : promise.cause()
 12:18:54 [DEBUG] [main] c.i.o.DefaultPromiseTest2 - result java.lang.RuntimeException: error...
 ```
 
-
-
 #### 例5
 
 异步处理任务失败
@@ -892,8 +860,6 @@ log.debug("start...");
 12:04:58 [DEBUG] [defaultEventLoop-1-1] c.i.o.DefaultPromiseTest2 - set failure, java.lang.RuntimeException: error...
 12:04:58 [DEBUG] [defaultEventLoop-1-1] c.i.o.DefaultPromiseTest2 - result java.lang.RuntimeException: error...
 ```
-
-
 
 #### 例6
 
@@ -957,10 +923,6 @@ io.netty.util.concurrent.BlockingOperationException: DefaultPromise@47499c2a(inc
 	at java.lang.Thread.run(Thread.java:745)
 
 ```
-
-
-
-
 
 ### 3.4 Handler & Pipeline
 
@@ -1170,7 +1132,6 @@ private static void log(ByteBuf buffer) {
     System.out.println(buf.toString());
 }
 ```
-
 
 #### 2）直接内存 vs 堆内存
 
@@ -1572,13 +1533,9 @@ System.out.println(ByteBufUtil.prettyHexDump(origin));
 
 ![[z-oblib/z2-attachments/dc2294119a7fdc68f77855060844c978.png]]
 
-
-
 #### 11）copy
 
 会将底层内存数据进行**深拷贝**，因此无论读写，都与原始 ByteBuf 无关
-
-
 
 #### 12）CompositeByteBuf
 
@@ -1702,8 +1659,6 @@ class io.netty.buffer.CompositeByteBuf
 |00000000| 01 02 03 04 05 06                               |......          |
 +--------+-------------------------------------------------+----------------+
 ```
-
-
 
 #### 💡 ByteBuf 优势
 

@@ -1,10 +1,11 @@
 ---
 title: Netty进阶
 created: 2022-06-21 22:23:25
-updated: 2022-06-23 10:23:48
+updated: 2022-09-18 22:16:57
 tags: 
-- #atom
+- article
 ---
+
 # Netty进阶
 
 ## 1. 粘包与半包
@@ -556,8 +557,6 @@ public class HelloWorldClient {
 14:08:18 [DEBUG] [nioEventLoopGroup-2-1] i.n.h.l.LoggingHandler - [id: 0x1282d755, L:/192.168.0.103:63641 - R:/192.168.0.103:9090] FLUSH
 ```
 
-
-
 服务端输出
 
 ```
@@ -1055,7 +1054,6 @@ channel.writeInbound(s2);
 
 ![[z-oblib/z2-attachments/0013.png]]
 
-
 ##### 注意半包
 
 虽然协议指定了数据长度，可以解决粘包问题，但是半包问题还要注意：
@@ -1145,8 +1143,6 @@ public interface UserService {
 }
 ```
 
-
-
 ```java
 /**
  * 会话管理接口
@@ -1190,8 +1186,6 @@ public interface Session {
     Channel getChannel(String username);
 }
 ```
-
-
 
 ```java
 /**
@@ -1246,8 +1240,6 @@ public interface GroupSession {
 }
 ```
 
-
-
 ### 3.2 聊天室业务-登录
 
 ```java
@@ -1296,8 +1288,6 @@ public class ChatServer {
     }
 }
 ```
-
-
 
 ```java
 @Slf4j
@@ -1413,8 +1403,6 @@ public class ChatClient {
 }
 ```
 
-
-
 ### 3.3 聊天室业务-单聊
 
 服务器端将 handler 独立出来
@@ -1461,8 +1449,6 @@ public class ChatRequestMessageHandler extends SimpleChannelInboundHandler<ChatR
     }
 }
 ```
-
-
 
 ### 3.4 聊天室业务-群聊
 
@@ -1558,8 +1544,6 @@ public class GroupMembersRequestMessageHandler extends SimpleChannelInboundHandl
 }
 ```
 
-
-
 ### 3.5 聊天室业务-退出
 
 ```
@@ -1582,8 +1566,6 @@ public class QuitHandler extends ChannelInboundHandlerAdapter {
     }
 }
 ```
-
-
 
 ### 3.6 聊天室业务-空闲检测
 

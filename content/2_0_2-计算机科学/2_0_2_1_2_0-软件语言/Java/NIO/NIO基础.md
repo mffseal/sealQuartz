@@ -1,9 +1,10 @@
 ---
 title: 一. NIO 基础
 created: 2022-06-18 16:01:49
-updated: 2022-06-20 21:18:18
+updated: 2022-09-18 22:15:44
 tags: 
-- #atom
+- article
+- featured
 ---
 
 # 一. NIO 基础
@@ -1766,6 +1767,7 @@ public class ChannelDemo7 {
 
 worker的选择器注册时机需要注意：
 在worker的register代码是这样的：
+
 ```java
 if (!start) {  
     selector = Selector.open();  
@@ -1896,9 +1898,11 @@ public class UdpClient {
 ![[z-oblib/z2-attachments/9beda40e996875e42ae18f1a4010cb0e.png]]
 
 #### 阻塞 IO
+
     
 ![[z-oblib/z2-attachments/d6140fbe21ad3029c901c39fc656c80f.png]]
     
+
 #### 非阻塞 IO
 
 > 只有等待数据阶段是非阻塞的，复制数据阶段还是阻塞的。
@@ -1906,6 +1910,7 @@ public class UdpClient {
  
 ![[z-oblib/z2-attachments/bee47ff0353597736841cb77f39de290.png]]
     
+
 #### 多路复用
 
 ![[z-oblib/z2-attachments/92295a6cadbef7f318b447c195cfdaaf.png]]
@@ -1919,6 +1924,7 @@ public class UdpClient {
 ![[z-oblib/z2-attachments/d24fd0f79f08ba57c427e8105d1b723b.png]]
 
 #### 阻塞 IO vs 多路复用
+
     
 ![[z-oblib/z2-attachments/b14515879b743602954685e6403970ad.png]]
     

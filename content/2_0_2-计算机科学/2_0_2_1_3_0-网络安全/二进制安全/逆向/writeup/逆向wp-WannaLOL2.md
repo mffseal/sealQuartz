@@ -1,10 +1,12 @@
 ---
 title: 逆向wp-WannaLOL2
 created: 2022-09-17 21:56:24
-updated: 2022-09-17 22:53:04
+updated: 2022-09-18 22:13:42
 tags: 
 - article
+- featured
 ---
+
 # 逆向wp-WannaLOL2
 
 逆向入门题.
@@ -150,10 +152,13 @@ LABEL_14:
 ```c
 if ( strlen(&String) != 4 || String == 48 || v6 == 48 || v7 == 48 || v8 == 48 || String != 49 || v6 != 53 )
 ```
+
 为假, 且
+
 ```c
 if ( v8 != 48 && v8 == 48 )
 ```
+
 为真, 则返回 success.
 
 #### 优化变量名

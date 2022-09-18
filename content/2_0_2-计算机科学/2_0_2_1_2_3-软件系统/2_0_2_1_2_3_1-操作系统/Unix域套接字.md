@@ -3,7 +3,7 @@ title: Unix域套接字
 created: 2022-08-03 14:12:53
 updated: 2022-08-03 14:13:31
 tags: 
-- #atom
+- atom
 ---
 # Unix域套接字
 

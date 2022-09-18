@@ -1,10 +1,11 @@
 ---
 title: Balking
 created: 2022-05-30 22:40:25
-updated: 2022-05-30 22:57:00
+updated: 2022-09-18 22:18:17
 tags: 
-- #atom
+- atom
 ---
+
 # Balking
 
 Balking （犹豫）模式用在一个线程发现另一个线程或本线程已经做了某一件相同的事，那么本线程就无需再做了，直接结束返回。
@@ -53,4 +54,3 @@ class SystemMonitor {
 ```
 
 ## 应用
-

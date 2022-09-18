@@ -3,7 +3,7 @@ title: Thread
 created: 2022-05-25 23:12:47
 updated: 2022-05-26 09:31:13
 tags: 
-- #atom
+- atom
 ---
 # Thread
 

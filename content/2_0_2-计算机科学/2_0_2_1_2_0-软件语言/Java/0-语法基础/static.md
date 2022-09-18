@@ -3,7 +3,7 @@ title: static
 created: 2022-05-29 12:22:21
 updated: 2022-05-29 12:22:23
 tags: 
-- #atom
+- atom
 ---
 # static
 

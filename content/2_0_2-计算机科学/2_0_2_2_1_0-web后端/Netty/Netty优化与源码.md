@@ -1,10 +1,11 @@
 ---
 title: Netty优化与源码
 created: 2022-06-23 10:39:12
-updated: 2022-06-28 16:36:38
+updated: 2022-09-18 22:16:47
 tags: 
-- #atom
+- article
 ---
+
 # Netty优化与源码
 
 ## 1. 优化
@@ -99,8 +100,6 @@ enum SerializerAlgorithm implements Serializer {
 }
 ```
 
-
-
 增加配置类和配置文件
 
 ```java
@@ -138,8 +137,6 @@ public abstract class Config {
 ```properties
 serializer.algorithm=Json
 ```
-
-
 
 修改编解码器
 
@@ -195,8 +192,6 @@ public class MessageCodecSharable extends MessageToMessageCodec<ByteBuf, Message
     }
 }
 ```
-
-
 
 其中确定具体消息类型，可以根据 `消息类型字节` 获取到对应的 `消息 class`
 
@@ -256,15 +251,12 @@ public abstract class Message implements Serializable {
 }
 ```
 
-
-
 ### 1.2 参数调优
 
 客户端直接调用 Bootstrap().option(xxx)
 服务器端：
 ServerBootstrap().option(xxx)是给ServerSocketChannel配置参数
 ServerBootstrap().childOption(xxx)是给SocketChannel配置参数
-
 
 #### 1）CONNECT_TIMEOUT_MILLIS
 
@@ -328,6 +320,7 @@ public final void connect(
 * 属于 ServerSocketChannal 参数
 
 三次握手的过程：
+
 ```mermaid
 sequenceDiagram
 
@@ -351,6 +344,7 @@ Note right of s : ESTABLISHED
 aq -->> s : 
 s ->> s : accept()
 ```
+
 > sync queue：半连接队列：还未完成三次握手的连接放入
 > accept queue：全连接队列：完成三次握手的连接放入
 
@@ -439,7 +433,6 @@ Tue Apr 21 20:53:58 CST 2020 connecting...
 Tue Apr 21 20:53:59 CST 2020 connecting timeout...
 java.net.SocketTimeoutException: connect timed out
 ```
-
 
 #### 3）ulimit -n
 
@@ -684,8 +677,6 @@ serializer.algorithm=Json
 cn.itcast.server.service.HelloService=cn.itcast.server.service.HelloServiceImpl
 ```
 
-
-
 #### 2）服务器 handler
 
 ```java
@@ -719,10 +710,6 @@ public class RpcRequestMessageHandler extends SimpleChannelInboundHandler<RpcReq
     }
 }
 ```
-
-
-
-
 
 #### 3）客户端代码第一版
 
@@ -775,8 +762,6 @@ public class RpcClient {
 }
 ```
 
-
-
 #### 4）客户端 handler 第一版
 
 ```java
@@ -789,10 +774,6 @@ public class RpcResponseMessageHandler extends SimpleChannelInboundHandler<RpcRe
     }
 }
 ```
-
-
-
-
 
 #### 5）客户端代码 第二版
 
@@ -897,8 +878,6 @@ public class RpcClientManager {
 }
 ```
 
-
-
 #### 6）客户端 handler 第二版
 
 ```java
@@ -928,9 +907,7 @@ public class RpcResponseMessageHandler extends SimpleChannelInboundHandler<RpcRe
 }
 ```
 
-
 ![[z-oblib/z2-attachments/Pasted image 20220624192123.png]]
-
 
 ## 2. 源码分析
 
@@ -1124,8 +1101,6 @@ public final void register(EventLoop eventLoop, final ChannelPromise promise) {
 }
 ```
 
-
-
 `io.netty.channel.AbstractChannel.AbstractUnsafe#register0`
 
 ```java
@@ -1291,8 +1266,6 @@ protected void doBeginRead() throws Exception {
 }
 ```
 
-
-
 ### 2.2 NioEventLoop 剖析
 
 ![[z-oblib/z2-attachments/Pasted image 20220624231611.png]]
@@ -1325,8 +1298,6 @@ public void execute(Runnable task) {
 }
 ```
 
-
-
 唤醒 select 阻塞线程`io.netty.channel.nio.NioEventLoop#wakeup`
 
 ```java
@@ -1337,8 +1308,6 @@ protected void wakeup(boolean inEventLoop) {
     }
 }
 ```
-
-
 
 启动 EventLoop 主循环 `io.netty.util.concurrent.SingleThreadEventExecutor#doStartThread`
 
@@ -1369,8 +1338,6 @@ private void doStartThread() {
     });
 }
 ```
-
-
 
 `io.netty.channel.nio.NioEventLoop#run` 主要任务是执行死循环，不断看有没有新任务，有没有 IO 事件
 
@@ -1449,8 +1416,6 @@ protected void run() {
     }
 }
 ```
-
-
 
 #### ⚠️ 注意
 
@@ -1543,8 +1508,6 @@ private void select(boolean oldWakenUp) throws IOException {
 }
 ```
 
-
-
 处理 keys `io.netty.channel.nio.NioEventLoop#processSelectedKeys`
 
 ```java
@@ -1558,8 +1521,6 @@ private void processSelectedKeys() {
     }
 }
 ```
-
-
 
 `io.netty.channel.nio.NioEventLoop#processSelectedKey`
 
@@ -1600,8 +1561,6 @@ private void processSelectedKey(SelectionKey k, AbstractNioChannel ch) {
 }
 ```
 
-
-
 ### 2.3 accept 剖析
 
 nio 中如下代码，在 netty 中的流程
@@ -1628,8 +1587,6 @@ while (iter.hasNext()) {
     // ...
 }
 ```
-
-
 
 先来看可接入事件处理（accept）
 
@@ -1696,8 +1653,6 @@ public void read() {
 }
 ```
 
-
-
 关键代码 `io.netty.bootstrap.ServerBootstrap.ServerBootstrapAcceptor#channelRead`
 
 ```java
@@ -1730,8 +1685,6 @@ public void channelRead(ChannelHandlerContext ctx, Object msg) {
     }
 }
 ```
-
-
 
 又回到了熟悉的 `io.netty.channel.AbstractChannel.AbstractUnsafe#register`  方法
 
@@ -1798,8 +1751,6 @@ private void register0(ChannelPromise promise) {
 }
 ```
 
-
-
 回到了熟悉的代码 `io.netty.channel.DefaultChannelPipeline.HeadContext#channelActive`
 
 ```java
@@ -1829,8 +1780,6 @@ protected void doBeginRead() throws Exception {
     }
 }
 ```
-
-
 
 ### 2.4 read 剖析
 
@@ -1893,8 +1842,6 @@ public final void read() {
 }
 ```
 
-
-
 `io.netty.channel.DefaultMaxMessagesRecvByteBufAllocator.MaxMessageHandle#continueReading(io.netty.util.UncheckedBooleanSupplier)`
 
 ```java
@@ -1911,6 +1858,3 @@ public boolean continueReading(UncheckedBooleanSupplier maybeMoreDataSupplier) {
            totalBytesRead > 0;
 }
 ```
-
-
-

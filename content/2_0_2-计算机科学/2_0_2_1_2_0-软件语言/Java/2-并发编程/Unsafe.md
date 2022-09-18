@@ -3,7 +3,7 @@ title: Unsafe
 created: 2022-06-04 22:42:50
 updated: 2022-06-06 22:42:26
 tags: 
-- #atom
+- atom
 ---
 # Unsafe
 

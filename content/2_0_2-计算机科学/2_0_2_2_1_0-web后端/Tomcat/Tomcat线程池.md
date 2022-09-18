@@ -1,11 +1,13 @@
 ---
 title: Tomcat线程池
 created: 2022-06-08 18:28:37
-updated: 2022-06-08 21:00:59
+updated: 2022-09-18 22:17:08
 tags: 
-- #atom
+- atom
 ---
+
 # Tomcat线程池
+
 > 合理的分工是实现高[[2_0_2-计算机科学/2_0_2_1_2_3-软件系统/2_0_2_1_2_3_1-操作系统/并发|并发]]的保障。
 
 ![[z-oblib/z2-attachments/Pasted image 20220608183846.png]]
@@ -58,6 +60,7 @@ public void execute(Runnable command, long timeout, TimeUnit unit) {
 ```
 
 Connector 配置：
+
 ```java
 public boolean force(Runnable o, long timeout, TimeUnit unit) throws InterruptedException {
     if ( parent.isShutdown() ) 
@@ -69,4 +72,3 @@ public boolean force(Runnable o, long timeout, TimeUnit unit) throws Interrupted
 is rejected
 }
 ```
-

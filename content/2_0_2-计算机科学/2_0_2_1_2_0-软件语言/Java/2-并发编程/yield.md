@@ -3,7 +3,7 @@ title: yield
 created: 2022-05-26 14:48:06
 updated: 2022-05-26 14:48:47
 tags: 
-- #atom
+- atom
 ---
 # yield
 

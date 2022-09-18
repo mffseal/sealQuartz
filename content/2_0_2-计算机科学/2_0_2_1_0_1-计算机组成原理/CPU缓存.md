@@ -3,7 +3,7 @@ title: CPU缓存
 created: 2022-06-02 14:35:10
 updated: 2022-06-02 14:37:02
 tags: 
-- #atom
+- atom
 ---
 # CPU缓存
 

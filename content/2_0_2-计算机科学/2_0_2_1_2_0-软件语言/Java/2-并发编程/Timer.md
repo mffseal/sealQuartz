@@ -3,7 +3,7 @@ title: Timer
 created: 2022-06-08 17:05:32
 updated: 2022-06-08 17:06:49
 tags: 
-- #atom
+- atom
 ---
 # Timer
 

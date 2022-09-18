@@ -1,12 +1,12 @@
 ---
-title: AbstractDispatcherServletInitializer 的实现类为什么可以在初始化 Web 容器的时候被调用
+title: AbstractDispatcherServletInitializer的实现类为什么可以在初始化Web容器的时候被调用
 created: 2022-08-19 23:41:11
-updated: 2022-09-18 20:28:39
+updated: 2022-09-18 22:17:24
 tags: 
 - article
 ---
 
-# AbstractDispatcherServletInitializer 的实现类为什么可以在初始化 Web 容器的时候被调用
+# AbstractDispatcherServletInitializer的实现类为什么可以在初始化Web容器的时候被调用
 
 [(33条消息) AbstractDispatcherServletInitializer 的实现类为什么可以在初始化Web容器的时候被调用_Nishkata的博客-CSDN博客](https://blog.csdn.net/Nishkata/article/details/125432352)
 

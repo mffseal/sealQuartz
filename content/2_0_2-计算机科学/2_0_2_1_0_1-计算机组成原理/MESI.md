@@ -3,7 +3,7 @@ title: MESI
 created: 2022-05-30 20:25:31
 updated: 2022-05-30 20:30:26
 tags: 
-- #atom
+- atom
 ---
 # MESI
 
