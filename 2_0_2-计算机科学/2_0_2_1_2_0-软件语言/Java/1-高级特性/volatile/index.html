@@ -1,6 +1,5 @@
 <!doctype html><html lang=en><head><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8920808282451934" crossorigin=anonymous></script><meta charset=utf-8><meta name=description content="volatile   https://ifeve.com/java-volatile%E5%85%B3%E9%94%AE%E5%AD%97/
- 内存可见性问题 1 2 3 4 5 6 7 8 9 10 11  A = 0; B = 0; T0 { A = 1; print(B); } T1 { B = 1; print(A); }   这样一段代码可能会出现下列四种输出：
-   情况1 情况2 情况3 情况4     读A 读A 写A 写A   读B 写B 写B 读B   写A 写A 读A 读A   写B 读B 读B 写B   A0B0 A0B1 A1B1 A1B0    在读上加入内存屏障即可保证在一个线程中写操作发生在读操作之前，但是若线程1先执行完毕线程2才执行，就会导致线程1无法读取到B的值，所以需要让两个线程同步："><title>volatile</title><meta name=viewport content="width=device-width,initial-scale=1"><link rel="shortcut icon" type=image/png href=https://harbor.mffseal.top//icon.png><link href=https://harbor.mffseal.top/styles.7153093e4d1bbb584a28469cadfa3f88.min.css rel=stylesheet><link href=https://harbor.mffseal.top/styles/_light_syntax.86a48a52faebeaaf42158b72922b1c90.min.css rel=stylesheet id=theme-link><script src=https://harbor.mffseal.top/js/darkmode.9841b88d44c115f7419d485ee72d23a2.min.js></script>
+ 内存可见性问题 1 2 3 4 5 6 7 8 9 10 11  A = 0; B = 0; T0 { A = 1; print(B); } T1 { B = 1; print(A); }   这样一段代码可能会出现下列四种输出："><title>volatile</title><meta name=viewport content="width=device-width,initial-scale=1"><link rel="shortcut icon" type=image/png href=https://harbor.mffseal.top//icon.png><link href=https://harbor.mffseal.top/styles.7153093e4d1bbb584a28469cadfa3f88.min.css rel=stylesheet><link href=https://harbor.mffseal.top/styles/_light_syntax.86a48a52faebeaaf42158b72922b1c90.min.css rel=stylesheet id=theme-link><script src=https://harbor.mffseal.top/js/darkmode.9841b88d44c115f7419d485ee72d23a2.min.js></script>
 <script src=https://harbor.mffseal.top/js/util.9825137f5e7825e8553c68ce39ac9e44.min.js></script>
 <link rel=stylesheet href=https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.css integrity=sha384-R4558gYOUz8mP9YWpZJjofhk+zx0AS11p36HnD2ZKj/6JR5z27gSSULCNHIRReVs crossorigin=anonymous><script defer src=https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.js integrity=sha384-z1fJDqw8ZApjGO3/unPWUPsIymfsJmyrDVWC8Tv/a1HeOtGmkwNd/7xUS0Xcnvsx crossorigin=anonymous></script>
 <script defer src=https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/contrib/auto-render.min.js integrity=sha384-+XBljXPPiv+OzfbB3cVmLHf4hdUFHlWNZN5spNQ7rmHTXpd7WvJum6fIACpNNfIR crossorigin=anonymous></script>
@@ -11,7 +10,7 @@
 <script src=https://harbor.mffseal.top/js/code-title.b35124ad8db0ba37162b886afb711cbc.min.js></script>
 <script src=https://harbor.mffseal.top/js/clipboard.c20857734e53a3fb733b7443879efa61.min.js></script>
 <script src=https://harbor.mffseal.top/js/callouts.7723cac461d613d118ee8bb8216b9838.min.js></script>
-<script>const BASE_URL="https://harbor.mffseal.top/",fetchData=Promise.all([fetch("https://harbor.mffseal.top/indices/linkIndex.5da375bc9ca1d813eb68255e2c0afb35.min.json").then(e=>e.json()).then(e=>({index:e.index,links:e.links})),fetch("https://harbor.mffseal.top/indices/contentIndex.e562ec6ad43d185479787d85119148bd.min.json").then(e=>e.json())]).then(([{index:e,links:t},n])=>({index:e,links:t,content:n})),render=()=>{const e=new URL(BASE_URL),t=e.pathname,n=window.location.pathname,s=t==n;addCopyButtons(),addTitleToCodeBlocks(),addCollapsibleCallouts(),initPopover("https://harbor.mffseal.top",!0,!0);const o=document.getElementById("footer");if(o){const e=document.getElementById("graph-container");if(!e)return requestAnimationFrame(render);e.textContent="";const t=s&&!1;drawGraph("https://harbor.mffseal.top",t,[{"/moc":"#4388cc"}],t?{centerForce:1,depth:-1,enableDrag:!0,enableLegend:!1,enableZoom:!0,fontSize:.5,linkDistance:1,opacityScale:3,repelForce:1,scale:1.4}:{centerForce:1,depth:1,enableDrag:!0,enableLegend:!1,enableZoom:!0,fontSize:.6,linkDistance:1,opacityScale:3,repelForce:2,scale:1.2})}},init=(e=document)=>{addCopyButtons(),addTitleToCodeBlocks(),renderMathInElement(e.body,{delimiters:[{left:"$$",right:"$$",display:!0},{left:"$",right:"$",display:!1}],macros:{'’':"'"},throwOnError:!1})}</script><script type=module>
+<script>const BASE_URL="https://harbor.mffseal.top/",fetchData=Promise.all([fetch("https://harbor.mffseal.top/indices/linkIndex.5da375bc9ca1d813eb68255e2c0afb35.min.json").then(e=>e.json()).then(e=>({index:e.index,links:e.links})),fetch("https://harbor.mffseal.top/indices/contentIndex.363af2e61a16ab88407bc594d017144e.min.json").then(e=>e.json())]).then(([{index:e,links:t},n])=>({index:e,links:t,content:n})),render=()=>{const e=new URL(BASE_URL),t=e.pathname,n=window.location.pathname,s=t==n;addCopyButtons(),addTitleToCodeBlocks(),addCollapsibleCallouts(),initPopover("https://harbor.mffseal.top",!0,!0);const o=document.getElementById("footer");if(o){const e=document.getElementById("graph-container");if(!e)return requestAnimationFrame(render);e.textContent="";const t=s&&!0;drawGraph("https://harbor.mffseal.top",t,[{"/moc":"#4388cc"}],t?{centerForce:1,depth:-1,enableDrag:!0,enableLegend:!1,enableZoom:!0,fontSize:.5,linkDistance:1,opacityScale:3,repelForce:1,scale:1.4}:{centerForce:1,depth:1,enableDrag:!0,enableLegend:!1,enableZoom:!0,fontSize:.6,linkDistance:1,opacityScale:3,repelForce:2,scale:1.2})}},init=(e=document)=>{addCopyButtons(),addTitleToCodeBlocks(),renderMathInElement(e.body,{delimiters:[{left:"$$",right:"$$",display:!0},{left:"$",right:"$",display:!1}],macros:{'’':"'"},throwOnError:!1})}</script><script type=module>
     import { attachSPARouting } from "https:\/\/harbor.mffseal.top\/js\/router.9d4974281069e9ebb189f642ae1e3ca2.min.js"
     attachSPARouting(init, render)
   </script></head><script async src="https://www.googletagmanager.com/gtag/js?id=G-NV58SYWRZD"></script>
@@ -19,17 +18,17 @@
 <script defer src=https://harbor.mffseal.top/js/full-text-search.24827f874defbbc6d529926cbfcfb493.min.js></script><div class=singlePage><header><h1 id=page-title><a href=https://harbor.mffseal.top/>🦭 港湾</a></h1><div class=spacer></div><div id=search-icon><p>Search</p><svg tabindex="0" aria-labelledby="title desc" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 19.9 19.7"><title id="title">Search Icon</title><desc id="desc">Icon to open search</desc><g class="search-path" fill="none"><path stroke-linecap="square" d="M18.5 18.3l-5.4-5.4"/><circle cx="8" cy="8" r="7"/></g></svg></div><div class=darkmode><input class=toggle id=darkmode-toggle type=checkbox tabindex=-1>
 <label id=toggle-label-light for=darkmode-toggle tabindex=-1><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" id="dayIcon" viewBox="0 0 35 35" style="enable-background:new 0 0 35 35"><title>Light Mode</title><path d="M6 17.5C6 16.672 5.328 16 4.5 16h-3C.672 16 0 16.672.0 17.5S.672 19 1.5 19h3C5.328 19 6 18.328 6 17.5zM7.5 26c-.414.0-.789.168-1.061.439l-2 2C4.168 28.711 4 29.086 4 29.5 4 30.328 4.671 31 5.5 31c.414.0.789-.168 1.06-.44l2-2C8.832 28.289 9 27.914 9 27.5 9 26.672 8.329 26 7.5 26zm10-20C18.329 6 19 5.328 19 4.5v-3C19 .672 18.329.0 17.5.0S16 .672 16 1.5v3C16 5.328 16.671 6 17.5 6zm10 3c.414.0.789-.168 1.06-.439l2-2C30.832 6.289 31 5.914 31 5.5 31 4.672 30.329 4 29.5 4c-.414.0-.789.168-1.061.44l-2 2C26.168 6.711 26 7.086 26 7.5 26 8.328 26.671 9 27.5 9zM6.439 8.561C6.711 8.832 7.086 9 7.5 9 8.328 9 9 8.328 9 7.5c0-.414-.168-.789-.439-1.061l-2-2C6.289 4.168 5.914 4 5.5 4 4.672 4 4 4.672 4 5.5c0 .414.168.789.439 1.06l2 2.001zM33.5 16h-3c-.828.0-1.5.672-1.5 1.5s.672 1.5 1.5 1.5h3c.828.0 1.5-.672 1.5-1.5S34.328 16 33.5 16zM28.561 26.439C28.289 26.168 27.914 26 27.5 26c-.828.0-1.5.672-1.5 1.5.0.414.168.789.439 1.06l2 2C28.711 30.832 29.086 31 29.5 31c.828.0 1.5-.672 1.5-1.5.0-.414-.168-.789-.439-1.061l-2-2zM17.5 29c-.829.0-1.5.672-1.5 1.5v3c0 .828.671 1.5 1.5 1.5s1.5-.672 1.5-1.5v-3C19 29.672 18.329 29 17.5 29zm0-22C11.71 7 7 11.71 7 17.5S11.71 28 17.5 28 28 23.29 28 17.5 23.29 7 17.5 7zm0 18c-4.136.0-7.5-3.364-7.5-7.5s3.364-7.5 7.5-7.5 7.5 3.364 7.5 7.5S21.636 25 17.5 25z"/></svg></label><label id=toggle-label-dark for=darkmode-toggle tabindex=-1><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" id="nightIcon" viewBox="0 0 100 100" style="enable-background='new 0 0 100 100'"><title>Dark Mode</title><path d="M96.76 66.458c-.853-.852-2.15-1.064-3.23-.534-6.063 2.991-12.858 4.571-19.655 4.571C62.022 70.495 50.88 65.88 42.5 57.5 29.043 44.043 25.658 23.536 34.076 6.47c.532-1.08.318-2.379-.534-3.23-.851-.852-2.15-1.064-3.23-.534-4.918 2.427-9.375 5.619-13.246 9.491-9.447 9.447-14.65 22.008-14.65 35.369.0 13.36 5.203 25.921 14.65 35.368s22.008 14.65 35.368 14.65c13.361.0 25.921-5.203 35.369-14.65 3.872-3.871 7.064-8.328 9.491-13.246C97.826 68.608 97.611 67.309 96.76 66.458z"/></svg></label></div></header><article><h1>volatile</h1><p class=meta>Last updated
 May 31, 2022
-<a href=https://github.com/mffseal/2_0_2-%e8%ae%a1%e7%ae%97%e6%9c%ba%e7%a7%91%e5%ad%a6/2_0_2_1_2_0-%e8%bd%af%e4%bb%b6%e8%af%ad%e8%a8%80/Java/1-%e9%ab%98%e7%ba%a7%e7%89%b9%e6%80%a7/volatile.md rel=noopener>Edit Source</a></p><ul class=tags><li><a href=https://harbor.mffseal.top/tags/atom/>Atom</a></li></ul><aside class=mainTOC><details><summary>Table of Contents</summary><nav id=TableOfContents><ol><li><a href=#内存可见性问题>内存可见性问题</a></li><li><a href=#作用>作用</a></li><li><a href=#jvm限制重排序的方式>JVM限制重排序的方式</a><ol><li><a href=#如何保证可见性>如何保证可见性</a></li><li><a href=#如何保证有序性>如何保证有序性</a></li></ol></li><li><a href=#原理>原理</a></li><li><a href=#volatile并不总是可行的>volatile并不总是可行的</a></li><li><a href=#何时使用volatile>何时使用volatile</a></li><li><a href=#volatile的性能考量>volatile的性能考量</a></li></ol></nav></details></aside><a href=#volatile><h1 id=volatile><span class=hanchor arialabel=Anchor># </span>volatile</h1></a><blockquote><p><a href=https://ifeve.com/java-volatile%E5%85%B3%E9%94%AE%E5%AD%97/ rel=noopener>https://ifeve.com/java-volatile%E5%85%B3%E9%94%AE%E5%AD%97/</a></p></blockquote><a href=#内存可见性问题><h2 id=内存可见性问题><span class=hanchor arialabel=Anchor># </span>内存可见性问题</h2></a><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
-</span><span class=lnt> 2
-</span><span class=lnt> 3
-</span><span class=lnt> 4
-</span><span class=lnt> 5
-</span><span class=lnt> 6
-</span><span class=lnt> 7
-</span><span class=lnt> 8
-</span><span class=lnt> 9
-</span><span class=lnt>10
-</span><span class=lnt>11
+<a href=https://github.com/mffseal/2_0_2-%e8%ae%a1%e7%ae%97%e6%9c%ba%e7%a7%91%e5%ad%a6/2_0_2_1_2_0-%e8%bd%af%e4%bb%b6%e8%af%ad%e8%a8%80/Java/1-%e9%ab%98%e7%ba%a7%e7%89%b9%e6%80%a7/volatile.md rel=noopener>Edit Source</a></p><ul class=tags><li><a href=https://harbor.mffseal.top/tags/atom/>Atom</a></li></ul><aside class=mainTOC><details><summary>Table of Contents</summary><nav id=TableOfContents><ol><li><a href=#内存可见性问题>内存可见性问题</a></li><li><a href=#作用>作用</a></li><li><a href=#jvm限制重排序的方式>JVM限制重排序的方式</a><ol><li><a href=#如何保证可见性>如何保证可见性</a></li><li><a href=#如何保证有序性>如何保证有序性</a></li></ol></li><li><a href=#原理>原理</a></li><li><a href=#volatile并不总是可行的>volatile并不总是可行的</a></li><li><a href=#何时使用volatile>何时使用volatile</a></li><li><a href=#volatile的性能考量>volatile的性能考量</a></li></ol></nav></details></aside><a href=#volatile><h1 id=volatile><span class=hanchor arialabel=Anchor># </span>volatile</h1></a><blockquote><p><a href=https://ifeve.com/java-volatile%E5%85%B3%E9%94%AE%E5%AD%97/ rel=noopener>https://ifeve.com/java-volatile%E5%85%B3%E9%94%AE%E5%AD%97/</a></p></blockquote><a href=#内存可见性问题><h2 id=内存可见性问题><span class=hanchor arialabel=Anchor># </span>内存可见性问题</h2></a><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt id=hl-0-1><a style=outline:none;text-decoration:none;color:inherit href=#hl-0-1> 1</a>
+</span><span class=lnt id=hl-0-2><a style=outline:none;text-decoration:none;color:inherit href=#hl-0-2> 2</a>
+</span><span class=lnt id=hl-0-3><a style=outline:none;text-decoration:none;color:inherit href=#hl-0-3> 3</a>
+</span><span class=lnt id=hl-0-4><a style=outline:none;text-decoration:none;color:inherit href=#hl-0-4> 4</a>
+</span><span class=lnt id=hl-0-5><a style=outline:none;text-decoration:none;color:inherit href=#hl-0-5> 5</a>
+</span><span class=lnt id=hl-0-6><a style=outline:none;text-decoration:none;color:inherit href=#hl-0-6> 6</a>
+</span><span class=lnt id=hl-0-7><a style=outline:none;text-decoration:none;color:inherit href=#hl-0-7> 7</a>
+</span><span class=lnt id=hl-0-8><a style=outline:none;text-decoration:none;color:inherit href=#hl-0-8> 8</a>
+</span><span class=lnt id=hl-0-9><a style=outline:none;text-decoration:none;color:inherit href=#hl-0-9> 9</a>
+</span><span class=lnt id=hl-0-10><a style=outline:none;text-decoration:none;color:inherit href=#hl-0-10>10</a>
+</span><span class=lnt id=hl-0-11><a style=outline:none;text-decoration:none;color:inherit href=#hl-0-11>11</a>
 </span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-java data-lang=java><span class=line><span class=cl><span class=n>A</span> <span class=o>=</span> <span class=n>0</span><span class=o>;</span>
 </span></span><span class=line><span class=cl><span class=n>B</span> <span class=o>=</span> <span class=n>0</span><span class=o>;</span>
 </span></span><span class=line><span class=cl><span class=n>T0</span> <span class=o>{</span>
@@ -42,25 +41,25 @@ May 31, 2022
 </span></span><span class=line><span class=cl>	<span class=n>print</span><span class=o>(</span><span class=n>A</span><span class=o>);</span>
 </span></span><span class=line><span class=cl><span class=o>}</span>
 </span></span></code></pre></td></tr></table></div></div><p>这样一段代码可能会出现下列四种输出：</p><table><thead><tr><th>情况1</th><th>情况2</th><th>情况3</th><th>情况4</th></tr></thead><tbody><tr><td>读A</td><td>读A</td><td>写A</td><td>写A</td></tr><tr><td>读B</td><td>写B</td><td>写B</td><td>读B</td></tr><tr><td>写A</td><td>写A</td><td>读A</td><td>读A</td></tr><tr><td>写B</td><td>读B</td><td>读B</td><td>写B</td></tr><tr><td>A0B0</td><td>A0B1</td><td>A1B1</td><td>A1B0</td></tr></tbody></table><p>在读上加入内存屏障即可保证<strong>在一个线程中</strong>写操作发生在读操作之前，但是若线程1先执行完毕线程2才执行，就会导致线程1无法读取到B的值，所以需要让两个线程同步：</p><ol><li>用标志位来告知A B变量有没有被写入过</li><li>写过后设置标志位</li><li>标志位的写前插入屏障   </li><li>读之前自旋判断对应标志位</li></ol><a href=#作用><h2 id=作用><span class=hanchor arialabel=Anchor># </span>作用</h2></a><p>保证：</p><ul><li>内存可见性<ul><li>读写一定是从主内存中获得，而不是本地内存</li></ul></li><li>内存有序性<ul><li>读写操作按一定的顺序执行，不会因为指令重排而乱序</li></ul></li></ul><blockquote><p>无法保证原子性。</p></blockquote><a href=#jvm限制重排序的方式><h2 id=jvm限制重排序的方式><span class=hanchor arialabel=Anchor># </span>JVM限制重排序的方式</h2></a><blockquote><p>禁止重排序实际上不是禁止了cpu指令级别的重排序、乱序执行、双射等操作，而是控制内存的访问顺序。编译器指令防止加载/存储操作在源代码中跨行重新排序，但是允许编译器对任意一侧的内存访问或同一侧的其他访问进行重新排序，这可能意味着使用专用指令停止内核的运行，直至确保所有先前的内存访问对系统中的其他代理可见。代理是系统中能够启动总线事务的任何设备——例如处理器或DMA控制器。屏障影响加载-存储（<code>load-store</code>）指令顺序的例子：
-<img src="/z-oblib/z2-attachments/Pasted image 20220531012444.png" width=auto></p></blockquote><ol><li>volatile变量执行<strong>写</strong>操作，会在写之前插入StoreStore Barriers<strong>写屏障</strong>，在执行volatile变量写之前的所有Store操作都已执行，数据同步到了内存中（将store buffer中的store操作刷新到内存）；在写之后插入StoreLoad Barriers，代表该volatile变量的写操作也会立即刷新到内存中，其他线程会看到最新值；</li><li>volatile变量执行<strong>读</strong>操作，会在读之前插入LoadLoad Barriers<strong>读屏障</strong>，代表在执行volatile变量读之前的所有Load从内存中获取最新值；在读之后插入LoadStore Barriers，代表该读取volatile变量获得是内存中最新的值；</li></ol><a href=#如何保证可见性><h3 id=如何保证可见性><span class=hanchor arialabel=Anchor># </span>如何保证可见性</h3></a><a href=#写屏障><h4 id=写屏障><span class=hanchor arialabel=Anchor># </span>写屏障</h4></a><p>写屏障（sfence）保证在该屏障之前的，对共享变量的改动，都同步到主存当中</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
-</span><span class=lnt>2
-</span><span class=lnt>3
-</span><span class=lnt>4
-</span><span class=lnt>5
+<img src="/z-oblib/z2-attachments/Pasted image 20220531012444.png" width=auto></p></blockquote><ol><li>volatile变量执行<strong>写</strong>操作，会在写之前插入StoreStore Barriers<strong>写屏障</strong>，在执行volatile变量写之前的所有Store操作都已执行，数据同步到了内存中（将store buffer中的store操作刷新到内存）；在写之后插入StoreLoad Barriers，代表该volatile变量的写操作也会立即刷新到内存中，其他线程会看到最新值；</li><li>volatile变量执行<strong>读</strong>操作，会在读之前插入LoadLoad Barriers<strong>读屏障</strong>，代表在执行volatile变量读之前的所有Load从内存中获取最新值；在读之后插入LoadStore Barriers，代表该读取volatile变量获得是内存中最新的值；</li></ol><a href=#如何保证可见性><h3 id=如何保证可见性><span class=hanchor arialabel=Anchor># </span>如何保证可见性</h3></a><a href=#写屏障><h4 id=写屏障><span class=hanchor arialabel=Anchor># </span>写屏障</h4></a><p>写屏障（sfence）保证在该屏障之前的，对共享变量的改动，都同步到主存当中</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt id=hl-1-1><a style=outline:none;text-decoration:none;color:inherit href=#hl-1-1>1</a>
+</span><span class=lnt id=hl-1-2><a style=outline:none;text-decoration:none;color:inherit href=#hl-1-2>2</a>
+</span><span class=lnt id=hl-1-3><a style=outline:none;text-decoration:none;color:inherit href=#hl-1-3>3</a>
+</span><span class=lnt id=hl-1-4><a style=outline:none;text-decoration:none;color:inherit href=#hl-1-4>4</a>
+</span><span class=lnt id=hl-1-5><a style=outline:none;text-decoration:none;color:inherit href=#hl-1-5>5</a>
 </span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-java data-lang=java><span class=line><span class=cl><span class=kd>public</span> <span class=kt>void</span> <span class=nf>actor2</span><span class=o>(</span><span class=n>I_Result</span> <span class=n>r</span><span class=o>)</span> <span class=o>{</span>
 </span></span><span class=line><span class=cl>    <span class=n>num</span> <span class=o>=</span> <span class=n>2</span><span class=o>;</span>
 </span></span><span class=line><span class=cl>    <span class=n>ready</span> <span class=o>=</span> <span class=kc>true</span><span class=o>;</span> <span class=c1>// ready 是 volatile 赋值带写屏障
 </span></span></span><span class=line><span class=cl><span class=c1></span>    <span class=c1>// 写屏障
 </span></span></span><span class=line><span class=cl><span class=c1></span><span class=o>}</span>
-</span></span></code></pre></td></tr></table></div></div><a href=#读屏障><h4 id=读屏障><span class=hanchor arialabel=Anchor># </span>读屏障</h4></a><p>而读屏障（lfence）保证在该屏障之后，对共享变量的读取，加载的是主存中最新数据</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
-</span><span class=lnt>2
-</span><span class=lnt>3
-</span><span class=lnt>4
-</span><span class=lnt>5
-</span><span class=lnt>6
-</span><span class=lnt>7
-</span><span class=lnt>8
-</span><span class=lnt>9
+</span></span></code></pre></td></tr></table></div></div><a href=#读屏障><h4 id=读屏障><span class=hanchor arialabel=Anchor># </span>读屏障</h4></a><p>而读屏障（lfence）保证在该屏障之后，对共享变量的读取，加载的是主存中最新数据</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt id=hl-2-1><a style=outline:none;text-decoration:none;color:inherit href=#hl-2-1>1</a>
+</span><span class=lnt id=hl-2-2><a style=outline:none;text-decoration:none;color:inherit href=#hl-2-2>2</a>
+</span><span class=lnt id=hl-2-3><a style=outline:none;text-decoration:none;color:inherit href=#hl-2-3>3</a>
+</span><span class=lnt id=hl-2-4><a style=outline:none;text-decoration:none;color:inherit href=#hl-2-4>4</a>
+</span><span class=lnt id=hl-2-5><a style=outline:none;text-decoration:none;color:inherit href=#hl-2-5>5</a>
+</span><span class=lnt id=hl-2-6><a style=outline:none;text-decoration:none;color:inherit href=#hl-2-6>6</a>
+</span><span class=lnt id=hl-2-7><a style=outline:none;text-decoration:none;color:inherit href=#hl-2-7>7</a>
+</span><span class=lnt id=hl-2-8><a style=outline:none;text-decoration:none;color:inherit href=#hl-2-8>8</a>
+</span><span class=lnt id=hl-2-9><a style=outline:none;text-decoration:none;color:inherit href=#hl-2-9>9</a>
 </span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-java data-lang=java><span class=line><span class=cl><span class=kd>public</span> <span class=kt>void</span> <span class=nf>actor1</span><span class=o>(</span><span class=n>I_Result</span> <span class=n>r</span><span class=o>)</span> <span class=o>{</span>
 </span></span><span class=line><span class=cl>    <span class=c1>// 读屏障
 </span></span></span><span class=line><span class=cl><span class=c1></span>    <span class=c1>// ready 是 volatile 读取值带读屏障
@@ -70,25 +69,25 @@ May 31, 2022
 </span></span><span class=line><span class=cl>        <span class=n>r</span><span class=o>.</span><span class=na>r1</span> <span class=o>=</span> <span class=n>1</span><span class=o>;</span>
 </span></span><span class=line><span class=cl>    <span class=o>}</span>
 </span></span><span class=line><span class=cl><span class=o>}</span><span class=n>f</span>
-</span></span></code></pre></td></tr></table></div></div><p><img src="/z-oblib/z2-attachments/Pasted image 20220531142019.png" width=auto></p><a href=#如何保证有序性><h3 id=如何保证有序性><span class=hanchor arialabel=Anchor># </span>如何保证有序性</h3></a><p>写屏障会确保指令重排序时，不会将写屏障之前的代码排在写屏障之后</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
-</span><span class=lnt>2
-</span><span class=lnt>3
-</span><span class=lnt>4
-</span><span class=lnt>5
+</span></span></code></pre></td></tr></table></div></div><p><img src="/z-oblib/z2-attachments/Pasted image 20220531142019.png" width=auto></p><a href=#如何保证有序性><h3 id=如何保证有序性><span class=hanchor arialabel=Anchor># </span>如何保证有序性</h3></a><p>写屏障会确保指令重排序时，不会将写屏障之前的代码排在写屏障之后</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt id=hl-3-1><a style=outline:none;text-decoration:none;color:inherit href=#hl-3-1>1</a>
+</span><span class=lnt id=hl-3-2><a style=outline:none;text-decoration:none;color:inherit href=#hl-3-2>2</a>
+</span><span class=lnt id=hl-3-3><a style=outline:none;text-decoration:none;color:inherit href=#hl-3-3>3</a>
+</span><span class=lnt id=hl-3-4><a style=outline:none;text-decoration:none;color:inherit href=#hl-3-4>4</a>
+</span><span class=lnt id=hl-3-5><a style=outline:none;text-decoration:none;color:inherit href=#hl-3-5>5</a>
 </span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-java data-lang=java><span class=line><span class=cl><span class=kd>public</span> <span class=kt>void</span> <span class=nf>actor2</span><span class=o>(</span><span class=n>I_Result</span> <span class=n>r</span><span class=o>)</span> <span class=o>{</span>
 </span></span><span class=line><span class=cl>    <span class=n>num</span> <span class=o>=</span> <span class=n>2</span><span class=o>;</span>
 </span></span><span class=line><span class=cl>    <span class=n>ready</span> <span class=o>=</span> <span class=kc>true</span><span class=o>;</span> <span class=c1>// ready 是 volatile 赋值带写屏障
 </span></span></span><span class=line><span class=cl><span class=c1></span>    <span class=c1>// 写屏障
 </span></span></span><span class=line><span class=cl><span class=c1></span><span class=o>}</span>
-</span></span></code></pre></td></tr></table></div></div><p>读屏障会确保指令重排序时，不会将读屏障之后的代码排在读屏障之前</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
-</span><span class=lnt>2
-</span><span class=lnt>3
-</span><span class=lnt>4
-</span><span class=lnt>5
-</span><span class=lnt>6
-</span><span class=lnt>7
-</span><span class=lnt>8
-</span><span class=lnt>9
+</span></span></code></pre></td></tr></table></div></div><p>读屏障会确保指令重排序时，不会将读屏障之后的代码排在读屏障之前</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt id=hl-4-1><a style=outline:none;text-decoration:none;color:inherit href=#hl-4-1>1</a>
+</span><span class=lnt id=hl-4-2><a style=outline:none;text-decoration:none;color:inherit href=#hl-4-2>2</a>
+</span><span class=lnt id=hl-4-3><a style=outline:none;text-decoration:none;color:inherit href=#hl-4-3>3</a>
+</span><span class=lnt id=hl-4-4><a style=outline:none;text-decoration:none;color:inherit href=#hl-4-4>4</a>
+</span><span class=lnt id=hl-4-5><a style=outline:none;text-decoration:none;color:inherit href=#hl-4-5>5</a>
+</span><span class=lnt id=hl-4-6><a style=outline:none;text-decoration:none;color:inherit href=#hl-4-6>6</a>
+</span><span class=lnt id=hl-4-7><a style=outline:none;text-decoration:none;color:inherit href=#hl-4-7>7</a>
+</span><span class=lnt id=hl-4-8><a style=outline:none;text-decoration:none;color:inherit href=#hl-4-8>8</a>
+</span><span class=lnt id=hl-4-9><a style=outline:none;text-decoration:none;color:inherit href=#hl-4-9>9</a>
 </span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-java data-lang=java><span class=line><span class=cl><span class=kd>public</span> <span class=kt>void</span> <span class=nf>actor1</span><span class=o>(</span><span class=n>I_Result</span> <span class=n>r</span><span class=o>)</span> <span class=o>{</span>
 </span></span><span class=line><span class=cl>    <span class=c1>// 读屏障
 </span></span></span><span class=line><span class=cl><span class=c1></span>    <span class=c1>// ready 是 volatile 读取值带读屏障
@@ -98,30 +97,30 @@ May 31, 2022
 </span></span><span class=line><span class=cl>        <span class=n>r</span><span class=o>.</span><span class=na>r1</span> <span class=o>=</span> <span class=n>1</span><span class=o>;</span>
 </span></span><span class=line><span class=cl>    <span class=o>}</span>
 </span></span><span class=line><span class=cl><span class=o>}</span>
-</span></span></code></pre></td></tr></table></div></div><p><img src="/z-oblib/z2-attachments/Pasted image 20220531143810.png" width=auto></p><a href=#原理><h2 id=原理><span class=hanchor arialabel=Anchor># </span>原理</h2></a><p>用<a href=/2_0_2-%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A7%91%E5%AD%A6/2_0_2_1_2_1-%E8%BD%AF%E4%BB%B6%E6%96%B9%E6%B3%95%E5%AD%A6/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F#%e5%8f%8c%e9%87%8d%e6%a0%a1%e9%aa%8c%e9%94%81 rel=noopener class=internal-link data-src=/2_0_2-%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A7%91%E5%AD%A6/2_0_2_1_2_1-%E8%BD%AF%E4%BB%B6%E6%96%B9%E6%B3%95%E5%AD%A6/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F>单例模式双重校验锁</a>的例子展开：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
-</span><span class=lnt> 2
-</span><span class=lnt> 3
-</span><span class=lnt> 4
-</span><span class=lnt> 5
-</span><span class=lnt> 6
-</span><span class=lnt> 7
-</span><span class=lnt> 8
-</span><span class=lnt> 9
-</span><span class=lnt>10
-</span><span class=lnt>11
-</span><span class=lnt>12
-</span><span class=lnt>13
-</span><span class=lnt>14
-</span><span class=lnt>15
-</span><span class=lnt>16
-</span><span class=lnt>17
-</span><span class=lnt>18
-</span><span class=lnt>19
-</span><span class=lnt>20
-</span><span class=lnt>21
-</span><span class=lnt>22
-</span><span class=lnt>23
-</span><span class=lnt>24
+</span></span></code></pre></td></tr></table></div></div><p><img src="/z-oblib/z2-attachments/Pasted image 20220531143810.png" width=auto></p><a href=#原理><h2 id=原理><span class=hanchor arialabel=Anchor># </span>原理</h2></a><p>用<a href=/2_0_2-%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A7%91%E5%AD%A6/2_0_2_1_2_1-%E8%BD%AF%E4%BB%B6%E6%96%B9%E6%B3%95%E5%AD%A6/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F#%e5%8f%8c%e9%87%8d%e6%a0%a1%e9%aa%8c%e9%94%81 rel=noopener class=internal-link data-src=/2_0_2-%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A7%91%E5%AD%A6/2_0_2_1_2_1-%E8%BD%AF%E4%BB%B6%E6%96%B9%E6%B3%95%E5%AD%A6/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F>单例模式双重校验锁</a>的例子展开：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt id=hl-5-1><a style=outline:none;text-decoration:none;color:inherit href=#hl-5-1> 1</a>
+</span><span class=lnt id=hl-5-2><a style=outline:none;text-decoration:none;color:inherit href=#hl-5-2> 2</a>
+</span><span class=lnt id=hl-5-3><a style=outline:none;text-decoration:none;color:inherit href=#hl-5-3> 3</a>
+</span><span class=lnt id=hl-5-4><a style=outline:none;text-decoration:none;color:inherit href=#hl-5-4> 4</a>
+</span><span class=lnt id=hl-5-5><a style=outline:none;text-decoration:none;color:inherit href=#hl-5-5> 5</a>
+</span><span class=lnt id=hl-5-6><a style=outline:none;text-decoration:none;color:inherit href=#hl-5-6> 6</a>
+</span><span class=lnt id=hl-5-7><a style=outline:none;text-decoration:none;color:inherit href=#hl-5-7> 7</a>
+</span><span class=lnt id=hl-5-8><a style=outline:none;text-decoration:none;color:inherit href=#hl-5-8> 8</a>
+</span><span class=lnt id=hl-5-9><a style=outline:none;text-decoration:none;color:inherit href=#hl-5-9> 9</a>
+</span><span class=lnt id=hl-5-10><a style=outline:none;text-decoration:none;color:inherit href=#hl-5-10>10</a>
+</span><span class=lnt id=hl-5-11><a style=outline:none;text-decoration:none;color:inherit href=#hl-5-11>11</a>
+</span><span class=lnt id=hl-5-12><a style=outline:none;text-decoration:none;color:inherit href=#hl-5-12>12</a>
+</span><span class=lnt id=hl-5-13><a style=outline:none;text-decoration:none;color:inherit href=#hl-5-13>13</a>
+</span><span class=lnt id=hl-5-14><a style=outline:none;text-decoration:none;color:inherit href=#hl-5-14>14</a>
+</span><span class=lnt id=hl-5-15><a style=outline:none;text-decoration:none;color:inherit href=#hl-5-15>15</a>
+</span><span class=lnt id=hl-5-16><a style=outline:none;text-decoration:none;color:inherit href=#hl-5-16>16</a>
+</span><span class=lnt id=hl-5-17><a style=outline:none;text-decoration:none;color:inherit href=#hl-5-17>17</a>
+</span><span class=lnt id=hl-5-18><a style=outline:none;text-decoration:none;color:inherit href=#hl-5-18>18</a>
+</span><span class=lnt id=hl-5-19><a style=outline:none;text-decoration:none;color:inherit href=#hl-5-19>19</a>
+</span><span class=lnt id=hl-5-20><a style=outline:none;text-decoration:none;color:inherit href=#hl-5-20>20</a>
+</span><span class=lnt id=hl-5-21><a style=outline:none;text-decoration:none;color:inherit href=#hl-5-21>21</a>
+</span><span class=lnt id=hl-5-22><a style=outline:none;text-decoration:none;color:inherit href=#hl-5-22>22</a>
+</span><span class=lnt id=hl-5-23><a style=outline:none;text-decoration:none;color:inherit href=#hl-5-23>23</a>
+</span><span class=lnt id=hl-5-24><a style=outline:none;text-decoration:none;color:inherit href=#hl-5-24>24</a>
 </span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-java data-lang=java><span class=line><span class=cl><span class=c1>// -------------------------------------&gt; 加入对 INSTANCE 变量的读屏障
 </span></span></span><span class=line><span class=cl><span class=c1></span><span class=nl>0:</span> <span class=n>getstatic</span>     <span class=err>#</span><span class=n>2</span>                  <span class=c1>// Field INSTANCE:Lcn/itcast/n5/Singleton;
 </span></span></span><span class=line><span class=cl><span class=c1></span><span class=nl>3:</span> <span class=n>ifnonnull</span>     <span class=n>37</span>
@@ -147,22 +146,22 @@ May 31, 2022
 </span></span><span class=line><span class=cl><span class=nl>37:</span> <span class=n>getstatic</span>     <span class=err>#</span><span class=n>2</span>                  <span class=c1>// Field INSTANCE:Lcn/itcast/n5/Singleton;
 </span></span></span><span class=line><span class=cl><span class=c1></span><span class=nl>40:</span> <span class=n>areturn</span>
 </span></span></code></pre></td></tr></table></div></div><p>如上面的注释内容所示，读写 volatile 变量时会加入内存屏障（Memory Barrier（Memory Fence）），保证下面两点：</p><ul><li>可见性<ul><li>写屏障（sfence）保证在该屏障之前的 t1 对共享变量的改动，都同步到主存当中</li><li>而读屏障（lfence）保证在该屏障之后 t2 对共享变量的读取，加载的是主存中最新数据</li></ul></li><li>有序性<ul><li>写屏障会确保指令重排序时，不会将写屏障之前的代码排在写屏障之后</li><li>读屏障会确保指令重排序时，不会将读屏障之后的代码排在读屏障之前</li></ul></li><li>更底层是读写变量时使用 lock 指令来多核 CPU 之间的可见性与有序性
-<img src="/z-oblib/z2-attachments/Pasted image 20220531154956.png" width=auto></li></ul><a href=#volatile并不总是可行的><h2 id=volatile并不总是可行的><span class=hanchor arialabel=Anchor># </span>volatile并不总是可行的</h2></a><p><strong>不能解决指令交错</strong>：</p><ul><li>写屏障仅仅是保证之后的读能够读到最新的结果，但不能保证读跑到它前面去。</li><li>而有序性的保证也只是保证了本线程内相关代码不被重排序S。</li><li></li></ul><p>从volatile的内存语义上来看，volatile可以保证内存可见性且禁止重排序。</p><p>在保证内存可见性这一点上，volatile有着与锁相同的内存语义，所以可以作为一个“轻量级”的锁来使用。但由于volatile仅仅保证对单个volatile变量的读/写具有原子性，而锁可以保证整个<strong>临界区代码</strong>的执行具有原子性。所以<strong>在功能上，锁比volatile更强大；在性能上，volatile更有优势</strong>。</p><p>在禁止重排序这一点上，volatile也是非常有用的。比如我们熟悉的<a class="internal-link broken">单例模式</a>，其中有一种实现方式是“<a href=/2_0_2-%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A7%91%E5%AD%A6/2_0_2_1_2_1-%E8%BD%AF%E4%BB%B6%E6%96%B9%E6%B3%95%E5%AD%A6/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F#%e7%ba%bf%e7%a8%8b%e5%ae%89%e5%85%a8%e7%9a%84%e5%ae%9e%e7%8e%b0 rel=noopener class=internal-link data-src=/2_0_2-%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A7%91%E5%AD%A6/2_0_2_1_2_1-%E8%BD%AF%E4%BB%B6%E6%96%B9%E6%B3%95%E5%AD%A6/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F>双重锁</a>检查”，比如这样的代码：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
-</span><span class=lnt> 2
-</span><span class=lnt> 3
-</span><span class=lnt> 4
-</span><span class=lnt> 5
-</span><span class=lnt> 6
-</span><span class=lnt> 7
-</span><span class=lnt> 8
-</span><span class=lnt> 9
-</span><span class=lnt>10
-</span><span class=lnt>11
-</span><span class=lnt>12
-</span><span class=lnt>13
-</span><span class=lnt>14
-</span><span class=lnt>15
-</span><span class=lnt>16
+<img src="/z-oblib/z2-attachments/Pasted image 20220531154956.png" width=auto></li></ul><a href=#volatile并不总是可行的><h2 id=volatile并不总是可行的><span class=hanchor arialabel=Anchor># </span>volatile并不总是可行的</h2></a><p><strong>不能解决指令交错</strong>：</p><ul><li>写屏障仅仅是保证之后的读能够读到最新的结果，但不能保证读跑到它前面去。</li><li>而有序性的保证也只是保证了本线程内相关代码不被重排序S。</li><li></li></ul><p>从volatile的内存语义上来看，volatile可以保证内存可见性且禁止重排序。</p><p>在保证内存可见性这一点上，volatile有着与锁相同的内存语义，所以可以作为一个“轻量级”的锁来使用。但由于volatile仅仅保证对单个volatile变量的读/写具有原子性，而锁可以保证整个<strong>临界区代码</strong>的执行具有原子性。所以<strong>在功能上，锁比volatile更强大；在性能上，volatile更有优势</strong>。</p><p>在禁止重排序这一点上，volatile也是非常有用的。比如我们熟悉的<a class="internal-link broken">单例模式</a>，其中有一种实现方式是“<a href=/2_0_2-%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A7%91%E5%AD%A6/2_0_2_1_2_1-%E8%BD%AF%E4%BB%B6%E6%96%B9%E6%B3%95%E5%AD%A6/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F#%e7%ba%bf%e7%a8%8b%e5%ae%89%e5%85%a8%e7%9a%84%e5%ae%9e%e7%8e%b0 rel=noopener class=internal-link data-src=/2_0_2-%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A7%91%E5%AD%A6/2_0_2_1_2_1-%E8%BD%AF%E4%BB%B6%E6%96%B9%E6%B3%95%E5%AD%A6/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F>双重锁</a>检查”，比如这样的代码：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt id=hl-6-1><a style=outline:none;text-decoration:none;color:inherit href=#hl-6-1> 1</a>
+</span><span class=lnt id=hl-6-2><a style=outline:none;text-decoration:none;color:inherit href=#hl-6-2> 2</a>
+</span><span class=lnt id=hl-6-3><a style=outline:none;text-decoration:none;color:inherit href=#hl-6-3> 3</a>
+</span><span class=lnt id=hl-6-4><a style=outline:none;text-decoration:none;color:inherit href=#hl-6-4> 4</a>
+</span><span class=lnt id=hl-6-5><a style=outline:none;text-decoration:none;color:inherit href=#hl-6-5> 5</a>
+</span><span class=lnt id=hl-6-6><a style=outline:none;text-decoration:none;color:inherit href=#hl-6-6> 6</a>
+</span><span class=lnt id=hl-6-7><a style=outline:none;text-decoration:none;color:inherit href=#hl-6-7> 7</a>
+</span><span class=lnt id=hl-6-8><a style=outline:none;text-decoration:none;color:inherit href=#hl-6-8> 8</a>
+</span><span class=lnt id=hl-6-9><a style=outline:none;text-decoration:none;color:inherit href=#hl-6-9> 9</a>
+</span><span class=lnt id=hl-6-10><a style=outline:none;text-decoration:none;color:inherit href=#hl-6-10>10</a>
+</span><span class=lnt id=hl-6-11><a style=outline:none;text-decoration:none;color:inherit href=#hl-6-11>11</a>
+</span><span class=lnt id=hl-6-12><a style=outline:none;text-decoration:none;color:inherit href=#hl-6-12>12</a>
+</span><span class=lnt id=hl-6-13><a style=outline:none;text-decoration:none;color:inherit href=#hl-6-13>13</a>
+</span><span class=lnt id=hl-6-14><a style=outline:none;text-decoration:none;color:inherit href=#hl-6-14>14</a>
+</span><span class=lnt id=hl-6-15><a style=outline:none;text-decoration:none;color:inherit href=#hl-6-15>15</a>
+</span><span class=lnt id=hl-6-16><a style=outline:none;text-decoration:none;color:inherit href=#hl-6-16>16</a>
 </span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-java data-lang=java><span class=line><span class=cl><span class=kd>public</span> <span class=kd>class</span> <span class=nc>Singleton</span> <span class=o>{</span>
 </span></span><span class=line><span class=cl>
 </span></span><span class=line><span class=cl>    <span class=kd>private</span> <span class=kd>static</span> <span class=n>Singleton</span> <span class=n>instance</span><span class=o>;</span> <span class=c1>// 不使用volatile关键字
@@ -179,17 +178,17 @@ May 31, 2022
 </span></span><span class=line><span class=cl>        <span class=k>return</span> <span class=n>instance</span><span class=o>;</span>
 </span></span><span class=line><span class=cl>    <span class=o>}</span>
 </span></span><span class=line><span class=cl><span class=o>}</span>
-</span></span></code></pre></td></tr></table></div></div><p>如果这里的变量声明不使用volatile关键字，是可能会发生错误的。它可能会被重排序：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
-</span><span class=lnt> 2
-</span><span class=lnt> 3
-</span><span class=lnt> 4
-</span><span class=lnt> 5
-</span><span class=lnt> 6
-</span><span class=lnt> 7
-</span><span class=lnt> 8
-</span><span class=lnt> 9
-</span><span class=lnt>10
-</span><span class=lnt>11
+</span></span></code></pre></td></tr></table></div></div><p>如果这里的变量声明不使用volatile关键字，是可能会发生错误的。它可能会被重排序：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt id=hl-7-1><a style=outline:none;text-decoration:none;color:inherit href=#hl-7-1> 1</a>
+</span><span class=lnt id=hl-7-2><a style=outline:none;text-decoration:none;color:inherit href=#hl-7-2> 2</a>
+</span><span class=lnt id=hl-7-3><a style=outline:none;text-decoration:none;color:inherit href=#hl-7-3> 3</a>
+</span><span class=lnt id=hl-7-4><a style=outline:none;text-decoration:none;color:inherit href=#hl-7-4> 4</a>
+</span><span class=lnt id=hl-7-5><a style=outline:none;text-decoration:none;color:inherit href=#hl-7-5> 5</a>
+</span><span class=lnt id=hl-7-6><a style=outline:none;text-decoration:none;color:inherit href=#hl-7-6> 6</a>
+</span><span class=lnt id=hl-7-7><a style=outline:none;text-decoration:none;color:inherit href=#hl-7-7> 7</a>
+</span><span class=lnt id=hl-7-8><a style=outline:none;text-decoration:none;color:inherit href=#hl-7-8> 8</a>
+</span><span class=lnt id=hl-7-9><a style=outline:none;text-decoration:none;color:inherit href=#hl-7-9> 9</a>
+</span><span class=lnt id=hl-7-10><a style=outline:none;text-decoration:none;color:inherit href=#hl-7-10>10</a>
+</span><span class=lnt id=hl-7-11><a style=outline:none;text-decoration:none;color:inherit href=#hl-7-11>11</a>
 </span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-java data-lang=java><span class=line><span class=cl><span class=n>instance</span> <span class=o>=</span> <span class=k>new</span> <span class=n>Singleton</span><span class=o>();</span> <span class=c1>// 第10行
 </span></span></span><span class=line><span class=cl><span class=c1></span>
 </span></span><span class=line><span class=cl><span class=c1>// 可以分解为以下三个步骤

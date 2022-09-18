@@ -1,5 +1,4 @@
-<!doctype html><html lang=en><head><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8920808282451934" crossorigin=anonymous></script><meta charset=utf-8><meta name=description content="ReentrantReadWriteLock 当读操作远远高于写操作时，这时候使用 读写锁 让 读-读 可以并发，提高性能。 类似于数据库中的 select &mldr;from &mldr; lock in share mode 提供一个 数据容器类 内部分别使用读锁保护数据的 read() 方法，写锁保护数据的 write() 方法：
-使用 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31  class DataContainer { private Object data; private ReentrantReadWriteLock rw = new ReentrantReadWriteLock(); private ReentrantReadWriteLock.ReadLock r = rw."><title>ReentrantReadWriteLock</title><meta name=viewport content="width=device-width,initial-scale=1"><link rel="shortcut icon" type=image/png href=https://harbor.mffseal.top//icon.png><link href=https://harbor.mffseal.top/styles.7153093e4d1bbb584a28469cadfa3f88.min.css rel=stylesheet><link href=https://harbor.mffseal.top/styles/_light_syntax.86a48a52faebeaaf42158b72922b1c90.min.css rel=stylesheet id=theme-link><script src=https://harbor.mffseal.top/js/darkmode.9841b88d44c115f7419d485ee72d23a2.min.js></script>
+<!doctype html><html lang=en><head><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8920808282451934" crossorigin=anonymous></script><meta charset=utf-8><meta name=description content="ReentrantReadWriteLock 当读操作远远高于写操作时，这时候使用 读写锁 让 读-读 可以并发，提高性能。 类似于数据库中的 select &mldr;from &mldr; lock in share mode 提供一个 数据容器类 内部分别使用读锁保护数据的 read() 方法，写锁保护数据的 write() 方法："><title>ReentrantReadWriteLock</title><meta name=viewport content="width=device-width,initial-scale=1"><link rel="shortcut icon" type=image/png href=https://harbor.mffseal.top//icon.png><link href=https://harbor.mffseal.top/styles.7153093e4d1bbb584a28469cadfa3f88.min.css rel=stylesheet><link href=https://harbor.mffseal.top/styles/_light_syntax.86a48a52faebeaaf42158b72922b1c90.min.css rel=stylesheet id=theme-link><script src=https://harbor.mffseal.top/js/darkmode.9841b88d44c115f7419d485ee72d23a2.min.js></script>
 <script src=https://harbor.mffseal.top/js/util.9825137f5e7825e8553c68ce39ac9e44.min.js></script>
 <link rel=stylesheet href=https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.css integrity=sha384-R4558gYOUz8mP9YWpZJjofhk+zx0AS11p36HnD2ZKj/6JR5z27gSSULCNHIRReVs crossorigin=anonymous><script defer src=https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.js integrity=sha384-z1fJDqw8ZApjGO3/unPWUPsIymfsJmyrDVWC8Tv/a1HeOtGmkwNd/7xUS0Xcnvsx crossorigin=anonymous></script>
 <script defer src=https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/contrib/auto-render.min.js integrity=sha384-+XBljXPPiv+OzfbB3cVmLHf4hdUFHlWNZN5spNQ7rmHTXpd7WvJum6fIACpNNfIR crossorigin=anonymous></script>
@@ -10,7 +9,7 @@
 <script src=https://harbor.mffseal.top/js/code-title.b35124ad8db0ba37162b886afb711cbc.min.js></script>
 <script src=https://harbor.mffseal.top/js/clipboard.c20857734e53a3fb733b7443879efa61.min.js></script>
 <script src=https://harbor.mffseal.top/js/callouts.7723cac461d613d118ee8bb8216b9838.min.js></script>
-<script>const BASE_URL="https://harbor.mffseal.top/",fetchData=Promise.all([fetch("https://harbor.mffseal.top/indices/linkIndex.5da375bc9ca1d813eb68255e2c0afb35.min.json").then(e=>e.json()).then(e=>({index:e.index,links:e.links})),fetch("https://harbor.mffseal.top/indices/contentIndex.e562ec6ad43d185479787d85119148bd.min.json").then(e=>e.json())]).then(([{index:e,links:t},n])=>({index:e,links:t,content:n})),render=()=>{const e=new URL(BASE_URL),t=e.pathname,n=window.location.pathname,s=t==n;addCopyButtons(),addTitleToCodeBlocks(),addCollapsibleCallouts(),initPopover("https://harbor.mffseal.top",!0,!0);const o=document.getElementById("footer");if(o){const e=document.getElementById("graph-container");if(!e)return requestAnimationFrame(render);e.textContent="";const t=s&&!1;drawGraph("https://harbor.mffseal.top",t,[{"/moc":"#4388cc"}],t?{centerForce:1,depth:-1,enableDrag:!0,enableLegend:!1,enableZoom:!0,fontSize:.5,linkDistance:1,opacityScale:3,repelForce:1,scale:1.4}:{centerForce:1,depth:1,enableDrag:!0,enableLegend:!1,enableZoom:!0,fontSize:.6,linkDistance:1,opacityScale:3,repelForce:2,scale:1.2})}},init=(e=document)=>{addCopyButtons(),addTitleToCodeBlocks(),renderMathInElement(e.body,{delimiters:[{left:"$$",right:"$$",display:!0},{left:"$",right:"$",display:!1}],macros:{'’':"'"},throwOnError:!1})}</script><script type=module>
+<script>const BASE_URL="https://harbor.mffseal.top/",fetchData=Promise.all([fetch("https://harbor.mffseal.top/indices/linkIndex.5da375bc9ca1d813eb68255e2c0afb35.min.json").then(e=>e.json()).then(e=>({index:e.index,links:e.links})),fetch("https://harbor.mffseal.top/indices/contentIndex.363af2e61a16ab88407bc594d017144e.min.json").then(e=>e.json())]).then(([{index:e,links:t},n])=>({index:e,links:t,content:n})),render=()=>{const e=new URL(BASE_URL),t=e.pathname,n=window.location.pathname,s=t==n;addCopyButtons(),addTitleToCodeBlocks(),addCollapsibleCallouts(),initPopover("https://harbor.mffseal.top",!0,!0);const o=document.getElementById("footer");if(o){const e=document.getElementById("graph-container");if(!e)return requestAnimationFrame(render);e.textContent="";const t=s&&!0;drawGraph("https://harbor.mffseal.top",t,[{"/moc":"#4388cc"}],t?{centerForce:1,depth:-1,enableDrag:!0,enableLegend:!1,enableZoom:!0,fontSize:.5,linkDistance:1,opacityScale:3,repelForce:1,scale:1.4}:{centerForce:1,depth:1,enableDrag:!0,enableLegend:!1,enableZoom:!0,fontSize:.6,linkDistance:1,opacityScale:3,repelForce:2,scale:1.2})}},init=(e=document)=>{addCopyButtons(),addTitleToCodeBlocks(),renderMathInElement(e.body,{delimiters:[{left:"$$",right:"$$",display:!0},{left:"$",right:"$",display:!1}],macros:{'’':"'"},throwOnError:!1})}</script><script type=module>
     import { attachSPARouting } from "https:\/\/harbor.mffseal.top\/js\/router.9d4974281069e9ebb189f642ae1e3ca2.min.js"
     attachSPARouting(init, render)
   </script></head><script async src="https://www.googletagmanager.com/gtag/js?id=G-NV58SYWRZD"></script>
@@ -19,37 +18,37 @@
 <label id=toggle-label-light for=darkmode-toggle tabindex=-1><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" id="dayIcon" viewBox="0 0 35 35" style="enable-background:new 0 0 35 35"><title>Light Mode</title><path d="M6 17.5C6 16.672 5.328 16 4.5 16h-3C.672 16 0 16.672.0 17.5S.672 19 1.5 19h3C5.328 19 6 18.328 6 17.5zM7.5 26c-.414.0-.789.168-1.061.439l-2 2C4.168 28.711 4 29.086 4 29.5 4 30.328 4.671 31 5.5 31c.414.0.789-.168 1.06-.44l2-2C8.832 28.289 9 27.914 9 27.5 9 26.672 8.329 26 7.5 26zm10-20C18.329 6 19 5.328 19 4.5v-3C19 .672 18.329.0 17.5.0S16 .672 16 1.5v3C16 5.328 16.671 6 17.5 6zm10 3c.414.0.789-.168 1.06-.439l2-2C30.832 6.289 31 5.914 31 5.5 31 4.672 30.329 4 29.5 4c-.414.0-.789.168-1.061.44l-2 2C26.168 6.711 26 7.086 26 7.5 26 8.328 26.671 9 27.5 9zM6.439 8.561C6.711 8.832 7.086 9 7.5 9 8.328 9 9 8.328 9 7.5c0-.414-.168-.789-.439-1.061l-2-2C6.289 4.168 5.914 4 5.5 4 4.672 4 4 4.672 4 5.5c0 .414.168.789.439 1.06l2 2.001zM33.5 16h-3c-.828.0-1.5.672-1.5 1.5s.672 1.5 1.5 1.5h3c.828.0 1.5-.672 1.5-1.5S34.328 16 33.5 16zM28.561 26.439C28.289 26.168 27.914 26 27.5 26c-.828.0-1.5.672-1.5 1.5.0.414.168.789.439 1.06l2 2C28.711 30.832 29.086 31 29.5 31c.828.0 1.5-.672 1.5-1.5.0-.414-.168-.789-.439-1.061l-2-2zM17.5 29c-.829.0-1.5.672-1.5 1.5v3c0 .828.671 1.5 1.5 1.5s1.5-.672 1.5-1.5v-3C19 29.672 18.329 29 17.5 29zm0-22C11.71 7 7 11.71 7 17.5S11.71 28 17.5 28 28 23.29 28 17.5 23.29 7 17.5 7zm0 18c-4.136.0-7.5-3.364-7.5-7.5s3.364-7.5 7.5-7.5 7.5 3.364 7.5 7.5S21.636 25 17.5 25z"/></svg></label><label id=toggle-label-dark for=darkmode-toggle tabindex=-1><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" id="nightIcon" viewBox="0 0 100 100" style="enable-background='new 0 0 100 100'"><title>Dark Mode</title><path d="M96.76 66.458c-.853-.852-2.15-1.064-3.23-.534-6.063 2.991-12.858 4.571-19.655 4.571C62.022 70.495 50.88 65.88 42.5 57.5 29.043 44.043 25.658 23.536 34.076 6.47c.532-1.08.318-2.379-.534-3.23-.851-.852-2.15-1.064-3.23-.534-4.918 2.427-9.375 5.619-13.246 9.491-9.447 9.447-14.65 22.008-14.65 35.369.0 13.36 5.203 25.921 14.65 35.368s22.008 14.65 35.368 14.65c13.361.0 25.921-5.203 35.369-14.65 3.872-3.871 7.064-8.328 9.491-13.246C97.826 68.608 97.611 67.309 96.76 66.458z"/></svg></label></div></header><article><h1>ReentrantReadWriteLock</h1><p class=meta>Last updated
 Jun 10, 2022
 <a href=https://github.com/mffseal/2_0_2-%e8%ae%a1%e7%ae%97%e6%9c%ba%e7%a7%91%e5%ad%a6/2_0_2_1_2_0-%e8%bd%af%e4%bb%b6%e8%af%ad%e8%a8%80/Java/2-%e5%b9%b6%e5%8f%91%e7%bc%96%e7%a8%8b/ReentrantReadWriteLock.md rel=noopener>Edit Source</a></p><ul class=tags><li><a href=https://harbor.mffseal.top/tags/atom/>Atom</a></li></ul><aside class=mainTOC><details><summary>Table of Contents</summary><nav id=TableOfContents><ol><li><a href=#使用>使用</a><ol><li><a href=#注意>注意</a></li></ol></li><li><a href=#应用>应用</a></li><li><a href=#流程>流程</a><ol><li><a href=#t1-wlockt2-rlock>t1 w.lock，t2 r.lock</a></li><li><a href=#t3-rlockt4-wlock>t3 r.lock，t4 w.lock</a></li><li><a href=#t1-wunlock>t1 w.unlock</a></li><li><a href=#t2-runlockt3-runlock>t2 r.unlock，t3 r.unlock</a></li></ol></li><li><a href=#源码>源码</a><ol><li><a href=#写上锁>写上锁</a></li><li><a href=#写释放>写释放</a></li><li><a href=#读上锁>读上锁</a></li><li><a href=#读释放>读释放</a></li></ol></li></ol></nav></details></aside><a href=#reentrantreadwritelock><h1 id=reentrantreadwritelock><span class=hanchor arialabel=Anchor># </span>ReentrantReadWriteLock</h1></a><p>当读操作远远高于写操作时，这时候使用 读写锁 让 读-读 可以并发，提高性能。 类似于数据库中的 select &mldr;from &mldr; lock in share mode
-提供一个 数据容器类 内部分别使用读锁保护数据的 read() 方法，写锁保护数据的 write() 方法：</p><a href=#使用><h2 id=使用><span class=hanchor arialabel=Anchor># </span>使用</h2></a><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
-</span><span class=lnt> 2
-</span><span class=lnt> 3
-</span><span class=lnt> 4
-</span><span class=lnt> 5
-</span><span class=lnt> 6
-</span><span class=lnt> 7
-</span><span class=lnt> 8
-</span><span class=lnt> 9
-</span><span class=lnt>10
-</span><span class=lnt>11
-</span><span class=lnt>12
-</span><span class=lnt>13
-</span><span class=lnt>14
-</span><span class=lnt>15
-</span><span class=lnt>16
-</span><span class=lnt>17
-</span><span class=lnt>18
-</span><span class=lnt>19
-</span><span class=lnt>20
-</span><span class=lnt>21
-</span><span class=lnt>22
-</span><span class=lnt>23
-</span><span class=lnt>24
-</span><span class=lnt>25
-</span><span class=lnt>26
-</span><span class=lnt>27
-</span><span class=lnt>28
-</span><span class=lnt>29
-</span><span class=lnt>30
-</span><span class=lnt>31
+提供一个 数据容器类 内部分别使用读锁保护数据的 read() 方法，写锁保护数据的 write() 方法：</p><a href=#使用><h2 id=使用><span class=hanchor arialabel=Anchor># </span>使用</h2></a><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt id=hl-0-1><a style=outline:none;text-decoration:none;color:inherit href=#hl-0-1> 1</a>
+</span><span class=lnt id=hl-0-2><a style=outline:none;text-decoration:none;color:inherit href=#hl-0-2> 2</a>
+</span><span class=lnt id=hl-0-3><a style=outline:none;text-decoration:none;color:inherit href=#hl-0-3> 3</a>
+</span><span class=lnt id=hl-0-4><a style=outline:none;text-decoration:none;color:inherit href=#hl-0-4> 4</a>
+</span><span class=lnt id=hl-0-5><a style=outline:none;text-decoration:none;color:inherit href=#hl-0-5> 5</a>
+</span><span class=lnt id=hl-0-6><a style=outline:none;text-decoration:none;color:inherit href=#hl-0-6> 6</a>
+</span><span class=lnt id=hl-0-7><a style=outline:none;text-decoration:none;color:inherit href=#hl-0-7> 7</a>
+</span><span class=lnt id=hl-0-8><a style=outline:none;text-decoration:none;color:inherit href=#hl-0-8> 8</a>
+</span><span class=lnt id=hl-0-9><a style=outline:none;text-decoration:none;color:inherit href=#hl-0-9> 9</a>
+</span><span class=lnt id=hl-0-10><a style=outline:none;text-decoration:none;color:inherit href=#hl-0-10>10</a>
+</span><span class=lnt id=hl-0-11><a style=outline:none;text-decoration:none;color:inherit href=#hl-0-11>11</a>
+</span><span class=lnt id=hl-0-12><a style=outline:none;text-decoration:none;color:inherit href=#hl-0-12>12</a>
+</span><span class=lnt id=hl-0-13><a style=outline:none;text-decoration:none;color:inherit href=#hl-0-13>13</a>
+</span><span class=lnt id=hl-0-14><a style=outline:none;text-decoration:none;color:inherit href=#hl-0-14>14</a>
+</span><span class=lnt id=hl-0-15><a style=outline:none;text-decoration:none;color:inherit href=#hl-0-15>15</a>
+</span><span class=lnt id=hl-0-16><a style=outline:none;text-decoration:none;color:inherit href=#hl-0-16>16</a>
+</span><span class=lnt id=hl-0-17><a style=outline:none;text-decoration:none;color:inherit href=#hl-0-17>17</a>
+</span><span class=lnt id=hl-0-18><a style=outline:none;text-decoration:none;color:inherit href=#hl-0-18>18</a>
+</span><span class=lnt id=hl-0-19><a style=outline:none;text-decoration:none;color:inherit href=#hl-0-19>19</a>
+</span><span class=lnt id=hl-0-20><a style=outline:none;text-decoration:none;color:inherit href=#hl-0-20>20</a>
+</span><span class=lnt id=hl-0-21><a style=outline:none;text-decoration:none;color:inherit href=#hl-0-21>21</a>
+</span><span class=lnt id=hl-0-22><a style=outline:none;text-decoration:none;color:inherit href=#hl-0-22>22</a>
+</span><span class=lnt id=hl-0-23><a style=outline:none;text-decoration:none;color:inherit href=#hl-0-23>23</a>
+</span><span class=lnt id=hl-0-24><a style=outline:none;text-decoration:none;color:inherit href=#hl-0-24>24</a>
+</span><span class=lnt id=hl-0-25><a style=outline:none;text-decoration:none;color:inherit href=#hl-0-25>25</a>
+</span><span class=lnt id=hl-0-26><a style=outline:none;text-decoration:none;color:inherit href=#hl-0-26>26</a>
+</span><span class=lnt id=hl-0-27><a style=outline:none;text-decoration:none;color:inherit href=#hl-0-27>27</a>
+</span><span class=lnt id=hl-0-28><a style=outline:none;text-decoration:none;color:inherit href=#hl-0-28>28</a>
+</span><span class=lnt id=hl-0-29><a style=outline:none;text-decoration:none;color:inherit href=#hl-0-29>29</a>
+</span><span class=lnt id=hl-0-30><a style=outline:none;text-decoration:none;color:inherit href=#hl-0-30>30</a>
+</span><span class=lnt id=hl-0-31><a style=outline:none;text-decoration:none;color:inherit href=#hl-0-31>31</a>
 </span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-java data-lang=java><span class=line><span class=cl><span class=kd>class</span> <span class=nc>DataContainer</span> <span class=o>{</span>
 </span></span><span class=line><span class=cl>    <span class=kd>private</span> <span class=n>Object</span> <span class=n>data</span><span class=o>;</span>
 </span></span><span class=line><span class=cl>    <span class=kd>private</span> <span class=n>ReentrantReadWriteLock</span> <span class=n>rw</span> <span class=o>=</span> <span class=k>new</span> <span class=n>ReentrantReadWriteLock</span><span class=o>();</span>
@@ -82,19 +81,19 @@ Jun 10, 2022
 </span></span><span class=line><span class=cl>    <span class=o>}</span>
 </span></span><span class=line><span class=cl><span class=o>}</span>
 </span></span></code></pre></td></tr></table></div></div><a href=#注意><h3 id=注意><span class=hanchor arialabel=Anchor># </span>注意</h3></a><p>读锁不支持条件变量
-重入时升级不支持：即持有读锁的情况下去获取写锁，会导致获取写锁永久等待</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
-</span><span class=lnt> 2
-</span><span class=lnt> 3
-</span><span class=lnt> 4
-</span><span class=lnt> 5
-</span><span class=lnt> 6
-</span><span class=lnt> 7
-</span><span class=lnt> 8
-</span><span class=lnt> 9
-</span><span class=lnt>10
-</span><span class=lnt>11
-</span><span class=lnt>12
-</span><span class=lnt>13
+重入时升级不支持：即持有读锁的情况下去获取写锁，会导致获取写锁永久等待</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt id=hl-1-1><a style=outline:none;text-decoration:none;color:inherit href=#hl-1-1> 1</a>
+</span><span class=lnt id=hl-1-2><a style=outline:none;text-decoration:none;color:inherit href=#hl-1-2> 2</a>
+</span><span class=lnt id=hl-1-3><a style=outline:none;text-decoration:none;color:inherit href=#hl-1-3> 3</a>
+</span><span class=lnt id=hl-1-4><a style=outline:none;text-decoration:none;color:inherit href=#hl-1-4> 4</a>
+</span><span class=lnt id=hl-1-5><a style=outline:none;text-decoration:none;color:inherit href=#hl-1-5> 5</a>
+</span><span class=lnt id=hl-1-6><a style=outline:none;text-decoration:none;color:inherit href=#hl-1-6> 6</a>
+</span><span class=lnt id=hl-1-7><a style=outline:none;text-decoration:none;color:inherit href=#hl-1-7> 7</a>
+</span><span class=lnt id=hl-1-8><a style=outline:none;text-decoration:none;color:inherit href=#hl-1-8> 8</a>
+</span><span class=lnt id=hl-1-9><a style=outline:none;text-decoration:none;color:inherit href=#hl-1-9> 9</a>
+</span><span class=lnt id=hl-1-10><a style=outline:none;text-decoration:none;color:inherit href=#hl-1-10>10</a>
+</span><span class=lnt id=hl-1-11><a style=outline:none;text-decoration:none;color:inherit href=#hl-1-11>11</a>
+</span><span class=lnt id=hl-1-12><a style=outline:none;text-decoration:none;color:inherit href=#hl-1-12>12</a>
+</span><span class=lnt id=hl-1-13><a style=outline:none;text-decoration:none;color:inherit href=#hl-1-13>13</a>
 </span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-java data-lang=java><span class=line><span class=cl><span class=n>r</span><span class=o>.</span><span class=na>lock</span><span class=o>();</span>
 </span></span><span class=line><span class=cl><span class=k>try</span> <span class=o>{</span>
 </span></span><span class=line><span class=cl>    <span class=c1>// ...
@@ -108,43 +107,43 @@ Jun 10, 2022
 </span></span><span class=line><span class=cl>  <span class=n>r</span><span class=o>.</span><span class=na>unlock</span><span class=o>();</span>
 </span></span><span class=line><span class=cl><span class=o>}</span>
 </span></span><span class=line><span class=cl> 
-</span></span></code></pre></td></tr></table></div></div><ul><li>重入时降级支持：即持有写锁的情况下去获取读锁</li></ul><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
-</span><span class=lnt> 2
-</span><span class=lnt> 3
-</span><span class=lnt> 4
-</span><span class=lnt> 5
-</span><span class=lnt> 6
-</span><span class=lnt> 7
-</span><span class=lnt> 8
-</span><span class=lnt> 9
-</span><span class=lnt>10
-</span><span class=lnt>11
-</span><span class=lnt>12
-</span><span class=lnt>13
-</span><span class=lnt>14
-</span><span class=lnt>15
-</span><span class=lnt>16
-</span><span class=lnt>17
-</span><span class=lnt>18
-</span><span class=lnt>19
-</span><span class=lnt>20
-</span><span class=lnt>21
-</span><span class=lnt>22
-</span><span class=lnt>23
-</span><span class=lnt>24
-</span><span class=lnt>25
-</span><span class=lnt>26
-</span><span class=lnt>27
-</span><span class=lnt>28
-</span><span class=lnt>29
-</span><span class=lnt>30
-</span><span class=lnt>31
-</span><span class=lnt>32
-</span><span class=lnt>33
-</span><span class=lnt>34
-</span><span class=lnt>35
-</span><span class=lnt>36
-</span><span class=lnt>37
+</span></span></code></pre></td></tr></table></div></div><ul><li>重入时降级支持：即持有写锁的情况下去获取读锁</li></ul><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt id=hl-2-1><a style=outline:none;text-decoration:none;color:inherit href=#hl-2-1> 1</a>
+</span><span class=lnt id=hl-2-2><a style=outline:none;text-decoration:none;color:inherit href=#hl-2-2> 2</a>
+</span><span class=lnt id=hl-2-3><a style=outline:none;text-decoration:none;color:inherit href=#hl-2-3> 3</a>
+</span><span class=lnt id=hl-2-4><a style=outline:none;text-decoration:none;color:inherit href=#hl-2-4> 4</a>
+</span><span class=lnt id=hl-2-5><a style=outline:none;text-decoration:none;color:inherit href=#hl-2-5> 5</a>
+</span><span class=lnt id=hl-2-6><a style=outline:none;text-decoration:none;color:inherit href=#hl-2-6> 6</a>
+</span><span class=lnt id=hl-2-7><a style=outline:none;text-decoration:none;color:inherit href=#hl-2-7> 7</a>
+</span><span class=lnt id=hl-2-8><a style=outline:none;text-decoration:none;color:inherit href=#hl-2-8> 8</a>
+</span><span class=lnt id=hl-2-9><a style=outline:none;text-decoration:none;color:inherit href=#hl-2-9> 9</a>
+</span><span class=lnt id=hl-2-10><a style=outline:none;text-decoration:none;color:inherit href=#hl-2-10>10</a>
+</span><span class=lnt id=hl-2-11><a style=outline:none;text-decoration:none;color:inherit href=#hl-2-11>11</a>
+</span><span class=lnt id=hl-2-12><a style=outline:none;text-decoration:none;color:inherit href=#hl-2-12>12</a>
+</span><span class=lnt id=hl-2-13><a style=outline:none;text-decoration:none;color:inherit href=#hl-2-13>13</a>
+</span><span class=lnt id=hl-2-14><a style=outline:none;text-decoration:none;color:inherit href=#hl-2-14>14</a>
+</span><span class=lnt id=hl-2-15><a style=outline:none;text-decoration:none;color:inherit href=#hl-2-15>15</a>
+</span><span class=lnt id=hl-2-16><a style=outline:none;text-decoration:none;color:inherit href=#hl-2-16>16</a>
+</span><span class=lnt id=hl-2-17><a style=outline:none;text-decoration:none;color:inherit href=#hl-2-17>17</a>
+</span><span class=lnt id=hl-2-18><a style=outline:none;text-decoration:none;color:inherit href=#hl-2-18>18</a>
+</span><span class=lnt id=hl-2-19><a style=outline:none;text-decoration:none;color:inherit href=#hl-2-19>19</a>
+</span><span class=lnt id=hl-2-20><a style=outline:none;text-decoration:none;color:inherit href=#hl-2-20>20</a>
+</span><span class=lnt id=hl-2-21><a style=outline:none;text-decoration:none;color:inherit href=#hl-2-21>21</a>
+</span><span class=lnt id=hl-2-22><a style=outline:none;text-decoration:none;color:inherit href=#hl-2-22>22</a>
+</span><span class=lnt id=hl-2-23><a style=outline:none;text-decoration:none;color:inherit href=#hl-2-23>23</a>
+</span><span class=lnt id=hl-2-24><a style=outline:none;text-decoration:none;color:inherit href=#hl-2-24>24</a>
+</span><span class=lnt id=hl-2-25><a style=outline:none;text-decoration:none;color:inherit href=#hl-2-25>25</a>
+</span><span class=lnt id=hl-2-26><a style=outline:none;text-decoration:none;color:inherit href=#hl-2-26>26</a>
+</span><span class=lnt id=hl-2-27><a style=outline:none;text-decoration:none;color:inherit href=#hl-2-27>27</a>
+</span><span class=lnt id=hl-2-28><a style=outline:none;text-decoration:none;color:inherit href=#hl-2-28>28</a>
+</span><span class=lnt id=hl-2-29><a style=outline:none;text-decoration:none;color:inherit href=#hl-2-29>29</a>
+</span><span class=lnt id=hl-2-30><a style=outline:none;text-decoration:none;color:inherit href=#hl-2-30>30</a>
+</span><span class=lnt id=hl-2-31><a style=outline:none;text-decoration:none;color:inherit href=#hl-2-31>31</a>
+</span><span class=lnt id=hl-2-32><a style=outline:none;text-decoration:none;color:inherit href=#hl-2-32>32</a>
+</span><span class=lnt id=hl-2-33><a style=outline:none;text-decoration:none;color:inherit href=#hl-2-33>33</a>
+</span><span class=lnt id=hl-2-34><a style=outline:none;text-decoration:none;color:inherit href=#hl-2-34>34</a>
+</span><span class=lnt id=hl-2-35><a style=outline:none;text-decoration:none;color:inherit href=#hl-2-35>35</a>
+</span><span class=lnt id=hl-2-36><a style=outline:none;text-decoration:none;color:inherit href=#hl-2-36>36</a>
+</span><span class=lnt id=hl-2-37><a style=outline:none;text-decoration:none;color:inherit href=#hl-2-37>37</a>
 </span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-java data-lang=java><span class=line><span class=cl><span class=c1>// 缓存数据操作示例
 </span></span></span><span class=line><span class=cl><span class=c1></span><span class=kd>class</span> <span class=nc>CachedData</span> <span class=o>{</span>
 </span></span><span class=line><span class=cl>   <span class=n>Object</span> <span class=n>data</span><span class=o>;</span>
@@ -193,73 +192,73 @@ Jun 10, 2022
 <img src="/z-oblib/z2-attachments/Pasted image 20220610205306.png" width=auto></li><li>下一个节点不是 shared 了，因此不会继续唤醒 t4 所在节点</li></ol><a href=#t2-runlockt3-runlock><h3 id=t2-runlockt3-runlock><span class=hanchor arialabel=Anchor># </span>t2 r.unlock，t3 r.unlock</h3></a><blockquote><p>同一批读锁都释放了（依靠计数器），才能真正去唤醒后续的独占节点。</p></blockquote><ol><li>t2 进入 sync.releaseShared(1) 中，调用 tryReleaseShared(1) 让计数减一，但由于计数还不为零
 <img src="/z-oblib/z2-attachments/Pasted image 20220610211041.png" width=auto></li><li>t3 进入 sync.releaseShared(1) 中，调用 tryReleaseShared(1) 让计数减一，这回计数为零了，进入 doReleaseShared() 将头节点从 -1 改为 0 并唤醒老二，即
 <img src="/z-oblib/z2-attachments/Pasted image 20220610211104.png" width=auto></li><li>之后 t4 在 acquireQueued 中 parkAndCheckInterrupt 处恢复运行，再次 for (;;) 这次自己是老二，并且没有其他竞争，tryAcquire(1) 成功，修改头结点，流程结束
-<img src="/z-oblib/z2-attachments/Pasted image 20220610211128.png" width=auto></li></ol><a href=#源码><h2 id=源码><span class=hanchor arialabel=Anchor># </span>源码</h2></a><a href=#写上锁><h3 id=写上锁><span class=hanchor arialabel=Anchor># </span>写上锁</h3></a><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
-</span><span class=lnt> 2
-</span><span class=lnt> 3
-</span><span class=lnt> 4
-</span><span class=lnt> 5
-</span><span class=lnt> 6
-</span><span class=lnt> 7
-</span><span class=lnt> 8
-</span><span class=lnt> 9
-</span><span class=lnt>10
-</span><span class=lnt>11
-</span><span class=lnt>12
-</span><span class=lnt>13
-</span><span class=lnt>14
-</span><span class=lnt>15
-</span><span class=lnt>16
-</span><span class=lnt>17
-</span><span class=lnt>18
-</span><span class=lnt>19
-</span><span class=lnt>20
-</span><span class=lnt>21
-</span><span class=lnt>22
-</span><span class=lnt>23
-</span><span class=lnt>24
-</span><span class=lnt>25
-</span><span class=lnt>26
-</span><span class=lnt>27
-</span><span class=lnt>28
-</span><span class=lnt>29
-</span><span class=lnt>30
-</span><span class=lnt>31
-</span><span class=lnt>32
-</span><span class=lnt>33
-</span><span class=lnt>34
-</span><span class=lnt>35
-</span><span class=lnt>36
-</span><span class=lnt>37
-</span><span class=lnt>38
-</span><span class=lnt>39
-</span><span class=lnt>40
-</span><span class=lnt>41
-</span><span class=lnt>42
-</span><span class=lnt>43
-</span><span class=lnt>44
-</span><span class=lnt>45
-</span><span class=lnt>46
-</span><span class=lnt>47
-</span><span class=lnt>48
-</span><span class=lnt>49
-</span><span class=lnt>50
-</span><span class=lnt>51
-</span><span class=lnt>52
-</span><span class=lnt>53
-</span><span class=lnt>54
-</span><span class=lnt>55
-</span><span class=lnt>56
-</span><span class=lnt>57
-</span><span class=lnt>58
-</span><span class=lnt>59
-</span><span class=lnt>60
-</span><span class=lnt>61
-</span><span class=lnt>62
-</span><span class=lnt>63
-</span><span class=lnt>64
-</span><span class=lnt>65
-</span><span class=lnt>66
-</span><span class=lnt>67
+<img src="/z-oblib/z2-attachments/Pasted image 20220610211128.png" width=auto></li></ol><a href=#源码><h2 id=源码><span class=hanchor arialabel=Anchor># </span>源码</h2></a><a href=#写上锁><h3 id=写上锁><span class=hanchor arialabel=Anchor># </span>写上锁</h3></a><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt id=hl-3-1><a style=outline:none;text-decoration:none;color:inherit href=#hl-3-1> 1</a>
+</span><span class=lnt id=hl-3-2><a style=outline:none;text-decoration:none;color:inherit href=#hl-3-2> 2</a>
+</span><span class=lnt id=hl-3-3><a style=outline:none;text-decoration:none;color:inherit href=#hl-3-3> 3</a>
+</span><span class=lnt id=hl-3-4><a style=outline:none;text-decoration:none;color:inherit href=#hl-3-4> 4</a>
+</span><span class=lnt id=hl-3-5><a style=outline:none;text-decoration:none;color:inherit href=#hl-3-5> 5</a>
+</span><span class=lnt id=hl-3-6><a style=outline:none;text-decoration:none;color:inherit href=#hl-3-6> 6</a>
+</span><span class=lnt id=hl-3-7><a style=outline:none;text-decoration:none;color:inherit href=#hl-3-7> 7</a>
+</span><span class=lnt id=hl-3-8><a style=outline:none;text-decoration:none;color:inherit href=#hl-3-8> 8</a>
+</span><span class=lnt id=hl-3-9><a style=outline:none;text-decoration:none;color:inherit href=#hl-3-9> 9</a>
+</span><span class=lnt id=hl-3-10><a style=outline:none;text-decoration:none;color:inherit href=#hl-3-10>10</a>
+</span><span class=lnt id=hl-3-11><a style=outline:none;text-decoration:none;color:inherit href=#hl-3-11>11</a>
+</span><span class=lnt id=hl-3-12><a style=outline:none;text-decoration:none;color:inherit href=#hl-3-12>12</a>
+</span><span class=lnt id=hl-3-13><a style=outline:none;text-decoration:none;color:inherit href=#hl-3-13>13</a>
+</span><span class=lnt id=hl-3-14><a style=outline:none;text-decoration:none;color:inherit href=#hl-3-14>14</a>
+</span><span class=lnt id=hl-3-15><a style=outline:none;text-decoration:none;color:inherit href=#hl-3-15>15</a>
+</span><span class=lnt id=hl-3-16><a style=outline:none;text-decoration:none;color:inherit href=#hl-3-16>16</a>
+</span><span class=lnt id=hl-3-17><a style=outline:none;text-decoration:none;color:inherit href=#hl-3-17>17</a>
+</span><span class=lnt id=hl-3-18><a style=outline:none;text-decoration:none;color:inherit href=#hl-3-18>18</a>
+</span><span class=lnt id=hl-3-19><a style=outline:none;text-decoration:none;color:inherit href=#hl-3-19>19</a>
+</span><span class=lnt id=hl-3-20><a style=outline:none;text-decoration:none;color:inherit href=#hl-3-20>20</a>
+</span><span class=lnt id=hl-3-21><a style=outline:none;text-decoration:none;color:inherit href=#hl-3-21>21</a>
+</span><span class=lnt id=hl-3-22><a style=outline:none;text-decoration:none;color:inherit href=#hl-3-22>22</a>
+</span><span class=lnt id=hl-3-23><a style=outline:none;text-decoration:none;color:inherit href=#hl-3-23>23</a>
+</span><span class=lnt id=hl-3-24><a style=outline:none;text-decoration:none;color:inherit href=#hl-3-24>24</a>
+</span><span class=lnt id=hl-3-25><a style=outline:none;text-decoration:none;color:inherit href=#hl-3-25>25</a>
+</span><span class=lnt id=hl-3-26><a style=outline:none;text-decoration:none;color:inherit href=#hl-3-26>26</a>
+</span><span class=lnt id=hl-3-27><a style=outline:none;text-decoration:none;color:inherit href=#hl-3-27>27</a>
+</span><span class=lnt id=hl-3-28><a style=outline:none;text-decoration:none;color:inherit href=#hl-3-28>28</a>
+</span><span class=lnt id=hl-3-29><a style=outline:none;text-decoration:none;color:inherit href=#hl-3-29>29</a>
+</span><span class=lnt id=hl-3-30><a style=outline:none;text-decoration:none;color:inherit href=#hl-3-30>30</a>
+</span><span class=lnt id=hl-3-31><a style=outline:none;text-decoration:none;color:inherit href=#hl-3-31>31</a>
+</span><span class=lnt id=hl-3-32><a style=outline:none;text-decoration:none;color:inherit href=#hl-3-32>32</a>
+</span><span class=lnt id=hl-3-33><a style=outline:none;text-decoration:none;color:inherit href=#hl-3-33>33</a>
+</span><span class=lnt id=hl-3-34><a style=outline:none;text-decoration:none;color:inherit href=#hl-3-34>34</a>
+</span><span class=lnt id=hl-3-35><a style=outline:none;text-decoration:none;color:inherit href=#hl-3-35>35</a>
+</span><span class=lnt id=hl-3-36><a style=outline:none;text-decoration:none;color:inherit href=#hl-3-36>36</a>
+</span><span class=lnt id=hl-3-37><a style=outline:none;text-decoration:none;color:inherit href=#hl-3-37>37</a>
+</span><span class=lnt id=hl-3-38><a style=outline:none;text-decoration:none;color:inherit href=#hl-3-38>38</a>
+</span><span class=lnt id=hl-3-39><a style=outline:none;text-decoration:none;color:inherit href=#hl-3-39>39</a>
+</span><span class=lnt id=hl-3-40><a style=outline:none;text-decoration:none;color:inherit href=#hl-3-40>40</a>
+</span><span class=lnt id=hl-3-41><a style=outline:none;text-decoration:none;color:inherit href=#hl-3-41>41</a>
+</span><span class=lnt id=hl-3-42><a style=outline:none;text-decoration:none;color:inherit href=#hl-3-42>42</a>
+</span><span class=lnt id=hl-3-43><a style=outline:none;text-decoration:none;color:inherit href=#hl-3-43>43</a>
+</span><span class=lnt id=hl-3-44><a style=outline:none;text-decoration:none;color:inherit href=#hl-3-44>44</a>
+</span><span class=lnt id=hl-3-45><a style=outline:none;text-decoration:none;color:inherit href=#hl-3-45>45</a>
+</span><span class=lnt id=hl-3-46><a style=outline:none;text-decoration:none;color:inherit href=#hl-3-46>46</a>
+</span><span class=lnt id=hl-3-47><a style=outline:none;text-decoration:none;color:inherit href=#hl-3-47>47</a>
+</span><span class=lnt id=hl-3-48><a style=outline:none;text-decoration:none;color:inherit href=#hl-3-48>48</a>
+</span><span class=lnt id=hl-3-49><a style=outline:none;text-decoration:none;color:inherit href=#hl-3-49>49</a>
+</span><span class=lnt id=hl-3-50><a style=outline:none;text-decoration:none;color:inherit href=#hl-3-50>50</a>
+</span><span class=lnt id=hl-3-51><a style=outline:none;text-decoration:none;color:inherit href=#hl-3-51>51</a>
+</span><span class=lnt id=hl-3-52><a style=outline:none;text-decoration:none;color:inherit href=#hl-3-52>52</a>
+</span><span class=lnt id=hl-3-53><a style=outline:none;text-decoration:none;color:inherit href=#hl-3-53>53</a>
+</span><span class=lnt id=hl-3-54><a style=outline:none;text-decoration:none;color:inherit href=#hl-3-54>54</a>
+</span><span class=lnt id=hl-3-55><a style=outline:none;text-decoration:none;color:inherit href=#hl-3-55>55</a>
+</span><span class=lnt id=hl-3-56><a style=outline:none;text-decoration:none;color:inherit href=#hl-3-56>56</a>
+</span><span class=lnt id=hl-3-57><a style=outline:none;text-decoration:none;color:inherit href=#hl-3-57>57</a>
+</span><span class=lnt id=hl-3-58><a style=outline:none;text-decoration:none;color:inherit href=#hl-3-58>58</a>
+</span><span class=lnt id=hl-3-59><a style=outline:none;text-decoration:none;color:inherit href=#hl-3-59>59</a>
+</span><span class=lnt id=hl-3-60><a style=outline:none;text-decoration:none;color:inherit href=#hl-3-60>60</a>
+</span><span class=lnt id=hl-3-61><a style=outline:none;text-decoration:none;color:inherit href=#hl-3-61>61</a>
+</span><span class=lnt id=hl-3-62><a style=outline:none;text-decoration:none;color:inherit href=#hl-3-62>62</a>
+</span><span class=lnt id=hl-3-63><a style=outline:none;text-decoration:none;color:inherit href=#hl-3-63>63</a>
+</span><span class=lnt id=hl-3-64><a style=outline:none;text-decoration:none;color:inherit href=#hl-3-64>64</a>
+</span><span class=lnt id=hl-3-65><a style=outline:none;text-decoration:none;color:inherit href=#hl-3-65>65</a>
+</span><span class=lnt id=hl-3-66><a style=outline:none;text-decoration:none;color:inherit href=#hl-3-66>66</a>
+</span><span class=lnt id=hl-3-67><a style=outline:none;text-decoration:none;color:inherit href=#hl-3-67>67</a>
 </span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-java data-lang=java><span class=line><span class=cl><span class=kd>static</span> <span class=kd>final</span> <span class=kd>class</span> <span class=nc>NonfairSync</span> <span class=kd>extends</span> <span class=n>Sync</span> <span class=o>{</span>
 </span></span><span class=line><span class=cl>    <span class=c1>// ... 省略无关代码
 </span></span></span><span class=line><span class=cl><span class=c1></span>    
@@ -327,42 +326,42 @@ Jun 10, 2022
 </span></span><span class=line><span class=cl>        <span class=k>return</span> <span class=kc>false</span><span class=o>;</span>
 </span></span><span class=line><span class=cl>    <span class=o>}</span>
 </span></span><span class=line><span class=cl><span class=o>}</span>
-</span></span></code></pre></td></tr></table></div></div><a href=#写释放><h3 id=写释放><span class=hanchor arialabel=Anchor># </span>写释放</h3></a><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
-</span><span class=lnt> 2
-</span><span class=lnt> 3
-</span><span class=lnt> 4
-</span><span class=lnt> 5
-</span><span class=lnt> 6
-</span><span class=lnt> 7
-</span><span class=lnt> 8
-</span><span class=lnt> 9
-</span><span class=lnt>10
-</span><span class=lnt>11
-</span><span class=lnt>12
-</span><span class=lnt>13
-</span><span class=lnt>14
-</span><span class=lnt>15
-</span><span class=lnt>16
-</span><span class=lnt>17
-</span><span class=lnt>18
-</span><span class=lnt>19
-</span><span class=lnt>20
-</span><span class=lnt>21
-</span><span class=lnt>22
-</span><span class=lnt>23
-</span><span class=lnt>24
-</span><span class=lnt>25
-</span><span class=lnt>26
-</span><span class=lnt>27
-</span><span class=lnt>28
-</span><span class=lnt>29
-</span><span class=lnt>30
-</span><span class=lnt>31
-</span><span class=lnt>32
-</span><span class=lnt>33
-</span><span class=lnt>34
-</span><span class=lnt>35
-</span><span class=lnt>36
+</span></span></code></pre></td></tr></table></div></div><a href=#写释放><h3 id=写释放><span class=hanchor arialabel=Anchor># </span>写释放</h3></a><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt id=hl-4-1><a style=outline:none;text-decoration:none;color:inherit href=#hl-4-1> 1</a>
+</span><span class=lnt id=hl-4-2><a style=outline:none;text-decoration:none;color:inherit href=#hl-4-2> 2</a>
+</span><span class=lnt id=hl-4-3><a style=outline:none;text-decoration:none;color:inherit href=#hl-4-3> 3</a>
+</span><span class=lnt id=hl-4-4><a style=outline:none;text-decoration:none;color:inherit href=#hl-4-4> 4</a>
+</span><span class=lnt id=hl-4-5><a style=outline:none;text-decoration:none;color:inherit href=#hl-4-5> 5</a>
+</span><span class=lnt id=hl-4-6><a style=outline:none;text-decoration:none;color:inherit href=#hl-4-6> 6</a>
+</span><span class=lnt id=hl-4-7><a style=outline:none;text-decoration:none;color:inherit href=#hl-4-7> 7</a>
+</span><span class=lnt id=hl-4-8><a style=outline:none;text-decoration:none;color:inherit href=#hl-4-8> 8</a>
+</span><span class=lnt id=hl-4-9><a style=outline:none;text-decoration:none;color:inherit href=#hl-4-9> 9</a>
+</span><span class=lnt id=hl-4-10><a style=outline:none;text-decoration:none;color:inherit href=#hl-4-10>10</a>
+</span><span class=lnt id=hl-4-11><a style=outline:none;text-decoration:none;color:inherit href=#hl-4-11>11</a>
+</span><span class=lnt id=hl-4-12><a style=outline:none;text-decoration:none;color:inherit href=#hl-4-12>12</a>
+</span><span class=lnt id=hl-4-13><a style=outline:none;text-decoration:none;color:inherit href=#hl-4-13>13</a>
+</span><span class=lnt id=hl-4-14><a style=outline:none;text-decoration:none;color:inherit href=#hl-4-14>14</a>
+</span><span class=lnt id=hl-4-15><a style=outline:none;text-decoration:none;color:inherit href=#hl-4-15>15</a>
+</span><span class=lnt id=hl-4-16><a style=outline:none;text-decoration:none;color:inherit href=#hl-4-16>16</a>
+</span><span class=lnt id=hl-4-17><a style=outline:none;text-decoration:none;color:inherit href=#hl-4-17>17</a>
+</span><span class=lnt id=hl-4-18><a style=outline:none;text-decoration:none;color:inherit href=#hl-4-18>18</a>
+</span><span class=lnt id=hl-4-19><a style=outline:none;text-decoration:none;color:inherit href=#hl-4-19>19</a>
+</span><span class=lnt id=hl-4-20><a style=outline:none;text-decoration:none;color:inherit href=#hl-4-20>20</a>
+</span><span class=lnt id=hl-4-21><a style=outline:none;text-decoration:none;color:inherit href=#hl-4-21>21</a>
+</span><span class=lnt id=hl-4-22><a style=outline:none;text-decoration:none;color:inherit href=#hl-4-22>22</a>
+</span><span class=lnt id=hl-4-23><a style=outline:none;text-decoration:none;color:inherit href=#hl-4-23>23</a>
+</span><span class=lnt id=hl-4-24><a style=outline:none;text-decoration:none;color:inherit href=#hl-4-24>24</a>
+</span><span class=lnt id=hl-4-25><a style=outline:none;text-decoration:none;color:inherit href=#hl-4-25>25</a>
+</span><span class=lnt id=hl-4-26><a style=outline:none;text-decoration:none;color:inherit href=#hl-4-26>26</a>
+</span><span class=lnt id=hl-4-27><a style=outline:none;text-decoration:none;color:inherit href=#hl-4-27>27</a>
+</span><span class=lnt id=hl-4-28><a style=outline:none;text-decoration:none;color:inherit href=#hl-4-28>28</a>
+</span><span class=lnt id=hl-4-29><a style=outline:none;text-decoration:none;color:inherit href=#hl-4-29>29</a>
+</span><span class=lnt id=hl-4-30><a style=outline:none;text-decoration:none;color:inherit href=#hl-4-30>30</a>
+</span><span class=lnt id=hl-4-31><a style=outline:none;text-decoration:none;color:inherit href=#hl-4-31>31</a>
+</span><span class=lnt id=hl-4-32><a style=outline:none;text-decoration:none;color:inherit href=#hl-4-32>32</a>
+</span><span class=lnt id=hl-4-33><a style=outline:none;text-decoration:none;color:inherit href=#hl-4-33>33</a>
+</span><span class=lnt id=hl-4-34><a style=outline:none;text-decoration:none;color:inherit href=#hl-4-34>34</a>
+</span><span class=lnt id=hl-4-35><a style=outline:none;text-decoration:none;color:inherit href=#hl-4-35>35</a>
+</span><span class=lnt id=hl-4-36><a style=outline:none;text-decoration:none;color:inherit href=#hl-4-36>36</a>
 </span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-java data-lang=java><span class=line><span class=cl><span class=kd>static</span> <span class=kd>final</span> <span class=kd>class</span> <span class=nc>NonfairSync</span> <span class=kd>extends</span> <span class=n>Sync</span> <span class=o>{</span>
 </span></span><span class=line><span class=cl>    <span class=c1>// ... 省略无关代码
 </span></span></span><span class=line><span class=cl><span class=c1></span>    
@@ -399,160 +398,160 @@ Jun 10, 2022
 </span></span><span class=line><span class=cl>        <span class=k>return</span> <span class=n>free</span><span class=o>;</span>
 </span></span><span class=line><span class=cl>    <span class=o>}</span>
 </span></span><span class=line><span class=cl><span class=o>}</span>
-</span></span></code></pre></td></tr></table></div></div><a href=#读上锁><h3 id=读上锁><span class=hanchor arialabel=Anchor># </span>读上锁</h3></a><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>  1
-</span><span class=lnt>  2
-</span><span class=lnt>  3
-</span><span class=lnt>  4
-</span><span class=lnt>  5
-</span><span class=lnt>  6
-</span><span class=lnt>  7
-</span><span class=lnt>  8
-</span><span class=lnt>  9
-</span><span class=lnt> 10
-</span><span class=lnt> 11
-</span><span class=lnt> 12
-</span><span class=lnt> 13
-</span><span class=lnt> 14
-</span><span class=lnt> 15
-</span><span class=lnt> 16
-</span><span class=lnt> 17
-</span><span class=lnt> 18
-</span><span class=lnt> 19
-</span><span class=lnt> 20
-</span><span class=lnt> 21
-</span><span class=lnt> 22
-</span><span class=lnt> 23
-</span><span class=lnt> 24
-</span><span class=lnt> 25
-</span><span class=lnt> 26
-</span><span class=lnt> 27
-</span><span class=lnt> 28
-</span><span class=lnt> 29
-</span><span class=lnt> 30
-</span><span class=lnt> 31
-</span><span class=lnt> 32
-</span><span class=lnt> 33
-</span><span class=lnt> 34
-</span><span class=lnt> 35
-</span><span class=lnt> 36
-</span><span class=lnt> 37
-</span><span class=lnt> 38
-</span><span class=lnt> 39
-</span><span class=lnt> 40
-</span><span class=lnt> 41
-</span><span class=lnt> 42
-</span><span class=lnt> 43
-</span><span class=lnt> 44
-</span><span class=lnt> 45
-</span><span class=lnt> 46
-</span><span class=lnt> 47
-</span><span class=lnt> 48
-</span><span class=lnt> 49
-</span><span class=lnt> 50
-</span><span class=lnt> 51
-</span><span class=lnt> 52
-</span><span class=lnt> 53
-</span><span class=lnt> 54
-</span><span class=lnt> 55
-</span><span class=lnt> 56
-</span><span class=lnt> 57
-</span><span class=lnt> 58
-</span><span class=lnt> 59
-</span><span class=lnt> 60
-</span><span class=lnt> 61
-</span><span class=lnt> 62
-</span><span class=lnt> 63
-</span><span class=lnt> 64
-</span><span class=lnt> 65
-</span><span class=lnt> 66
-</span><span class=lnt> 67
-</span><span class=lnt> 68
-</span><span class=lnt> 69
-</span><span class=lnt> 70
-</span><span class=lnt> 71
-</span><span class=lnt> 72
-</span><span class=lnt> 73
-</span><span class=lnt> 74
-</span><span class=lnt> 75
-</span><span class=lnt> 76
-</span><span class=lnt> 77
-</span><span class=lnt> 78
-</span><span class=lnt> 79
-</span><span class=lnt> 80
-</span><span class=lnt> 81
-</span><span class=lnt> 82
-</span><span class=lnt> 83
-</span><span class=lnt> 84
-</span><span class=lnt> 85
-</span><span class=lnt> 86
-</span><span class=lnt> 87
-</span><span class=lnt> 88
-</span><span class=lnt> 89
-</span><span class=lnt> 90
-</span><span class=lnt> 91
-</span><span class=lnt> 92
-</span><span class=lnt> 93
-</span><span class=lnt> 94
-</span><span class=lnt> 95
-</span><span class=lnt> 96
-</span><span class=lnt> 97
-</span><span class=lnt> 98
-</span><span class=lnt> 99
-</span><span class=lnt>100
-</span><span class=lnt>101
-</span><span class=lnt>102
-</span><span class=lnt>103
-</span><span class=lnt>104
-</span><span class=lnt>105
-</span><span class=lnt>106
-</span><span class=lnt>107
-</span><span class=lnt>108
-</span><span class=lnt>109
-</span><span class=lnt>110
-</span><span class=lnt>111
-</span><span class=lnt>112
-</span><span class=lnt>113
-</span><span class=lnt>114
-</span><span class=lnt>115
-</span><span class=lnt>116
-</span><span class=lnt>117
-</span><span class=lnt>118
-</span><span class=lnt>119
-</span><span class=lnt>120
-</span><span class=lnt>121
-</span><span class=lnt>122
-</span><span class=lnt>123
-</span><span class=lnt>124
-</span><span class=lnt>125
-</span><span class=lnt>126
-</span><span class=lnt>127
-</span><span class=lnt>128
-</span><span class=lnt>129
-</span><span class=lnt>130
-</span><span class=lnt>131
-</span><span class=lnt>132
-</span><span class=lnt>133
-</span><span class=lnt>134
-</span><span class=lnt>135
-</span><span class=lnt>136
-</span><span class=lnt>137
-</span><span class=lnt>138
-</span><span class=lnt>139
-</span><span class=lnt>140
-</span><span class=lnt>141
-</span><span class=lnt>142
-</span><span class=lnt>143
-</span><span class=lnt>144
-</span><span class=lnt>145
-</span><span class=lnt>146
-</span><span class=lnt>147
-</span><span class=lnt>148
-</span><span class=lnt>149
-</span><span class=lnt>150
-</span><span class=lnt>151
-</span><span class=lnt>152
-</span><span class=lnt>153
-</span><span class=lnt>154
+</span></span></code></pre></td></tr></table></div></div><a href=#读上锁><h3 id=读上锁><span class=hanchor arialabel=Anchor># </span>读上锁</h3></a><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt id=hl-5-1><a style=outline:none;text-decoration:none;color:inherit href=#hl-5-1>  1</a>
+</span><span class=lnt id=hl-5-2><a style=outline:none;text-decoration:none;color:inherit href=#hl-5-2>  2</a>
+</span><span class=lnt id=hl-5-3><a style=outline:none;text-decoration:none;color:inherit href=#hl-5-3>  3</a>
+</span><span class=lnt id=hl-5-4><a style=outline:none;text-decoration:none;color:inherit href=#hl-5-4>  4</a>
+</span><span class=lnt id=hl-5-5><a style=outline:none;text-decoration:none;color:inherit href=#hl-5-5>  5</a>
+</span><span class=lnt id=hl-5-6><a style=outline:none;text-decoration:none;color:inherit href=#hl-5-6>  6</a>
+</span><span class=lnt id=hl-5-7><a style=outline:none;text-decoration:none;color:inherit href=#hl-5-7>  7</a>
+</span><span class=lnt id=hl-5-8><a style=outline:none;text-decoration:none;color:inherit href=#hl-5-8>  8</a>
+</span><span class=lnt id=hl-5-9><a style=outline:none;text-decoration:none;color:inherit href=#hl-5-9>  9</a>
+</span><span class=lnt id=hl-5-10><a style=outline:none;text-decoration:none;color:inherit href=#hl-5-10> 10</a>
+</span><span class=lnt id=hl-5-11><a style=outline:none;text-decoration:none;color:inherit href=#hl-5-11> 11</a>
+</span><span class=lnt id=hl-5-12><a style=outline:none;text-decoration:none;color:inherit href=#hl-5-12> 12</a>
+</span><span class=lnt id=hl-5-13><a style=outline:none;text-decoration:none;color:inherit href=#hl-5-13> 13</a>
+</span><span class=lnt id=hl-5-14><a style=outline:none;text-decoration:none;color:inherit href=#hl-5-14> 14</a>
+</span><span class=lnt id=hl-5-15><a style=outline:none;text-decoration:none;color:inherit href=#hl-5-15> 15</a>
+</span><span class=lnt id=hl-5-16><a style=outline:none;text-decoration:none;color:inherit href=#hl-5-16> 16</a>
+</span><span class=lnt id=hl-5-17><a style=outline:none;text-decoration:none;color:inherit href=#hl-5-17> 17</a>
+</span><span class=lnt id=hl-5-18><a style=outline:none;text-decoration:none;color:inherit href=#hl-5-18> 18</a>
+</span><span class=lnt id=hl-5-19><a style=outline:none;text-decoration:none;color:inherit href=#hl-5-19> 19</a>
+</span><span class=lnt id=hl-5-20><a style=outline:none;text-decoration:none;color:inherit href=#hl-5-20> 20</a>
+</span><span class=lnt id=hl-5-21><a style=outline:none;text-decoration:none;color:inherit href=#hl-5-21> 21</a>
+</span><span class=lnt id=hl-5-22><a style=outline:none;text-decoration:none;color:inherit href=#hl-5-22> 22</a>
+</span><span class=lnt id=hl-5-23><a style=outline:none;text-decoration:none;color:inherit href=#hl-5-23> 23</a>
+</span><span class=lnt id=hl-5-24><a style=outline:none;text-decoration:none;color:inherit href=#hl-5-24> 24</a>
+</span><span class=lnt id=hl-5-25><a style=outline:none;text-decoration:none;color:inherit href=#hl-5-25> 25</a>
+</span><span class=lnt id=hl-5-26><a style=outline:none;text-decoration:none;color:inherit href=#hl-5-26> 26</a>
+</span><span class=lnt id=hl-5-27><a style=outline:none;text-decoration:none;color:inherit href=#hl-5-27> 27</a>
+</span><span class=lnt id=hl-5-28><a style=outline:none;text-decoration:none;color:inherit href=#hl-5-28> 28</a>
+</span><span class=lnt id=hl-5-29><a style=outline:none;text-decoration:none;color:inherit href=#hl-5-29> 29</a>
+</span><span class=lnt id=hl-5-30><a style=outline:none;text-decoration:none;color:inherit href=#hl-5-30> 30</a>
+</span><span class=lnt id=hl-5-31><a style=outline:none;text-decoration:none;color:inherit href=#hl-5-31> 31</a>
+</span><span class=lnt id=hl-5-32><a style=outline:none;text-decoration:none;color:inherit href=#hl-5-32> 32</a>
+</span><span class=lnt id=hl-5-33><a style=outline:none;text-decoration:none;color:inherit href=#hl-5-33> 33</a>
+</span><span class=lnt id=hl-5-34><a style=outline:none;text-decoration:none;color:inherit href=#hl-5-34> 34</a>
+</span><span class=lnt id=hl-5-35><a style=outline:none;text-decoration:none;color:inherit href=#hl-5-35> 35</a>
+</span><span class=lnt id=hl-5-36><a style=outline:none;text-decoration:none;color:inherit href=#hl-5-36> 36</a>
+</span><span class=lnt id=hl-5-37><a style=outline:none;text-decoration:none;color:inherit href=#hl-5-37> 37</a>
+</span><span class=lnt id=hl-5-38><a style=outline:none;text-decoration:none;color:inherit href=#hl-5-38> 38</a>
+</span><span class=lnt id=hl-5-39><a style=outline:none;text-decoration:none;color:inherit href=#hl-5-39> 39</a>
+</span><span class=lnt id=hl-5-40><a style=outline:none;text-decoration:none;color:inherit href=#hl-5-40> 40</a>
+</span><span class=lnt id=hl-5-41><a style=outline:none;text-decoration:none;color:inherit href=#hl-5-41> 41</a>
+</span><span class=lnt id=hl-5-42><a style=outline:none;text-decoration:none;color:inherit href=#hl-5-42> 42</a>
+</span><span class=lnt id=hl-5-43><a style=outline:none;text-decoration:none;color:inherit href=#hl-5-43> 43</a>
+</span><span class=lnt id=hl-5-44><a style=outline:none;text-decoration:none;color:inherit href=#hl-5-44> 44</a>
+</span><span class=lnt id=hl-5-45><a style=outline:none;text-decoration:none;color:inherit href=#hl-5-45> 45</a>
+</span><span class=lnt id=hl-5-46><a style=outline:none;text-decoration:none;color:inherit href=#hl-5-46> 46</a>
+</span><span class=lnt id=hl-5-47><a style=outline:none;text-decoration:none;color:inherit href=#hl-5-47> 47</a>
+</span><span class=lnt id=hl-5-48><a style=outline:none;text-decoration:none;color:inherit href=#hl-5-48> 48</a>
+</span><span class=lnt id=hl-5-49><a style=outline:none;text-decoration:none;color:inherit href=#hl-5-49> 49</a>
+</span><span class=lnt id=hl-5-50><a style=outline:none;text-decoration:none;color:inherit href=#hl-5-50> 50</a>
+</span><span class=lnt id=hl-5-51><a style=outline:none;text-decoration:none;color:inherit href=#hl-5-51> 51</a>
+</span><span class=lnt id=hl-5-52><a style=outline:none;text-decoration:none;color:inherit href=#hl-5-52> 52</a>
+</span><span class=lnt id=hl-5-53><a style=outline:none;text-decoration:none;color:inherit href=#hl-5-53> 53</a>
+</span><span class=lnt id=hl-5-54><a style=outline:none;text-decoration:none;color:inherit href=#hl-5-54> 54</a>
+</span><span class=lnt id=hl-5-55><a style=outline:none;text-decoration:none;color:inherit href=#hl-5-55> 55</a>
+</span><span class=lnt id=hl-5-56><a style=outline:none;text-decoration:none;color:inherit href=#hl-5-56> 56</a>
+</span><span class=lnt id=hl-5-57><a style=outline:none;text-decoration:none;color:inherit href=#hl-5-57> 57</a>
+</span><span class=lnt id=hl-5-58><a style=outline:none;text-decoration:none;color:inherit href=#hl-5-58> 58</a>
+</span><span class=lnt id=hl-5-59><a style=outline:none;text-decoration:none;color:inherit href=#hl-5-59> 59</a>
+</span><span class=lnt id=hl-5-60><a style=outline:none;text-decoration:none;color:inherit href=#hl-5-60> 60</a>
+</span><span class=lnt id=hl-5-61><a style=outline:none;text-decoration:none;color:inherit href=#hl-5-61> 61</a>
+</span><span class=lnt id=hl-5-62><a style=outline:none;text-decoration:none;color:inherit href=#hl-5-62> 62</a>
+</span><span class=lnt id=hl-5-63><a style=outline:none;text-decoration:none;color:inherit href=#hl-5-63> 63</a>
+</span><span class=lnt id=hl-5-64><a style=outline:none;text-decoration:none;color:inherit href=#hl-5-64> 64</a>
+</span><span class=lnt id=hl-5-65><a style=outline:none;text-decoration:none;color:inherit href=#hl-5-65> 65</a>
+</span><span class=lnt id=hl-5-66><a style=outline:none;text-decoration:none;color:inherit href=#hl-5-66> 66</a>
+</span><span class=lnt id=hl-5-67><a style=outline:none;text-decoration:none;color:inherit href=#hl-5-67> 67</a>
+</span><span class=lnt id=hl-5-68><a style=outline:none;text-decoration:none;color:inherit href=#hl-5-68> 68</a>
+</span><span class=lnt id=hl-5-69><a style=outline:none;text-decoration:none;color:inherit href=#hl-5-69> 69</a>
+</span><span class=lnt id=hl-5-70><a style=outline:none;text-decoration:none;color:inherit href=#hl-5-70> 70</a>
+</span><span class=lnt id=hl-5-71><a style=outline:none;text-decoration:none;color:inherit href=#hl-5-71> 71</a>
+</span><span class=lnt id=hl-5-72><a style=outline:none;text-decoration:none;color:inherit href=#hl-5-72> 72</a>
+</span><span class=lnt id=hl-5-73><a style=outline:none;text-decoration:none;color:inherit href=#hl-5-73> 73</a>
+</span><span class=lnt id=hl-5-74><a style=outline:none;text-decoration:none;color:inherit href=#hl-5-74> 74</a>
+</span><span class=lnt id=hl-5-75><a style=outline:none;text-decoration:none;color:inherit href=#hl-5-75> 75</a>
+</span><span class=lnt id=hl-5-76><a style=outline:none;text-decoration:none;color:inherit href=#hl-5-76> 76</a>
+</span><span class=lnt id=hl-5-77><a style=outline:none;text-decoration:none;color:inherit href=#hl-5-77> 77</a>
+</span><span class=lnt id=hl-5-78><a style=outline:none;text-decoration:none;color:inherit href=#hl-5-78> 78</a>
+</span><span class=lnt id=hl-5-79><a style=outline:none;text-decoration:none;color:inherit href=#hl-5-79> 79</a>
+</span><span class=lnt id=hl-5-80><a style=outline:none;text-decoration:none;color:inherit href=#hl-5-80> 80</a>
+</span><span class=lnt id=hl-5-81><a style=outline:none;text-decoration:none;color:inherit href=#hl-5-81> 81</a>
+</span><span class=lnt id=hl-5-82><a style=outline:none;text-decoration:none;color:inherit href=#hl-5-82> 82</a>
+</span><span class=lnt id=hl-5-83><a style=outline:none;text-decoration:none;color:inherit href=#hl-5-83> 83</a>
+</span><span class=lnt id=hl-5-84><a style=outline:none;text-decoration:none;color:inherit href=#hl-5-84> 84</a>
+</span><span class=lnt id=hl-5-85><a style=outline:none;text-decoration:none;color:inherit href=#hl-5-85> 85</a>
+</span><span class=lnt id=hl-5-86><a style=outline:none;text-decoration:none;color:inherit href=#hl-5-86> 86</a>
+</span><span class=lnt id=hl-5-87><a style=outline:none;text-decoration:none;color:inherit href=#hl-5-87> 87</a>
+</span><span class=lnt id=hl-5-88><a style=outline:none;text-decoration:none;color:inherit href=#hl-5-88> 88</a>
+</span><span class=lnt id=hl-5-89><a style=outline:none;text-decoration:none;color:inherit href=#hl-5-89> 89</a>
+</span><span class=lnt id=hl-5-90><a style=outline:none;text-decoration:none;color:inherit href=#hl-5-90> 90</a>
+</span><span class=lnt id=hl-5-91><a style=outline:none;text-decoration:none;color:inherit href=#hl-5-91> 91</a>
+</span><span class=lnt id=hl-5-92><a style=outline:none;text-decoration:none;color:inherit href=#hl-5-92> 92</a>
+</span><span class=lnt id=hl-5-93><a style=outline:none;text-decoration:none;color:inherit href=#hl-5-93> 93</a>
+</span><span class=lnt id=hl-5-94><a style=outline:none;text-decoration:none;color:inherit href=#hl-5-94> 94</a>
+</span><span class=lnt id=hl-5-95><a style=outline:none;text-decoration:none;color:inherit href=#hl-5-95> 95</a>
+</span><span class=lnt id=hl-5-96><a style=outline:none;text-decoration:none;color:inherit href=#hl-5-96> 96</a>
+</span><span class=lnt id=hl-5-97><a style=outline:none;text-decoration:none;color:inherit href=#hl-5-97> 97</a>
+</span><span class=lnt id=hl-5-98><a style=outline:none;text-decoration:none;color:inherit href=#hl-5-98> 98</a>
+</span><span class=lnt id=hl-5-99><a style=outline:none;text-decoration:none;color:inherit href=#hl-5-99> 99</a>
+</span><span class=lnt id=hl-5-100><a style=outline:none;text-decoration:none;color:inherit href=#hl-5-100>100</a>
+</span><span class=lnt id=hl-5-101><a style=outline:none;text-decoration:none;color:inherit href=#hl-5-101>101</a>
+</span><span class=lnt id=hl-5-102><a style=outline:none;text-decoration:none;color:inherit href=#hl-5-102>102</a>
+</span><span class=lnt id=hl-5-103><a style=outline:none;text-decoration:none;color:inherit href=#hl-5-103>103</a>
+</span><span class=lnt id=hl-5-104><a style=outline:none;text-decoration:none;color:inherit href=#hl-5-104>104</a>
+</span><span class=lnt id=hl-5-105><a style=outline:none;text-decoration:none;color:inherit href=#hl-5-105>105</a>
+</span><span class=lnt id=hl-5-106><a style=outline:none;text-decoration:none;color:inherit href=#hl-5-106>106</a>
+</span><span class=lnt id=hl-5-107><a style=outline:none;text-decoration:none;color:inherit href=#hl-5-107>107</a>
+</span><span class=lnt id=hl-5-108><a style=outline:none;text-decoration:none;color:inherit href=#hl-5-108>108</a>
+</span><span class=lnt id=hl-5-109><a style=outline:none;text-decoration:none;color:inherit href=#hl-5-109>109</a>
+</span><span class=lnt id=hl-5-110><a style=outline:none;text-decoration:none;color:inherit href=#hl-5-110>110</a>
+</span><span class=lnt id=hl-5-111><a style=outline:none;text-decoration:none;color:inherit href=#hl-5-111>111</a>
+</span><span class=lnt id=hl-5-112><a style=outline:none;text-decoration:none;color:inherit href=#hl-5-112>112</a>
+</span><span class=lnt id=hl-5-113><a style=outline:none;text-decoration:none;color:inherit href=#hl-5-113>113</a>
+</span><span class=lnt id=hl-5-114><a style=outline:none;text-decoration:none;color:inherit href=#hl-5-114>114</a>
+</span><span class=lnt id=hl-5-115><a style=outline:none;text-decoration:none;color:inherit href=#hl-5-115>115</a>
+</span><span class=lnt id=hl-5-116><a style=outline:none;text-decoration:none;color:inherit href=#hl-5-116>116</a>
+</span><span class=lnt id=hl-5-117><a style=outline:none;text-decoration:none;color:inherit href=#hl-5-117>117</a>
+</span><span class=lnt id=hl-5-118><a style=outline:none;text-decoration:none;color:inherit href=#hl-5-118>118</a>
+</span><span class=lnt id=hl-5-119><a style=outline:none;text-decoration:none;color:inherit href=#hl-5-119>119</a>
+</span><span class=lnt id=hl-5-120><a style=outline:none;text-decoration:none;color:inherit href=#hl-5-120>120</a>
+</span><span class=lnt id=hl-5-121><a style=outline:none;text-decoration:none;color:inherit href=#hl-5-121>121</a>
+</span><span class=lnt id=hl-5-122><a style=outline:none;text-decoration:none;color:inherit href=#hl-5-122>122</a>
+</span><span class=lnt id=hl-5-123><a style=outline:none;text-decoration:none;color:inherit href=#hl-5-123>123</a>
+</span><span class=lnt id=hl-5-124><a style=outline:none;text-decoration:none;color:inherit href=#hl-5-124>124</a>
+</span><span class=lnt id=hl-5-125><a style=outline:none;text-decoration:none;color:inherit href=#hl-5-125>125</a>
+</span><span class=lnt id=hl-5-126><a style=outline:none;text-decoration:none;color:inherit href=#hl-5-126>126</a>
+</span><span class=lnt id=hl-5-127><a style=outline:none;text-decoration:none;color:inherit href=#hl-5-127>127</a>
+</span><span class=lnt id=hl-5-128><a style=outline:none;text-decoration:none;color:inherit href=#hl-5-128>128</a>
+</span><span class=lnt id=hl-5-129><a style=outline:none;text-decoration:none;color:inherit href=#hl-5-129>129</a>
+</span><span class=lnt id=hl-5-130><a style=outline:none;text-decoration:none;color:inherit href=#hl-5-130>130</a>
+</span><span class=lnt id=hl-5-131><a style=outline:none;text-decoration:none;color:inherit href=#hl-5-131>131</a>
+</span><span class=lnt id=hl-5-132><a style=outline:none;text-decoration:none;color:inherit href=#hl-5-132>132</a>
+</span><span class=lnt id=hl-5-133><a style=outline:none;text-decoration:none;color:inherit href=#hl-5-133>133</a>
+</span><span class=lnt id=hl-5-134><a style=outline:none;text-decoration:none;color:inherit href=#hl-5-134>134</a>
+</span><span class=lnt id=hl-5-135><a style=outline:none;text-decoration:none;color:inherit href=#hl-5-135>135</a>
+</span><span class=lnt id=hl-5-136><a style=outline:none;text-decoration:none;color:inherit href=#hl-5-136>136</a>
+</span><span class=lnt id=hl-5-137><a style=outline:none;text-decoration:none;color:inherit href=#hl-5-137>137</a>
+</span><span class=lnt id=hl-5-138><a style=outline:none;text-decoration:none;color:inherit href=#hl-5-138>138</a>
+</span><span class=lnt id=hl-5-139><a style=outline:none;text-decoration:none;color:inherit href=#hl-5-139>139</a>
+</span><span class=lnt id=hl-5-140><a style=outline:none;text-decoration:none;color:inherit href=#hl-5-140>140</a>
+</span><span class=lnt id=hl-5-141><a style=outline:none;text-decoration:none;color:inherit href=#hl-5-141>141</a>
+</span><span class=lnt id=hl-5-142><a style=outline:none;text-decoration:none;color:inherit href=#hl-5-142>142</a>
+</span><span class=lnt id=hl-5-143><a style=outline:none;text-decoration:none;color:inherit href=#hl-5-143>143</a>
+</span><span class=lnt id=hl-5-144><a style=outline:none;text-decoration:none;color:inherit href=#hl-5-144>144</a>
+</span><span class=lnt id=hl-5-145><a style=outline:none;text-decoration:none;color:inherit href=#hl-5-145>145</a>
+</span><span class=lnt id=hl-5-146><a style=outline:none;text-decoration:none;color:inherit href=#hl-5-146>146</a>
+</span><span class=lnt id=hl-5-147><a style=outline:none;text-decoration:none;color:inherit href=#hl-5-147>147</a>
+</span><span class=lnt id=hl-5-148><a style=outline:none;text-decoration:none;color:inherit href=#hl-5-148>148</a>
+</span><span class=lnt id=hl-5-149><a style=outline:none;text-decoration:none;color:inherit href=#hl-5-149>149</a>
+</span><span class=lnt id=hl-5-150><a style=outline:none;text-decoration:none;color:inherit href=#hl-5-150>150</a>
+</span><span class=lnt id=hl-5-151><a style=outline:none;text-decoration:none;color:inherit href=#hl-5-151>151</a>
+</span><span class=lnt id=hl-5-152><a style=outline:none;text-decoration:none;color:inherit href=#hl-5-152>152</a>
+</span><span class=lnt id=hl-5-153><a style=outline:none;text-decoration:none;color:inherit href=#hl-5-153>153</a>
+</span><span class=lnt id=hl-5-154><a style=outline:none;text-decoration:none;color:inherit href=#hl-5-154>154</a>
 </span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-java data-lang=java><span class=line><span class=cl><span class=kd>static</span> <span class=kd>final</span> <span class=kd>class</span> <span class=nc>NonfairSync</span> <span class=kd>extends</span> <span class=n>Sync</span> <span class=o>{</span>
 </span></span><span class=line><span class=cl>    
 </span></span><span class=line><span class=cl>    <span class=c1>// ReadLock 方法, 方便阅读, 放在此处
@@ -707,62 +706,62 @@ Jun 10, 2022
 </span></span><span class=line><span class=cl>        <span class=o>}</span>
 </span></span><span class=line><span class=cl>    <span class=o>}</span>
 </span></span><span class=line><span class=cl><span class=o>}</span>
-</span></span></code></pre></td></tr></table></div></div><ul><li>tryAcquireShared 返回值表示：<ul><li>-1 表示失败</li><li>0 表示成功，但后继节点不会继续唤醒（这里用不到0）</li><li>正数表示成功，而且数值是还有几个后继节点需要唤醒，读写锁返回 1</li></ul></li></ul><a href=#读释放><h3 id=读释放><span class=hanchor arialabel=Anchor># </span>读释放</h3></a><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
-</span><span class=lnt> 2
-</span><span class=lnt> 3
-</span><span class=lnt> 4
-</span><span class=lnt> 5
-</span><span class=lnt> 6
-</span><span class=lnt> 7
-</span><span class=lnt> 8
-</span><span class=lnt> 9
-</span><span class=lnt>10
-</span><span class=lnt>11
-</span><span class=lnt>12
-</span><span class=lnt>13
-</span><span class=lnt>14
-</span><span class=lnt>15
-</span><span class=lnt>16
-</span><span class=lnt>17
-</span><span class=lnt>18
-</span><span class=lnt>19
-</span><span class=lnt>20
-</span><span class=lnt>21
-</span><span class=lnt>22
-</span><span class=lnt>23
-</span><span class=lnt>24
-</span><span class=lnt>25
-</span><span class=lnt>26
-</span><span class=lnt>27
-</span><span class=lnt>28
-</span><span class=lnt>29
-</span><span class=lnt>30
-</span><span class=lnt>31
-</span><span class=lnt>32
-</span><span class=lnt>33
-</span><span class=lnt>34
-</span><span class=lnt>35
-</span><span class=lnt>36
-</span><span class=lnt>37
-</span><span class=lnt>38
-</span><span class=lnt>39
-</span><span class=lnt>40
-</span><span class=lnt>41
-</span><span class=lnt>42
-</span><span class=lnt>43
-</span><span class=lnt>44
-</span><span class=lnt>45
-</span><span class=lnt>46
-</span><span class=lnt>47
-</span><span class=lnt>48
-</span><span class=lnt>49
-</span><span class=lnt>50
-</span><span class=lnt>51
-</span><span class=lnt>52
-</span><span class=lnt>53
-</span><span class=lnt>54
-</span><span class=lnt>55
-</span><span class=lnt>56
+</span></span></code></pre></td></tr></table></div></div><ul><li>tryAcquireShared 返回值表示：<ul><li>-1 表示失败</li><li>0 表示成功，但后继节点不会继续唤醒（这里用不到0）</li><li>正数表示成功，而且数值是还有几个后继节点需要唤醒，读写锁返回 1</li></ul></li></ul><a href=#读释放><h3 id=读释放><span class=hanchor arialabel=Anchor># </span>读释放</h3></a><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt id=hl-6-1><a style=outline:none;text-decoration:none;color:inherit href=#hl-6-1> 1</a>
+</span><span class=lnt id=hl-6-2><a style=outline:none;text-decoration:none;color:inherit href=#hl-6-2> 2</a>
+</span><span class=lnt id=hl-6-3><a style=outline:none;text-decoration:none;color:inherit href=#hl-6-3> 3</a>
+</span><span class=lnt id=hl-6-4><a style=outline:none;text-decoration:none;color:inherit href=#hl-6-4> 4</a>
+</span><span class=lnt id=hl-6-5><a style=outline:none;text-decoration:none;color:inherit href=#hl-6-5> 5</a>
+</span><span class=lnt id=hl-6-6><a style=outline:none;text-decoration:none;color:inherit href=#hl-6-6> 6</a>
+</span><span class=lnt id=hl-6-7><a style=outline:none;text-decoration:none;color:inherit href=#hl-6-7> 7</a>
+</span><span class=lnt id=hl-6-8><a style=outline:none;text-decoration:none;color:inherit href=#hl-6-8> 8</a>
+</span><span class=lnt id=hl-6-9><a style=outline:none;text-decoration:none;color:inherit href=#hl-6-9> 9</a>
+</span><span class=lnt id=hl-6-10><a style=outline:none;text-decoration:none;color:inherit href=#hl-6-10>10</a>
+</span><span class=lnt id=hl-6-11><a style=outline:none;text-decoration:none;color:inherit href=#hl-6-11>11</a>
+</span><span class=lnt id=hl-6-12><a style=outline:none;text-decoration:none;color:inherit href=#hl-6-12>12</a>
+</span><span class=lnt id=hl-6-13><a style=outline:none;text-decoration:none;color:inherit href=#hl-6-13>13</a>
+</span><span class=lnt id=hl-6-14><a style=outline:none;text-decoration:none;color:inherit href=#hl-6-14>14</a>
+</span><span class=lnt id=hl-6-15><a style=outline:none;text-decoration:none;color:inherit href=#hl-6-15>15</a>
+</span><span class=lnt id=hl-6-16><a style=outline:none;text-decoration:none;color:inherit href=#hl-6-16>16</a>
+</span><span class=lnt id=hl-6-17><a style=outline:none;text-decoration:none;color:inherit href=#hl-6-17>17</a>
+</span><span class=lnt id=hl-6-18><a style=outline:none;text-decoration:none;color:inherit href=#hl-6-18>18</a>
+</span><span class=lnt id=hl-6-19><a style=outline:none;text-decoration:none;color:inherit href=#hl-6-19>19</a>
+</span><span class=lnt id=hl-6-20><a style=outline:none;text-decoration:none;color:inherit href=#hl-6-20>20</a>
+</span><span class=lnt id=hl-6-21><a style=outline:none;text-decoration:none;color:inherit href=#hl-6-21>21</a>
+</span><span class=lnt id=hl-6-22><a style=outline:none;text-decoration:none;color:inherit href=#hl-6-22>22</a>
+</span><span class=lnt id=hl-6-23><a style=outline:none;text-decoration:none;color:inherit href=#hl-6-23>23</a>
+</span><span class=lnt id=hl-6-24><a style=outline:none;text-decoration:none;color:inherit href=#hl-6-24>24</a>
+</span><span class=lnt id=hl-6-25><a style=outline:none;text-decoration:none;color:inherit href=#hl-6-25>25</a>
+</span><span class=lnt id=hl-6-26><a style=outline:none;text-decoration:none;color:inherit href=#hl-6-26>26</a>
+</span><span class=lnt id=hl-6-27><a style=outline:none;text-decoration:none;color:inherit href=#hl-6-27>27</a>
+</span><span class=lnt id=hl-6-28><a style=outline:none;text-decoration:none;color:inherit href=#hl-6-28>28</a>
+</span><span class=lnt id=hl-6-29><a style=outline:none;text-decoration:none;color:inherit href=#hl-6-29>29</a>
+</span><span class=lnt id=hl-6-30><a style=outline:none;text-decoration:none;color:inherit href=#hl-6-30>30</a>
+</span><span class=lnt id=hl-6-31><a style=outline:none;text-decoration:none;color:inherit href=#hl-6-31>31</a>
+</span><span class=lnt id=hl-6-32><a style=outline:none;text-decoration:none;color:inherit href=#hl-6-32>32</a>
+</span><span class=lnt id=hl-6-33><a style=outline:none;text-decoration:none;color:inherit href=#hl-6-33>33</a>
+</span><span class=lnt id=hl-6-34><a style=outline:none;text-decoration:none;color:inherit href=#hl-6-34>34</a>
+</span><span class=lnt id=hl-6-35><a style=outline:none;text-decoration:none;color:inherit href=#hl-6-35>35</a>
+</span><span class=lnt id=hl-6-36><a style=outline:none;text-decoration:none;color:inherit href=#hl-6-36>36</a>
+</span><span class=lnt id=hl-6-37><a style=outline:none;text-decoration:none;color:inherit href=#hl-6-37>37</a>
+</span><span class=lnt id=hl-6-38><a style=outline:none;text-decoration:none;color:inherit href=#hl-6-38>38</a>
+</span><span class=lnt id=hl-6-39><a style=outline:none;text-decoration:none;color:inherit href=#hl-6-39>39</a>
+</span><span class=lnt id=hl-6-40><a style=outline:none;text-decoration:none;color:inherit href=#hl-6-40>40</a>
+</span><span class=lnt id=hl-6-41><a style=outline:none;text-decoration:none;color:inherit href=#hl-6-41>41</a>
+</span><span class=lnt id=hl-6-42><a style=outline:none;text-decoration:none;color:inherit href=#hl-6-42>42</a>
+</span><span class=lnt id=hl-6-43><a style=outline:none;text-decoration:none;color:inherit href=#hl-6-43>43</a>
+</span><span class=lnt id=hl-6-44><a style=outline:none;text-decoration:none;color:inherit href=#hl-6-44>44</a>
+</span><span class=lnt id=hl-6-45><a style=outline:none;text-decoration:none;color:inherit href=#hl-6-45>45</a>
+</span><span class=lnt id=hl-6-46><a style=outline:none;text-decoration:none;color:inherit href=#hl-6-46>46</a>
+</span><span class=lnt id=hl-6-47><a style=outline:none;text-decoration:none;color:inherit href=#hl-6-47>47</a>
+</span><span class=lnt id=hl-6-48><a style=outline:none;text-decoration:none;color:inherit href=#hl-6-48>48</a>
+</span><span class=lnt id=hl-6-49><a style=outline:none;text-decoration:none;color:inherit href=#hl-6-49>49</a>
+</span><span class=lnt id=hl-6-50><a style=outline:none;text-decoration:none;color:inherit href=#hl-6-50>50</a>
+</span><span class=lnt id=hl-6-51><a style=outline:none;text-decoration:none;color:inherit href=#hl-6-51>51</a>
+</span><span class=lnt id=hl-6-52><a style=outline:none;text-decoration:none;color:inherit href=#hl-6-52>52</a>
+</span><span class=lnt id=hl-6-53><a style=outline:none;text-decoration:none;color:inherit href=#hl-6-53>53</a>
+</span><span class=lnt id=hl-6-54><a style=outline:none;text-decoration:none;color:inherit href=#hl-6-54>54</a>
+</span><span class=lnt id=hl-6-55><a style=outline:none;text-decoration:none;color:inherit href=#hl-6-55>55</a>
+</span><span class=lnt id=hl-6-56><a style=outline:none;text-decoration:none;color:inherit href=#hl-6-56>56</a>
 </span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-java data-lang=java><span class=line><span class=cl><span class=kd>static</span> <span class=kd>final</span> <span class=kd>class</span> <span class=nc>NonfairSync</span> <span class=kd>extends</span> <span class=n>Sync</span> <span class=o>{</span>
 </span></span><span class=line><span class=cl>    
 </span></span><span class=line><span class=cl>    <span class=c1>// ReadLock 方法, 方便阅读, 放在此处

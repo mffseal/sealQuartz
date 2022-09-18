@@ -1,12 +1,7 @@
 <!doctype html><html lang=en><head><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8920808282451934" crossorigin=anonymous></script><meta charset=utf-8><meta name=description content="装饰器模式 对现有类不改动结构的情况下为类添加新职责和功能的模式。
 使用场景  需要大量的子类为某一个对象进行职责增强的时候，可以使用装饰器模式 希望使用继承对于类进行动态扩展的时候，可以考虑使用装饰器模式  动机 一般有两种方式可以实现给一个类或对象增加行为：
  继承机制，使用继承机制是给现有类添加功能的一种有效途径，通过继承一个现有类可以使得子类在拥有自身方法的同时还拥有父类的方法。但是这种方法是静态的，用户不能控制增加行为的方式和时机。 关联机制，即将一个类的对象嵌入另一个对象中，由另一个对象来决定是否调用嵌入对象的行为以便扩展自己的行为，我们称这个嵌入的对象为装饰器(Decorator)  装饰模式以对客户透明的方式动态地给一个对象附加上更多的责任，换言之，客户端并不会觉得对象在装饰前和装饰后有什么不同。装饰模式可以在不需要创造更多子类的情况下，将对象的功能加以扩展。
-角色  Component：抽象组件，装饰者和被装饰者共同的父类，是一个接口或者抽象类，用来定义基本行为，可以给这些对象动态添加职责 ConcreteComponent：具体的组件对象，实现类 ，即被装饰者，通常就是被装饰器装饰的原始对象，也就是可以给这个对象添加职责 Decorator：所有装饰器的抽象父类，一般是抽象类，实现接口；它的属性必然有个指向 Conponent 抽象组件的对象 ，其实就是持有一个被装饰的对象 ConcreteDecorator：具体的装饰对象，实现具体要被装饰对象添加的功能。每一个具体装饰类都定义了一些新的行为，它可以调用在抽象装饰类中定义的方法，并可以增加新的方法用以扩充对象的行为。  ![[z-oblib/z2-attachments/3ec6aa3545c9b5ab14fac788a400a4e9.webp]]
-装饰者和被装饰者对象有相同的父类，因为装饰者和被装饰者必须是一样的类型，这里利用继承是为了达到类型匹配，而不是利用继承获得行为。
-利用继承设计子类，只能在编译时静态决定，并且所有子类都会继承相同的行为；利用组合的做法扩展对象，就可以在运行时动态的进行扩展。装饰者模式遵循开放-关闭原则：类应该对扩展开放，对修改关闭。利用装饰者，我们可以实现新的装饰者增加新的行为而不用修改现有代码，而如果单纯依赖继承，每当需要新行为时，还得修改现有的代码。
-实例 卖煎饼：
-![[z-oblib/z2-attachments/Pasted image 20220610170159.png]]
-抽象组件 1 2 3 4 5 6 7 8 9 10 11 12 13  public abstract class Pancake { String description = &#34;普通煎饼&#34;; public String getDescription(){ return description; } public abstract double cost(); }   具体组件 定义具体的被装饰者，这里是煎饼果子，当然还可以有鸡蛋灌饼、手抓饼等其他被装饰者："><title>装饰器模式</title><meta name=viewport content="width=device-width,initial-scale=1"><link rel="shortcut icon" type=image/png href=https://harbor.mffseal.top//icon.png><link href=https://harbor.mffseal.top/styles.7153093e4d1bbb584a28469cadfa3f88.min.css rel=stylesheet><link href=https://harbor.mffseal.top/styles/_light_syntax.86a48a52faebeaaf42158b72922b1c90.min.css rel=stylesheet id=theme-link><script src=https://harbor.mffseal.top/js/darkmode.9841b88d44c115f7419d485ee72d23a2.min.js></script>
+角色  Component：抽象组件，装饰者和被装饰者共同的父类，是一个接口或者抽象类，用来定义基本行为，可以给这些对象动态添加职责 ConcreteComponent：具体的组件对象，实现类 ，即被装饰者，通常就是被装饰器装饰的原始对象，也就是可以给这个对象添加职责 Decorator：所有装饰器的抽象父类，一般是抽象类，实现接口；它的属性必然有个指向 Conponent 抽象组件的对象 ，其实就是持有一个被装饰的对象 ConcreteDecorator：具体的装饰对象，实现具体要被装饰对象添加的功能。每一个具体装饰类都定义了一些新的行为，它可以调用在抽象装饰类中定义的方法，并可以增加新的方法用以扩充对象的行为。  !"><title>装饰器模式</title><meta name=viewport content="width=device-width,initial-scale=1"><link rel="shortcut icon" type=image/png href=https://harbor.mffseal.top//icon.png><link href=https://harbor.mffseal.top/styles.7153093e4d1bbb584a28469cadfa3f88.min.css rel=stylesheet><link href=https://harbor.mffseal.top/styles/_light_syntax.86a48a52faebeaaf42158b72922b1c90.min.css rel=stylesheet id=theme-link><script src=https://harbor.mffseal.top/js/darkmode.9841b88d44c115f7419d485ee72d23a2.min.js></script>
 <script src=https://harbor.mffseal.top/js/util.9825137f5e7825e8553c68ce39ac9e44.min.js></script>
 <link rel=stylesheet href=https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.css integrity=sha384-R4558gYOUz8mP9YWpZJjofhk+zx0AS11p36HnD2ZKj/6JR5z27gSSULCNHIRReVs crossorigin=anonymous><script defer src=https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.js integrity=sha384-z1fJDqw8ZApjGO3/unPWUPsIymfsJmyrDVWC8Tv/a1HeOtGmkwNd/7xUS0Xcnvsx crossorigin=anonymous></script>
 <script defer src=https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/contrib/auto-render.min.js integrity=sha384-+XBljXPPiv+OzfbB3cVmLHf4hdUFHlWNZN5spNQ7rmHTXpd7WvJum6fIACpNNfIR crossorigin=anonymous></script>
@@ -17,7 +12,7 @@
 <script src=https://harbor.mffseal.top/js/code-title.b35124ad8db0ba37162b886afb711cbc.min.js></script>
 <script src=https://harbor.mffseal.top/js/clipboard.c20857734e53a3fb733b7443879efa61.min.js></script>
 <script src=https://harbor.mffseal.top/js/callouts.7723cac461d613d118ee8bb8216b9838.min.js></script>
-<script>const BASE_URL="https://harbor.mffseal.top/",fetchData=Promise.all([fetch("https://harbor.mffseal.top/indices/linkIndex.5da375bc9ca1d813eb68255e2c0afb35.min.json").then(e=>e.json()).then(e=>({index:e.index,links:e.links})),fetch("https://harbor.mffseal.top/indices/contentIndex.e562ec6ad43d185479787d85119148bd.min.json").then(e=>e.json())]).then(([{index:e,links:t},n])=>({index:e,links:t,content:n})),render=()=>{const e=new URL(BASE_URL),t=e.pathname,n=window.location.pathname,s=t==n;addCopyButtons(),addTitleToCodeBlocks(),addCollapsibleCallouts(),initPopover("https://harbor.mffseal.top",!0,!0);const o=document.getElementById("footer");if(o){const e=document.getElementById("graph-container");if(!e)return requestAnimationFrame(render);e.textContent="";const t=s&&!1;drawGraph("https://harbor.mffseal.top",t,[{"/moc":"#4388cc"}],t?{centerForce:1,depth:-1,enableDrag:!0,enableLegend:!1,enableZoom:!0,fontSize:.5,linkDistance:1,opacityScale:3,repelForce:1,scale:1.4}:{centerForce:1,depth:1,enableDrag:!0,enableLegend:!1,enableZoom:!0,fontSize:.6,linkDistance:1,opacityScale:3,repelForce:2,scale:1.2})}},init=(e=document)=>{addCopyButtons(),addTitleToCodeBlocks(),renderMathInElement(e.body,{delimiters:[{left:"$$",right:"$$",display:!0},{left:"$",right:"$",display:!1}],macros:{'’':"'"},throwOnError:!1})}</script><script type=module>
+<script>const BASE_URL="https://harbor.mffseal.top/",fetchData=Promise.all([fetch("https://harbor.mffseal.top/indices/linkIndex.5da375bc9ca1d813eb68255e2c0afb35.min.json").then(e=>e.json()).then(e=>({index:e.index,links:e.links})),fetch("https://harbor.mffseal.top/indices/contentIndex.363af2e61a16ab88407bc594d017144e.min.json").then(e=>e.json())]).then(([{index:e,links:t},n])=>({index:e,links:t,content:n})),render=()=>{const e=new URL(BASE_URL),t=e.pathname,n=window.location.pathname,s=t==n;addCopyButtons(),addTitleToCodeBlocks(),addCollapsibleCallouts(),initPopover("https://harbor.mffseal.top",!0,!0);const o=document.getElementById("footer");if(o){const e=document.getElementById("graph-container");if(!e)return requestAnimationFrame(render);e.textContent="";const t=s&&!0;drawGraph("https://harbor.mffseal.top",t,[{"/moc":"#4388cc"}],t?{centerForce:1,depth:-1,enableDrag:!0,enableLegend:!1,enableZoom:!0,fontSize:.5,linkDistance:1,opacityScale:3,repelForce:1,scale:1.4}:{centerForce:1,depth:1,enableDrag:!0,enableLegend:!1,enableZoom:!0,fontSize:.6,linkDistance:1,opacityScale:3,repelForce:2,scale:1.2})}},init=(e=document)=>{addCopyButtons(),addTitleToCodeBlocks(),renderMathInElement(e.body,{delimiters:[{left:"$$",right:"$$",display:!0},{left:"$",right:"$",display:!1}],macros:{'’':"'"},throwOnError:!1})}</script><script type=module>
     import { attachSPARouting } from "https:\/\/harbor.mffseal.top\/js\/router.9d4974281069e9ebb189f642ae1e3ca2.min.js"
     attachSPARouting(init, render)
   </script></head><script async src="https://www.googletagmanager.com/gtag/js?id=G-NV58SYWRZD"></script>
@@ -25,19 +20,19 @@
 <script defer src=https://harbor.mffseal.top/js/full-text-search.24827f874defbbc6d529926cbfcfb493.min.js></script><div class=singlePage><header><h1 id=page-title><a href=https://harbor.mffseal.top/>🦭 港湾</a></h1><div class=spacer></div><div id=search-icon><p>Search</p><svg tabindex="0" aria-labelledby="title desc" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 19.9 19.7"><title id="title">Search Icon</title><desc id="desc">Icon to open search</desc><g class="search-path" fill="none"><path stroke-linecap="square" d="M18.5 18.3l-5.4-5.4"/><circle cx="8" cy="8" r="7"/></g></svg></div><div class=darkmode><input class=toggle id=darkmode-toggle type=checkbox tabindex=-1>
 <label id=toggle-label-light for=darkmode-toggle tabindex=-1><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" id="dayIcon" viewBox="0 0 35 35" style="enable-background:new 0 0 35 35"><title>Light Mode</title><path d="M6 17.5C6 16.672 5.328 16 4.5 16h-3C.672 16 0 16.672.0 17.5S.672 19 1.5 19h3C5.328 19 6 18.328 6 17.5zM7.5 26c-.414.0-.789.168-1.061.439l-2 2C4.168 28.711 4 29.086 4 29.5 4 30.328 4.671 31 5.5 31c.414.0.789-.168 1.06-.44l2-2C8.832 28.289 9 27.914 9 27.5 9 26.672 8.329 26 7.5 26zm10-20C18.329 6 19 5.328 19 4.5v-3C19 .672 18.329.0 17.5.0S16 .672 16 1.5v3C16 5.328 16.671 6 17.5 6zm10 3c.414.0.789-.168 1.06-.439l2-2C30.832 6.289 31 5.914 31 5.5 31 4.672 30.329 4 29.5 4c-.414.0-.789.168-1.061.44l-2 2C26.168 6.711 26 7.086 26 7.5 26 8.328 26.671 9 27.5 9zM6.439 8.561C6.711 8.832 7.086 9 7.5 9 8.328 9 9 8.328 9 7.5c0-.414-.168-.789-.439-1.061l-2-2C6.289 4.168 5.914 4 5.5 4 4.672 4 4 4.672 4 5.5c0 .414.168.789.439 1.06l2 2.001zM33.5 16h-3c-.828.0-1.5.672-1.5 1.5s.672 1.5 1.5 1.5h3c.828.0 1.5-.672 1.5-1.5S34.328 16 33.5 16zM28.561 26.439C28.289 26.168 27.914 26 27.5 26c-.828.0-1.5.672-1.5 1.5.0.414.168.789.439 1.06l2 2C28.711 30.832 29.086 31 29.5 31c.828.0 1.5-.672 1.5-1.5.0-.414-.168-.789-.439-1.061l-2-2zM17.5 29c-.829.0-1.5.672-1.5 1.5v3c0 .828.671 1.5 1.5 1.5s1.5-.672 1.5-1.5v-3C19 29.672 18.329 29 17.5 29zm0-22C11.71 7 7 11.71 7 17.5S11.71 28 17.5 28 28 23.29 28 17.5 23.29 7 17.5 7zm0 18c-4.136.0-7.5-3.364-7.5-7.5s3.364-7.5 7.5-7.5 7.5 3.364 7.5 7.5S21.636 25 17.5 25z"/></svg></label><label id=toggle-label-dark for=darkmode-toggle tabindex=-1><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" id="nightIcon" viewBox="0 0 100 100" style="enable-background='new 0 0 100 100'"><title>Dark Mode</title><path d="M96.76 66.458c-.853-.852-2.15-1.064-3.23-.534-6.063 2.991-12.858 4.571-19.655 4.571C62.022 70.495 50.88 65.88 42.5 57.5 29.043 44.043 25.658 23.536 34.076 6.47c.532-1.08.318-2.379-.534-3.23-.851-.852-2.15-1.064-3.23-.534-4.918 2.427-9.375 5.619-13.246 9.491-9.447 9.447-14.65 22.008-14.65 35.369.0 13.36 5.203 25.921 14.65 35.368s22.008 14.65 35.368 14.65c13.361.0 25.921-5.203 35.369-14.65 3.872-3.871 7.064-8.328 9.491-13.246C97.826 68.608 97.611 67.309 96.76 66.458z"/></svg></label></div></header><article><h1>装饰器模式</h1><p class=meta>Last updated
 Jun 10, 2022
-<a href=https://github.com/mffseal/2_0_2-%e8%ae%a1%e7%ae%97%e6%9c%ba%e7%a7%91%e5%ad%a6/2_0_2_1_2_1-%e8%bd%af%e4%bb%b6%e6%96%b9%e6%b3%95%e5%ad%a6/%e8%ae%be%e8%ae%a1%e6%a8%a1%e5%bc%8f/%e8%a3%85%e9%a5%b0%e5%99%a8%e6%a8%a1%e5%bc%8f.md rel=noopener>Edit Source</a></p><ul class=tags></ul><aside class=mainTOC><details><summary>Table of Contents</summary><nav id=TableOfContents><ol><li><a href=#使用场景>使用场景</a></li><li><a href=#动机>动机</a></li><li><a href=#角色>角色</a></li><li><a href=#实例>实例</a><ol><li><a href=#抽象组件>抽象组件</a></li><li><a href=#具体组件>具体组件</a></li><li><a href=#抽象装饰器>抽象装饰器</a></li><li><a href=#具体装饰器>具体装饰器</a></li><li><a href=#测试>测试</a></li></ol></li><li><a href=#优点>优点</a></li><li><a href=#缺点>缺点</a></li></ol></nav></details></aside><a href=#装饰器模式><h1 id=装饰器模式><span class=hanchor arialabel=Anchor># </span>装饰器模式</h1></a><p>对现有类不改动结构的情况下为类添加新职责和功能的模式。</p><a href=#使用场景><h2 id=使用场景><span class=hanchor arialabel=Anchor># </span>使用场景</h2></a><ul><li>需要大量的子类为某一个对象进行职责增强的时候，可以使用装饰器模式</li><li>希望使用继承对于类进行动态扩展的时候，可以考虑使用装饰器模式</li></ul><a href=#动机><h2 id=动机><span class=hanchor arialabel=Anchor># </span>动机</h2></a><p>一般有两种方式可以实现给一个类或对象增加行为：</p><ul><li>继承机制，使用继承机制是给现有类添加功能的一种有效途径，通过继承一个现有类可以使得子类在拥有自身方法的同时还拥有父类的方法。但是这种方法是静态的，用户不能控制增加行为的方式和时机。</li><li>关联机制，即将一个类的对象嵌入另一个对象中，由另一个对象来决定是否调用嵌入对象的行为以便扩展自己的行为，我们称这个嵌入的对象为装饰器(Decorator)</li></ul><p>装饰模式以对客户透明的方式动态地给一个对象附加上更多的责任，换言之，客户端并不会觉得对象在装饰前和装饰后有什么不同。装饰模式可以在不需要创造更多子类的情况下，将对象的功能加以扩展。</p><a href=#角色><h2 id=角色><span class=hanchor arialabel=Anchor># </span>角色</h2></a><ul><li><strong>Component</strong>：抽象组件，装饰者和被装饰者共同的父类，是一个接口或者抽象类，用来定义基本行为，可以给这些对象动态添加职责</li><li><strong>ConcreteComponent</strong>：具体的组件对象，实现类 ，即被装饰者，通常就是被装饰器装饰的原始对象，也就是可以给这个对象添加职责</li><li><strong>Decorator</strong>：所有装饰器的抽象父类，一般是抽象类，实现接口；它的属性必然有个指向 Conponent 抽象组件的对象 ，其实就是持有一个被装饰的对象</li><li><strong>ConcreteDecorator</strong>：具体的装饰对象，实现具体要被装饰对象添加的功能。每一个具体装饰类都定义了一些新的行为，它可以调用在抽象装饰类中定义的方法，并可以增加新的方法用以扩充对象的行为。</li></ul><p><img src=/z-oblib/z2-attachments/3ec6aa3545c9b5ab14fac788a400a4e9.webp width=auto></p><p>装饰者和被装饰者对象有相同的父类，因为装饰者和被装饰者必须是一样的类型，<strong>这里利用继承是为了达到类型匹配，而不是利用继承获得行为</strong>。</p><p>利用继承设计子类，只能在编译时静态决定，并且所有子类都会继承相同的行为；利用组合的做法扩展对象，就可以在运行时动态的进行扩展。装饰者模式遵循开放-关闭原则：类应该对扩展开放，对修改关闭。利用装饰者，我们可以实现新的装饰者增加新的行为而不用修改现有代码，而如果单纯依赖继承，每当需要新行为时，还得修改现有的代码。</p><a href=#实例><h2 id=实例><span class=hanchor arialabel=Anchor># </span>实例</h2></a><p>卖煎饼：</p><p><img src="/z-oblib/z2-attachments/Pasted image 20220610170159.png" width=auto></p><a href=#抽象组件><h3 id=抽象组件><span class=hanchor arialabel=Anchor># </span>抽象组件</h3></a><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
-</span><span class=lnt> 2
-</span><span class=lnt> 3
-</span><span class=lnt> 4
-</span><span class=lnt> 5
-</span><span class=lnt> 6
-</span><span class=lnt> 7
-</span><span class=lnt> 8
-</span><span class=lnt> 9
-</span><span class=lnt>10
-</span><span class=lnt>11
-</span><span class=lnt>12
-</span><span class=lnt>13
+<a href=https://github.com/mffseal/2_0_2-%e8%ae%a1%e7%ae%97%e6%9c%ba%e7%a7%91%e5%ad%a6/2_0_2_1_2_1-%e8%bd%af%e4%bb%b6%e6%96%b9%e6%b3%95%e5%ad%a6/%e8%ae%be%e8%ae%a1%e6%a8%a1%e5%bc%8f/%e8%a3%85%e9%a5%b0%e5%99%a8%e6%a8%a1%e5%bc%8f.md rel=noopener>Edit Source</a></p><ul class=tags></ul><aside class=mainTOC><details><summary>Table of Contents</summary><nav id=TableOfContents><ol><li><a href=#使用场景>使用场景</a></li><li><a href=#动机>动机</a></li><li><a href=#角色>角色</a></li><li><a href=#实例>实例</a><ol><li><a href=#抽象组件>抽象组件</a></li><li><a href=#具体组件>具体组件</a></li><li><a href=#抽象装饰器>抽象装饰器</a></li><li><a href=#具体装饰器>具体装饰器</a></li><li><a href=#测试>测试</a></li></ol></li><li><a href=#优点>优点</a></li><li><a href=#缺点>缺点</a></li></ol></nav></details></aside><a href=#装饰器模式><h1 id=装饰器模式><span class=hanchor arialabel=Anchor># </span>装饰器模式</h1></a><p>对现有类不改动结构的情况下为类添加新职责和功能的模式。</p><a href=#使用场景><h2 id=使用场景><span class=hanchor arialabel=Anchor># </span>使用场景</h2></a><ul><li>需要大量的子类为某一个对象进行职责增强的时候，可以使用装饰器模式</li><li>希望使用继承对于类进行动态扩展的时候，可以考虑使用装饰器模式</li></ul><a href=#动机><h2 id=动机><span class=hanchor arialabel=Anchor># </span>动机</h2></a><p>一般有两种方式可以实现给一个类或对象增加行为：</p><ul><li>继承机制，使用继承机制是给现有类添加功能的一种有效途径，通过继承一个现有类可以使得子类在拥有自身方法的同时还拥有父类的方法。但是这种方法是静态的，用户不能控制增加行为的方式和时机。</li><li>关联机制，即将一个类的对象嵌入另一个对象中，由另一个对象来决定是否调用嵌入对象的行为以便扩展自己的行为，我们称这个嵌入的对象为装饰器(Decorator)</li></ul><p>装饰模式以对客户透明的方式动态地给一个对象附加上更多的责任，换言之，客户端并不会觉得对象在装饰前和装饰后有什么不同。装饰模式可以在不需要创造更多子类的情况下，将对象的功能加以扩展。</p><a href=#角色><h2 id=角色><span class=hanchor arialabel=Anchor># </span>角色</h2></a><ul><li><strong>Component</strong>：抽象组件，装饰者和被装饰者共同的父类，是一个接口或者抽象类，用来定义基本行为，可以给这些对象动态添加职责</li><li><strong>ConcreteComponent</strong>：具体的组件对象，实现类 ，即被装饰者，通常就是被装饰器装饰的原始对象，也就是可以给这个对象添加职责</li><li><strong>Decorator</strong>：所有装饰器的抽象父类，一般是抽象类，实现接口；它的属性必然有个指向 Conponent 抽象组件的对象 ，其实就是持有一个被装饰的对象</li><li><strong>ConcreteDecorator</strong>：具体的装饰对象，实现具体要被装饰对象添加的功能。每一个具体装饰类都定义了一些新的行为，它可以调用在抽象装饰类中定义的方法，并可以增加新的方法用以扩充对象的行为。</li></ul><p><img src=/z-oblib/z2-attachments/3ec6aa3545c9b5ab14fac788a400a4e9.webp width=auto></p><p>装饰者和被装饰者对象有相同的父类，因为装饰者和被装饰者必须是一样的类型，<strong>这里利用继承是为了达到类型匹配，而不是利用继承获得行为</strong>。</p><p>利用继承设计子类，只能在编译时静态决定，并且所有子类都会继承相同的行为；利用组合的做法扩展对象，就可以在运行时动态的进行扩展。装饰者模式遵循开放-关闭原则：类应该对扩展开放，对修改关闭。利用装饰者，我们可以实现新的装饰者增加新的行为而不用修改现有代码，而如果单纯依赖继承，每当需要新行为时，还得修改现有的代码。</p><a href=#实例><h2 id=实例><span class=hanchor arialabel=Anchor># </span>实例</h2></a><p>卖煎饼：</p><p><img src="/z-oblib/z2-attachments/Pasted image 20220610170159.png" width=auto></p><a href=#抽象组件><h3 id=抽象组件><span class=hanchor arialabel=Anchor># </span>抽象组件</h3></a><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt id=hl-0-1><a style=outline:none;text-decoration:none;color:inherit href=#hl-0-1> 1</a>
+</span><span class=lnt id=hl-0-2><a style=outline:none;text-decoration:none;color:inherit href=#hl-0-2> 2</a>
+</span><span class=lnt id=hl-0-3><a style=outline:none;text-decoration:none;color:inherit href=#hl-0-3> 3</a>
+</span><span class=lnt id=hl-0-4><a style=outline:none;text-decoration:none;color:inherit href=#hl-0-4> 4</a>
+</span><span class=lnt id=hl-0-5><a style=outline:none;text-decoration:none;color:inherit href=#hl-0-5> 5</a>
+</span><span class=lnt id=hl-0-6><a style=outline:none;text-decoration:none;color:inherit href=#hl-0-6> 6</a>
+</span><span class=lnt id=hl-0-7><a style=outline:none;text-decoration:none;color:inherit href=#hl-0-7> 7</a>
+</span><span class=lnt id=hl-0-8><a style=outline:none;text-decoration:none;color:inherit href=#hl-0-8> 8</a>
+</span><span class=lnt id=hl-0-9><a style=outline:none;text-decoration:none;color:inherit href=#hl-0-9> 9</a>
+</span><span class=lnt id=hl-0-10><a style=outline:none;text-decoration:none;color:inherit href=#hl-0-10>10</a>
+</span><span class=lnt id=hl-0-11><a style=outline:none;text-decoration:none;color:inherit href=#hl-0-11>11</a>
+</span><span class=lnt id=hl-0-12><a style=outline:none;text-decoration:none;color:inherit href=#hl-0-12>12</a>
+</span><span class=lnt id=hl-0-13><a style=outline:none;text-decoration:none;color:inherit href=#hl-0-13>13</a>
 </span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-java data-lang=java><span class=line><span class=cl><span class=kd>public</span> <span class=kd>abstract</span> <span class=kd>class</span> <span class=nc>Pancake</span> <span class=o>{</span>
 </span></span><span class=line><span class=cl>
 </span></span><span class=line><span class=cl>    <span class=n>String</span> <span class=n>description</span> <span class=o>=</span> <span class=s>&#34;普通煎饼&#34;</span><span class=o>;</span>
@@ -51,16 +46,16 @@ Jun 10, 2022
 </span></span><span class=line><span class=cl>    <span class=kd>public</span> <span class=kd>abstract</span> <span class=kt>double</span> <span class=nf>cost</span><span class=o>();</span>
 </span></span><span class=line><span class=cl>
 </span></span><span class=line><span class=cl><span class=o>}</span>
-</span></span></code></pre></td></tr></table></div></div><a href=#具体组件><h3 id=具体组件><span class=hanchor arialabel=Anchor># </span>具体组件</h3></a><p>定义具体的被装饰者，这里是煎饼果子，当然还可以有鸡蛋灌饼、手抓饼等其他被装饰者：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
-</span><span class=lnt> 2
-</span><span class=lnt> 3
-</span><span class=lnt> 4
-</span><span class=lnt> 5
-</span><span class=lnt> 6
-</span><span class=lnt> 7
-</span><span class=lnt> 8
-</span><span class=lnt> 9
-</span><span class=lnt>10
+</span></span></code></pre></td></tr></table></div></div><a href=#具体组件><h3 id=具体组件><span class=hanchor arialabel=Anchor># </span>具体组件</h3></a><p>定义具体的被装饰者，这里是煎饼果子，当然还可以有鸡蛋灌饼、手抓饼等其他被装饰者：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt id=hl-1-1><a style=outline:none;text-decoration:none;color:inherit href=#hl-1-1> 1</a>
+</span><span class=lnt id=hl-1-2><a style=outline:none;text-decoration:none;color:inherit href=#hl-1-2> 2</a>
+</span><span class=lnt id=hl-1-3><a style=outline:none;text-decoration:none;color:inherit href=#hl-1-3> 3</a>
+</span><span class=lnt id=hl-1-4><a style=outline:none;text-decoration:none;color:inherit href=#hl-1-4> 4</a>
+</span><span class=lnt id=hl-1-5><a style=outline:none;text-decoration:none;color:inherit href=#hl-1-5> 5</a>
+</span><span class=lnt id=hl-1-6><a style=outline:none;text-decoration:none;color:inherit href=#hl-1-6> 6</a>
+</span><span class=lnt id=hl-1-7><a style=outline:none;text-decoration:none;color:inherit href=#hl-1-7> 7</a>
+</span><span class=lnt id=hl-1-8><a style=outline:none;text-decoration:none;color:inherit href=#hl-1-8> 8</a>
+</span><span class=lnt id=hl-1-9><a style=outline:none;text-decoration:none;color:inherit href=#hl-1-9> 9</a>
+</span><span class=lnt id=hl-1-10><a style=outline:none;text-decoration:none;color:inherit href=#hl-1-10>10</a>
 </span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-java data-lang=java><span class=line><span class=cl><span class=kd>public</span> <span class=kd>class</span> <span class=nc>Battercake</span> <span class=kd>extends</span> <span class=n>Pancake</span> <span class=o>{</span>
 </span></span><span class=line><span class=cl>    <span class=nd>@Override</span>
 </span></span><span class=line><span class=cl>    <span class=kd>public</span> <span class=kt>double</span> <span class=nf>cost</span><span class=o>()</span> <span class=o>{</span>
@@ -71,16 +66,16 @@ Jun 10, 2022
 </span></span><span class=line><span class=cl>        <span class=n>description</span> <span class=o>=</span> <span class=s>&#34;煎饼果子&#34;</span><span class=o>;</span>
 </span></span><span class=line><span class=cl>    <span class=o>}</span>
 </span></span><span class=line><span class=cl><span class=o>}</span>
-</span></span></code></pre></td></tr></table></div></div><a href=#抽象装饰器><h3 id=抽象装饰器><span class=hanchor arialabel=Anchor># </span>抽象装饰器</h3></a><p>定义一个调料抽象类：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
-</span><span class=lnt> 2
-</span><span class=lnt> 3
-</span><span class=lnt> 4
-</span><span class=lnt> 5
-</span><span class=lnt> 6
-</span><span class=lnt> 7
-</span><span class=lnt> 8
-</span><span class=lnt> 9
-</span><span class=lnt>10
+</span></span></code></pre></td></tr></table></div></div><a href=#抽象装饰器><h3 id=抽象装饰器><span class=hanchor arialabel=Anchor># </span>抽象装饰器</h3></a><p>定义一个调料抽象类：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt id=hl-2-1><a style=outline:none;text-decoration:none;color:inherit href=#hl-2-1> 1</a>
+</span><span class=lnt id=hl-2-2><a style=outline:none;text-decoration:none;color:inherit href=#hl-2-2> 2</a>
+</span><span class=lnt id=hl-2-3><a style=outline:none;text-decoration:none;color:inherit href=#hl-2-3> 3</a>
+</span><span class=lnt id=hl-2-4><a style=outline:none;text-decoration:none;color:inherit href=#hl-2-4> 4</a>
+</span><span class=lnt id=hl-2-5><a style=outline:none;text-decoration:none;color:inherit href=#hl-2-5> 5</a>
+</span><span class=lnt id=hl-2-6><a style=outline:none;text-decoration:none;color:inherit href=#hl-2-6> 6</a>
+</span><span class=lnt id=hl-2-7><a style=outline:none;text-decoration:none;color:inherit href=#hl-2-7> 7</a>
+</span><span class=lnt id=hl-2-8><a style=outline:none;text-decoration:none;color:inherit href=#hl-2-8> 8</a>
+</span><span class=lnt id=hl-2-9><a style=outline:none;text-decoration:none;color:inherit href=#hl-2-9> 9</a>
+</span><span class=lnt id=hl-2-10><a style=outline:none;text-decoration:none;color:inherit href=#hl-2-10>10</a>
 </span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-java data-lang=java><span class=line><span class=cl><span class=kd>public</span> <span class=kd>abstract</span> <span class=kd>class</span> <span class=nc>CondimentDecorator</span> <span class=kd>extends</span> <span class=n>Pancake</span> <span class=o>{</span>
 </span></span><span class=line><span class=cl>
 </span></span><span class=line><span class=cl>    <span class=c1>// 持有组件对象
@@ -91,22 +86,22 @@ Jun 10, 2022
 </span></span><span class=line><span class=cl>
 </span></span><span class=line><span class=cl>    <span class=kd>public</span> <span class=kd>abstract</span> <span class=n>String</span> <span class=nf>getDescription</span><span class=o>();</span>
 </span></span><span class=line><span class=cl><span class=o>}</span>
-</span></span></code></pre></td></tr></table></div></div><a href=#具体装饰器><h3 id=具体装饰器><span class=hanchor arialabel=Anchor># </span>具体装饰器</h3></a><p>具体的装饰者，我们定义一个鸡蛋装饰器，一个火腿装饰器：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
-</span><span class=lnt> 2
-</span><span class=lnt> 3
-</span><span class=lnt> 4
-</span><span class=lnt> 5
-</span><span class=lnt> 6
-</span><span class=lnt> 7
-</span><span class=lnt> 8
-</span><span class=lnt> 9
-</span><span class=lnt>10
-</span><span class=lnt>11
-</span><span class=lnt>12
-</span><span class=lnt>13
-</span><span class=lnt>14
-</span><span class=lnt>15
-</span><span class=lnt>16
+</span></span></code></pre></td></tr></table></div></div><a href=#具体装饰器><h3 id=具体装饰器><span class=hanchor arialabel=Anchor># </span>具体装饰器</h3></a><p>具体的装饰者，我们定义一个鸡蛋装饰器，一个火腿装饰器：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt id=hl-3-1><a style=outline:none;text-decoration:none;color:inherit href=#hl-3-1> 1</a>
+</span><span class=lnt id=hl-3-2><a style=outline:none;text-decoration:none;color:inherit href=#hl-3-2> 2</a>
+</span><span class=lnt id=hl-3-3><a style=outline:none;text-decoration:none;color:inherit href=#hl-3-3> 3</a>
+</span><span class=lnt id=hl-3-4><a style=outline:none;text-decoration:none;color:inherit href=#hl-3-4> 4</a>
+</span><span class=lnt id=hl-3-5><a style=outline:none;text-decoration:none;color:inherit href=#hl-3-5> 5</a>
+</span><span class=lnt id=hl-3-6><a style=outline:none;text-decoration:none;color:inherit href=#hl-3-6> 6</a>
+</span><span class=lnt id=hl-3-7><a style=outline:none;text-decoration:none;color:inherit href=#hl-3-7> 7</a>
+</span><span class=lnt id=hl-3-8><a style=outline:none;text-decoration:none;color:inherit href=#hl-3-8> 8</a>
+</span><span class=lnt id=hl-3-9><a style=outline:none;text-decoration:none;color:inherit href=#hl-3-9> 9</a>
+</span><span class=lnt id=hl-3-10><a style=outline:none;text-decoration:none;color:inherit href=#hl-3-10>10</a>
+</span><span class=lnt id=hl-3-11><a style=outline:none;text-decoration:none;color:inherit href=#hl-3-11>11</a>
+</span><span class=lnt id=hl-3-12><a style=outline:none;text-decoration:none;color:inherit href=#hl-3-12>12</a>
+</span><span class=lnt id=hl-3-13><a style=outline:none;text-decoration:none;color:inherit href=#hl-3-13>13</a>
+</span><span class=lnt id=hl-3-14><a style=outline:none;text-decoration:none;color:inherit href=#hl-3-14>14</a>
+</span><span class=lnt id=hl-3-15><a style=outline:none;text-decoration:none;color:inherit href=#hl-3-15>15</a>
+</span><span class=lnt id=hl-3-16><a style=outline:none;text-decoration:none;color:inherit href=#hl-3-16>16</a>
 </span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-java data-lang=java><span class=line><span class=cl><span class=kd>public</span> <span class=kd>class</span> <span class=nc>Egg</span> <span class=kd>extends</span> <span class=n>CondimentDecorator</span> <span class=o>{</span>
 </span></span><span class=line><span class=cl>    <span class=kd>public</span> <span class=nf>Egg</span><span class=o>(</span><span class=n>Pancake</span> <span class=n>pancake</span><span class=o>){</span>
 </span></span><span class=line><span class=cl>        <span class=kd>super</span><span class=o>(</span><span class=n>pancake</span><span class=o>);</span>
@@ -123,20 +118,20 @@ Jun 10, 2022
 </span></span><span class=line><span class=cl>        <span class=k>return</span> <span class=n>pancake</span><span class=o>.</span><span class=na>cost</span><span class=o>()</span> <span class=o>+</span> <span class=n>1</span><span class=o>;</span>
 </span></span><span class=line><span class=cl>    <span class=o>}</span>
 </span></span><span class=line><span class=cl><span class=o>}</span>
-</span></span></code></pre></td></tr></table></div></div><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
-</span><span class=lnt> 2
-</span><span class=lnt> 3
-</span><span class=lnt> 4
-</span><span class=lnt> 5
-</span><span class=lnt> 6
-</span><span class=lnt> 7
-</span><span class=lnt> 8
-</span><span class=lnt> 9
-</span><span class=lnt>10
-</span><span class=lnt>11
-</span><span class=lnt>12
-</span><span class=lnt>13
-</span><span class=lnt>14
+</span></span></code></pre></td></tr></table></div></div><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt id=hl-4-1><a style=outline:none;text-decoration:none;color:inherit href=#hl-4-1> 1</a>
+</span><span class=lnt id=hl-4-2><a style=outline:none;text-decoration:none;color:inherit href=#hl-4-2> 2</a>
+</span><span class=lnt id=hl-4-3><a style=outline:none;text-decoration:none;color:inherit href=#hl-4-3> 3</a>
+</span><span class=lnt id=hl-4-4><a style=outline:none;text-decoration:none;color:inherit href=#hl-4-4> 4</a>
+</span><span class=lnt id=hl-4-5><a style=outline:none;text-decoration:none;color:inherit href=#hl-4-5> 5</a>
+</span><span class=lnt id=hl-4-6><a style=outline:none;text-decoration:none;color:inherit href=#hl-4-6> 6</a>
+</span><span class=lnt id=hl-4-7><a style=outline:none;text-decoration:none;color:inherit href=#hl-4-7> 7</a>
+</span><span class=lnt id=hl-4-8><a style=outline:none;text-decoration:none;color:inherit href=#hl-4-8> 8</a>
+</span><span class=lnt id=hl-4-9><a style=outline:none;text-decoration:none;color:inherit href=#hl-4-9> 9</a>
+</span><span class=lnt id=hl-4-10><a style=outline:none;text-decoration:none;color:inherit href=#hl-4-10>10</a>
+</span><span class=lnt id=hl-4-11><a style=outline:none;text-decoration:none;color:inherit href=#hl-4-11>11</a>
+</span><span class=lnt id=hl-4-12><a style=outline:none;text-decoration:none;color:inherit href=#hl-4-12>12</a>
+</span><span class=lnt id=hl-4-13><a style=outline:none;text-decoration:none;color:inherit href=#hl-4-13>13</a>
+</span><span class=lnt id=hl-4-14><a style=outline:none;text-decoration:none;color:inherit href=#hl-4-14>14</a>
 </span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-java data-lang=java><span class=line><span class=cl><span class=kd>public</span> <span class=kd>class</span> <span class=nc>Sausage</span> <span class=kd>extends</span> <span class=n>CondimentDecorator</span><span class=o>{</span>
 </span></span><span class=line><span class=cl>    <span class=kd>public</span> <span class=nf>Sausage</span><span class=o>(</span><span class=n>Pancake</span> <span class=n>pancake</span><span class=o>){</span>
 </span></span><span class=line><span class=cl>        <span class=kd>super</span><span class=o>(</span><span class=n>pancake</span><span class=o>);</span>
@@ -151,26 +146,26 @@ Jun 10, 2022
 </span></span><span class=line><span class=cl>        <span class=k>return</span> <span class=n>pancake</span><span class=o>.</span><span class=na>cost</span><span class=o>()</span> <span class=o>+</span> <span class=n>2</span><span class=o>;</span>
 </span></span><span class=line><span class=cl>    <span class=o>}</span>
 </span></span><span class=line><span class=cl><span class=o>}</span>
-</span></span></code></pre></td></tr></table></div></div><a href=#测试><h3 id=测试><span class=hanchor arialabel=Anchor># </span>测试</h3></a><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
-</span><span class=lnt> 2
-</span><span class=lnt> 3
-</span><span class=lnt> 4
-</span><span class=lnt> 5
-</span><span class=lnt> 6
-</span><span class=lnt> 7
-</span><span class=lnt> 8
-</span><span class=lnt> 9
-</span><span class=lnt>10
-</span><span class=lnt>11
-</span><span class=lnt>12
-</span><span class=lnt>13
-</span><span class=lnt>14
-</span><span class=lnt>15
-</span><span class=lnt>16
-</span><span class=lnt>17
-</span><span class=lnt>18
-</span><span class=lnt>19
-</span><span class=lnt>20
+</span></span></code></pre></td></tr></table></div></div><a href=#测试><h3 id=测试><span class=hanchor arialabel=Anchor># </span>测试</h3></a><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt id=hl-5-1><a style=outline:none;text-decoration:none;color:inherit href=#hl-5-1> 1</a>
+</span><span class=lnt id=hl-5-2><a style=outline:none;text-decoration:none;color:inherit href=#hl-5-2> 2</a>
+</span><span class=lnt id=hl-5-3><a style=outline:none;text-decoration:none;color:inherit href=#hl-5-3> 3</a>
+</span><span class=lnt id=hl-5-4><a style=outline:none;text-decoration:none;color:inherit href=#hl-5-4> 4</a>
+</span><span class=lnt id=hl-5-5><a style=outline:none;text-decoration:none;color:inherit href=#hl-5-5> 5</a>
+</span><span class=lnt id=hl-5-6><a style=outline:none;text-decoration:none;color:inherit href=#hl-5-6> 6</a>
+</span><span class=lnt id=hl-5-7><a style=outline:none;text-decoration:none;color:inherit href=#hl-5-7> 7</a>
+</span><span class=lnt id=hl-5-8><a style=outline:none;text-decoration:none;color:inherit href=#hl-5-8> 8</a>
+</span><span class=lnt id=hl-5-9><a style=outline:none;text-decoration:none;color:inherit href=#hl-5-9> 9</a>
+</span><span class=lnt id=hl-5-10><a style=outline:none;text-decoration:none;color:inherit href=#hl-5-10>10</a>
+</span><span class=lnt id=hl-5-11><a style=outline:none;text-decoration:none;color:inherit href=#hl-5-11>11</a>
+</span><span class=lnt id=hl-5-12><a style=outline:none;text-decoration:none;color:inherit href=#hl-5-12>12</a>
+</span><span class=lnt id=hl-5-13><a style=outline:none;text-decoration:none;color:inherit href=#hl-5-13>13</a>
+</span><span class=lnt id=hl-5-14><a style=outline:none;text-decoration:none;color:inherit href=#hl-5-14>14</a>
+</span><span class=lnt id=hl-5-15><a style=outline:none;text-decoration:none;color:inherit href=#hl-5-15>15</a>
+</span><span class=lnt id=hl-5-16><a style=outline:none;text-decoration:none;color:inherit href=#hl-5-16>16</a>
+</span><span class=lnt id=hl-5-17><a style=outline:none;text-decoration:none;color:inherit href=#hl-5-17>17</a>
+</span><span class=lnt id=hl-5-18><a style=outline:none;text-decoration:none;color:inherit href=#hl-5-18>18</a>
+</span><span class=lnt id=hl-5-19><a style=outline:none;text-decoration:none;color:inherit href=#hl-5-19>19</a>
+</span><span class=lnt id=hl-5-20><a style=outline:none;text-decoration:none;color:inherit href=#hl-5-20>20</a>
 </span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-java data-lang=java><span class=line><span class=cl><span class=kd>public</span> <span class=kd>class</span> <span class=nc>Client</span> <span class=o>{</span>
 </span></span><span class=line><span class=cl>
 </span></span><span class=line><span class=cl>    <span class=kd>public</span> <span class=kd>static</span> <span class=kt>void</span> <span class=nf>main</span><span class=o>(</span><span class=n>String</span><span class=o>[]</span> <span class=n>args</span><span class=o>)</span> <span class=o>{</span>
@@ -191,9 +186,9 @@ Jun 10, 2022
 </span></span><span class=line><span class=cl>        <span class=n>System</span><span class=o>.</span><span class=na>out</span><span class=o>.</span><span class=na>println</span><span class=o>(</span><span class=n>battercakePlus</span><span class=o>.</span><span class=na>getDescription</span><span class=o>()</span> <span class=o>+</span> <span class=s>&#34;花费&#34;</span> <span class=o>+</span> <span class=n>battercakePlus</span><span class=o>.</span><span class=na>cost</span><span class=o>()</span> <span class=o>+</span> <span class=s>&#34;元&#34;</span><span class=o>);</span>
 </span></span><span class=line><span class=cl>    <span class=o>}</span>
 </span></span><span class=line><span class=cl><span class=o>}</span>
-</span></span></code></pre></td></tr></table></div></div><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
-</span><span class=lnt>2
-</span><span class=lnt>3
+</span></span></code></pre></td></tr></table></div></div><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt id=hl-6-1><a style=outline:none;text-decoration:none;color:inherit href=#hl-6-1>1</a>
+</span><span class=lnt id=hl-6-2><a style=outline:none;text-decoration:none;color:inherit href=#hl-6-2>2</a>
+</span><span class=lnt id=hl-6-3><a style=outline:none;text-decoration:none;color:inherit href=#hl-6-3>3</a>
 </span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>煎饼果子花费：8.0元
 </span></span><span class=line><span class=cl>煎饼果子加鸡蛋加鸡蛋花费10.0元
 </span></span><span class=line><span class=cl>煎饼果子加鸡蛋加火腿花费11.0元

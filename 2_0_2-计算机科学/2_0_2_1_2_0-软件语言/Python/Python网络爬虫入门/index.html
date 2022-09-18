@@ -1,5 +1,4 @@
-<!doctype html><html lang=en><head><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8920808282451934" crossorigin=anonymous></script><meta charset=utf-8><meta name=description content="Python网络爬虫入门 爬虫简介 合法性  抓取数据时现实生活中真实数据则合法 抓取数据为原创数据则受版权保护  背景调研 检查 robots.txt  检查 robots.txt 可以最小化爬虫被封禁的可能 发现和网络结构相关的线索  查看方法 通过访问 http://example.webscraping.com/robots.txt, 得到内容:
-1 2 3 4 5 6 7 8 9 10 11  ## section 1 User-agent: BadCrawler // 禁止用户代理为 BadCrawler 的爬虫爬取网站 Disallow: / ## section 2 User-agent: * Disallow: /trap // 封禁爬取不允许链接的爬虫 Crawl-delay: 5 // 两次请求应间隔 5 秒 ## section 3 Sitemap: http://example.webscraping.com/sitemap.xml   检查网站地图  Sitemap 文件帮助爬虫定位最新的文件, 而无需爬取每一个网页 网站地图提供了所以网页的链接 该文件经常存在缺失, 过期或不完整的问题  查看方法 通过访问 robots."><title>Python网络爬虫入门</title><meta name=viewport content="width=device-width,initial-scale=1"><link rel="shortcut icon" type=image/png href=https://harbor.mffseal.top//icon.png><link href=https://harbor.mffseal.top/styles.7153093e4d1bbb584a28469cadfa3f88.min.css rel=stylesheet><link href=https://harbor.mffseal.top/styles/_light_syntax.86a48a52faebeaaf42158b72922b1c90.min.css rel=stylesheet id=theme-link><script src=https://harbor.mffseal.top/js/darkmode.9841b88d44c115f7419d485ee72d23a2.min.js></script>
+<!doctype html><html lang=en><head><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8920808282451934" crossorigin=anonymous></script><meta charset=utf-8><meta name=description content="Python网络爬虫入门 爬虫简介 合法性  抓取数据时现实生活中真实数据则合法 抓取数据为原创数据则受版权保护  背景调研 检查 robots.txt  检查 robots.txt 可以最小化爬虫被封禁的可能 发现和网络结构相关的线索  查看方法 通过访问 http://example.webscraping.com/robots.txt, 得到内容:"><title>Python网络爬虫入门</title><meta name=viewport content="width=device-width,initial-scale=1"><link rel="shortcut icon" type=image/png href=https://harbor.mffseal.top//icon.png><link href=https://harbor.mffseal.top/styles.7153093e4d1bbb584a28469cadfa3f88.min.css rel=stylesheet><link href=https://harbor.mffseal.top/styles/_light_syntax.86a48a52faebeaaf42158b72922b1c90.min.css rel=stylesheet id=theme-link><script src=https://harbor.mffseal.top/js/darkmode.9841b88d44c115f7419d485ee72d23a2.min.js></script>
 <script src=https://harbor.mffseal.top/js/util.9825137f5e7825e8553c68ce39ac9e44.min.js></script>
 <link rel=stylesheet href=https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.css integrity=sha384-R4558gYOUz8mP9YWpZJjofhk+zx0AS11p36HnD2ZKj/6JR5z27gSSULCNHIRReVs crossorigin=anonymous><script defer src=https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.js integrity=sha384-z1fJDqw8ZApjGO3/unPWUPsIymfsJmyrDVWC8Tv/a1HeOtGmkwNd/7xUS0Xcnvsx crossorigin=anonymous></script>
 <script defer src=https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/contrib/auto-render.min.js integrity=sha384-+XBljXPPiv+OzfbB3cVmLHf4hdUFHlWNZN5spNQ7rmHTXpd7WvJum6fIACpNNfIR crossorigin=anonymous></script>
@@ -10,7 +9,7 @@
 <script src=https://harbor.mffseal.top/js/code-title.b35124ad8db0ba37162b886afb711cbc.min.js></script>
 <script src=https://harbor.mffseal.top/js/clipboard.c20857734e53a3fb733b7443879efa61.min.js></script>
 <script src=https://harbor.mffseal.top/js/callouts.7723cac461d613d118ee8bb8216b9838.min.js></script>
-<script>const BASE_URL="https://harbor.mffseal.top/",fetchData=Promise.all([fetch("https://harbor.mffseal.top/indices/linkIndex.5da375bc9ca1d813eb68255e2c0afb35.min.json").then(e=>e.json()).then(e=>({index:e.index,links:e.links})),fetch("https://harbor.mffseal.top/indices/contentIndex.e562ec6ad43d185479787d85119148bd.min.json").then(e=>e.json())]).then(([{index:e,links:t},n])=>({index:e,links:t,content:n})),render=()=>{const e=new URL(BASE_URL),t=e.pathname,n=window.location.pathname,s=t==n;addCopyButtons(),addTitleToCodeBlocks(),addCollapsibleCallouts(),initPopover("https://harbor.mffseal.top",!0,!0);const o=document.getElementById("footer");if(o){const e=document.getElementById("graph-container");if(!e)return requestAnimationFrame(render);e.textContent="";const t=s&&!1;drawGraph("https://harbor.mffseal.top",t,[{"/moc":"#4388cc"}],t?{centerForce:1,depth:-1,enableDrag:!0,enableLegend:!1,enableZoom:!0,fontSize:.5,linkDistance:1,opacityScale:3,repelForce:1,scale:1.4}:{centerForce:1,depth:1,enableDrag:!0,enableLegend:!1,enableZoom:!0,fontSize:.6,linkDistance:1,opacityScale:3,repelForce:2,scale:1.2})}},init=(e=document)=>{addCopyButtons(),addTitleToCodeBlocks(),renderMathInElement(e.body,{delimiters:[{left:"$$",right:"$$",display:!0},{left:"$",right:"$",display:!1}],macros:{'’':"'"},throwOnError:!1})}</script><script type=module>
+<script>const BASE_URL="https://harbor.mffseal.top/",fetchData=Promise.all([fetch("https://harbor.mffseal.top/indices/linkIndex.5da375bc9ca1d813eb68255e2c0afb35.min.json").then(e=>e.json()).then(e=>({index:e.index,links:e.links})),fetch("https://harbor.mffseal.top/indices/contentIndex.363af2e61a16ab88407bc594d017144e.min.json").then(e=>e.json())]).then(([{index:e,links:t},n])=>({index:e,links:t,content:n})),render=()=>{const e=new URL(BASE_URL),t=e.pathname,n=window.location.pathname,s=t==n;addCopyButtons(),addTitleToCodeBlocks(),addCollapsibleCallouts(),initPopover("https://harbor.mffseal.top",!0,!0);const o=document.getElementById("footer");if(o){const e=document.getElementById("graph-container");if(!e)return requestAnimationFrame(render);e.textContent="";const t=s&&!0;drawGraph("https://harbor.mffseal.top",t,[{"/moc":"#4388cc"}],t?{centerForce:1,depth:-1,enableDrag:!0,enableLegend:!1,enableZoom:!0,fontSize:.5,linkDistance:1,opacityScale:3,repelForce:1,scale:1.4}:{centerForce:1,depth:1,enableDrag:!0,enableLegend:!1,enableZoom:!0,fontSize:.6,linkDistance:1,opacityScale:3,repelForce:2,scale:1.2})}},init=(e=document)=>{addCopyButtons(),addTitleToCodeBlocks(),renderMathInElement(e.body,{delimiters:[{left:"$$",right:"$$",display:!0},{left:"$",right:"$",display:!1}],macros:{'’':"'"},throwOnError:!1})}</script><script type=module>
     import { attachSPARouting } from "https:\/\/harbor.mffseal.top\/js\/router.9d4974281069e9ebb189f642ae1e3ca2.min.js"
     attachSPARouting(init, render)
   </script></head><script async src="https://www.googletagmanager.com/gtag/js?id=G-NV58SYWRZD"></script>
@@ -19,17 +18,17 @@
 <label id=toggle-label-light for=darkmode-toggle tabindex=-1><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" id="dayIcon" viewBox="0 0 35 35" style="enable-background:new 0 0 35 35"><title>Light Mode</title><path d="M6 17.5C6 16.672 5.328 16 4.5 16h-3C.672 16 0 16.672.0 17.5S.672 19 1.5 19h3C5.328 19 6 18.328 6 17.5zM7.5 26c-.414.0-.789.168-1.061.439l-2 2C4.168 28.711 4 29.086 4 29.5 4 30.328 4.671 31 5.5 31c.414.0.789-.168 1.06-.44l2-2C8.832 28.289 9 27.914 9 27.5 9 26.672 8.329 26 7.5 26zm10-20C18.329 6 19 5.328 19 4.5v-3C19 .672 18.329.0 17.5.0S16 .672 16 1.5v3C16 5.328 16.671 6 17.5 6zm10 3c.414.0.789-.168 1.06-.439l2-2C30.832 6.289 31 5.914 31 5.5 31 4.672 30.329 4 29.5 4c-.414.0-.789.168-1.061.44l-2 2C26.168 6.711 26 7.086 26 7.5 26 8.328 26.671 9 27.5 9zM6.439 8.561C6.711 8.832 7.086 9 7.5 9 8.328 9 9 8.328 9 7.5c0-.414-.168-.789-.439-1.061l-2-2C6.289 4.168 5.914 4 5.5 4 4.672 4 4 4.672 4 5.5c0 .414.168.789.439 1.06l2 2.001zM33.5 16h-3c-.828.0-1.5.672-1.5 1.5s.672 1.5 1.5 1.5h3c.828.0 1.5-.672 1.5-1.5S34.328 16 33.5 16zM28.561 26.439C28.289 26.168 27.914 26 27.5 26c-.828.0-1.5.672-1.5 1.5.0.414.168.789.439 1.06l2 2C28.711 30.832 29.086 31 29.5 31c.828.0 1.5-.672 1.5-1.5.0-.414-.168-.789-.439-1.061l-2-2zM17.5 29c-.829.0-1.5.672-1.5 1.5v3c0 .828.671 1.5 1.5 1.5s1.5-.672 1.5-1.5v-3C19 29.672 18.329 29 17.5 29zm0-22C11.71 7 7 11.71 7 17.5S11.71 28 17.5 28 28 23.29 28 17.5 23.29 7 17.5 7zm0 18c-4.136.0-7.5-3.364-7.5-7.5s3.364-7.5 7.5-7.5 7.5 3.364 7.5 7.5S21.636 25 17.5 25z"/></svg></label><label id=toggle-label-dark for=darkmode-toggle tabindex=-1><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" id="nightIcon" viewBox="0 0 100 100" style="enable-background='new 0 0 100 100'"><title>Dark Mode</title><path d="M96.76 66.458c-.853-.852-2.15-1.064-3.23-.534-6.063 2.991-12.858 4.571-19.655 4.571C62.022 70.495 50.88 65.88 42.5 57.5 29.043 44.043 25.658 23.536 34.076 6.47c.532-1.08.318-2.379-.534-3.23-.851-.852-2.15-1.064-3.23-.534-4.918 2.427-9.375 5.619-13.246 9.491-9.447 9.447-14.65 22.008-14.65 35.369.0 13.36 5.203 25.921 14.65 35.368s22.008 14.65 35.368 14.65c13.361.0 25.921-5.203 35.369-14.65 3.872-3.871 7.064-8.328 9.491-13.246C97.826 68.608 97.611 67.309 96.76 66.458z"/></svg></label></div></header><article><h1>Python网络爬虫入门</h1><p class=meta>Last updated
 Sep 17, 2022
 <a href=https://github.com/mffseal/2_0_2-%e8%ae%a1%e7%ae%97%e6%9c%ba%e7%a7%91%e5%ad%a6/2_0_2_1_2_0-%e8%bd%af%e4%bb%b6%e8%af%ad%e8%a8%80/Python/Python%e7%bd%91%e7%bb%9c%e7%88%ac%e8%99%ab%e5%85%a5%e9%97%a8.md rel=noopener>Edit Source</a></p><ul class=tags><li><a href=https://harbor.mffseal.top/tags/article/>Article</a></li></ul><aside class=mainTOC><details><summary>Table of Contents</summary><nav id=TableOfContents><ol><li><a href=#爬虫简介>爬虫简介</a><ol><li><a href=#合法性>合法性</a></li><li><a href=#背景调研>背景调研</a></li><li><a href=#编写第一个爬虫>编写第一个爬虫</a></li></ol></li><li><a href=#实际项目>实际项目</a><ol><li><a href=#插件>插件</a></li><li><a href=#user-agent>user-agent</a></li></ol></li></ol></nav></details></aside><a href=#python网络爬虫入门><h1 id=python网络爬虫入门><span class=hanchor arialabel=Anchor># </span>Python网络爬虫入门</h1></a><a href=#爬虫简介><h2 id=爬虫简介><span class=hanchor arialabel=Anchor># </span>爬虫简介</h2></a><a href=#合法性><h3 id=合法性><span class=hanchor arialabel=Anchor># </span>合法性</h3></a><ul><li>抓取数据时现实生活中真实数据则合法</li><li>抓取数据为原创数据则受版权保护</li></ul><a href=#背景调研><h3 id=背景调研><span class=hanchor arialabel=Anchor># </span>背景调研</h3></a><a href=#检查-robotstxt><h4 id=检查-robotstxt><span class=hanchor arialabel=Anchor># </span>检查 robots.txt</h4></a><ul><li>检查 robots.txt 可以最小化爬虫被封禁的可能</li><li>发现和网络结构相关的线索</li></ul><a href=#查看方法><h5 id=查看方法><span class=hanchor arialabel=Anchor># </span>查看方法</h5></a><p>通过访问
-<a href=http://example.webscraping.com/ rel=noopener>http://example.webscraping.com/</a><strong>robots.txt</strong>, 得到内容:</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
-</span><span class=lnt> 2
-</span><span class=lnt> 3
-</span><span class=lnt> 4
-</span><span class=lnt> 5
-</span><span class=lnt> 6
-</span><span class=lnt> 7
-</span><span class=lnt> 8
-</span><span class=lnt> 9
-</span><span class=lnt>10
-</span><span class=lnt>11
+<a href=http://example.webscraping.com/ rel=noopener>http://example.webscraping.com/</a><strong>robots.txt</strong>, 得到内容:</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt id=hl-0-1><a style=outline:none;text-decoration:none;color:inherit href=#hl-0-1> 1</a>
+</span><span class=lnt id=hl-0-2><a style=outline:none;text-decoration:none;color:inherit href=#hl-0-2> 2</a>
+</span><span class=lnt id=hl-0-3><a style=outline:none;text-decoration:none;color:inherit href=#hl-0-3> 3</a>
+</span><span class=lnt id=hl-0-4><a style=outline:none;text-decoration:none;color:inherit href=#hl-0-4> 4</a>
+</span><span class=lnt id=hl-0-5><a style=outline:none;text-decoration:none;color:inherit href=#hl-0-5> 5</a>
+</span><span class=lnt id=hl-0-6><a style=outline:none;text-decoration:none;color:inherit href=#hl-0-6> 6</a>
+</span><span class=lnt id=hl-0-7><a style=outline:none;text-decoration:none;color:inherit href=#hl-0-7> 7</a>
+</span><span class=lnt id=hl-0-8><a style=outline:none;text-decoration:none;color:inherit href=#hl-0-8> 8</a>
+</span><span class=lnt id=hl-0-9><a style=outline:none;text-decoration:none;color:inherit href=#hl-0-9> 9</a>
+</span><span class=lnt id=hl-0-10><a style=outline:none;text-decoration:none;color:inherit href=#hl-0-10>10</a>
+</span><span class=lnt id=hl-0-11><a style=outline:none;text-decoration:none;color:inherit href=#hl-0-11>11</a>
 </span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-http data-lang=http><span class=line><span class=cl><span class=err>## section 1
 </span></span></span><span class=line><span class=cl><span class=err>User-agent: BadCrawler  // 禁止用户代理为 BadCrawler 的爬虫爬取网站
 </span></span></span><span class=line><span class=cl><span class=err>Disallow: /
@@ -42,17 +41,17 @@ Sep 17, 2022
 </span></span></span><span class=line><span class=cl><span class=err>## section 3
 </span></span></span><span class=line><span class=cl><span class=err>Sitemap: http://example.webscraping.com/sitemap.xml
 </span></span></span></code></pre></td></tr></table></div></div><a href=#检查网站地图><h4 id=检查网站地图><span class=hanchor arialabel=Anchor># </span>检查网站地图</h4></a><ul><li>Sitemap 文件帮助爬虫定位最新的文件, 而无需爬取每一个网页</li><li>网站地图提供了所以网页的链接</li><li>该文件经常存在缺失, 过期或不完整的问题</li></ul><a href=#查看方法-1><h5 id=查看方法-1><span class=hanchor arialabel=Anchor># </span>查看方法</h5></a><p>通过访问 robots.txt 中定义的地图链接地址
-<a href=http://example.webscraping.com/sitemap.xml rel=noopener>http://example.webscraping.com/sitemap.xml</a></p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
-</span><span class=lnt> 2
-</span><span class=lnt> 3
-</span><span class=lnt> 4
-</span><span class=lnt> 5
-</span><span class=lnt> 6
-</span><span class=lnt> 7
-</span><span class=lnt> 8
-</span><span class=lnt> 9
-</span><span class=lnt>10
-</span><span class=lnt>11
+<a href=http://example.webscraping.com/sitemap.xml rel=noopener>http://example.webscraping.com/sitemap.xml</a></p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt id=hl-1-1><a style=outline:none;text-decoration:none;color:inherit href=#hl-1-1> 1</a>
+</span><span class=lnt id=hl-1-2><a style=outline:none;text-decoration:none;color:inherit href=#hl-1-2> 2</a>
+</span><span class=lnt id=hl-1-3><a style=outline:none;text-decoration:none;color:inherit href=#hl-1-3> 3</a>
+</span><span class=lnt id=hl-1-4><a style=outline:none;text-decoration:none;color:inherit href=#hl-1-4> 4</a>
+</span><span class=lnt id=hl-1-5><a style=outline:none;text-decoration:none;color:inherit href=#hl-1-5> 5</a>
+</span><span class=lnt id=hl-1-6><a style=outline:none;text-decoration:none;color:inherit href=#hl-1-6> 6</a>
+</span><span class=lnt id=hl-1-7><a style=outline:none;text-decoration:none;color:inherit href=#hl-1-7> 7</a>
+</span><span class=lnt id=hl-1-8><a style=outline:none;text-decoration:none;color:inherit href=#hl-1-8> 8</a>
+</span><span class=lnt id=hl-1-9><a style=outline:none;text-decoration:none;color:inherit href=#hl-1-9> 9</a>
+</span><span class=lnt id=hl-1-10><a style=outline:none;text-decoration:none;color:inherit href=#hl-1-10>10</a>
+</span><span class=lnt id=hl-1-11><a style=outline:none;text-decoration:none;color:inherit href=#hl-1-11>11</a>
 </span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-sh data-lang=sh><span class=line><span class=cl>http://example.webscraping.com/places/default/view/Afghanistan-1
 </span></span><span class=line><span class=cl>http://example.webscraping.com/places/default/view/Aland-Islands-2
 </span></span><span class=line><span class=cl>http://example.webscraping.com/places/default/view/Albania-3
@@ -65,62 +64,62 @@ Sep 17, 2022
 </span></span><span class=line><span class=cl>http://example.webscraping.com/places/default/view/Antigua-and-Barbuda-10
 </span></span><span class=line><span class=cl>......
 </span></span></code></pre></td></tr></table></div></div><a href=#估算网站大小><h4 id=估算网站大小><span class=hanchor arialabel=Anchor># </span>估算网站大小</h4></a><ul><li>目标网站的大小会影响我们如何进行爬取</li></ul><a href=#估算方法><h5 id=估算方法><span class=hanchor arialabel=Anchor># </span>估算方法</h5></a><ul><li>一个简单的方法是检查 Google 爬虫的结果, Google 很可能已经爬取过我们感兴趣的网站</li><li>通过搜索的 <code>site</code> 关键词过滤域名结<ul><li>在域名后添加 url 可以对结果进行过滤, 仅显示网页某些部分</li><li>可以从
-<a href=http://www.google.com/advanced_search rel=noopener>http://www.google.com/advanced_search</a> 了解参数</li></ul></li></ul><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
-</span><span class=lnt>2
+<a href=http://www.google.com/advanced_search rel=noopener>http://www.google.com/advanced_search</a> 了解参数</li></ul></li></ul><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt id=hl-2-1><a style=outline:none;text-decoration:none;color:inherit href=#hl-2-1>1</a>
+</span><span class=lnt id=hl-2-2><a style=outline:none;text-decoration:none;color:inherit href=#hl-2-2>2</a>
 </span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>site:example.webscraping.com       // 搜索全站
 </span></span><span class=line><span class=cl>site:example.webscraping.com/places/default/view  // 只搜索国家页面
-</span></span></code></pre></td></tr></table></div></div><a href=#识别网站所用技术><h4 id=识别网站所用技术><span class=hanchor arialabel=Anchor># </span>识别网站所用技术</h4></a><p>使用 builtwith 模块检查网站构建的技术类型:</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></span></code></pre></td></tr></table></div></div><a href=#识别网站所用技术><h4 id=识别网站所用技术><span class=hanchor arialabel=Anchor># </span>识别网站所用技术</h4></a><p>使用 builtwith 模块检查网站构建的技术类型:</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt id=hl-3-1><a style=outline:none;text-decoration:none;color:inherit href=#hl-3-1>1</a>
 </span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-sh data-lang=sh><span class=line><span class=cl>pip install builtwish
-</span></span></code></pre></td></tr></table></div></div><p>用法:</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
-</span><span class=lnt>2
-</span><span class=lnt>3
-</span><span class=lnt>4
+</span></span></code></pre></td></tr></table></div></div><p>用法:</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt id=hl-4-1><a style=outline:none;text-decoration:none;color:inherit href=#hl-4-1>1</a>
+</span><span class=lnt id=hl-4-2><a style=outline:none;text-decoration:none;color:inherit href=#hl-4-2>2</a>
+</span><span class=lnt id=hl-4-3><a style=outline:none;text-decoration:none;color:inherit href=#hl-4-3>3</a>
+</span><span class=lnt id=hl-4-4><a style=outline:none;text-decoration:none;color:inherit href=#hl-4-4>4</a>
 </span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=o>&gt;&gt;&gt;</span> <span class=kn>import</span> <span class=nn>builtwith</span>
 </span></span><span class=line><span class=cl><span class=o>&gt;&gt;&gt;</span> <span class=n>builtwith</span><span class=o>.</span><span class=n>parse</span><span class=p>(</span><span class=s1>&#39;http://example.webscraping.com&#39;</span><span class=p>)</span>
 </span></span><span class=line><span class=cl>
 </span></span><span class=line><span class=cl><span class=p>{</span><span class=sa>u</span><span class=s1>&#39;javascript-frameworks&#39;</span><span class=p>:</span> <span class=p>[</span><span class=sa>u</span><span class=s1>&#39;jQuery&#39;</span><span class=p>,</span> <span class=sa>u</span><span class=s1>&#39;Modernizr&#39;</span><span class=p>,</span> <span class=sa>u</span><span class=s1>&#39;jQuery UI&#39;</span><span class=p>],</span> <span class=sa>u</span><span class=s1>&#39;web-frameworks&#39;</span><span class=p>:</span> <span class=p>[</span><span class=sa>u</span><span class=s1>&#39;Web2py&#39;</span><span class=p>,</span> <span class=sa>u</span><span class=s1>&#39;Twitter Bootstrap&#39;</span><span class=p>],</span> <span class=sa>u</span><span class=s1>&#39;programming-languages&#39;</span><span class=p>:</span> <span class=p>[</span><span class=sa>u</span><span class=s1>&#39;Python&#39;</span><span class=p>],</span> <span class=sa>u</span><span class=s1>&#39;web-servers&#39;</span><span class=p>:</span> <span class=p>[</span><span class=sa>u</span><span class=s1>&#39;Nginx&#39;</span><span class=p>]}</span>
-</span></span></code></pre></td></tr></table></div></div><p>通过返回的信息, 该网站使用 python 的 web2py 框架, 还使用了一些 JavaScript 库, 因此内容可能嵌入在 HTML 中.</p><a href=#寻找网站所有者><h4 id=寻找网站所有者><span class=hanchor arialabel=Anchor># </span>寻找网站所有者</h4></a><p>根据所有者来调整爬虫策略.</p><a href=#whois-查询><h5 id=whois-查询><span class=hanchor arialabel=Anchor># </span>WHOIS 查询</h5></a><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></span></code></pre></td></tr></table></div></div><p>通过返回的信息, 该网站使用 python 的 web2py 框架, 还使用了一些 JavaScript 库, 因此内容可能嵌入在 HTML 中.</p><a href=#寻找网站所有者><h4 id=寻找网站所有者><span class=hanchor arialabel=Anchor># </span>寻找网站所有者</h4></a><p>根据所有者来调整爬虫策略.</p><a href=#whois-查询><h5 id=whois-查询><span class=hanchor arialabel=Anchor># </span>WHOIS 查询</h5></a><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt id=hl-5-1><a style=outline:none;text-decoration:none;color:inherit href=#hl-5-1>1</a>
 </span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-sh data-lang=sh><span class=line><span class=cl>pip install python-whois
-</span></span></code></pre></td></tr></table></div></div><p>用法:</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
-</span><span class=lnt> 2
-</span><span class=lnt> 3
-</span><span class=lnt> 4
-</span><span class=lnt> 5
-</span><span class=lnt> 6
-</span><span class=lnt> 7
-</span><span class=lnt> 8
-</span><span class=lnt> 9
-</span><span class=lnt>10
-</span><span class=lnt>11
-</span><span class=lnt>12
-</span><span class=lnt>13
-</span><span class=lnt>14
-</span><span class=lnt>15
-</span><span class=lnt>16
-</span><span class=lnt>17
-</span><span class=lnt>18
-</span><span class=lnt>19
-</span><span class=lnt>20
-</span><span class=lnt>21
-</span><span class=lnt>22
-</span><span class=lnt>23
-</span><span class=lnt>24
-</span><span class=lnt>25
-</span><span class=lnt>26
-</span><span class=lnt>27
-</span><span class=lnt>28
-</span><span class=lnt>29
-</span><span class=lnt>30
-</span><span class=lnt>31
-</span><span class=lnt>32
-</span><span class=lnt>33
-</span><span class=lnt>34
-</span><span class=lnt>35
-</span><span class=lnt>36
-</span><span class=lnt>37
-</span><span class=lnt>38
-</span><span class=lnt>39
-</span><span class=lnt>40
+</span></span></code></pre></td></tr></table></div></div><p>用法:</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt id=hl-6-1><a style=outline:none;text-decoration:none;color:inherit href=#hl-6-1> 1</a>
+</span><span class=lnt id=hl-6-2><a style=outline:none;text-decoration:none;color:inherit href=#hl-6-2> 2</a>
+</span><span class=lnt id=hl-6-3><a style=outline:none;text-decoration:none;color:inherit href=#hl-6-3> 3</a>
+</span><span class=lnt id=hl-6-4><a style=outline:none;text-decoration:none;color:inherit href=#hl-6-4> 4</a>
+</span><span class=lnt id=hl-6-5><a style=outline:none;text-decoration:none;color:inherit href=#hl-6-5> 5</a>
+</span><span class=lnt id=hl-6-6><a style=outline:none;text-decoration:none;color:inherit href=#hl-6-6> 6</a>
+</span><span class=lnt id=hl-6-7><a style=outline:none;text-decoration:none;color:inherit href=#hl-6-7> 7</a>
+</span><span class=lnt id=hl-6-8><a style=outline:none;text-decoration:none;color:inherit href=#hl-6-8> 8</a>
+</span><span class=lnt id=hl-6-9><a style=outline:none;text-decoration:none;color:inherit href=#hl-6-9> 9</a>
+</span><span class=lnt id=hl-6-10><a style=outline:none;text-decoration:none;color:inherit href=#hl-6-10>10</a>
+</span><span class=lnt id=hl-6-11><a style=outline:none;text-decoration:none;color:inherit href=#hl-6-11>11</a>
+</span><span class=lnt id=hl-6-12><a style=outline:none;text-decoration:none;color:inherit href=#hl-6-12>12</a>
+</span><span class=lnt id=hl-6-13><a style=outline:none;text-decoration:none;color:inherit href=#hl-6-13>13</a>
+</span><span class=lnt id=hl-6-14><a style=outline:none;text-decoration:none;color:inherit href=#hl-6-14>14</a>
+</span><span class=lnt id=hl-6-15><a style=outline:none;text-decoration:none;color:inherit href=#hl-6-15>15</a>
+</span><span class=lnt id=hl-6-16><a style=outline:none;text-decoration:none;color:inherit href=#hl-6-16>16</a>
+</span><span class=lnt id=hl-6-17><a style=outline:none;text-decoration:none;color:inherit href=#hl-6-17>17</a>
+</span><span class=lnt id=hl-6-18><a style=outline:none;text-decoration:none;color:inherit href=#hl-6-18>18</a>
+</span><span class=lnt id=hl-6-19><a style=outline:none;text-decoration:none;color:inherit href=#hl-6-19>19</a>
+</span><span class=lnt id=hl-6-20><a style=outline:none;text-decoration:none;color:inherit href=#hl-6-20>20</a>
+</span><span class=lnt id=hl-6-21><a style=outline:none;text-decoration:none;color:inherit href=#hl-6-21>21</a>
+</span><span class=lnt id=hl-6-22><a style=outline:none;text-decoration:none;color:inherit href=#hl-6-22>22</a>
+</span><span class=lnt id=hl-6-23><a style=outline:none;text-decoration:none;color:inherit href=#hl-6-23>23</a>
+</span><span class=lnt id=hl-6-24><a style=outline:none;text-decoration:none;color:inherit href=#hl-6-24>24</a>
+</span><span class=lnt id=hl-6-25><a style=outline:none;text-decoration:none;color:inherit href=#hl-6-25>25</a>
+</span><span class=lnt id=hl-6-26><a style=outline:none;text-decoration:none;color:inherit href=#hl-6-26>26</a>
+</span><span class=lnt id=hl-6-27><a style=outline:none;text-decoration:none;color:inherit href=#hl-6-27>27</a>
+</span><span class=lnt id=hl-6-28><a style=outline:none;text-decoration:none;color:inherit href=#hl-6-28>28</a>
+</span><span class=lnt id=hl-6-29><a style=outline:none;text-decoration:none;color:inherit href=#hl-6-29>29</a>
+</span><span class=lnt id=hl-6-30><a style=outline:none;text-decoration:none;color:inherit href=#hl-6-30>30</a>
+</span><span class=lnt id=hl-6-31><a style=outline:none;text-decoration:none;color:inherit href=#hl-6-31>31</a>
+</span><span class=lnt id=hl-6-32><a style=outline:none;text-decoration:none;color:inherit href=#hl-6-32>32</a>
+</span><span class=lnt id=hl-6-33><a style=outline:none;text-decoration:none;color:inherit href=#hl-6-33>33</a>
+</span><span class=lnt id=hl-6-34><a style=outline:none;text-decoration:none;color:inherit href=#hl-6-34>34</a>
+</span><span class=lnt id=hl-6-35><a style=outline:none;text-decoration:none;color:inherit href=#hl-6-35>35</a>
+</span><span class=lnt id=hl-6-36><a style=outline:none;text-decoration:none;color:inherit href=#hl-6-36>36</a>
+</span><span class=lnt id=hl-6-37><a style=outline:none;text-decoration:none;color:inherit href=#hl-6-37>37</a>
+</span><span class=lnt id=hl-6-38><a style=outline:none;text-decoration:none;color:inherit href=#hl-6-38>38</a>
+</span><span class=lnt id=hl-6-39><a style=outline:none;text-decoration:none;color:inherit href=#hl-6-39>39</a>
+</span><span class=lnt id=hl-6-40><a style=outline:none;text-decoration:none;color:inherit href=#hl-6-40>40</a>
 </span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=o>&gt;&gt;&gt;</span> <span class=kn>import</span> <span class=nn>whois</span>
 </span></span><span class=line><span class=cl><span class=o>&gt;&gt;&gt;</span> <span class=nb>print</span> <span class=n>whois</span><span class=o>.</span><span class=n>whois</span><span class=p>(</span><span class=s1>&#39;webscraping.com&#39;</span><span class=p>)</span>
 </span></span><span class=line><span class=cl>
@@ -161,21 +160,21 @@ Sep 17, 2022
 </span></span><span class=line><span class=cl>  <span class=s2>&#34;creation_date&#34;</span><span class=p>:</span> <span class=s2>&#34;2004-06-26 18:01:19&#34;</span><span class=p>,</span> 
 </span></span><span class=line><span class=cl>  <span class=s2>&#34;emails&#34;</span><span class=p>:</span> <span class=s2>&#34;abuse@godaddy.com&#34;</span>
 </span></span><span class=line><span class=cl><span class=p>}</span>
-</span></span></code></pre></td></tr></table></div></div><a href=#编写第一个爬虫><h3 id=编写第一个爬虫><span class=hanchor arialabel=Anchor># </span>编写第一个爬虫</h3></a><p>爬取 (srawling) 一般方式:</p><ul><li>爬取网站地图</li><li>遍历每个网页的数据库 ID</li><li>跟踪网页链接</li></ul><a href=#下载网页><h4 id=下载网页><span class=hanchor arialabel=Anchor># </span>下载网页</h4></a><p>使用 urllib2 模块下载 URL:</p><p>download.py:</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
-</span><span class=lnt> 2
-</span><span class=lnt> 3
-</span><span class=lnt> 4
-</span><span class=lnt> 5
-</span><span class=lnt> 6
-</span><span class=lnt> 7
-</span><span class=lnt> 8
-</span><span class=lnt> 9
-</span><span class=lnt>10
-</span><span class=lnt>11
-</span><span class=lnt>12
-</span><span class=lnt>13
-</span><span class=lnt>14
-</span><span class=lnt>15
+</span></span></code></pre></td></tr></table></div></div><a href=#编写第一个爬虫><h3 id=编写第一个爬虫><span class=hanchor arialabel=Anchor># </span>编写第一个爬虫</h3></a><p>爬取 (srawling) 一般方式:</p><ul><li>爬取网站地图</li><li>遍历每个网页的数据库 ID</li><li>跟踪网页链接</li></ul><a href=#下载网页><h4 id=下载网页><span class=hanchor arialabel=Anchor># </span>下载网页</h4></a><p>使用 urllib2 模块下载 URL:</p><p>download.py:</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt id=hl-7-1><a style=outline:none;text-decoration:none;color:inherit href=#hl-7-1> 1</a>
+</span><span class=lnt id=hl-7-2><a style=outline:none;text-decoration:none;color:inherit href=#hl-7-2> 2</a>
+</span><span class=lnt id=hl-7-3><a style=outline:none;text-decoration:none;color:inherit href=#hl-7-3> 3</a>
+</span><span class=lnt id=hl-7-4><a style=outline:none;text-decoration:none;color:inherit href=#hl-7-4> 4</a>
+</span><span class=lnt id=hl-7-5><a style=outline:none;text-decoration:none;color:inherit href=#hl-7-5> 5</a>
+</span><span class=lnt id=hl-7-6><a style=outline:none;text-decoration:none;color:inherit href=#hl-7-6> 6</a>
+</span><span class=lnt id=hl-7-7><a style=outline:none;text-decoration:none;color:inherit href=#hl-7-7> 7</a>
+</span><span class=lnt id=hl-7-8><a style=outline:none;text-decoration:none;color:inherit href=#hl-7-8> 8</a>
+</span><span class=lnt id=hl-7-9><a style=outline:none;text-decoration:none;color:inherit href=#hl-7-9> 9</a>
+</span><span class=lnt id=hl-7-10><a style=outline:none;text-decoration:none;color:inherit href=#hl-7-10>10</a>
+</span><span class=lnt id=hl-7-11><a style=outline:none;text-decoration:none;color:inherit href=#hl-7-11>11</a>
+</span><span class=lnt id=hl-7-12><a style=outline:none;text-decoration:none;color:inherit href=#hl-7-12>12</a>
+</span><span class=lnt id=hl-7-13><a style=outline:none;text-decoration:none;color:inherit href=#hl-7-13>13</a>
+</span><span class=lnt id=hl-7-14><a style=outline:none;text-decoration:none;color:inherit href=#hl-7-14>14</a>
+</span><span class=lnt id=hl-7-15><a style=outline:none;text-decoration:none;color:inherit href=#hl-7-15>15</a>
 </span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=c1>## coding=utf-8</span>
 </span></span><span class=line><span class=cl><span class=kn>import</span> <span class=nn>urllib2</span>
 </span></span><span class=line><span class=cl>
@@ -191,18 +190,18 @@ Sep 17, 2022
 </span></span><span class=line><span class=cl>        <span class=k>if</span> <span class=nb>hasattr</span><span class=p>(</span><span class=n>e</span><span class=p>,</span> <span class=s1>&#39;code&#39;</span><span class=p>)</span> <span class=ow>and</span> <span class=mi>500</span> <span class=o>&lt;=</span> <span class=n>e</span><span class=o>.</span><span class=n>code</span> <span class=o>&lt;</span> <span class=mi>600</span><span class=p>:</span>
 </span></span><span class=line><span class=cl>            <span class=k>return</span> <span class=n>download</span><span class=p>(</span><span class=n>url</span><span class=p>,</span> <span class=n>num_retries</span> <span class=o>-</span> <span class=mi>1</span><span class=p>)</span>
 </span></span><span class=line><span class=cl>    <span class=k>return</span> <span class=n>html</span>
-</span></span></code></pre></td></tr></table></div></div><p>test.py:</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
-</span><span class=lnt>2
-</span><span class=lnt>3
-</span><span class=lnt>4
-</span><span class=lnt>5
-</span><span class=lnt>6
+</span></span></code></pre></td></tr></table></div></div><p>test.py:</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt id=hl-8-1><a style=outline:none;text-decoration:none;color:inherit href=#hl-8-1>1</a>
+</span><span class=lnt id=hl-8-2><a style=outline:none;text-decoration:none;color:inherit href=#hl-8-2>2</a>
+</span><span class=lnt id=hl-8-3><a style=outline:none;text-decoration:none;color:inherit href=#hl-8-3>3</a>
+</span><span class=lnt id=hl-8-4><a style=outline:none;text-decoration:none;color:inherit href=#hl-8-4>4</a>
+</span><span class=lnt id=hl-8-5><a style=outline:none;text-decoration:none;color:inherit href=#hl-8-5>5</a>
+</span><span class=lnt id=hl-8-6><a style=outline:none;text-decoration:none;color:inherit href=#hl-8-6>6</a>
 </span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=c1>## coding=utf-8</span>
 </span></span><span class=line><span class=cl><span class=kn>import</span> <span class=nn>download</span>
 </span></span><span class=line><span class=cl>
 </span></span><span class=line><span class=cl><span class=n>url</span> <span class=o>=</span> <span class=n>raw_input</span><span class=p>(</span><span class=s2>&#34;please type the url:&#34;</span><span class=p>)</span>  <span class=c1>## 输入url</span>
 </span></span><span class=line><span class=cl><span class=n>html</span> <span class=o>=</span> <span class=n>download</span><span class=o>.</span><span class=n>download</span><span class=p>(</span><span class=n>url</span><span class=p>)</span>
 </span></span><span class=line><span class=cl><span class=nb>print</span> <span class=n>html</span>
-</span></span></code></pre></td></tr></table></div></div><a href=#实际项目><h2 id=实际项目><span class=hanchor arialabel=Anchor># </span>实际项目</h2></a><a href=#插件><h3 id=插件><span class=hanchor arialabel=Anchor># </span>插件</h3></a><ul><li>requests<ul><li>爬取网页</li></ul></li><li>bs4<ul><li>解析爬取的内容</li></ul></li><li>openpyxl<ul><li>导出 excel</li></ul></li></ul><a href=#user-agent><h3 id=user-agent><span class=hanchor arialabel=Anchor># </span>user-agent</h3></a><p>浏览器中 F12, 网络一栏找到加载的一个 html文件. 里面有 user-agent 字段.</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></span></code></pre></td></tr></table></div></div><a href=#实际项目><h2 id=实际项目><span class=hanchor arialabel=Anchor># </span>实际项目</h2></a><a href=#插件><h3 id=插件><span class=hanchor arialabel=Anchor># </span>插件</h3></a><ul><li>requests<ul><li>爬取网页</li></ul></li><li>bs4<ul><li>解析爬取的内容</li></ul></li><li>openpyxl<ul><li>导出 excel</li></ul></li></ul><a href=#user-agent><h3 id=user-agent><span class=hanchor arialabel=Anchor># </span>user-agent</h3></a><p>浏览器中 F12, 网络一栏找到加载的一个 html文件. 里面有 user-agent 字段.</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt id=hl-9-1><a style=outline:none;text-decoration:none;color:inherit href=#hl-9-1>1</a>
 </span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=n>headers</span> <span class=o>=</span> <span class=p>{</span><span class=s1>&#39;user-agent&#39;</span><span class=p>:</span> <span class=s1>&#39;Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:62.0) Gecko/20100101 Firefox/62.0&#39;</span><span class=p>}</span>
 </span></span></code></pre></td></tr></table></div></div></article><hr><div class=page-end id=footer><div class=backlinks-container><h3>Backlinks</h3><ul class=backlinks><li>No backlinks found</li></ul></div><div><script src=https://cdn.jsdelivr.net/npm/d3@6.7.0/dist/d3.min.js integrity="sha256-+7jaYCp29O1JusNWHaYtgUn6EhuP0VaFuswhNV06MyI=" crossorigin=anonymous></script><h3>Interactive Graph</h3><div id=graph-container></div><style>:root{--g-node:var(--secondary);--g-node-active:var(--primary);--g-node-inactive:var(--visited);--g-link:var(--outlinegray);--g-link-active:#5a7282}</style><script src=https://harbor.mffseal.top/js/graph.abd4bc2af3869a96524d7d23b76152c7.js></script></div></div><div id=contact_buttons><footer><p>Made by mffseal using <a href=https://github.com/jackyzha0/quartz>Quartz</a>, © 2022</p><ul><li><a href=https://harbor.mffseal.top/>Home</a></li><li><a href=https://github.com/mffseal>Github</a></li></ul></footer></div></div></body></html>

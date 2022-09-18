@@ -1,6 +1,4 @@
-<!doctype html><html lang=en><head><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8920808282451934" crossorigin=anonymous></script><meta charset=utf-8><meta name=description content="OJ常用代码 进制转换 任意进制转 10 进制 对于一个 p 进制的 n 位数 y 来说, 其每一位$a_n$的关系是 $$ y = a_1 \times p^{n-1} + n_2 \times p^{n-2} + &mldr; + a_{n-1} \times p^1 + a_n \times p^0 $$
-转换代码实现:
-1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16  #include <iostream>using namespace std; int main(void) { int y = 0, a = 0, p = 1, result = 0; // p 初始为1, 代表p^0 	cin>>y>>a; while (y!"><title>OJ常用代码</title><meta name=viewport content="width=device-width,initial-scale=1"><link rel="shortcut icon" type=image/png href=https://harbor.mffseal.top//icon.png><link href=https://harbor.mffseal.top/styles.7153093e4d1bbb584a28469cadfa3f88.min.css rel=stylesheet><link href=https://harbor.mffseal.top/styles/_light_syntax.86a48a52faebeaaf42158b72922b1c90.min.css rel=stylesheet id=theme-link><script src=https://harbor.mffseal.top/js/darkmode.9841b88d44c115f7419d485ee72d23a2.min.js></script>
+<!doctype html><html lang=en><head><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8920808282451934" crossorigin=anonymous></script><meta charset=utf-8><meta name=description content="OJ常用代码 进制转换 任意进制转 10 进制 对于一个 p 进制的 n 位数 y 来说, 其每一位$a_n$的关系是 $$ y = a_1 \times p^{n-1} + n_2 \times p^{n-2} + &mldr; + a_{n-1} \times p^1 + a_n \times p^0 $$"><title>OJ常用代码</title><meta name=viewport content="width=device-width,initial-scale=1"><link rel="shortcut icon" type=image/png href=https://harbor.mffseal.top//icon.png><link href=https://harbor.mffseal.top/styles.7153093e4d1bbb584a28469cadfa3f88.min.css rel=stylesheet><link href=https://harbor.mffseal.top/styles/_light_syntax.86a48a52faebeaaf42158b72922b1c90.min.css rel=stylesheet id=theme-link><script src=https://harbor.mffseal.top/js/darkmode.9841b88d44c115f7419d485ee72d23a2.min.js></script>
 <script src=https://harbor.mffseal.top/js/util.9825137f5e7825e8553c68ce39ac9e44.min.js></script>
 <link rel=stylesheet href=https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.css integrity=sha384-R4558gYOUz8mP9YWpZJjofhk+zx0AS11p36HnD2ZKj/6JR5z27gSSULCNHIRReVs crossorigin=anonymous><script defer src=https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.js integrity=sha384-z1fJDqw8ZApjGO3/unPWUPsIymfsJmyrDVWC8Tv/a1HeOtGmkwNd/7xUS0Xcnvsx crossorigin=anonymous></script>
 <script defer src=https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/contrib/auto-render.min.js integrity=sha384-+XBljXPPiv+OzfbB3cVmLHf4hdUFHlWNZN5spNQ7rmHTXpd7WvJum6fIACpNNfIR crossorigin=anonymous></script>
@@ -11,7 +9,7 @@
 <script src=https://harbor.mffseal.top/js/code-title.b35124ad8db0ba37162b886afb711cbc.min.js></script>
 <script src=https://harbor.mffseal.top/js/clipboard.c20857734e53a3fb733b7443879efa61.min.js></script>
 <script src=https://harbor.mffseal.top/js/callouts.7723cac461d613d118ee8bb8216b9838.min.js></script>
-<script>const BASE_URL="https://harbor.mffseal.top/",fetchData=Promise.all([fetch("https://harbor.mffseal.top/indices/linkIndex.5da375bc9ca1d813eb68255e2c0afb35.min.json").then(e=>e.json()).then(e=>({index:e.index,links:e.links})),fetch("https://harbor.mffseal.top/indices/contentIndex.e562ec6ad43d185479787d85119148bd.min.json").then(e=>e.json())]).then(([{index:e,links:t},n])=>({index:e,links:t,content:n})),render=()=>{const e=new URL(BASE_URL),t=e.pathname,n=window.location.pathname,s=t==n;addCopyButtons(),addTitleToCodeBlocks(),addCollapsibleCallouts(),initPopover("https://harbor.mffseal.top",!0,!0);const o=document.getElementById("footer");if(o){const e=document.getElementById("graph-container");if(!e)return requestAnimationFrame(render);e.textContent="";const t=s&&!1;drawGraph("https://harbor.mffseal.top",t,[{"/moc":"#4388cc"}],t?{centerForce:1,depth:-1,enableDrag:!0,enableLegend:!1,enableZoom:!0,fontSize:.5,linkDistance:1,opacityScale:3,repelForce:1,scale:1.4}:{centerForce:1,depth:1,enableDrag:!0,enableLegend:!1,enableZoom:!0,fontSize:.6,linkDistance:1,opacityScale:3,repelForce:2,scale:1.2})}},init=(e=document)=>{addCopyButtons(),addTitleToCodeBlocks(),renderMathInElement(e.body,{delimiters:[{left:"$$",right:"$$",display:!0},{left:"$",right:"$",display:!1}],macros:{'’':"'"},throwOnError:!1})}</script><script type=module>
+<script>const BASE_URL="https://harbor.mffseal.top/",fetchData=Promise.all([fetch("https://harbor.mffseal.top/indices/linkIndex.5da375bc9ca1d813eb68255e2c0afb35.min.json").then(e=>e.json()).then(e=>({index:e.index,links:e.links})),fetch("https://harbor.mffseal.top/indices/contentIndex.363af2e61a16ab88407bc594d017144e.min.json").then(e=>e.json())]).then(([{index:e,links:t},n])=>({index:e,links:t,content:n})),render=()=>{const e=new URL(BASE_URL),t=e.pathname,n=window.location.pathname,s=t==n;addCopyButtons(),addTitleToCodeBlocks(),addCollapsibleCallouts(),initPopover("https://harbor.mffseal.top",!0,!0);const o=document.getElementById("footer");if(o){const e=document.getElementById("graph-container");if(!e)return requestAnimationFrame(render);e.textContent="";const t=s&&!0;drawGraph("https://harbor.mffseal.top",t,[{"/moc":"#4388cc"}],t?{centerForce:1,depth:-1,enableDrag:!0,enableLegend:!1,enableZoom:!0,fontSize:.5,linkDistance:1,opacityScale:3,repelForce:1,scale:1.4}:{centerForce:1,depth:1,enableDrag:!0,enableLegend:!1,enableZoom:!0,fontSize:.6,linkDistance:1,opacityScale:3,repelForce:2,scale:1.2})}},init=(e=document)=>{addCopyButtons(),addTitleToCodeBlocks(),renderMathInElement(e.body,{delimiters:[{left:"$$",right:"$$",display:!0},{left:"$",right:"$",display:!1}],macros:{'’':"'"},throwOnError:!1})}</script><script type=module>
     import { attachSPARouting } from "https:\/\/harbor.mffseal.top\/js\/router.9d4974281069e9ebb189f642ae1e3ca2.min.js"
     attachSPARouting(init, render)
   </script></head><script async src="https://www.googletagmanager.com/gtag/js?id=G-NV58SYWRZD"></script>
@@ -22,22 +20,22 @@ Sep 18, 2022
 <a href=https://github.com/mffseal/2_0_2-%e8%ae%a1%e7%ae%97%e6%9c%ba%e7%a7%91%e5%ad%a6/2_0_2_0_2_1-%e6%95%b0%e6%8d%ae%e7%bb%93%e6%9e%84%e4%b8%8e%e7%ae%97%e6%b3%95/OJ%e5%b8%b8%e7%94%a8%e4%bb%a3%e7%a0%81.md rel=noopener>Edit Source</a></p><ul class=tags><li><a href=https://harbor.mffseal.top/tags/article/>Article</a></li></ul><aside class=mainTOC><details><summary>Table of Contents</summary><nav id=TableOfContents><ol><li><a href=#进制转换>进制转换</a><ol><li><a href=#任意进制转-10-进制>任意进制转 10 进制</a></li><li><a href=#10-进制转任意进制>10 进制转任意进制</a></li><li><a href=#任意进制间转换>任意进制间转换</a></li></ol></li><li><a href=#最小公因数>最小公因数</a></li><li><a href=#互质>互质</a></li><li><a href=#最小公倍数>最小公倍数</a></li><li><a href=#排序>排序</a><ol><li><a href=#冒泡排序>冒泡排序</a></li><li><a href=#简单选择排序>简单选择排序</a></li><li><a href=#直接插入排序>直接插入排序</a></li><li><a href=#2路归并排序>2路归并排序</a></li><li><a href=#快速排序>快速排序</a></li></ol></li><li><a href=#sort>sort()</a><ol><li><a href=#cmp-函数构造>cmp() 函数构造</a></li></ol></li><li><a href=#贪心算法>贪心算法</a></li><li><a href=#two-pointers>two pointers</a></li></ol></nav></details></aside><a href=#oj常用代码><h1 id=oj常用代码><span class=hanchor arialabel=Anchor># </span>OJ常用代码</h1></a><a href=#进制转换><h2 id=进制转换><span class=hanchor arialabel=Anchor># </span>进制转换</h2></a><a href=#任意进制转-10-进制><h3 id=任意进制转-10-进制><span class=hanchor arialabel=Anchor># </span>任意进制转 10 进制</h3></a><p>对于一个 p 进制的 n 位数 y 来说, 其每一位$a_n$的关系是
 $$
 y = a_1 \times p^{n-1} + n_2 \times p^{n-2} + &mldr; + a_{n-1} \times p^1 + a_n \times p^0
-$$</p><p>转换代码实现:</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
-</span><span class=lnt> 2
-</span><span class=lnt> 3
-</span><span class=lnt> 4
-</span><span class=lnt> 5
-</span><span class=lnt> 6
-</span><span class=lnt> 7
-</span><span class=lnt> 8
-</span><span class=lnt> 9
-</span><span class=lnt>10
-</span><span class=lnt>11
-</span><span class=lnt>12
-</span><span class=lnt>13
-</span><span class=lnt>14
-</span><span class=lnt>15
-</span><span class=lnt>16
+$$</p><p>转换代码实现:</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt id=hl-0-1><a style=outline:none;text-decoration:none;color:inherit href=#hl-0-1> 1</a>
+</span><span class=lnt id=hl-0-2><a style=outline:none;text-decoration:none;color:inherit href=#hl-0-2> 2</a>
+</span><span class=lnt id=hl-0-3><a style=outline:none;text-decoration:none;color:inherit href=#hl-0-3> 3</a>
+</span><span class=lnt id=hl-0-4><a style=outline:none;text-decoration:none;color:inherit href=#hl-0-4> 4</a>
+</span><span class=lnt id=hl-0-5><a style=outline:none;text-decoration:none;color:inherit href=#hl-0-5> 5</a>
+</span><span class=lnt id=hl-0-6><a style=outline:none;text-decoration:none;color:inherit href=#hl-0-6> 6</a>
+</span><span class=lnt id=hl-0-7><a style=outline:none;text-decoration:none;color:inherit href=#hl-0-7> 7</a>
+</span><span class=lnt id=hl-0-8><a style=outline:none;text-decoration:none;color:inherit href=#hl-0-8> 8</a>
+</span><span class=lnt id=hl-0-9><a style=outline:none;text-decoration:none;color:inherit href=#hl-0-9> 9</a>
+</span><span class=lnt id=hl-0-10><a style=outline:none;text-decoration:none;color:inherit href=#hl-0-10>10</a>
+</span><span class=lnt id=hl-0-11><a style=outline:none;text-decoration:none;color:inherit href=#hl-0-11>11</a>
+</span><span class=lnt id=hl-0-12><a style=outline:none;text-decoration:none;color:inherit href=#hl-0-12>12</a>
+</span><span class=lnt id=hl-0-13><a style=outline:none;text-decoration:none;color:inherit href=#hl-0-13>13</a>
+</span><span class=lnt id=hl-0-14><a style=outline:none;text-decoration:none;color:inherit href=#hl-0-14>14</a>
+</span><span class=lnt id=hl-0-15><a style=outline:none;text-decoration:none;color:inherit href=#hl-0-15>15</a>
+</span><span class=lnt id=hl-0-16><a style=outline:none;text-decoration:none;color:inherit href=#hl-0-16>16</a>
 </span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-c++ data-lang=c++><span class=line><span class=cl><span class=cp>#include</span> <span class=cpf>&lt;iostream&gt;</span><span class=cp>
 </span></span></span><span class=line><span class=cl><span class=cp></span><span class=k>using</span> <span class=k>namespace</span> <span class=n>std</span><span class=p>;</span>
 </span></span><span class=line><span class=cl>
@@ -54,25 +52,25 @@ $$</p><p>转换代码实现:</p><div class=highlight><div class=chroma><table cl
 </span></span><span class=line><span class=cl>    <span class=n>cout</span><span class=o>&lt;&lt;</span><span class=n>result</span><span class=p>;</span>
 </span></span><span class=line><span class=cl>	<span class=k>return</span> <span class=mi>0</span><span class=p>;</span>
 </span></span><span class=line><span class=cl><span class=p>}</span>
-</span></span></code></pre></td></tr></table></div></div><a href=#10-进制转任意进制><h3 id=10-进制转任意进制><span class=hanchor arialabel=Anchor># </span>10 进制转任意进制</h3></a><p>采用除基取余法:</p><ul><li>基代表目标进制 q</li></ul><p>步骤:</p><ol><li>每次将上一步的商除以目标进制 q</li><li>余数插入结果, 从左向右插入</li><li>直到商为 0 , 插入本次余数后停止</li></ol><p>代码实现(10进制数 y 转化为 q 进制数):</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
-</span><span class=lnt> 2
-</span><span class=lnt> 3
-</span><span class=lnt> 4
-</span><span class=lnt> 5
-</span><span class=lnt> 6
-</span><span class=lnt> 7
-</span><span class=lnt> 8
-</span><span class=lnt> 9
-</span><span class=lnt>10
-</span><span class=lnt>11
-</span><span class=lnt>12
-</span><span class=lnt>13
-</span><span class=lnt>14
-</span><span class=lnt>15
-</span><span class=lnt>16
-</span><span class=lnt>17
-</span><span class=lnt>18
-</span><span class=lnt>19
+</span></span></code></pre></td></tr></table></div></div><a href=#10-进制转任意进制><h3 id=10-进制转任意进制><span class=hanchor arialabel=Anchor># </span>10 进制转任意进制</h3></a><p>采用除基取余法:</p><ul><li>基代表目标进制 q</li></ul><p>步骤:</p><ol><li>每次将上一步的商除以目标进制 q</li><li>余数插入结果, 从左向右插入</li><li>直到商为 0 , 插入本次余数后停止</li></ol><p>代码实现(10进制数 y 转化为 q 进制数):</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt id=hl-1-1><a style=outline:none;text-decoration:none;color:inherit href=#hl-1-1> 1</a>
+</span><span class=lnt id=hl-1-2><a style=outline:none;text-decoration:none;color:inherit href=#hl-1-2> 2</a>
+</span><span class=lnt id=hl-1-3><a style=outline:none;text-decoration:none;color:inherit href=#hl-1-3> 3</a>
+</span><span class=lnt id=hl-1-4><a style=outline:none;text-decoration:none;color:inherit href=#hl-1-4> 4</a>
+</span><span class=lnt id=hl-1-5><a style=outline:none;text-decoration:none;color:inherit href=#hl-1-5> 5</a>
+</span><span class=lnt id=hl-1-6><a style=outline:none;text-decoration:none;color:inherit href=#hl-1-6> 6</a>
+</span><span class=lnt id=hl-1-7><a style=outline:none;text-decoration:none;color:inherit href=#hl-1-7> 7</a>
+</span><span class=lnt id=hl-1-8><a style=outline:none;text-decoration:none;color:inherit href=#hl-1-8> 8</a>
+</span><span class=lnt id=hl-1-9><a style=outline:none;text-decoration:none;color:inherit href=#hl-1-9> 9</a>
+</span><span class=lnt id=hl-1-10><a style=outline:none;text-decoration:none;color:inherit href=#hl-1-10>10</a>
+</span><span class=lnt id=hl-1-11><a style=outline:none;text-decoration:none;color:inherit href=#hl-1-11>11</a>
+</span><span class=lnt id=hl-1-12><a style=outline:none;text-decoration:none;color:inherit href=#hl-1-12>12</a>
+</span><span class=lnt id=hl-1-13><a style=outline:none;text-decoration:none;color:inherit href=#hl-1-13>13</a>
+</span><span class=lnt id=hl-1-14><a style=outline:none;text-decoration:none;color:inherit href=#hl-1-14>14</a>
+</span><span class=lnt id=hl-1-15><a style=outline:none;text-decoration:none;color:inherit href=#hl-1-15>15</a>
+</span><span class=lnt id=hl-1-16><a style=outline:none;text-decoration:none;color:inherit href=#hl-1-16>16</a>
+</span><span class=lnt id=hl-1-17><a style=outline:none;text-decoration:none;color:inherit href=#hl-1-17>17</a>
+</span><span class=lnt id=hl-1-18><a style=outline:none;text-decoration:none;color:inherit href=#hl-1-18>18</a>
+</span><span class=lnt id=hl-1-19><a style=outline:none;text-decoration:none;color:inherit href=#hl-1-19>19</a>
 </span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-c++ data-lang=c++><span class=line><span class=cl><span class=cp>#include</span> <span class=cpf>&lt;iostream&gt;</span><span class=cp>
 </span></span></span><span class=line><span class=cl><span class=cp></span><span class=k>using</span> <span class=k>namespace</span> <span class=n>std</span><span class=p>;</span>
 </span></span><span class=line><span class=cl>
@@ -92,13 +90,13 @@ $$</p><p>转换代码实现:</p><div class=highlight><div class=chroma><table cl
 </span></span><span class=line><span class=cl>    <span class=n>cout</span><span class=o>&lt;&lt;</span><span class=n>result</span><span class=p>;</span>
 </span></span><span class=line><span class=cl>	<span class=k>return</span> <span class=mi>0</span><span class=p>;</span>
 </span></span><span class=line><span class=cl><span class=p>}</span>
-</span></span></code></pre></td></tr></table></div></div><a href=#任意进制间转换><h3 id=任意进制间转换><span class=hanchor arialabel=Anchor># </span>任意进制间转换</h3></a><p>将上面两个步骤结合起来即可.</p><a href=#最小公因数><h2 id=最小公因数><span class=hanchor arialabel=Anchor># </span>最小公因数</h2></a><p>递归实现:</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
-</span><span class=lnt>2
-</span><span class=lnt>3
-</span><span class=lnt>4
-</span><span class=lnt>5
-</span><span class=lnt>6
-</span><span class=lnt>7
+</span></span></code></pre></td></tr></table></div></div><a href=#任意进制间转换><h3 id=任意进制间转换><span class=hanchor arialabel=Anchor># </span>任意进制间转换</h3></a><p>将上面两个步骤结合起来即可.</p><a href=#最小公因数><h2 id=最小公因数><span class=hanchor arialabel=Anchor># </span>最小公因数</h2></a><p>递归实现:</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt id=hl-2-1><a style=outline:none;text-decoration:none;color:inherit href=#hl-2-1>1</a>
+</span><span class=lnt id=hl-2-2><a style=outline:none;text-decoration:none;color:inherit href=#hl-2-2>2</a>
+</span><span class=lnt id=hl-2-3><a style=outline:none;text-decoration:none;color:inherit href=#hl-2-3>3</a>
+</span><span class=lnt id=hl-2-4><a style=outline:none;text-decoration:none;color:inherit href=#hl-2-4>4</a>
+</span><span class=lnt id=hl-2-5><a style=outline:none;text-decoration:none;color:inherit href=#hl-2-5>5</a>
+</span><span class=lnt id=hl-2-6><a style=outline:none;text-decoration:none;color:inherit href=#hl-2-6>6</a>
+</span><span class=lnt id=hl-2-7><a style=outline:none;text-decoration:none;color:inherit href=#hl-2-7>7</a>
 </span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-c++ data-lang=c++><span class=line><span class=cl><span class=cp>#include</span> <span class=cpf>&lt;iostream&gt;</span><span class=cp>
 </span></span></span><span class=line><span class=cl><span class=cp></span><span class=k>using</span> <span class=k>namespace</span> <span class=n>std</span><span class=p>;</span>
 </span></span><span class=line><span class=cl>
@@ -106,35 +104,35 @@ $$</p><p>转换代码实现:</p><div class=highlight><div class=chroma><table cl
 </span></span><span class=line><span class=cl><span class=p>{</span>
 </span></span><span class=line><span class=cl>    <span class=k>return</span> <span class=n>b</span><span class=o>==</span><span class=mi>0</span> <span class=o>?</span> <span class=nl>a</span> <span class=p>:</span> <span class=n>gcd</span><span class=p>(</span><span class=n>b</span><span class=p>,</span> <span class=n>a</span><span class=o>%</span><span class=n>b</span><span class=p>);</span>
 </span></span><span class=line><span class=cl><span class=p>}</span>
-</span></span></code></pre></td></tr></table></div></div><a href=#互质><h2 id=互质><span class=hanchor arialabel=Anchor># </span>互质</h2></a><p>判断两个数互质或者是分数的化简:</p><ul><li>就是判断两个数的最小公因数是不是1</li></ul><a href=#最小公倍数><h2 id=最小公倍数><span class=hanchor arialabel=Anchor># </span>最小公倍数</h2></a><p>a,b两数求最小公倍数:</p><ol><li>先求它们的最小公因数gcd</li><li>再算 $a * b / gcd$</li></ol><a href=#排序><h2 id=排序><span class=hanchor arialabel=Anchor># </span>排序</h2></a><a href=#冒泡排序><h3 id=冒泡排序><span class=hanchor arialabel=Anchor># </span>冒泡排序</h3></a><p><a href=/2_0_2-%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A7%91%E5%AD%A6/2_0_2_0_2_1-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/%E5%86%92%E6%B3%A1%E6%8E%92%E5%BA%8F rel=noopener class=internal-link data-src=/2_0_2-%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A7%91%E5%AD%A6/2_0_2_0_2_1-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/%E5%86%92%E6%B3%A1%E6%8E%92%E5%BA%8F>冒泡排序</a></p><ol><li>有n个元素则循环n-1次</li><li>好像传手帕一般, 每次将当前为固定数中最大的那个传到右边固定</li><li>最后一步则是根据情况交换第一和第二个元素</li></ol><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
-</span><span class=lnt> 2
-</span><span class=lnt> 3
-</span><span class=lnt> 4
-</span><span class=lnt> 5
-</span><span class=lnt> 6
-</span><span class=lnt> 7
-</span><span class=lnt> 8
-</span><span class=lnt> 9
-</span><span class=lnt>10
-</span><span class=lnt>11
-</span><span class=lnt>12
-</span><span class=lnt>13
-</span><span class=lnt>14
-</span><span class=lnt>15
-</span><span class=lnt>16
-</span><span class=lnt>17
-</span><span class=lnt>18
-</span><span class=lnt>19
-</span><span class=lnt>20
-</span><span class=lnt>21
-</span><span class=lnt>22
-</span><span class=lnt>23
-</span><span class=lnt>24
-</span><span class=lnt>25
-</span><span class=lnt>26
-</span><span class=lnt>27
-</span><span class=lnt>28
-</span><span class=lnt>29
+</span></span></code></pre></td></tr></table></div></div><a href=#互质><h2 id=互质><span class=hanchor arialabel=Anchor># </span>互质</h2></a><p>判断两个数互质或者是分数的化简:</p><ul><li>就是判断两个数的最小公因数是不是1</li></ul><a href=#最小公倍数><h2 id=最小公倍数><span class=hanchor arialabel=Anchor># </span>最小公倍数</h2></a><p>a,b两数求最小公倍数:</p><ol><li>先求它们的最小公因数gcd</li><li>再算 $a * b / gcd$</li></ol><a href=#排序><h2 id=排序><span class=hanchor arialabel=Anchor># </span>排序</h2></a><a href=#冒泡排序><h3 id=冒泡排序><span class=hanchor arialabel=Anchor># </span>冒泡排序</h3></a><p><a href=/2_0_2-%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A7%91%E5%AD%A6/2_0_2_0_2_1-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/%E5%86%92%E6%B3%A1%E6%8E%92%E5%BA%8F rel=noopener class=internal-link data-src=/2_0_2-%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A7%91%E5%AD%A6/2_0_2_0_2_1-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/%E5%86%92%E6%B3%A1%E6%8E%92%E5%BA%8F>冒泡排序</a></p><ol><li>有n个元素则循环n-1次</li><li>好像传手帕一般, 每次将当前为固定数中最大的那个传到右边固定</li><li>最后一步则是根据情况交换第一和第二个元素</li></ol><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt id=hl-3-1><a style=outline:none;text-decoration:none;color:inherit href=#hl-3-1> 1</a>
+</span><span class=lnt id=hl-3-2><a style=outline:none;text-decoration:none;color:inherit href=#hl-3-2> 2</a>
+</span><span class=lnt id=hl-3-3><a style=outline:none;text-decoration:none;color:inherit href=#hl-3-3> 3</a>
+</span><span class=lnt id=hl-3-4><a style=outline:none;text-decoration:none;color:inherit href=#hl-3-4> 4</a>
+</span><span class=lnt id=hl-3-5><a style=outline:none;text-decoration:none;color:inherit href=#hl-3-5> 5</a>
+</span><span class=lnt id=hl-3-6><a style=outline:none;text-decoration:none;color:inherit href=#hl-3-6> 6</a>
+</span><span class=lnt id=hl-3-7><a style=outline:none;text-decoration:none;color:inherit href=#hl-3-7> 7</a>
+</span><span class=lnt id=hl-3-8><a style=outline:none;text-decoration:none;color:inherit href=#hl-3-8> 8</a>
+</span><span class=lnt id=hl-3-9><a style=outline:none;text-decoration:none;color:inherit href=#hl-3-9> 9</a>
+</span><span class=lnt id=hl-3-10><a style=outline:none;text-decoration:none;color:inherit href=#hl-3-10>10</a>
+</span><span class=lnt id=hl-3-11><a style=outline:none;text-decoration:none;color:inherit href=#hl-3-11>11</a>
+</span><span class=lnt id=hl-3-12><a style=outline:none;text-decoration:none;color:inherit href=#hl-3-12>12</a>
+</span><span class=lnt id=hl-3-13><a style=outline:none;text-decoration:none;color:inherit href=#hl-3-13>13</a>
+</span><span class=lnt id=hl-3-14><a style=outline:none;text-decoration:none;color:inherit href=#hl-3-14>14</a>
+</span><span class=lnt id=hl-3-15><a style=outline:none;text-decoration:none;color:inherit href=#hl-3-15>15</a>
+</span><span class=lnt id=hl-3-16><a style=outline:none;text-decoration:none;color:inherit href=#hl-3-16>16</a>
+</span><span class=lnt id=hl-3-17><a style=outline:none;text-decoration:none;color:inherit href=#hl-3-17>17</a>
+</span><span class=lnt id=hl-3-18><a style=outline:none;text-decoration:none;color:inherit href=#hl-3-18>18</a>
+</span><span class=lnt id=hl-3-19><a style=outline:none;text-decoration:none;color:inherit href=#hl-3-19>19</a>
+</span><span class=lnt id=hl-3-20><a style=outline:none;text-decoration:none;color:inherit href=#hl-3-20>20</a>
+</span><span class=lnt id=hl-3-21><a style=outline:none;text-decoration:none;color:inherit href=#hl-3-21>21</a>
+</span><span class=lnt id=hl-3-22><a style=outline:none;text-decoration:none;color:inherit href=#hl-3-22>22</a>
+</span><span class=lnt id=hl-3-23><a style=outline:none;text-decoration:none;color:inherit href=#hl-3-23>23</a>
+</span><span class=lnt id=hl-3-24><a style=outline:none;text-decoration:none;color:inherit href=#hl-3-24>24</a>
+</span><span class=lnt id=hl-3-25><a style=outline:none;text-decoration:none;color:inherit href=#hl-3-25>25</a>
+</span><span class=lnt id=hl-3-26><a style=outline:none;text-decoration:none;color:inherit href=#hl-3-26>26</a>
+</span><span class=lnt id=hl-3-27><a style=outline:none;text-decoration:none;color:inherit href=#hl-3-27>27</a>
+</span><span class=lnt id=hl-3-28><a style=outline:none;text-decoration:none;color:inherit href=#hl-3-28>28</a>
+</span><span class=lnt id=hl-3-29><a style=outline:none;text-decoration:none;color:inherit href=#hl-3-29>29</a>
 </span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-c++ data-lang=c++><span class=line><span class=cl><span class=cp>#include</span> <span class=cpf>&lt;iostream&gt;</span><span class=cp>
 </span></span></span><span class=line><span class=cl><span class=cp></span><span class=k>using</span> <span class=k>namespace</span> <span class=n>std</span><span class=p>;</span>
 </span></span><span class=line><span class=cl>
@@ -164,32 +162,32 @@ $$</p><p>转换代码实现:</p><div class=highlight><div class=chroma><table cl
 </span></span><span class=line><span class=cl>    <span class=p>}</span>
 </span></span><span class=line><span class=cl>	<span class=k>return</span> <span class=mi>0</span><span class=p>;</span>
 </span></span><span class=line><span class=cl><span class=p>}</span>
-</span></span></code></pre></td></tr></table></div></div><a href=#简单选择排序><h3 id=简单选择排序><span class=hanchor arialabel=Anchor># </span>简单选择排序</h3></a><ol><li>外围循环为当前最小交换位标记</li><li>内层循环每次把当前最小的和标记位互换<ol><li>内循环结束一轮时标记位为当前子序列中最小的</li></ol></li><li>依次从小到大放到左边</li></ol><p>实现:</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
-</span><span class=lnt> 2
-</span><span class=lnt> 3
-</span><span class=lnt> 4
-</span><span class=lnt> 5
-</span><span class=lnt> 6
-</span><span class=lnt> 7
-</span><span class=lnt> 8
-</span><span class=lnt> 9
-</span><span class=lnt>10
-</span><span class=lnt>11
-</span><span class=lnt>12
-</span><span class=lnt>13
-</span><span class=lnt>14
-</span><span class=lnt>15
-</span><span class=lnt>16
-</span><span class=lnt>17
-</span><span class=lnt>18
-</span><span class=lnt>19
-</span><span class=lnt>20
-</span><span class=lnt>21
-</span><span class=lnt>22
-</span><span class=lnt>23
-</span><span class=lnt>24
-</span><span class=lnt>25
-</span><span class=lnt>26
+</span></span></code></pre></td></tr></table></div></div><a href=#简单选择排序><h3 id=简单选择排序><span class=hanchor arialabel=Anchor># </span>简单选择排序</h3></a><ol><li>外围循环为当前最小交换位标记</li><li>内层循环每次把当前最小的和标记位互换<ol><li>内循环结束一轮时标记位为当前子序列中最小的</li></ol></li><li>依次从小到大放到左边</li></ol><p>实现:</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt id=hl-4-1><a style=outline:none;text-decoration:none;color:inherit href=#hl-4-1> 1</a>
+</span><span class=lnt id=hl-4-2><a style=outline:none;text-decoration:none;color:inherit href=#hl-4-2> 2</a>
+</span><span class=lnt id=hl-4-3><a style=outline:none;text-decoration:none;color:inherit href=#hl-4-3> 3</a>
+</span><span class=lnt id=hl-4-4><a style=outline:none;text-decoration:none;color:inherit href=#hl-4-4> 4</a>
+</span><span class=lnt id=hl-4-5><a style=outline:none;text-decoration:none;color:inherit href=#hl-4-5> 5</a>
+</span><span class=lnt id=hl-4-6><a style=outline:none;text-decoration:none;color:inherit href=#hl-4-6> 6</a>
+</span><span class=lnt id=hl-4-7><a style=outline:none;text-decoration:none;color:inherit href=#hl-4-7> 7</a>
+</span><span class=lnt id=hl-4-8><a style=outline:none;text-decoration:none;color:inherit href=#hl-4-8> 8</a>
+</span><span class=lnt id=hl-4-9><a style=outline:none;text-decoration:none;color:inherit href=#hl-4-9> 9</a>
+</span><span class=lnt id=hl-4-10><a style=outline:none;text-decoration:none;color:inherit href=#hl-4-10>10</a>
+</span><span class=lnt id=hl-4-11><a style=outline:none;text-decoration:none;color:inherit href=#hl-4-11>11</a>
+</span><span class=lnt id=hl-4-12><a style=outline:none;text-decoration:none;color:inherit href=#hl-4-12>12</a>
+</span><span class=lnt id=hl-4-13><a style=outline:none;text-decoration:none;color:inherit href=#hl-4-13>13</a>
+</span><span class=lnt id=hl-4-14><a style=outline:none;text-decoration:none;color:inherit href=#hl-4-14>14</a>
+</span><span class=lnt id=hl-4-15><a style=outline:none;text-decoration:none;color:inherit href=#hl-4-15>15</a>
+</span><span class=lnt id=hl-4-16><a style=outline:none;text-decoration:none;color:inherit href=#hl-4-16>16</a>
+</span><span class=lnt id=hl-4-17><a style=outline:none;text-decoration:none;color:inherit href=#hl-4-17>17</a>
+</span><span class=lnt id=hl-4-18><a style=outline:none;text-decoration:none;color:inherit href=#hl-4-18>18</a>
+</span><span class=lnt id=hl-4-19><a style=outline:none;text-decoration:none;color:inherit href=#hl-4-19>19</a>
+</span><span class=lnt id=hl-4-20><a style=outline:none;text-decoration:none;color:inherit href=#hl-4-20>20</a>
+</span><span class=lnt id=hl-4-21><a style=outline:none;text-decoration:none;color:inherit href=#hl-4-21>21</a>
+</span><span class=lnt id=hl-4-22><a style=outline:none;text-decoration:none;color:inherit href=#hl-4-22>22</a>
+</span><span class=lnt id=hl-4-23><a style=outline:none;text-decoration:none;color:inherit href=#hl-4-23>23</a>
+</span><span class=lnt id=hl-4-24><a style=outline:none;text-decoration:none;color:inherit href=#hl-4-24>24</a>
+</span><span class=lnt id=hl-4-25><a style=outline:none;text-decoration:none;color:inherit href=#hl-4-25>25</a>
+</span><span class=lnt id=hl-4-26><a style=outline:none;text-decoration:none;color:inherit href=#hl-4-26>26</a>
 </span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-c++ data-lang=c++><span class=line><span class=cl><span class=cp>#include</span> <span class=cpf>&lt;iostream&gt;</span><span class=cp>
 </span></span></span><span class=line><span class=cl><span class=cp></span><span class=k>using</span> <span class=k>namespace</span> <span class=n>std</span><span class=p>;</span>
 </span></span><span class=line><span class=cl>
@@ -216,31 +214,31 @@ $$</p><p>转换代码实现:</p><div class=highlight><div class=chroma><table cl
 </span></span><span class=line><span class=cl>    <span class=p>}</span>
 </span></span><span class=line><span class=cl>	<span class=k>return</span> <span class=mi>0</span><span class=p>;</span>
 </span></span><span class=line><span class=cl><span class=p>}</span>
-</span></span></code></pre></td></tr></table></div></div><a href=#直接插入排序><h3 id=直接插入排序><span class=hanchor arialabel=Anchor># </span>直接插入排序</h3></a><ol><li>将第一个元素当作初始有序子序列, 从第二个元素开始遍历</li><li>暂存当前元素值</li><li>从当前遍历元素开始往回(左)遍历, 如果比当前元素小则往右挪<ol><li>如果挪动, 自然会覆盖掉当前元素的坑位</li></ol></li><li>当前元素插入挪出的坑位, 左侧子序列还保持有序</li></ol><p>实现:</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
-</span><span class=lnt> 2
-</span><span class=lnt> 3
-</span><span class=lnt> 4
-</span><span class=lnt> 5
-</span><span class=lnt> 6
-</span><span class=lnt> 7
-</span><span class=lnt> 8
-</span><span class=lnt> 9
-</span><span class=lnt>10
-</span><span class=lnt>11
-</span><span class=lnt>12
-</span><span class=lnt>13
-</span><span class=lnt>14
-</span><span class=lnt>15
-</span><span class=lnt>16
-</span><span class=lnt>17
-</span><span class=lnt>18
-</span><span class=lnt>19
-</span><span class=lnt>20
-</span><span class=lnt>21
-</span><span class=lnt>22
-</span><span class=lnt>23
-</span><span class=lnt>24
-</span><span class=lnt>25
+</span></span></code></pre></td></tr></table></div></div><a href=#直接插入排序><h3 id=直接插入排序><span class=hanchor arialabel=Anchor># </span>直接插入排序</h3></a><ol><li>将第一个元素当作初始有序子序列, 从第二个元素开始遍历</li><li>暂存当前元素值</li><li>从当前遍历元素开始往回(左)遍历, 如果比当前元素小则往右挪<ol><li>如果挪动, 自然会覆盖掉当前元素的坑位</li></ol></li><li>当前元素插入挪出的坑位, 左侧子序列还保持有序</li></ol><p>实现:</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt id=hl-5-1><a style=outline:none;text-decoration:none;color:inherit href=#hl-5-1> 1</a>
+</span><span class=lnt id=hl-5-2><a style=outline:none;text-decoration:none;color:inherit href=#hl-5-2> 2</a>
+</span><span class=lnt id=hl-5-3><a style=outline:none;text-decoration:none;color:inherit href=#hl-5-3> 3</a>
+</span><span class=lnt id=hl-5-4><a style=outline:none;text-decoration:none;color:inherit href=#hl-5-4> 4</a>
+</span><span class=lnt id=hl-5-5><a style=outline:none;text-decoration:none;color:inherit href=#hl-5-5> 5</a>
+</span><span class=lnt id=hl-5-6><a style=outline:none;text-decoration:none;color:inherit href=#hl-5-6> 6</a>
+</span><span class=lnt id=hl-5-7><a style=outline:none;text-decoration:none;color:inherit href=#hl-5-7> 7</a>
+</span><span class=lnt id=hl-5-8><a style=outline:none;text-decoration:none;color:inherit href=#hl-5-8> 8</a>
+</span><span class=lnt id=hl-5-9><a style=outline:none;text-decoration:none;color:inherit href=#hl-5-9> 9</a>
+</span><span class=lnt id=hl-5-10><a style=outline:none;text-decoration:none;color:inherit href=#hl-5-10>10</a>
+</span><span class=lnt id=hl-5-11><a style=outline:none;text-decoration:none;color:inherit href=#hl-5-11>11</a>
+</span><span class=lnt id=hl-5-12><a style=outline:none;text-decoration:none;color:inherit href=#hl-5-12>12</a>
+</span><span class=lnt id=hl-5-13><a style=outline:none;text-decoration:none;color:inherit href=#hl-5-13>13</a>
+</span><span class=lnt id=hl-5-14><a style=outline:none;text-decoration:none;color:inherit href=#hl-5-14>14</a>
+</span><span class=lnt id=hl-5-15><a style=outline:none;text-decoration:none;color:inherit href=#hl-5-15>15</a>
+</span><span class=lnt id=hl-5-16><a style=outline:none;text-decoration:none;color:inherit href=#hl-5-16>16</a>
+</span><span class=lnt id=hl-5-17><a style=outline:none;text-decoration:none;color:inherit href=#hl-5-17>17</a>
+</span><span class=lnt id=hl-5-18><a style=outline:none;text-decoration:none;color:inherit href=#hl-5-18>18</a>
+</span><span class=lnt id=hl-5-19><a style=outline:none;text-decoration:none;color:inherit href=#hl-5-19>19</a>
+</span><span class=lnt id=hl-5-20><a style=outline:none;text-decoration:none;color:inherit href=#hl-5-20>20</a>
+</span><span class=lnt id=hl-5-21><a style=outline:none;text-decoration:none;color:inherit href=#hl-5-21>21</a>
+</span><span class=lnt id=hl-5-22><a style=outline:none;text-decoration:none;color:inherit href=#hl-5-22>22</a>
+</span><span class=lnt id=hl-5-23><a style=outline:none;text-decoration:none;color:inherit href=#hl-5-23>23</a>
+</span><span class=lnt id=hl-5-24><a style=outline:none;text-decoration:none;color:inherit href=#hl-5-24>24</a>
+</span><span class=lnt id=hl-5-25><a style=outline:none;text-decoration:none;color:inherit href=#hl-5-25>25</a>
 </span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-c++ data-lang=c++><span class=line><span class=cl><span class=cp>#include</span> <span class=cpf>&lt;iostream&gt;</span><span class=cp>
 </span></span></span><span class=line><span class=cl><span class=cp></span><span class=k>using</span> <span class=k>namespace</span> <span class=n>std</span><span class=p>;</span>
 </span></span><span class=line><span class=cl>
@@ -266,60 +264,60 @@ $$</p><p>转换代码实现:</p><div class=highlight><div class=chroma><table cl
 </span></span><span class=line><span class=cl>    <span class=p>}</span>
 </span></span><span class=line><span class=cl>	<span class=k>return</span> <span class=mi>0</span><span class=p>;</span>
 </span></span><span class=line><span class=cl><span class=p>}</span>
-</span></span></code></pre></td></tr></table></div></div><a href=#2路归并排序><h3 id=2路归并排序><span class=hanchor arialabel=Anchor># </span>2路归并排序</h3></a><a href=#递归版><h4 id=递归版><span class=hanchor arialabel=Anchor># </span>递归版</h4></a><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
-</span><span class=lnt> 2
-</span><span class=lnt> 3
-</span><span class=lnt> 4
-</span><span class=lnt> 5
-</span><span class=lnt> 6
-</span><span class=lnt> 7
-</span><span class=lnt> 8
-</span><span class=lnt> 9
-</span><span class=lnt>10
-</span><span class=lnt>11
-</span><span class=lnt>12
-</span><span class=lnt>13
-</span><span class=lnt>14
-</span><span class=lnt>15
-</span><span class=lnt>16
-</span><span class=lnt>17
-</span><span class=lnt>18
-</span><span class=lnt>19
-</span><span class=lnt>20
-</span><span class=lnt>21
-</span><span class=lnt>22
-</span><span class=lnt>23
-</span><span class=lnt>24
-</span><span class=lnt>25
-</span><span class=lnt>26
-</span><span class=lnt>27
-</span><span class=lnt>28
-</span><span class=lnt>29
-</span><span class=lnt>30
-</span><span class=lnt>31
-</span><span class=lnt>32
-</span><span class=lnt>33
-</span><span class=lnt>34
-</span><span class=lnt>35
-</span><span class=lnt>36
-</span><span class=lnt>37
-</span><span class=lnt>38
-</span><span class=lnt>39
-</span><span class=lnt>40
-</span><span class=lnt>41
-</span><span class=lnt>42
-</span><span class=lnt>43
-</span><span class=lnt>44
-</span><span class=lnt>45
-</span><span class=lnt>46
-</span><span class=lnt>47
-</span><span class=lnt>48
-</span><span class=lnt>49
-</span><span class=lnt>50
-</span><span class=lnt>51
-</span><span class=lnt>52
-</span><span class=lnt>53
-</span><span class=lnt>54
+</span></span></code></pre></td></tr></table></div></div><a href=#2路归并排序><h3 id=2路归并排序><span class=hanchor arialabel=Anchor># </span>2路归并排序</h3></a><a href=#递归版><h4 id=递归版><span class=hanchor arialabel=Anchor># </span>递归版</h4></a><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt id=hl-6-1><a style=outline:none;text-decoration:none;color:inherit href=#hl-6-1> 1</a>
+</span><span class=lnt id=hl-6-2><a style=outline:none;text-decoration:none;color:inherit href=#hl-6-2> 2</a>
+</span><span class=lnt id=hl-6-3><a style=outline:none;text-decoration:none;color:inherit href=#hl-6-3> 3</a>
+</span><span class=lnt id=hl-6-4><a style=outline:none;text-decoration:none;color:inherit href=#hl-6-4> 4</a>
+</span><span class=lnt id=hl-6-5><a style=outline:none;text-decoration:none;color:inherit href=#hl-6-5> 5</a>
+</span><span class=lnt id=hl-6-6><a style=outline:none;text-decoration:none;color:inherit href=#hl-6-6> 6</a>
+</span><span class=lnt id=hl-6-7><a style=outline:none;text-decoration:none;color:inherit href=#hl-6-7> 7</a>
+</span><span class=lnt id=hl-6-8><a style=outline:none;text-decoration:none;color:inherit href=#hl-6-8> 8</a>
+</span><span class=lnt id=hl-6-9><a style=outline:none;text-decoration:none;color:inherit href=#hl-6-9> 9</a>
+</span><span class=lnt id=hl-6-10><a style=outline:none;text-decoration:none;color:inherit href=#hl-6-10>10</a>
+</span><span class=lnt id=hl-6-11><a style=outline:none;text-decoration:none;color:inherit href=#hl-6-11>11</a>
+</span><span class=lnt id=hl-6-12><a style=outline:none;text-decoration:none;color:inherit href=#hl-6-12>12</a>
+</span><span class=lnt id=hl-6-13><a style=outline:none;text-decoration:none;color:inherit href=#hl-6-13>13</a>
+</span><span class=lnt id=hl-6-14><a style=outline:none;text-decoration:none;color:inherit href=#hl-6-14>14</a>
+</span><span class=lnt id=hl-6-15><a style=outline:none;text-decoration:none;color:inherit href=#hl-6-15>15</a>
+</span><span class=lnt id=hl-6-16><a style=outline:none;text-decoration:none;color:inherit href=#hl-6-16>16</a>
+</span><span class=lnt id=hl-6-17><a style=outline:none;text-decoration:none;color:inherit href=#hl-6-17>17</a>
+</span><span class=lnt id=hl-6-18><a style=outline:none;text-decoration:none;color:inherit href=#hl-6-18>18</a>
+</span><span class=lnt id=hl-6-19><a style=outline:none;text-decoration:none;color:inherit href=#hl-6-19>19</a>
+</span><span class=lnt id=hl-6-20><a style=outline:none;text-decoration:none;color:inherit href=#hl-6-20>20</a>
+</span><span class=lnt id=hl-6-21><a style=outline:none;text-decoration:none;color:inherit href=#hl-6-21>21</a>
+</span><span class=lnt id=hl-6-22><a style=outline:none;text-decoration:none;color:inherit href=#hl-6-22>22</a>
+</span><span class=lnt id=hl-6-23><a style=outline:none;text-decoration:none;color:inherit href=#hl-6-23>23</a>
+</span><span class=lnt id=hl-6-24><a style=outline:none;text-decoration:none;color:inherit href=#hl-6-24>24</a>
+</span><span class=lnt id=hl-6-25><a style=outline:none;text-decoration:none;color:inherit href=#hl-6-25>25</a>
+</span><span class=lnt id=hl-6-26><a style=outline:none;text-decoration:none;color:inherit href=#hl-6-26>26</a>
+</span><span class=lnt id=hl-6-27><a style=outline:none;text-decoration:none;color:inherit href=#hl-6-27>27</a>
+</span><span class=lnt id=hl-6-28><a style=outline:none;text-decoration:none;color:inherit href=#hl-6-28>28</a>
+</span><span class=lnt id=hl-6-29><a style=outline:none;text-decoration:none;color:inherit href=#hl-6-29>29</a>
+</span><span class=lnt id=hl-6-30><a style=outline:none;text-decoration:none;color:inherit href=#hl-6-30>30</a>
+</span><span class=lnt id=hl-6-31><a style=outline:none;text-decoration:none;color:inherit href=#hl-6-31>31</a>
+</span><span class=lnt id=hl-6-32><a style=outline:none;text-decoration:none;color:inherit href=#hl-6-32>32</a>
+</span><span class=lnt id=hl-6-33><a style=outline:none;text-decoration:none;color:inherit href=#hl-6-33>33</a>
+</span><span class=lnt id=hl-6-34><a style=outline:none;text-decoration:none;color:inherit href=#hl-6-34>34</a>
+</span><span class=lnt id=hl-6-35><a style=outline:none;text-decoration:none;color:inherit href=#hl-6-35>35</a>
+</span><span class=lnt id=hl-6-36><a style=outline:none;text-decoration:none;color:inherit href=#hl-6-36>36</a>
+</span><span class=lnt id=hl-6-37><a style=outline:none;text-decoration:none;color:inherit href=#hl-6-37>37</a>
+</span><span class=lnt id=hl-6-38><a style=outline:none;text-decoration:none;color:inherit href=#hl-6-38>38</a>
+</span><span class=lnt id=hl-6-39><a style=outline:none;text-decoration:none;color:inherit href=#hl-6-39>39</a>
+</span><span class=lnt id=hl-6-40><a style=outline:none;text-decoration:none;color:inherit href=#hl-6-40>40</a>
+</span><span class=lnt id=hl-6-41><a style=outline:none;text-decoration:none;color:inherit href=#hl-6-41>41</a>
+</span><span class=lnt id=hl-6-42><a style=outline:none;text-decoration:none;color:inherit href=#hl-6-42>42</a>
+</span><span class=lnt id=hl-6-43><a style=outline:none;text-decoration:none;color:inherit href=#hl-6-43>43</a>
+</span><span class=lnt id=hl-6-44><a style=outline:none;text-decoration:none;color:inherit href=#hl-6-44>44</a>
+</span><span class=lnt id=hl-6-45><a style=outline:none;text-decoration:none;color:inherit href=#hl-6-45>45</a>
+</span><span class=lnt id=hl-6-46><a style=outline:none;text-decoration:none;color:inherit href=#hl-6-46>46</a>
+</span><span class=lnt id=hl-6-47><a style=outline:none;text-decoration:none;color:inherit href=#hl-6-47>47</a>
+</span><span class=lnt id=hl-6-48><a style=outline:none;text-decoration:none;color:inherit href=#hl-6-48>48</a>
+</span><span class=lnt id=hl-6-49><a style=outline:none;text-decoration:none;color:inherit href=#hl-6-49>49</a>
+</span><span class=lnt id=hl-6-50><a style=outline:none;text-decoration:none;color:inherit href=#hl-6-50>50</a>
+</span><span class=lnt id=hl-6-51><a style=outline:none;text-decoration:none;color:inherit href=#hl-6-51>51</a>
+</span><span class=lnt id=hl-6-52><a style=outline:none;text-decoration:none;color:inherit href=#hl-6-52>52</a>
+</span><span class=lnt id=hl-6-53><a style=outline:none;text-decoration:none;color:inherit href=#hl-6-53>53</a>
+</span><span class=lnt id=hl-6-54><a style=outline:none;text-decoration:none;color:inherit href=#hl-6-54>54</a>
 </span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-c++ data-lang=c++><span class=line><span class=cl><span class=cp>#include</span> <span class=cpf>&lt;iostream&gt;</span><span class=cp>
 </span></span></span><span class=line><span class=cl><span class=cp></span><span class=k>using</span> <span class=k>namespace</span> <span class=n>std</span><span class=p>;</span>
 </span></span><span class=line><span class=cl>
@@ -374,63 +372,63 @@ $$</p><p>转换代码实现:</p><div class=highlight><div class=chroma><table cl
 </span></span></span><span class=line><span class=cl><span class=c1></span>        <span class=n>merge</span><span class=p>(</span><span class=n>a</span><span class=p>,</span> <span class=n>left</span><span class=p>,</span> <span class=n>mid</span><span class=p>,</span> <span class=n>mid</span><span class=o>+</span><span class=mi>1</span><span class=p>,</span> <span class=n>right</span><span class=p>);</span>  <span class=c1>// 有序归并两个数组 
 </span></span></span><span class=line><span class=cl><span class=c1></span>    <span class=p>}</span>
 </span></span><span class=line><span class=cl><span class=p>}</span>
-</span></span></code></pre></td></tr></table></div></div><a href=#循环版><h4 id=循环版><span class=hanchor arialabel=Anchor># </span>循环版</h4></a><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
-</span><span class=lnt> 2
-</span><span class=lnt> 3
-</span><span class=lnt> 4
-</span><span class=lnt> 5
-</span><span class=lnt> 6
-</span><span class=lnt> 7
-</span><span class=lnt> 8
-</span><span class=lnt> 9
-</span><span class=lnt>10
-</span><span class=lnt>11
-</span><span class=lnt>12
-</span><span class=lnt>13
-</span><span class=lnt>14
-</span><span class=lnt>15
-</span><span class=lnt>16
-</span><span class=lnt>17
-</span><span class=lnt>18
-</span><span class=lnt>19
-</span><span class=lnt>20
-</span><span class=lnt>21
-</span><span class=lnt>22
-</span><span class=lnt>23
-</span><span class=lnt>24
-</span><span class=lnt>25
-</span><span class=lnt>26
-</span><span class=lnt>27
-</span><span class=lnt>28
-</span><span class=lnt>29
-</span><span class=lnt>30
-</span><span class=lnt>31
-</span><span class=lnt>32
-</span><span class=lnt>33
-</span><span class=lnt>34
-</span><span class=lnt>35
-</span><span class=lnt>36
-</span><span class=lnt>37
-</span><span class=lnt>38
-</span><span class=lnt>39
-</span><span class=lnt>40
-</span><span class=lnt>41
-</span><span class=lnt>42
-</span><span class=lnt>43
-</span><span class=lnt>44
-</span><span class=lnt>45
-</span><span class=lnt>46
-</span><span class=lnt>47
-</span><span class=lnt>48
-</span><span class=lnt>49
-</span><span class=lnt>50
-</span><span class=lnt>51
-</span><span class=lnt>52
-</span><span class=lnt>53
-</span><span class=lnt>54
-</span><span class=lnt>55
-</span><span class=lnt>56
-</span><span class=lnt>57
+</span></span></code></pre></td></tr></table></div></div><a href=#循环版><h4 id=循环版><span class=hanchor arialabel=Anchor># </span>循环版</h4></a><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt id=hl-7-1><a style=outline:none;text-decoration:none;color:inherit href=#hl-7-1> 1</a>
+</span><span class=lnt id=hl-7-2><a style=outline:none;text-decoration:none;color:inherit href=#hl-7-2> 2</a>
+</span><span class=lnt id=hl-7-3><a style=outline:none;text-decoration:none;color:inherit href=#hl-7-3> 3</a>
+</span><span class=lnt id=hl-7-4><a style=outline:none;text-decoration:none;color:inherit href=#hl-7-4> 4</a>
+</span><span class=lnt id=hl-7-5><a style=outline:none;text-decoration:none;color:inherit href=#hl-7-5> 5</a>
+</span><span class=lnt id=hl-7-6><a style=outline:none;text-decoration:none;color:inherit href=#hl-7-6> 6</a>
+</span><span class=lnt id=hl-7-7><a style=outline:none;text-decoration:none;color:inherit href=#hl-7-7> 7</a>
+</span><span class=lnt id=hl-7-8><a style=outline:none;text-decoration:none;color:inherit href=#hl-7-8> 8</a>
+</span><span class=lnt id=hl-7-9><a style=outline:none;text-decoration:none;color:inherit href=#hl-7-9> 9</a>
+</span><span class=lnt id=hl-7-10><a style=outline:none;text-decoration:none;color:inherit href=#hl-7-10>10</a>
+</span><span class=lnt id=hl-7-11><a style=outline:none;text-decoration:none;color:inherit href=#hl-7-11>11</a>
+</span><span class=lnt id=hl-7-12><a style=outline:none;text-decoration:none;color:inherit href=#hl-7-12>12</a>
+</span><span class=lnt id=hl-7-13><a style=outline:none;text-decoration:none;color:inherit href=#hl-7-13>13</a>
+</span><span class=lnt id=hl-7-14><a style=outline:none;text-decoration:none;color:inherit href=#hl-7-14>14</a>
+</span><span class=lnt id=hl-7-15><a style=outline:none;text-decoration:none;color:inherit href=#hl-7-15>15</a>
+</span><span class=lnt id=hl-7-16><a style=outline:none;text-decoration:none;color:inherit href=#hl-7-16>16</a>
+</span><span class=lnt id=hl-7-17><a style=outline:none;text-decoration:none;color:inherit href=#hl-7-17>17</a>
+</span><span class=lnt id=hl-7-18><a style=outline:none;text-decoration:none;color:inherit href=#hl-7-18>18</a>
+</span><span class=lnt id=hl-7-19><a style=outline:none;text-decoration:none;color:inherit href=#hl-7-19>19</a>
+</span><span class=lnt id=hl-7-20><a style=outline:none;text-decoration:none;color:inherit href=#hl-7-20>20</a>
+</span><span class=lnt id=hl-7-21><a style=outline:none;text-decoration:none;color:inherit href=#hl-7-21>21</a>
+</span><span class=lnt id=hl-7-22><a style=outline:none;text-decoration:none;color:inherit href=#hl-7-22>22</a>
+</span><span class=lnt id=hl-7-23><a style=outline:none;text-decoration:none;color:inherit href=#hl-7-23>23</a>
+</span><span class=lnt id=hl-7-24><a style=outline:none;text-decoration:none;color:inherit href=#hl-7-24>24</a>
+</span><span class=lnt id=hl-7-25><a style=outline:none;text-decoration:none;color:inherit href=#hl-7-25>25</a>
+</span><span class=lnt id=hl-7-26><a style=outline:none;text-decoration:none;color:inherit href=#hl-7-26>26</a>
+</span><span class=lnt id=hl-7-27><a style=outline:none;text-decoration:none;color:inherit href=#hl-7-27>27</a>
+</span><span class=lnt id=hl-7-28><a style=outline:none;text-decoration:none;color:inherit href=#hl-7-28>28</a>
+</span><span class=lnt id=hl-7-29><a style=outline:none;text-decoration:none;color:inherit href=#hl-7-29>29</a>
+</span><span class=lnt id=hl-7-30><a style=outline:none;text-decoration:none;color:inherit href=#hl-7-30>30</a>
+</span><span class=lnt id=hl-7-31><a style=outline:none;text-decoration:none;color:inherit href=#hl-7-31>31</a>
+</span><span class=lnt id=hl-7-32><a style=outline:none;text-decoration:none;color:inherit href=#hl-7-32>32</a>
+</span><span class=lnt id=hl-7-33><a style=outline:none;text-decoration:none;color:inherit href=#hl-7-33>33</a>
+</span><span class=lnt id=hl-7-34><a style=outline:none;text-decoration:none;color:inherit href=#hl-7-34>34</a>
+</span><span class=lnt id=hl-7-35><a style=outline:none;text-decoration:none;color:inherit href=#hl-7-35>35</a>
+</span><span class=lnt id=hl-7-36><a style=outline:none;text-decoration:none;color:inherit href=#hl-7-36>36</a>
+</span><span class=lnt id=hl-7-37><a style=outline:none;text-decoration:none;color:inherit href=#hl-7-37>37</a>
+</span><span class=lnt id=hl-7-38><a style=outline:none;text-decoration:none;color:inherit href=#hl-7-38>38</a>
+</span><span class=lnt id=hl-7-39><a style=outline:none;text-decoration:none;color:inherit href=#hl-7-39>39</a>
+</span><span class=lnt id=hl-7-40><a style=outline:none;text-decoration:none;color:inherit href=#hl-7-40>40</a>
+</span><span class=lnt id=hl-7-41><a style=outline:none;text-decoration:none;color:inherit href=#hl-7-41>41</a>
+</span><span class=lnt id=hl-7-42><a style=outline:none;text-decoration:none;color:inherit href=#hl-7-42>42</a>
+</span><span class=lnt id=hl-7-43><a style=outline:none;text-decoration:none;color:inherit href=#hl-7-43>43</a>
+</span><span class=lnt id=hl-7-44><a style=outline:none;text-decoration:none;color:inherit href=#hl-7-44>44</a>
+</span><span class=lnt id=hl-7-45><a style=outline:none;text-decoration:none;color:inherit href=#hl-7-45>45</a>
+</span><span class=lnt id=hl-7-46><a style=outline:none;text-decoration:none;color:inherit href=#hl-7-46>46</a>
+</span><span class=lnt id=hl-7-47><a style=outline:none;text-decoration:none;color:inherit href=#hl-7-47>47</a>
+</span><span class=lnt id=hl-7-48><a style=outline:none;text-decoration:none;color:inherit href=#hl-7-48>48</a>
+</span><span class=lnt id=hl-7-49><a style=outline:none;text-decoration:none;color:inherit href=#hl-7-49>49</a>
+</span><span class=lnt id=hl-7-50><a style=outline:none;text-decoration:none;color:inherit href=#hl-7-50>50</a>
+</span><span class=lnt id=hl-7-51><a style=outline:none;text-decoration:none;color:inherit href=#hl-7-51>51</a>
+</span><span class=lnt id=hl-7-52><a style=outline:none;text-decoration:none;color:inherit href=#hl-7-52>52</a>
+</span><span class=lnt id=hl-7-53><a style=outline:none;text-decoration:none;color:inherit href=#hl-7-53>53</a>
+</span><span class=lnt id=hl-7-54><a style=outline:none;text-decoration:none;color:inherit href=#hl-7-54>54</a>
+</span><span class=lnt id=hl-7-55><a style=outline:none;text-decoration:none;color:inherit href=#hl-7-55>55</a>
+</span><span class=lnt id=hl-7-56><a style=outline:none;text-decoration:none;color:inherit href=#hl-7-56>56</a>
+</span><span class=lnt id=hl-7-57><a style=outline:none;text-decoration:none;color:inherit href=#hl-7-57>57</a>
 </span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-c++ data-lang=c++><span class=line><span class=cl><span class=cp>#include</span> <span class=cpf>&lt;iostream&gt;</span><span class=cp>
 </span></span></span><span class=line><span class=cl><span class=cp>#include</span> <span class=cpf>&lt;algorithm&gt;</span><span class=cp>
 </span></span></span><span class=line><span class=cl><span class=cp></span><span class=k>using</span> <span class=k>namespace</span> <span class=n>std</span><span class=p>;</span>
@@ -488,40 +486,40 @@ $$</p><p>转换代码实现:</p><div class=highlight><div class=chroma><table cl
 </span></span><span class=line><span class=cl>    <span class=k>for</span> <span class=p>(</span><span class=kt>int</span> <span class=n>i</span><span class=o>=</span><span class=mi>0</span><span class=p>;</span> <span class=n>i</span><span class=o>&lt;</span><span class=n>index</span><span class=p>;</span> <span class=n>i</span><span class=o>++</span><span class=p>)</span>
 </span></span><span class=line><span class=cl>        <span class=n>a</span><span class=p>[</span><span class=n>l1</span><span class=o>+</span><span class=n>i</span><span class=p>]</span> <span class=o>=</span> <span class=n>temp</span><span class=p>[</span><span class=n>i</span><span class=p>];</span>
 </span></span><span class=line><span class=cl><span class=p>}</span>
-</span></span></code></pre></td></tr></table></div></div><a href=#循环模拟版><h4 id=循环模拟版><span class=hanchor arialabel=Anchor># </span>循环模拟版</h4></a><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
-</span><span class=lnt> 2
-</span><span class=lnt> 3
-</span><span class=lnt> 4
-</span><span class=lnt> 5
-</span><span class=lnt> 6
-</span><span class=lnt> 7
-</span><span class=lnt> 8
-</span><span class=lnt> 9
-</span><span class=lnt>10
-</span><span class=lnt>11
-</span><span class=lnt>12
-</span><span class=lnt>13
-</span><span class=lnt>14
-</span><span class=lnt>15
-</span><span class=lnt>16
-</span><span class=lnt>17
-</span><span class=lnt>18
-</span><span class=lnt>19
-</span><span class=lnt>20
-</span><span class=lnt>21
-</span><span class=lnt>22
-</span><span class=lnt>23
-</span><span class=lnt>24
-</span><span class=lnt>25
-</span><span class=lnt>26
-</span><span class=lnt>27
-</span><span class=lnt>28
-</span><span class=lnt>29
-</span><span class=lnt>30
-</span><span class=lnt>31
-</span><span class=lnt>32
-</span><span class=lnt>33
-</span><span class=lnt>34
+</span></span></code></pre></td></tr></table></div></div><a href=#循环模拟版><h4 id=循环模拟版><span class=hanchor arialabel=Anchor># </span>循环模拟版</h4></a><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt id=hl-8-1><a style=outline:none;text-decoration:none;color:inherit href=#hl-8-1> 1</a>
+</span><span class=lnt id=hl-8-2><a style=outline:none;text-decoration:none;color:inherit href=#hl-8-2> 2</a>
+</span><span class=lnt id=hl-8-3><a style=outline:none;text-decoration:none;color:inherit href=#hl-8-3> 3</a>
+</span><span class=lnt id=hl-8-4><a style=outline:none;text-decoration:none;color:inherit href=#hl-8-4> 4</a>
+</span><span class=lnt id=hl-8-5><a style=outline:none;text-decoration:none;color:inherit href=#hl-8-5> 5</a>
+</span><span class=lnt id=hl-8-6><a style=outline:none;text-decoration:none;color:inherit href=#hl-8-6> 6</a>
+</span><span class=lnt id=hl-8-7><a style=outline:none;text-decoration:none;color:inherit href=#hl-8-7> 7</a>
+</span><span class=lnt id=hl-8-8><a style=outline:none;text-decoration:none;color:inherit href=#hl-8-8> 8</a>
+</span><span class=lnt id=hl-8-9><a style=outline:none;text-decoration:none;color:inherit href=#hl-8-9> 9</a>
+</span><span class=lnt id=hl-8-10><a style=outline:none;text-decoration:none;color:inherit href=#hl-8-10>10</a>
+</span><span class=lnt id=hl-8-11><a style=outline:none;text-decoration:none;color:inherit href=#hl-8-11>11</a>
+</span><span class=lnt id=hl-8-12><a style=outline:none;text-decoration:none;color:inherit href=#hl-8-12>12</a>
+</span><span class=lnt id=hl-8-13><a style=outline:none;text-decoration:none;color:inherit href=#hl-8-13>13</a>
+</span><span class=lnt id=hl-8-14><a style=outline:none;text-decoration:none;color:inherit href=#hl-8-14>14</a>
+</span><span class=lnt id=hl-8-15><a style=outline:none;text-decoration:none;color:inherit href=#hl-8-15>15</a>
+</span><span class=lnt id=hl-8-16><a style=outline:none;text-decoration:none;color:inherit href=#hl-8-16>16</a>
+</span><span class=lnt id=hl-8-17><a style=outline:none;text-decoration:none;color:inherit href=#hl-8-17>17</a>
+</span><span class=lnt id=hl-8-18><a style=outline:none;text-decoration:none;color:inherit href=#hl-8-18>18</a>
+</span><span class=lnt id=hl-8-19><a style=outline:none;text-decoration:none;color:inherit href=#hl-8-19>19</a>
+</span><span class=lnt id=hl-8-20><a style=outline:none;text-decoration:none;color:inherit href=#hl-8-20>20</a>
+</span><span class=lnt id=hl-8-21><a style=outline:none;text-decoration:none;color:inherit href=#hl-8-21>21</a>
+</span><span class=lnt id=hl-8-22><a style=outline:none;text-decoration:none;color:inherit href=#hl-8-22>22</a>
+</span><span class=lnt id=hl-8-23><a style=outline:none;text-decoration:none;color:inherit href=#hl-8-23>23</a>
+</span><span class=lnt id=hl-8-24><a style=outline:none;text-decoration:none;color:inherit href=#hl-8-24>24</a>
+</span><span class=lnt id=hl-8-25><a style=outline:none;text-decoration:none;color:inherit href=#hl-8-25>25</a>
+</span><span class=lnt id=hl-8-26><a style=outline:none;text-decoration:none;color:inherit href=#hl-8-26>26</a>
+</span><span class=lnt id=hl-8-27><a style=outline:none;text-decoration:none;color:inherit href=#hl-8-27>27</a>
+</span><span class=lnt id=hl-8-28><a style=outline:none;text-decoration:none;color:inherit href=#hl-8-28>28</a>
+</span><span class=lnt id=hl-8-29><a style=outline:none;text-decoration:none;color:inherit href=#hl-8-29>29</a>
+</span><span class=lnt id=hl-8-30><a style=outline:none;text-decoration:none;color:inherit href=#hl-8-30>30</a>
+</span><span class=lnt id=hl-8-31><a style=outline:none;text-decoration:none;color:inherit href=#hl-8-31>31</a>
+</span><span class=lnt id=hl-8-32><a style=outline:none;text-decoration:none;color:inherit href=#hl-8-32>32</a>
+</span><span class=lnt id=hl-8-33><a style=outline:none;text-decoration:none;color:inherit href=#hl-8-33>33</a>
+</span><span class=lnt id=hl-8-34><a style=outline:none;text-decoration:none;color:inherit href=#hl-8-34>34</a>
 </span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-c++ data-lang=c++><span class=line><span class=cl><span class=cp>#include</span> <span class=cpf>&lt;iostream&gt;</span><span class=cp>
 </span></span></span><span class=line><span class=cl><span class=cp>#include</span> <span class=cpf>&lt;algorithm&gt;</span><span class=cp>
 </span></span></span><span class=line><span class=cl><span class=cp></span><span class=k>using</span> <span class=k>namespace</span> <span class=n>std</span><span class=p>;</span>
@@ -556,11 +554,11 @@ $$</p><p>转换代码实现:</p><div class=highlight><div class=chroma><table cl
 </span></span><span class=line><span class=cl>    <span class=p>}</span>
 </span></span><span class=line><span class=cl>	<span class=k>return</span> <span class=mi>0</span><span class=p>;</span>
 </span></span><span class=line><span class=cl><span class=p>}</span>
-</span></span></code></pre></td></tr></table></div></div><a href=#快速排序><h3 id=快速排序><span class=hanchor arialabel=Anchor># </span>快速排序</h3></a><p><a href=/2_0_2-%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A7%91%E5%AD%A6/2_0_2_0_2_1-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8F rel=noopener class=internal-link data-src=/2_0_2-%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A7%91%E5%AD%A6/2_0_2_0_2_1-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8F>快速排序</a></p><a href=#sort><h2 id=sort><span class=hanchor arialabel=Anchor># </span>sort()</h2></a><a href=#cmp-函数构造><h3 id=cmp-函数构造><span class=hanchor arialabel=Anchor># </span>cmp() 函数构造</h3></a><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
-</span><span class=lnt>2
-</span><span class=lnt>3
-</span><span class=lnt>4
-</span><span class=lnt>5
+</span></span></code></pre></td></tr></table></div></div><a href=#快速排序><h3 id=快速排序><span class=hanchor arialabel=Anchor># </span>快速排序</h3></a><p><a href=/2_0_2-%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A7%91%E5%AD%A6/2_0_2_0_2_1-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8F rel=noopener class=internal-link data-src=/2_0_2-%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A7%91%E5%AD%A6/2_0_2_0_2_1-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8F>快速排序</a></p><a href=#sort><h2 id=sort><span class=hanchor arialabel=Anchor># </span>sort()</h2></a><a href=#cmp-函数构造><h3 id=cmp-函数构造><span class=hanchor arialabel=Anchor># </span>cmp() 函数构造</h3></a><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt id=hl-9-1><a style=outline:none;text-decoration:none;color:inherit href=#hl-9-1>1</a>
+</span><span class=lnt id=hl-9-2><a style=outline:none;text-decoration:none;color:inherit href=#hl-9-2>2</a>
+</span><span class=lnt id=hl-9-3><a style=outline:none;text-decoration:none;color:inherit href=#hl-9-3>3</a>
+</span><span class=lnt id=hl-9-4><a style=outline:none;text-decoration:none;color:inherit href=#hl-9-4>4</a>
+</span><span class=lnt id=hl-9-5><a style=outline:none;text-decoration:none;color:inherit href=#hl-9-5>5</a>
 </span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-c++ data-lang=c++><span class=line><span class=cl><span class=kt>bool</span> <span class=nf>cmp</span><span class=p>(</span><span class=n>a</span><span class=p>,</span><span class=n>b</span><span class=p>)</span>
 </span></span><span class=line><span class=cl><span class=p>{</span>
 </span></span><span class=line><span class=cl>    <span class=k>return</span> <span class=n>a</span><span class=o>&gt;</span><span class=n>b</span><span class=p>;</span> <span class=c1>// 降序

@@ -1,8 +1,7 @@
 <!doctype html><html lang=en><head><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8920808282451934" crossorigin=anonymous></script><meta charset=utf-8><meta name=description content="逆向wp-keylead  杭电 CTF 平台逆向第二题.
 题目在网络对应目录中: http://gokoucat.ys168.com/
 文件分析 通过在 lunux 环境下, 使用 file keylead 发现是一个压缩文件, 解压后得到可执行文件.
-1 2 3  file keylead keylead: XZ compressed data   函数分析 通过字符串定位的方法, 找到主函数.
-主函数 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 57 58 59 60 61 62 63 64 65 66 67 68 69 70 71 72 73  signed __int64 __fastcall main(__int64 a1, char **a2, char **a3) { unsigned int v3; // eax  unsigned int i_rand_n1; // ST14_4  signed __int64 result; // rax  unsigned int i_rand_n5; // [rsp+4h] [rbp-1Ch]  unsigned int i_rand_n4; // [rsp+8h] [rbp-18h]  unsigned int i_rand_n3; // [rsp+Ch] [rbp-14h]  unsigned int i_rand_n2; // [rsp+10h] [rbp-10h]  int start_time; // [rsp+18h] [rbp-8h]  puts(&#34;hi all ----------------------&#34;); puts(&#34;Welcome to dice game!"><title>逆向wp-keylead</title><meta name=viewport content="width=device-width,initial-scale=1"><link rel="shortcut icon" type=image/png href=https://harbor.mffseal.top//icon.png><link href=https://harbor.mffseal.top/styles.7153093e4d1bbb584a28469cadfa3f88.min.css rel=stylesheet><link href=https://harbor.mffseal.top/styles/_light_syntax.86a48a52faebeaaf42158b72922b1c90.min.css rel=stylesheet id=theme-link><script src=https://harbor.mffseal.top/js/darkmode.9841b88d44c115f7419d485ee72d23a2.min.js></script>
+1 2 3  file keylead keylead: XZ compressed data   函数分析 通过字符串定位的方法, 找到主函数."><title>逆向wp-keylead</title><meta name=viewport content="width=device-width,initial-scale=1"><link rel="shortcut icon" type=image/png href=https://harbor.mffseal.top//icon.png><link href=https://harbor.mffseal.top/styles.7153093e4d1bbb584a28469cadfa3f88.min.css rel=stylesheet><link href=https://harbor.mffseal.top/styles/_light_syntax.86a48a52faebeaaf42158b72922b1c90.min.css rel=stylesheet id=theme-link><script src=https://harbor.mffseal.top/js/darkmode.9841b88d44c115f7419d485ee72d23a2.min.js></script>
 <script src=https://harbor.mffseal.top/js/util.9825137f5e7825e8553c68ce39ac9e44.min.js></script>
 <link rel=stylesheet href=https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.css integrity=sha384-R4558gYOUz8mP9YWpZJjofhk+zx0AS11p36HnD2ZKj/6JR5z27gSSULCNHIRReVs crossorigin=anonymous><script defer src=https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.js integrity=sha384-z1fJDqw8ZApjGO3/unPWUPsIymfsJmyrDVWC8Tv/a1HeOtGmkwNd/7xUS0Xcnvsx crossorigin=anonymous></script>
 <script defer src=https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/contrib/auto-render.min.js integrity=sha384-+XBljXPPiv+OzfbB3cVmLHf4hdUFHlWNZN5spNQ7rmHTXpd7WvJum6fIACpNNfIR crossorigin=anonymous></script>
@@ -13,7 +12,7 @@
 <script src=https://harbor.mffseal.top/js/code-title.b35124ad8db0ba37162b886afb711cbc.min.js></script>
 <script src=https://harbor.mffseal.top/js/clipboard.c20857734e53a3fb733b7443879efa61.min.js></script>
 <script src=https://harbor.mffseal.top/js/callouts.7723cac461d613d118ee8bb8216b9838.min.js></script>
-<script>const BASE_URL="https://harbor.mffseal.top/",fetchData=Promise.all([fetch("https://harbor.mffseal.top/indices/linkIndex.5da375bc9ca1d813eb68255e2c0afb35.min.json").then(e=>e.json()).then(e=>({index:e.index,links:e.links})),fetch("https://harbor.mffseal.top/indices/contentIndex.e562ec6ad43d185479787d85119148bd.min.json").then(e=>e.json())]).then(([{index:e,links:t},n])=>({index:e,links:t,content:n})),render=()=>{const e=new URL(BASE_URL),t=e.pathname,n=window.location.pathname,s=t==n;addCopyButtons(),addTitleToCodeBlocks(),addCollapsibleCallouts(),initPopover("https://harbor.mffseal.top",!0,!0);const o=document.getElementById("footer");if(o){const e=document.getElementById("graph-container");if(!e)return requestAnimationFrame(render);e.textContent="";const t=s&&!1;drawGraph("https://harbor.mffseal.top",t,[{"/moc":"#4388cc"}],t?{centerForce:1,depth:-1,enableDrag:!0,enableLegend:!1,enableZoom:!0,fontSize:.5,linkDistance:1,opacityScale:3,repelForce:1,scale:1.4}:{centerForce:1,depth:1,enableDrag:!0,enableLegend:!1,enableZoom:!0,fontSize:.6,linkDistance:1,opacityScale:3,repelForce:2,scale:1.2})}},init=(e=document)=>{addCopyButtons(),addTitleToCodeBlocks(),renderMathInElement(e.body,{delimiters:[{left:"$$",right:"$$",display:!0},{left:"$",right:"$",display:!1}],macros:{'’':"'"},throwOnError:!1})}</script><script type=module>
+<script>const BASE_URL="https://harbor.mffseal.top/",fetchData=Promise.all([fetch("https://harbor.mffseal.top/indices/linkIndex.5da375bc9ca1d813eb68255e2c0afb35.min.json").then(e=>e.json()).then(e=>({index:e.index,links:e.links})),fetch("https://harbor.mffseal.top/indices/contentIndex.363af2e61a16ab88407bc594d017144e.min.json").then(e=>e.json())]).then(([{index:e,links:t},n])=>({index:e,links:t,content:n})),render=()=>{const e=new URL(BASE_URL),t=e.pathname,n=window.location.pathname,s=t==n;addCopyButtons(),addTitleToCodeBlocks(),addCollapsibleCallouts(),initPopover("https://harbor.mffseal.top",!0,!0);const o=document.getElementById("footer");if(o){const e=document.getElementById("graph-container");if(!e)return requestAnimationFrame(render);e.textContent="";const t=s&&!0;drawGraph("https://harbor.mffseal.top",t,[{"/moc":"#4388cc"}],t?{centerForce:1,depth:-1,enableDrag:!0,enableLegend:!1,enableZoom:!0,fontSize:.5,linkDistance:1,opacityScale:3,repelForce:1,scale:1.4}:{centerForce:1,depth:1,enableDrag:!0,enableLegend:!1,enableZoom:!0,fontSize:.6,linkDistance:1,opacityScale:3,repelForce:2,scale:1.2})}},init=(e=document)=>{addCopyButtons(),addTitleToCodeBlocks(),renderMathInElement(e.body,{delimiters:[{left:"$$",right:"$$",display:!0},{left:"$",right:"$",display:!1}],macros:{'’':"'"},throwOnError:!1})}</script><script type=module>
     import { attachSPARouting } from "https:\/\/harbor.mffseal.top\/js\/router.9d4974281069e9ebb189f642ae1e3ca2.min.js"
     attachSPARouting(init, render)
   </script></head><script async src="https://www.googletagmanager.com/gtag/js?id=G-NV58SYWRZD"></script>
@@ -22,85 +21,85 @@
 <label id=toggle-label-light for=darkmode-toggle tabindex=-1><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" id="dayIcon" viewBox="0 0 35 35" style="enable-background:new 0 0 35 35"><title>Light Mode</title><path d="M6 17.5C6 16.672 5.328 16 4.5 16h-3C.672 16 0 16.672.0 17.5S.672 19 1.5 19h3C5.328 19 6 18.328 6 17.5zM7.5 26c-.414.0-.789.168-1.061.439l-2 2C4.168 28.711 4 29.086 4 29.5 4 30.328 4.671 31 5.5 31c.414.0.789-.168 1.06-.44l2-2C8.832 28.289 9 27.914 9 27.5 9 26.672 8.329 26 7.5 26zm10-20C18.329 6 19 5.328 19 4.5v-3C19 .672 18.329.0 17.5.0S16 .672 16 1.5v3C16 5.328 16.671 6 17.5 6zm10 3c.414.0.789-.168 1.06-.439l2-2C30.832 6.289 31 5.914 31 5.5 31 4.672 30.329 4 29.5 4c-.414.0-.789.168-1.061.44l-2 2C26.168 6.711 26 7.086 26 7.5 26 8.328 26.671 9 27.5 9zM6.439 8.561C6.711 8.832 7.086 9 7.5 9 8.328 9 9 8.328 9 7.5c0-.414-.168-.789-.439-1.061l-2-2C6.289 4.168 5.914 4 5.5 4 4.672 4 4 4.672 4 5.5c0 .414.168.789.439 1.06l2 2.001zM33.5 16h-3c-.828.0-1.5.672-1.5 1.5s.672 1.5 1.5 1.5h3c.828.0 1.5-.672 1.5-1.5S34.328 16 33.5 16zM28.561 26.439C28.289 26.168 27.914 26 27.5 26c-.828.0-1.5.672-1.5 1.5.0.414.168.789.439 1.06l2 2C28.711 30.832 29.086 31 29.5 31c.828.0 1.5-.672 1.5-1.5.0-.414-.168-.789-.439-1.061l-2-2zM17.5 29c-.829.0-1.5.672-1.5 1.5v3c0 .828.671 1.5 1.5 1.5s1.5-.672 1.5-1.5v-3C19 29.672 18.329 29 17.5 29zm0-22C11.71 7 7 11.71 7 17.5S11.71 28 17.5 28 28 23.29 28 17.5 23.29 7 17.5 7zm0 18c-4.136.0-7.5-3.364-7.5-7.5s3.364-7.5 7.5-7.5 7.5 3.364 7.5 7.5S21.636 25 17.5 25z"/></svg></label><label id=toggle-label-dark for=darkmode-toggle tabindex=-1><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" id="nightIcon" viewBox="0 0 100 100" style="enable-background='new 0 0 100 100'"><title>Dark Mode</title><path d="M96.76 66.458c-.853-.852-2.15-1.064-3.23-.534-6.063 2.991-12.858 4.571-19.655 4.571C62.022 70.495 50.88 65.88 42.5 57.5 29.043 44.043 25.658 23.536 34.076 6.47c.532-1.08.318-2.379-.534-3.23-.851-.852-2.15-1.064-3.23-.534-4.918 2.427-9.375 5.619-13.246 9.491-9.447 9.447-14.65 22.008-14.65 35.369.0 13.36 5.203 25.921 14.65 35.368s22.008 14.65 35.368 14.65c13.361.0 25.921-5.203 35.369-14.65 3.872-3.871 7.064-8.328 9.491-13.246C97.826 68.608 97.611 67.309 96.76 66.458z"/></svg></label></div></header><article><h1>逆向wp-keylead</h1><p class=meta>Last updated
 Sep 17, 2022
 <a href=https://github.com/mffseal/2_0_2-%e8%ae%a1%e7%ae%97%e6%9c%ba%e7%a7%91%e5%ad%a6/2_0_2_1_3_0-%e7%bd%91%e7%bb%9c%e5%ae%89%e5%85%a8/%e4%ba%8c%e8%bf%9b%e5%88%b6%e5%ae%89%e5%85%a8/%e9%80%86%e5%90%91/writeup/%e9%80%86%e5%90%91wp-keylead.md rel=noopener>Edit Source</a></p><ul class=tags><li><a href=https://harbor.mffseal.top/tags/article/>Article</a></li></ul><aside class=mainTOC><details><summary>Table of Contents</summary><nav id=TableOfContents><ol><li><a href=#文件分析>文件分析</a></li><li><a href=#函数分析>函数分析</a><ol><li><a href=#主函数>主函数</a></li><li><a href=#flag-生成函数>flag 生成函数</a></li></ol></li><li><a href=#方法分析>方法分析</a><ol><li><a href=#定位程序起始位置>定位程序起始位置</a></li><li><a href=#函数位置记录>函数位置记录</a></li></ol></li><li><a href=#调试>调试</a><ol><li><a href=#gdb-操作复习>gdb 操作复习</a></li><li><a href=#开始调试>开始调试</a></li></ol></li></ol></nav></details></aside><a href=#逆向wp-keylead><h1 id=逆向wp-keylead><span class=hanchor arialabel=Anchor># </span>逆向wp-keylead</h1></a><p><a href="http://sec.hdu.edu.cn/question/reverse/5783?sort=default" rel=noopener>杭电 CTF 平台逆向第二题.</a></p><p>题目在网络对应目录中:
-<a href=http://gokoucat.ys168.com/ rel=noopener>http://gokoucat.ys168.com/</a></p><a href=#文件分析><h2 id=文件分析><span class=hanchor arialabel=Anchor># </span>文件分析</h2></a><p>通过在 lunux 环境下, 使用 <code>file keylead</code> 发现是一个压缩文件, 解压后得到可执行文件.</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
-</span><span class=lnt>2
-</span><span class=lnt>3
+<a href=http://gokoucat.ys168.com/ rel=noopener>http://gokoucat.ys168.com/</a></p><a href=#文件分析><h2 id=文件分析><span class=hanchor arialabel=Anchor># </span>文件分析</h2></a><p>通过在 lunux 环境下, 使用 <code>file keylead</code> 发现是一个压缩文件, 解压后得到可执行文件.</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt id=hl-0-1><a style=outline:none;text-decoration:none;color:inherit href=#hl-0-1>1</a>
+</span><span class=lnt id=hl-0-2><a style=outline:none;text-decoration:none;color:inherit href=#hl-0-2>2</a>
+</span><span class=lnt id=hl-0-3><a style=outline:none;text-decoration:none;color:inherit href=#hl-0-3>3</a>
 </span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-shell data-lang=shell><span class=line><span class=cl>file keylead
 </span></span><span class=line><span class=cl>
 </span></span><span class=line><span class=cl>keylead: XZ compressed data
-</span></span></code></pre></td></tr></table></div></div><a href=#函数分析><h2 id=函数分析><span class=hanchor arialabel=Anchor># </span>函数分析</h2></a><p>通过字符串定位的方法, 找到主函数.</p><a href=#主函数><h3 id=主函数><span class=hanchor arialabel=Anchor># </span>主函数</h3></a><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
-</span><span class=lnt> 2
-</span><span class=lnt> 3
-</span><span class=lnt> 4
-</span><span class=lnt> 5
-</span><span class=lnt> 6
-</span><span class=lnt> 7
-</span><span class=lnt> 8
-</span><span class=lnt> 9
-</span><span class=lnt>10
-</span><span class=lnt>11
-</span><span class=lnt>12
-</span><span class=lnt>13
-</span><span class=lnt>14
-</span><span class=lnt>15
-</span><span class=lnt>16
-</span><span class=lnt>17
-</span><span class=lnt>18
-</span><span class=lnt>19
-</span><span class=lnt>20
-</span><span class=lnt>21
-</span><span class=lnt>22
-</span><span class=lnt>23
-</span><span class=lnt>24
-</span><span class=lnt>25
-</span><span class=lnt>26
-</span><span class=lnt>27
-</span><span class=lnt>28
-</span><span class=lnt>29
-</span><span class=lnt>30
-</span><span class=lnt>31
-</span><span class=lnt>32
-</span><span class=lnt>33
-</span><span class=lnt>34
-</span><span class=lnt>35
-</span><span class=lnt>36
-</span><span class=lnt>37
-</span><span class=lnt>38
-</span><span class=lnt>39
-</span><span class=lnt>40
-</span><span class=lnt>41
-</span><span class=lnt>42
-</span><span class=lnt>43
-</span><span class=lnt>44
-</span><span class=lnt>45
-</span><span class=lnt>46
-</span><span class=lnt>47
-</span><span class=lnt>48
-</span><span class=lnt>49
-</span><span class=lnt>50
-</span><span class=lnt>51
-</span><span class=lnt>52
-</span><span class=lnt>53
-</span><span class=lnt>54
-</span><span class=lnt>55
-</span><span class=lnt>56
-</span><span class=lnt>57
-</span><span class=lnt>58
-</span><span class=lnt>59
-</span><span class=lnt>60
-</span><span class=lnt>61
-</span><span class=lnt>62
-</span><span class=lnt>63
-</span><span class=lnt>64
-</span><span class=lnt>65
-</span><span class=lnt>66
-</span><span class=lnt>67
-</span><span class=lnt>68
-</span><span class=lnt>69
-</span><span class=lnt>70
-</span><span class=lnt>71
-</span><span class=lnt>72
-</span><span class=lnt>73
+</span></span></code></pre></td></tr></table></div></div><a href=#函数分析><h2 id=函数分析><span class=hanchor arialabel=Anchor># </span>函数分析</h2></a><p>通过字符串定位的方法, 找到主函数.</p><a href=#主函数><h3 id=主函数><span class=hanchor arialabel=Anchor># </span>主函数</h3></a><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt id=hl-1-1><a style=outline:none;text-decoration:none;color:inherit href=#hl-1-1> 1</a>
+</span><span class=lnt id=hl-1-2><a style=outline:none;text-decoration:none;color:inherit href=#hl-1-2> 2</a>
+</span><span class=lnt id=hl-1-3><a style=outline:none;text-decoration:none;color:inherit href=#hl-1-3> 3</a>
+</span><span class=lnt id=hl-1-4><a style=outline:none;text-decoration:none;color:inherit href=#hl-1-4> 4</a>
+</span><span class=lnt id=hl-1-5><a style=outline:none;text-decoration:none;color:inherit href=#hl-1-5> 5</a>
+</span><span class=lnt id=hl-1-6><a style=outline:none;text-decoration:none;color:inherit href=#hl-1-6> 6</a>
+</span><span class=lnt id=hl-1-7><a style=outline:none;text-decoration:none;color:inherit href=#hl-1-7> 7</a>
+</span><span class=lnt id=hl-1-8><a style=outline:none;text-decoration:none;color:inherit href=#hl-1-8> 8</a>
+</span><span class=lnt id=hl-1-9><a style=outline:none;text-decoration:none;color:inherit href=#hl-1-9> 9</a>
+</span><span class=lnt id=hl-1-10><a style=outline:none;text-decoration:none;color:inherit href=#hl-1-10>10</a>
+</span><span class=lnt id=hl-1-11><a style=outline:none;text-decoration:none;color:inherit href=#hl-1-11>11</a>
+</span><span class=lnt id=hl-1-12><a style=outline:none;text-decoration:none;color:inherit href=#hl-1-12>12</a>
+</span><span class=lnt id=hl-1-13><a style=outline:none;text-decoration:none;color:inherit href=#hl-1-13>13</a>
+</span><span class=lnt id=hl-1-14><a style=outline:none;text-decoration:none;color:inherit href=#hl-1-14>14</a>
+</span><span class=lnt id=hl-1-15><a style=outline:none;text-decoration:none;color:inherit href=#hl-1-15>15</a>
+</span><span class=lnt id=hl-1-16><a style=outline:none;text-decoration:none;color:inherit href=#hl-1-16>16</a>
+</span><span class=lnt id=hl-1-17><a style=outline:none;text-decoration:none;color:inherit href=#hl-1-17>17</a>
+</span><span class=lnt id=hl-1-18><a style=outline:none;text-decoration:none;color:inherit href=#hl-1-18>18</a>
+</span><span class=lnt id=hl-1-19><a style=outline:none;text-decoration:none;color:inherit href=#hl-1-19>19</a>
+</span><span class=lnt id=hl-1-20><a style=outline:none;text-decoration:none;color:inherit href=#hl-1-20>20</a>
+</span><span class=lnt id=hl-1-21><a style=outline:none;text-decoration:none;color:inherit href=#hl-1-21>21</a>
+</span><span class=lnt id=hl-1-22><a style=outline:none;text-decoration:none;color:inherit href=#hl-1-22>22</a>
+</span><span class=lnt id=hl-1-23><a style=outline:none;text-decoration:none;color:inherit href=#hl-1-23>23</a>
+</span><span class=lnt id=hl-1-24><a style=outline:none;text-decoration:none;color:inherit href=#hl-1-24>24</a>
+</span><span class=lnt id=hl-1-25><a style=outline:none;text-decoration:none;color:inherit href=#hl-1-25>25</a>
+</span><span class=lnt id=hl-1-26><a style=outline:none;text-decoration:none;color:inherit href=#hl-1-26>26</a>
+</span><span class=lnt id=hl-1-27><a style=outline:none;text-decoration:none;color:inherit href=#hl-1-27>27</a>
+</span><span class=lnt id=hl-1-28><a style=outline:none;text-decoration:none;color:inherit href=#hl-1-28>28</a>
+</span><span class=lnt id=hl-1-29><a style=outline:none;text-decoration:none;color:inherit href=#hl-1-29>29</a>
+</span><span class=lnt id=hl-1-30><a style=outline:none;text-decoration:none;color:inherit href=#hl-1-30>30</a>
+</span><span class=lnt id=hl-1-31><a style=outline:none;text-decoration:none;color:inherit href=#hl-1-31>31</a>
+</span><span class=lnt id=hl-1-32><a style=outline:none;text-decoration:none;color:inherit href=#hl-1-32>32</a>
+</span><span class=lnt id=hl-1-33><a style=outline:none;text-decoration:none;color:inherit href=#hl-1-33>33</a>
+</span><span class=lnt id=hl-1-34><a style=outline:none;text-decoration:none;color:inherit href=#hl-1-34>34</a>
+</span><span class=lnt id=hl-1-35><a style=outline:none;text-decoration:none;color:inherit href=#hl-1-35>35</a>
+</span><span class=lnt id=hl-1-36><a style=outline:none;text-decoration:none;color:inherit href=#hl-1-36>36</a>
+</span><span class=lnt id=hl-1-37><a style=outline:none;text-decoration:none;color:inherit href=#hl-1-37>37</a>
+</span><span class=lnt id=hl-1-38><a style=outline:none;text-decoration:none;color:inherit href=#hl-1-38>38</a>
+</span><span class=lnt id=hl-1-39><a style=outline:none;text-decoration:none;color:inherit href=#hl-1-39>39</a>
+</span><span class=lnt id=hl-1-40><a style=outline:none;text-decoration:none;color:inherit href=#hl-1-40>40</a>
+</span><span class=lnt id=hl-1-41><a style=outline:none;text-decoration:none;color:inherit href=#hl-1-41>41</a>
+</span><span class=lnt id=hl-1-42><a style=outline:none;text-decoration:none;color:inherit href=#hl-1-42>42</a>
+</span><span class=lnt id=hl-1-43><a style=outline:none;text-decoration:none;color:inherit href=#hl-1-43>43</a>
+</span><span class=lnt id=hl-1-44><a style=outline:none;text-decoration:none;color:inherit href=#hl-1-44>44</a>
+</span><span class=lnt id=hl-1-45><a style=outline:none;text-decoration:none;color:inherit href=#hl-1-45>45</a>
+</span><span class=lnt id=hl-1-46><a style=outline:none;text-decoration:none;color:inherit href=#hl-1-46>46</a>
+</span><span class=lnt id=hl-1-47><a style=outline:none;text-decoration:none;color:inherit href=#hl-1-47>47</a>
+</span><span class=lnt id=hl-1-48><a style=outline:none;text-decoration:none;color:inherit href=#hl-1-48>48</a>
+</span><span class=lnt id=hl-1-49><a style=outline:none;text-decoration:none;color:inherit href=#hl-1-49>49</a>
+</span><span class=lnt id=hl-1-50><a style=outline:none;text-decoration:none;color:inherit href=#hl-1-50>50</a>
+</span><span class=lnt id=hl-1-51><a style=outline:none;text-decoration:none;color:inherit href=#hl-1-51>51</a>
+</span><span class=lnt id=hl-1-52><a style=outline:none;text-decoration:none;color:inherit href=#hl-1-52>52</a>
+</span><span class=lnt id=hl-1-53><a style=outline:none;text-decoration:none;color:inherit href=#hl-1-53>53</a>
+</span><span class=lnt id=hl-1-54><a style=outline:none;text-decoration:none;color:inherit href=#hl-1-54>54</a>
+</span><span class=lnt id=hl-1-55><a style=outline:none;text-decoration:none;color:inherit href=#hl-1-55>55</a>
+</span><span class=lnt id=hl-1-56><a style=outline:none;text-decoration:none;color:inherit href=#hl-1-56>56</a>
+</span><span class=lnt id=hl-1-57><a style=outline:none;text-decoration:none;color:inherit href=#hl-1-57>57</a>
+</span><span class=lnt id=hl-1-58><a style=outline:none;text-decoration:none;color:inherit href=#hl-1-58>58</a>
+</span><span class=lnt id=hl-1-59><a style=outline:none;text-decoration:none;color:inherit href=#hl-1-59>59</a>
+</span><span class=lnt id=hl-1-60><a style=outline:none;text-decoration:none;color:inherit href=#hl-1-60>60</a>
+</span><span class=lnt id=hl-1-61><a style=outline:none;text-decoration:none;color:inherit href=#hl-1-61>61</a>
+</span><span class=lnt id=hl-1-62><a style=outline:none;text-decoration:none;color:inherit href=#hl-1-62>62</a>
+</span><span class=lnt id=hl-1-63><a style=outline:none;text-decoration:none;color:inherit href=#hl-1-63>63</a>
+</span><span class=lnt id=hl-1-64><a style=outline:none;text-decoration:none;color:inherit href=#hl-1-64>64</a>
+</span><span class=lnt id=hl-1-65><a style=outline:none;text-decoration:none;color:inherit href=#hl-1-65>65</a>
+</span><span class=lnt id=hl-1-66><a style=outline:none;text-decoration:none;color:inherit href=#hl-1-66>66</a>
+</span><span class=lnt id=hl-1-67><a style=outline:none;text-decoration:none;color:inherit href=#hl-1-67>67</a>
+</span><span class=lnt id=hl-1-68><a style=outline:none;text-decoration:none;color:inherit href=#hl-1-68>68</a>
+</span><span class=lnt id=hl-1-69><a style=outline:none;text-decoration:none;color:inherit href=#hl-1-69>69</a>
+</span><span class=lnt id=hl-1-70><a style=outline:none;text-decoration:none;color:inherit href=#hl-1-70>70</a>
+</span><span class=lnt id=hl-1-71><a style=outline:none;text-decoration:none;color:inherit href=#hl-1-71>71</a>
+</span><span class=lnt id=hl-1-72><a style=outline:none;text-decoration:none;color:inherit href=#hl-1-72>72</a>
+</span><span class=lnt id=hl-1-73><a style=outline:none;text-decoration:none;color:inherit href=#hl-1-73>73</a>
 </span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-c data-lang=c><span class=line><span class=cl><span class=kt>signed</span> <span class=kr>__int64</span> <span class=kr>__fastcall</span> <span class=nf>main</span><span class=p>(</span><span class=kr>__int64</span> <span class=n>a1</span><span class=p>,</span> <span class=kt>char</span> <span class=o>**</span><span class=n>a2</span><span class=p>,</span> <span class=kt>char</span> <span class=o>**</span><span class=n>a3</span><span class=p>)</span>
 </span></span><span class=line><span class=cl><span class=p>{</span>
 </span></span><span class=line><span class=cl>  <span class=kt>unsigned</span> <span class=kt>int</span> <span class=n>v3</span><span class=p>;</span> <span class=c1>// eax
@@ -174,237 +173,237 @@ Sep 17, 2022
 </span></span><span class=line><span class=cl>  <span class=p>}</span>
 </span></span><span class=line><span class=cl>  <span class=k>return</span> <span class=n>result</span><span class=p>;</span>
 </span></span><span class=line><span class=cl><span class=p>}</span>
-</span></span></code></pre></td></tr></table></div></div><ul><li>函数通过 <code>rand()</code>, 随机生成 5 个数字用于投掷骰子</li><li>有防调试修改的手段</li><li>结果为 31337 则调用 flag 生成的函数 <code>f_cal_flag()</code></li></ul><a href=#flag-生成函数><h3 id=flag-生成函数><span class=hanchor arialabel=Anchor># </span>flag 生成函数</h3></a><p>尝试通过对 flag 生成函数进行还原, 得到flag, 复制代码后修改执行:</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>  1
-</span><span class=lnt>  2
-</span><span class=lnt>  3
-</span><span class=lnt>  4
-</span><span class=lnt>  5
-</span><span class=lnt>  6
-</span><span class=lnt>  7
-</span><span class=lnt>  8
-</span><span class=lnt>  9
-</span><span class=lnt> 10
-</span><span class=lnt> 11
-</span><span class=lnt> 12
-</span><span class=lnt> 13
-</span><span class=lnt> 14
-</span><span class=lnt> 15
-</span><span class=lnt> 16
-</span><span class=lnt> 17
-</span><span class=lnt> 18
-</span><span class=lnt> 19
-</span><span class=lnt> 20
-</span><span class=lnt> 21
-</span><span class=lnt> 22
-</span><span class=lnt> 23
-</span><span class=lnt> 24
-</span><span class=lnt> 25
-</span><span class=lnt> 26
-</span><span class=lnt> 27
-</span><span class=lnt> 28
-</span><span class=lnt> 29
-</span><span class=lnt> 30
-</span><span class=lnt> 31
-</span><span class=lnt> 32
-</span><span class=lnt> 33
-</span><span class=lnt> 34
-</span><span class=lnt> 35
-</span><span class=lnt> 36
-</span><span class=lnt> 37
-</span><span class=lnt> 38
-</span><span class=lnt> 39
-</span><span class=lnt> 40
-</span><span class=lnt> 41
-</span><span class=lnt> 42
-</span><span class=lnt> 43
-</span><span class=lnt> 44
-</span><span class=lnt> 45
-</span><span class=lnt> 46
-</span><span class=lnt> 47
-</span><span class=lnt> 48
-</span><span class=lnt> 49
-</span><span class=lnt> 50
-</span><span class=lnt> 51
-</span><span class=lnt> 52
-</span><span class=lnt> 53
-</span><span class=lnt> 54
-</span><span class=lnt> 55
-</span><span class=lnt> 56
-</span><span class=lnt> 57
-</span><span class=lnt> 58
-</span><span class=lnt> 59
-</span><span class=lnt> 60
-</span><span class=lnt> 61
-</span><span class=lnt> 62
-</span><span class=lnt> 63
-</span><span class=lnt> 64
-</span><span class=lnt> 65
-</span><span class=lnt> 66
-</span><span class=lnt> 67
-</span><span class=lnt> 68
-</span><span class=lnt> 69
-</span><span class=lnt> 70
-</span><span class=lnt> 71
-</span><span class=lnt> 72
-</span><span class=lnt> 73
-</span><span class=lnt> 74
-</span><span class=lnt> 75
-</span><span class=lnt> 76
-</span><span class=lnt> 77
-</span><span class=lnt> 78
-</span><span class=lnt> 79
-</span><span class=lnt> 80
-</span><span class=lnt> 81
-</span><span class=lnt> 82
-</span><span class=lnt> 83
-</span><span class=lnt> 84
-</span><span class=lnt> 85
-</span><span class=lnt> 86
-</span><span class=lnt> 87
-</span><span class=lnt> 88
-</span><span class=lnt> 89
-</span><span class=lnt> 90
-</span><span class=lnt> 91
-</span><span class=lnt> 92
-</span><span class=lnt> 93
-</span><span class=lnt> 94
-</span><span class=lnt> 95
-</span><span class=lnt> 96
-</span><span class=lnt> 97
-</span><span class=lnt> 98
-</span><span class=lnt> 99
-</span><span class=lnt>100
-</span><span class=lnt>101
-</span><span class=lnt>102
-</span><span class=lnt>103
-</span><span class=lnt>104
-</span><span class=lnt>105
-</span><span class=lnt>106
-</span><span class=lnt>107
-</span><span class=lnt>108
-</span><span class=lnt>109
-</span><span class=lnt>110
-</span><span class=lnt>111
-</span><span class=lnt>112
-</span><span class=lnt>113
-</span><span class=lnt>114
-</span><span class=lnt>115
-</span><span class=lnt>116
-</span><span class=lnt>117
-</span><span class=lnt>118
-</span><span class=lnt>119
-</span><span class=lnt>120
-</span><span class=lnt>121
-</span><span class=lnt>122
-</span><span class=lnt>123
-</span><span class=lnt>124
-</span><span class=lnt>125
-</span><span class=lnt>126
-</span><span class=lnt>127
-</span><span class=lnt>128
-</span><span class=lnt>129
-</span><span class=lnt>130
-</span><span class=lnt>131
-</span><span class=lnt>132
-</span><span class=lnt>133
-</span><span class=lnt>134
-</span><span class=lnt>135
-</span><span class=lnt>136
-</span><span class=lnt>137
-</span><span class=lnt>138
-</span><span class=lnt>139
-</span><span class=lnt>140
-</span><span class=lnt>141
-</span><span class=lnt>142
-</span><span class=lnt>143
-</span><span class=lnt>144
-</span><span class=lnt>145
-</span><span class=lnt>146
-</span><span class=lnt>147
-</span><span class=lnt>148
-</span><span class=lnt>149
-</span><span class=lnt>150
-</span><span class=lnt>151
-</span><span class=lnt>152
-</span><span class=lnt>153
-</span><span class=lnt>154
-</span><span class=lnt>155
-</span><span class=lnt>156
-</span><span class=lnt>157
-</span><span class=lnt>158
-</span><span class=lnt>159
-</span><span class=lnt>160
-</span><span class=lnt>161
-</span><span class=lnt>162
-</span><span class=lnt>163
-</span><span class=lnt>164
-</span><span class=lnt>165
-</span><span class=lnt>166
-</span><span class=lnt>167
-</span><span class=lnt>168
-</span><span class=lnt>169
-</span><span class=lnt>170
-</span><span class=lnt>171
-</span><span class=lnt>172
-</span><span class=lnt>173
-</span><span class=lnt>174
-</span><span class=lnt>175
-</span><span class=lnt>176
-</span><span class=lnt>177
-</span><span class=lnt>178
-</span><span class=lnt>179
-</span><span class=lnt>180
-</span><span class=lnt>181
-</span><span class=lnt>182
-</span><span class=lnt>183
-</span><span class=lnt>184
-</span><span class=lnt>185
-</span><span class=lnt>186
-</span><span class=lnt>187
-</span><span class=lnt>188
-</span><span class=lnt>189
-</span><span class=lnt>190
-</span><span class=lnt>191
-</span><span class=lnt>192
-</span><span class=lnt>193
-</span><span class=lnt>194
-</span><span class=lnt>195
-</span><span class=lnt>196
-</span><span class=lnt>197
-</span><span class=lnt>198
-</span><span class=lnt>199
-</span><span class=lnt>200
-</span><span class=lnt>201
-</span><span class=lnt>202
-</span><span class=lnt>203
-</span><span class=lnt>204
-</span><span class=lnt>205
-</span><span class=lnt>206
-</span><span class=lnt>207
-</span><span class=lnt>208
-</span><span class=lnt>209
-</span><span class=lnt>210
-</span><span class=lnt>211
-</span><span class=lnt>212
-</span><span class=lnt>213
-</span><span class=lnt>214
-</span><span class=lnt>215
-</span><span class=lnt>216
-</span><span class=lnt>217
-</span><span class=lnt>218
-</span><span class=lnt>219
-</span><span class=lnt>220
-</span><span class=lnt>221
-</span><span class=lnt>222
-</span><span class=lnt>223
-</span><span class=lnt>224
-</span><span class=lnt>225
-</span><span class=lnt>226
-</span><span class=lnt>227
-</span><span class=lnt>228
-</span><span class=lnt>229
-</span><span class=lnt>230
-</span><span class=lnt>231
+</span></span></code></pre></td></tr></table></div></div><ul><li>函数通过 <code>rand()</code>, 随机生成 5 个数字用于投掷骰子</li><li>有防调试修改的手段</li><li>结果为 31337 则调用 flag 生成的函数 <code>f_cal_flag()</code></li></ul><a href=#flag-生成函数><h3 id=flag-生成函数><span class=hanchor arialabel=Anchor># </span>flag 生成函数</h3></a><p>尝试通过对 flag 生成函数进行还原, 得到flag, 复制代码后修改执行:</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt id=hl-2-1><a style=outline:none;text-decoration:none;color:inherit href=#hl-2-1>  1</a>
+</span><span class=lnt id=hl-2-2><a style=outline:none;text-decoration:none;color:inherit href=#hl-2-2>  2</a>
+</span><span class=lnt id=hl-2-3><a style=outline:none;text-decoration:none;color:inherit href=#hl-2-3>  3</a>
+</span><span class=lnt id=hl-2-4><a style=outline:none;text-decoration:none;color:inherit href=#hl-2-4>  4</a>
+</span><span class=lnt id=hl-2-5><a style=outline:none;text-decoration:none;color:inherit href=#hl-2-5>  5</a>
+</span><span class=lnt id=hl-2-6><a style=outline:none;text-decoration:none;color:inherit href=#hl-2-6>  6</a>
+</span><span class=lnt id=hl-2-7><a style=outline:none;text-decoration:none;color:inherit href=#hl-2-7>  7</a>
+</span><span class=lnt id=hl-2-8><a style=outline:none;text-decoration:none;color:inherit href=#hl-2-8>  8</a>
+</span><span class=lnt id=hl-2-9><a style=outline:none;text-decoration:none;color:inherit href=#hl-2-9>  9</a>
+</span><span class=lnt id=hl-2-10><a style=outline:none;text-decoration:none;color:inherit href=#hl-2-10> 10</a>
+</span><span class=lnt id=hl-2-11><a style=outline:none;text-decoration:none;color:inherit href=#hl-2-11> 11</a>
+</span><span class=lnt id=hl-2-12><a style=outline:none;text-decoration:none;color:inherit href=#hl-2-12> 12</a>
+</span><span class=lnt id=hl-2-13><a style=outline:none;text-decoration:none;color:inherit href=#hl-2-13> 13</a>
+</span><span class=lnt id=hl-2-14><a style=outline:none;text-decoration:none;color:inherit href=#hl-2-14> 14</a>
+</span><span class=lnt id=hl-2-15><a style=outline:none;text-decoration:none;color:inherit href=#hl-2-15> 15</a>
+</span><span class=lnt id=hl-2-16><a style=outline:none;text-decoration:none;color:inherit href=#hl-2-16> 16</a>
+</span><span class=lnt id=hl-2-17><a style=outline:none;text-decoration:none;color:inherit href=#hl-2-17> 17</a>
+</span><span class=lnt id=hl-2-18><a style=outline:none;text-decoration:none;color:inherit href=#hl-2-18> 18</a>
+</span><span class=lnt id=hl-2-19><a style=outline:none;text-decoration:none;color:inherit href=#hl-2-19> 19</a>
+</span><span class=lnt id=hl-2-20><a style=outline:none;text-decoration:none;color:inherit href=#hl-2-20> 20</a>
+</span><span class=lnt id=hl-2-21><a style=outline:none;text-decoration:none;color:inherit href=#hl-2-21> 21</a>
+</span><span class=lnt id=hl-2-22><a style=outline:none;text-decoration:none;color:inherit href=#hl-2-22> 22</a>
+</span><span class=lnt id=hl-2-23><a style=outline:none;text-decoration:none;color:inherit href=#hl-2-23> 23</a>
+</span><span class=lnt id=hl-2-24><a style=outline:none;text-decoration:none;color:inherit href=#hl-2-24> 24</a>
+</span><span class=lnt id=hl-2-25><a style=outline:none;text-decoration:none;color:inherit href=#hl-2-25> 25</a>
+</span><span class=lnt id=hl-2-26><a style=outline:none;text-decoration:none;color:inherit href=#hl-2-26> 26</a>
+</span><span class=lnt id=hl-2-27><a style=outline:none;text-decoration:none;color:inherit href=#hl-2-27> 27</a>
+</span><span class=lnt id=hl-2-28><a style=outline:none;text-decoration:none;color:inherit href=#hl-2-28> 28</a>
+</span><span class=lnt id=hl-2-29><a style=outline:none;text-decoration:none;color:inherit href=#hl-2-29> 29</a>
+</span><span class=lnt id=hl-2-30><a style=outline:none;text-decoration:none;color:inherit href=#hl-2-30> 30</a>
+</span><span class=lnt id=hl-2-31><a style=outline:none;text-decoration:none;color:inherit href=#hl-2-31> 31</a>
+</span><span class=lnt id=hl-2-32><a style=outline:none;text-decoration:none;color:inherit href=#hl-2-32> 32</a>
+</span><span class=lnt id=hl-2-33><a style=outline:none;text-decoration:none;color:inherit href=#hl-2-33> 33</a>
+</span><span class=lnt id=hl-2-34><a style=outline:none;text-decoration:none;color:inherit href=#hl-2-34> 34</a>
+</span><span class=lnt id=hl-2-35><a style=outline:none;text-decoration:none;color:inherit href=#hl-2-35> 35</a>
+</span><span class=lnt id=hl-2-36><a style=outline:none;text-decoration:none;color:inherit href=#hl-2-36> 36</a>
+</span><span class=lnt id=hl-2-37><a style=outline:none;text-decoration:none;color:inherit href=#hl-2-37> 37</a>
+</span><span class=lnt id=hl-2-38><a style=outline:none;text-decoration:none;color:inherit href=#hl-2-38> 38</a>
+</span><span class=lnt id=hl-2-39><a style=outline:none;text-decoration:none;color:inherit href=#hl-2-39> 39</a>
+</span><span class=lnt id=hl-2-40><a style=outline:none;text-decoration:none;color:inherit href=#hl-2-40> 40</a>
+</span><span class=lnt id=hl-2-41><a style=outline:none;text-decoration:none;color:inherit href=#hl-2-41> 41</a>
+</span><span class=lnt id=hl-2-42><a style=outline:none;text-decoration:none;color:inherit href=#hl-2-42> 42</a>
+</span><span class=lnt id=hl-2-43><a style=outline:none;text-decoration:none;color:inherit href=#hl-2-43> 43</a>
+</span><span class=lnt id=hl-2-44><a style=outline:none;text-decoration:none;color:inherit href=#hl-2-44> 44</a>
+</span><span class=lnt id=hl-2-45><a style=outline:none;text-decoration:none;color:inherit href=#hl-2-45> 45</a>
+</span><span class=lnt id=hl-2-46><a style=outline:none;text-decoration:none;color:inherit href=#hl-2-46> 46</a>
+</span><span class=lnt id=hl-2-47><a style=outline:none;text-decoration:none;color:inherit href=#hl-2-47> 47</a>
+</span><span class=lnt id=hl-2-48><a style=outline:none;text-decoration:none;color:inherit href=#hl-2-48> 48</a>
+</span><span class=lnt id=hl-2-49><a style=outline:none;text-decoration:none;color:inherit href=#hl-2-49> 49</a>
+</span><span class=lnt id=hl-2-50><a style=outline:none;text-decoration:none;color:inherit href=#hl-2-50> 50</a>
+</span><span class=lnt id=hl-2-51><a style=outline:none;text-decoration:none;color:inherit href=#hl-2-51> 51</a>
+</span><span class=lnt id=hl-2-52><a style=outline:none;text-decoration:none;color:inherit href=#hl-2-52> 52</a>
+</span><span class=lnt id=hl-2-53><a style=outline:none;text-decoration:none;color:inherit href=#hl-2-53> 53</a>
+</span><span class=lnt id=hl-2-54><a style=outline:none;text-decoration:none;color:inherit href=#hl-2-54> 54</a>
+</span><span class=lnt id=hl-2-55><a style=outline:none;text-decoration:none;color:inherit href=#hl-2-55> 55</a>
+</span><span class=lnt id=hl-2-56><a style=outline:none;text-decoration:none;color:inherit href=#hl-2-56> 56</a>
+</span><span class=lnt id=hl-2-57><a style=outline:none;text-decoration:none;color:inherit href=#hl-2-57> 57</a>
+</span><span class=lnt id=hl-2-58><a style=outline:none;text-decoration:none;color:inherit href=#hl-2-58> 58</a>
+</span><span class=lnt id=hl-2-59><a style=outline:none;text-decoration:none;color:inherit href=#hl-2-59> 59</a>
+</span><span class=lnt id=hl-2-60><a style=outline:none;text-decoration:none;color:inherit href=#hl-2-60> 60</a>
+</span><span class=lnt id=hl-2-61><a style=outline:none;text-decoration:none;color:inherit href=#hl-2-61> 61</a>
+</span><span class=lnt id=hl-2-62><a style=outline:none;text-decoration:none;color:inherit href=#hl-2-62> 62</a>
+</span><span class=lnt id=hl-2-63><a style=outline:none;text-decoration:none;color:inherit href=#hl-2-63> 63</a>
+</span><span class=lnt id=hl-2-64><a style=outline:none;text-decoration:none;color:inherit href=#hl-2-64> 64</a>
+</span><span class=lnt id=hl-2-65><a style=outline:none;text-decoration:none;color:inherit href=#hl-2-65> 65</a>
+</span><span class=lnt id=hl-2-66><a style=outline:none;text-decoration:none;color:inherit href=#hl-2-66> 66</a>
+</span><span class=lnt id=hl-2-67><a style=outline:none;text-decoration:none;color:inherit href=#hl-2-67> 67</a>
+</span><span class=lnt id=hl-2-68><a style=outline:none;text-decoration:none;color:inherit href=#hl-2-68> 68</a>
+</span><span class=lnt id=hl-2-69><a style=outline:none;text-decoration:none;color:inherit href=#hl-2-69> 69</a>
+</span><span class=lnt id=hl-2-70><a style=outline:none;text-decoration:none;color:inherit href=#hl-2-70> 70</a>
+</span><span class=lnt id=hl-2-71><a style=outline:none;text-decoration:none;color:inherit href=#hl-2-71> 71</a>
+</span><span class=lnt id=hl-2-72><a style=outline:none;text-decoration:none;color:inherit href=#hl-2-72> 72</a>
+</span><span class=lnt id=hl-2-73><a style=outline:none;text-decoration:none;color:inherit href=#hl-2-73> 73</a>
+</span><span class=lnt id=hl-2-74><a style=outline:none;text-decoration:none;color:inherit href=#hl-2-74> 74</a>
+</span><span class=lnt id=hl-2-75><a style=outline:none;text-decoration:none;color:inherit href=#hl-2-75> 75</a>
+</span><span class=lnt id=hl-2-76><a style=outline:none;text-decoration:none;color:inherit href=#hl-2-76> 76</a>
+</span><span class=lnt id=hl-2-77><a style=outline:none;text-decoration:none;color:inherit href=#hl-2-77> 77</a>
+</span><span class=lnt id=hl-2-78><a style=outline:none;text-decoration:none;color:inherit href=#hl-2-78> 78</a>
+</span><span class=lnt id=hl-2-79><a style=outline:none;text-decoration:none;color:inherit href=#hl-2-79> 79</a>
+</span><span class=lnt id=hl-2-80><a style=outline:none;text-decoration:none;color:inherit href=#hl-2-80> 80</a>
+</span><span class=lnt id=hl-2-81><a style=outline:none;text-decoration:none;color:inherit href=#hl-2-81> 81</a>
+</span><span class=lnt id=hl-2-82><a style=outline:none;text-decoration:none;color:inherit href=#hl-2-82> 82</a>
+</span><span class=lnt id=hl-2-83><a style=outline:none;text-decoration:none;color:inherit href=#hl-2-83> 83</a>
+</span><span class=lnt id=hl-2-84><a style=outline:none;text-decoration:none;color:inherit href=#hl-2-84> 84</a>
+</span><span class=lnt id=hl-2-85><a style=outline:none;text-decoration:none;color:inherit href=#hl-2-85> 85</a>
+</span><span class=lnt id=hl-2-86><a style=outline:none;text-decoration:none;color:inherit href=#hl-2-86> 86</a>
+</span><span class=lnt id=hl-2-87><a style=outline:none;text-decoration:none;color:inherit href=#hl-2-87> 87</a>
+</span><span class=lnt id=hl-2-88><a style=outline:none;text-decoration:none;color:inherit href=#hl-2-88> 88</a>
+</span><span class=lnt id=hl-2-89><a style=outline:none;text-decoration:none;color:inherit href=#hl-2-89> 89</a>
+</span><span class=lnt id=hl-2-90><a style=outline:none;text-decoration:none;color:inherit href=#hl-2-90> 90</a>
+</span><span class=lnt id=hl-2-91><a style=outline:none;text-decoration:none;color:inherit href=#hl-2-91> 91</a>
+</span><span class=lnt id=hl-2-92><a style=outline:none;text-decoration:none;color:inherit href=#hl-2-92> 92</a>
+</span><span class=lnt id=hl-2-93><a style=outline:none;text-decoration:none;color:inherit href=#hl-2-93> 93</a>
+</span><span class=lnt id=hl-2-94><a style=outline:none;text-decoration:none;color:inherit href=#hl-2-94> 94</a>
+</span><span class=lnt id=hl-2-95><a style=outline:none;text-decoration:none;color:inherit href=#hl-2-95> 95</a>
+</span><span class=lnt id=hl-2-96><a style=outline:none;text-decoration:none;color:inherit href=#hl-2-96> 96</a>
+</span><span class=lnt id=hl-2-97><a style=outline:none;text-decoration:none;color:inherit href=#hl-2-97> 97</a>
+</span><span class=lnt id=hl-2-98><a style=outline:none;text-decoration:none;color:inherit href=#hl-2-98> 98</a>
+</span><span class=lnt id=hl-2-99><a style=outline:none;text-decoration:none;color:inherit href=#hl-2-99> 99</a>
+</span><span class=lnt id=hl-2-100><a style=outline:none;text-decoration:none;color:inherit href=#hl-2-100>100</a>
+</span><span class=lnt id=hl-2-101><a style=outline:none;text-decoration:none;color:inherit href=#hl-2-101>101</a>
+</span><span class=lnt id=hl-2-102><a style=outline:none;text-decoration:none;color:inherit href=#hl-2-102>102</a>
+</span><span class=lnt id=hl-2-103><a style=outline:none;text-decoration:none;color:inherit href=#hl-2-103>103</a>
+</span><span class=lnt id=hl-2-104><a style=outline:none;text-decoration:none;color:inherit href=#hl-2-104>104</a>
+</span><span class=lnt id=hl-2-105><a style=outline:none;text-decoration:none;color:inherit href=#hl-2-105>105</a>
+</span><span class=lnt id=hl-2-106><a style=outline:none;text-decoration:none;color:inherit href=#hl-2-106>106</a>
+</span><span class=lnt id=hl-2-107><a style=outline:none;text-decoration:none;color:inherit href=#hl-2-107>107</a>
+</span><span class=lnt id=hl-2-108><a style=outline:none;text-decoration:none;color:inherit href=#hl-2-108>108</a>
+</span><span class=lnt id=hl-2-109><a style=outline:none;text-decoration:none;color:inherit href=#hl-2-109>109</a>
+</span><span class=lnt id=hl-2-110><a style=outline:none;text-decoration:none;color:inherit href=#hl-2-110>110</a>
+</span><span class=lnt id=hl-2-111><a style=outline:none;text-decoration:none;color:inherit href=#hl-2-111>111</a>
+</span><span class=lnt id=hl-2-112><a style=outline:none;text-decoration:none;color:inherit href=#hl-2-112>112</a>
+</span><span class=lnt id=hl-2-113><a style=outline:none;text-decoration:none;color:inherit href=#hl-2-113>113</a>
+</span><span class=lnt id=hl-2-114><a style=outline:none;text-decoration:none;color:inherit href=#hl-2-114>114</a>
+</span><span class=lnt id=hl-2-115><a style=outline:none;text-decoration:none;color:inherit href=#hl-2-115>115</a>
+</span><span class=lnt id=hl-2-116><a style=outline:none;text-decoration:none;color:inherit href=#hl-2-116>116</a>
+</span><span class=lnt id=hl-2-117><a style=outline:none;text-decoration:none;color:inherit href=#hl-2-117>117</a>
+</span><span class=lnt id=hl-2-118><a style=outline:none;text-decoration:none;color:inherit href=#hl-2-118>118</a>
+</span><span class=lnt id=hl-2-119><a style=outline:none;text-decoration:none;color:inherit href=#hl-2-119>119</a>
+</span><span class=lnt id=hl-2-120><a style=outline:none;text-decoration:none;color:inherit href=#hl-2-120>120</a>
+</span><span class=lnt id=hl-2-121><a style=outline:none;text-decoration:none;color:inherit href=#hl-2-121>121</a>
+</span><span class=lnt id=hl-2-122><a style=outline:none;text-decoration:none;color:inherit href=#hl-2-122>122</a>
+</span><span class=lnt id=hl-2-123><a style=outline:none;text-decoration:none;color:inherit href=#hl-2-123>123</a>
+</span><span class=lnt id=hl-2-124><a style=outline:none;text-decoration:none;color:inherit href=#hl-2-124>124</a>
+</span><span class=lnt id=hl-2-125><a style=outline:none;text-decoration:none;color:inherit href=#hl-2-125>125</a>
+</span><span class=lnt id=hl-2-126><a style=outline:none;text-decoration:none;color:inherit href=#hl-2-126>126</a>
+</span><span class=lnt id=hl-2-127><a style=outline:none;text-decoration:none;color:inherit href=#hl-2-127>127</a>
+</span><span class=lnt id=hl-2-128><a style=outline:none;text-decoration:none;color:inherit href=#hl-2-128>128</a>
+</span><span class=lnt id=hl-2-129><a style=outline:none;text-decoration:none;color:inherit href=#hl-2-129>129</a>
+</span><span class=lnt id=hl-2-130><a style=outline:none;text-decoration:none;color:inherit href=#hl-2-130>130</a>
+</span><span class=lnt id=hl-2-131><a style=outline:none;text-decoration:none;color:inherit href=#hl-2-131>131</a>
+</span><span class=lnt id=hl-2-132><a style=outline:none;text-decoration:none;color:inherit href=#hl-2-132>132</a>
+</span><span class=lnt id=hl-2-133><a style=outline:none;text-decoration:none;color:inherit href=#hl-2-133>133</a>
+</span><span class=lnt id=hl-2-134><a style=outline:none;text-decoration:none;color:inherit href=#hl-2-134>134</a>
+</span><span class=lnt id=hl-2-135><a style=outline:none;text-decoration:none;color:inherit href=#hl-2-135>135</a>
+</span><span class=lnt id=hl-2-136><a style=outline:none;text-decoration:none;color:inherit href=#hl-2-136>136</a>
+</span><span class=lnt id=hl-2-137><a style=outline:none;text-decoration:none;color:inherit href=#hl-2-137>137</a>
+</span><span class=lnt id=hl-2-138><a style=outline:none;text-decoration:none;color:inherit href=#hl-2-138>138</a>
+</span><span class=lnt id=hl-2-139><a style=outline:none;text-decoration:none;color:inherit href=#hl-2-139>139</a>
+</span><span class=lnt id=hl-2-140><a style=outline:none;text-decoration:none;color:inherit href=#hl-2-140>140</a>
+</span><span class=lnt id=hl-2-141><a style=outline:none;text-decoration:none;color:inherit href=#hl-2-141>141</a>
+</span><span class=lnt id=hl-2-142><a style=outline:none;text-decoration:none;color:inherit href=#hl-2-142>142</a>
+</span><span class=lnt id=hl-2-143><a style=outline:none;text-decoration:none;color:inherit href=#hl-2-143>143</a>
+</span><span class=lnt id=hl-2-144><a style=outline:none;text-decoration:none;color:inherit href=#hl-2-144>144</a>
+</span><span class=lnt id=hl-2-145><a style=outline:none;text-decoration:none;color:inherit href=#hl-2-145>145</a>
+</span><span class=lnt id=hl-2-146><a style=outline:none;text-decoration:none;color:inherit href=#hl-2-146>146</a>
+</span><span class=lnt id=hl-2-147><a style=outline:none;text-decoration:none;color:inherit href=#hl-2-147>147</a>
+</span><span class=lnt id=hl-2-148><a style=outline:none;text-decoration:none;color:inherit href=#hl-2-148>148</a>
+</span><span class=lnt id=hl-2-149><a style=outline:none;text-decoration:none;color:inherit href=#hl-2-149>149</a>
+</span><span class=lnt id=hl-2-150><a style=outline:none;text-decoration:none;color:inherit href=#hl-2-150>150</a>
+</span><span class=lnt id=hl-2-151><a style=outline:none;text-decoration:none;color:inherit href=#hl-2-151>151</a>
+</span><span class=lnt id=hl-2-152><a style=outline:none;text-decoration:none;color:inherit href=#hl-2-152>152</a>
+</span><span class=lnt id=hl-2-153><a style=outline:none;text-decoration:none;color:inherit href=#hl-2-153>153</a>
+</span><span class=lnt id=hl-2-154><a style=outline:none;text-decoration:none;color:inherit href=#hl-2-154>154</a>
+</span><span class=lnt id=hl-2-155><a style=outline:none;text-decoration:none;color:inherit href=#hl-2-155>155</a>
+</span><span class=lnt id=hl-2-156><a style=outline:none;text-decoration:none;color:inherit href=#hl-2-156>156</a>
+</span><span class=lnt id=hl-2-157><a style=outline:none;text-decoration:none;color:inherit href=#hl-2-157>157</a>
+</span><span class=lnt id=hl-2-158><a style=outline:none;text-decoration:none;color:inherit href=#hl-2-158>158</a>
+</span><span class=lnt id=hl-2-159><a style=outline:none;text-decoration:none;color:inherit href=#hl-2-159>159</a>
+</span><span class=lnt id=hl-2-160><a style=outline:none;text-decoration:none;color:inherit href=#hl-2-160>160</a>
+</span><span class=lnt id=hl-2-161><a style=outline:none;text-decoration:none;color:inherit href=#hl-2-161>161</a>
+</span><span class=lnt id=hl-2-162><a style=outline:none;text-decoration:none;color:inherit href=#hl-2-162>162</a>
+</span><span class=lnt id=hl-2-163><a style=outline:none;text-decoration:none;color:inherit href=#hl-2-163>163</a>
+</span><span class=lnt id=hl-2-164><a style=outline:none;text-decoration:none;color:inherit href=#hl-2-164>164</a>
+</span><span class=lnt id=hl-2-165><a style=outline:none;text-decoration:none;color:inherit href=#hl-2-165>165</a>
+</span><span class=lnt id=hl-2-166><a style=outline:none;text-decoration:none;color:inherit href=#hl-2-166>166</a>
+</span><span class=lnt id=hl-2-167><a style=outline:none;text-decoration:none;color:inherit href=#hl-2-167>167</a>
+</span><span class=lnt id=hl-2-168><a style=outline:none;text-decoration:none;color:inherit href=#hl-2-168>168</a>
+</span><span class=lnt id=hl-2-169><a style=outline:none;text-decoration:none;color:inherit href=#hl-2-169>169</a>
+</span><span class=lnt id=hl-2-170><a style=outline:none;text-decoration:none;color:inherit href=#hl-2-170>170</a>
+</span><span class=lnt id=hl-2-171><a style=outline:none;text-decoration:none;color:inherit href=#hl-2-171>171</a>
+</span><span class=lnt id=hl-2-172><a style=outline:none;text-decoration:none;color:inherit href=#hl-2-172>172</a>
+</span><span class=lnt id=hl-2-173><a style=outline:none;text-decoration:none;color:inherit href=#hl-2-173>173</a>
+</span><span class=lnt id=hl-2-174><a style=outline:none;text-decoration:none;color:inherit href=#hl-2-174>174</a>
+</span><span class=lnt id=hl-2-175><a style=outline:none;text-decoration:none;color:inherit href=#hl-2-175>175</a>
+</span><span class=lnt id=hl-2-176><a style=outline:none;text-decoration:none;color:inherit href=#hl-2-176>176</a>
+</span><span class=lnt id=hl-2-177><a style=outline:none;text-decoration:none;color:inherit href=#hl-2-177>177</a>
+</span><span class=lnt id=hl-2-178><a style=outline:none;text-decoration:none;color:inherit href=#hl-2-178>178</a>
+</span><span class=lnt id=hl-2-179><a style=outline:none;text-decoration:none;color:inherit href=#hl-2-179>179</a>
+</span><span class=lnt id=hl-2-180><a style=outline:none;text-decoration:none;color:inherit href=#hl-2-180>180</a>
+</span><span class=lnt id=hl-2-181><a style=outline:none;text-decoration:none;color:inherit href=#hl-2-181>181</a>
+</span><span class=lnt id=hl-2-182><a style=outline:none;text-decoration:none;color:inherit href=#hl-2-182>182</a>
+</span><span class=lnt id=hl-2-183><a style=outline:none;text-decoration:none;color:inherit href=#hl-2-183>183</a>
+</span><span class=lnt id=hl-2-184><a style=outline:none;text-decoration:none;color:inherit href=#hl-2-184>184</a>
+</span><span class=lnt id=hl-2-185><a style=outline:none;text-decoration:none;color:inherit href=#hl-2-185>185</a>
+</span><span class=lnt id=hl-2-186><a style=outline:none;text-decoration:none;color:inherit href=#hl-2-186>186</a>
+</span><span class=lnt id=hl-2-187><a style=outline:none;text-decoration:none;color:inherit href=#hl-2-187>187</a>
+</span><span class=lnt id=hl-2-188><a style=outline:none;text-decoration:none;color:inherit href=#hl-2-188>188</a>
+</span><span class=lnt id=hl-2-189><a style=outline:none;text-decoration:none;color:inherit href=#hl-2-189>189</a>
+</span><span class=lnt id=hl-2-190><a style=outline:none;text-decoration:none;color:inherit href=#hl-2-190>190</a>
+</span><span class=lnt id=hl-2-191><a style=outline:none;text-decoration:none;color:inherit href=#hl-2-191>191</a>
+</span><span class=lnt id=hl-2-192><a style=outline:none;text-decoration:none;color:inherit href=#hl-2-192>192</a>
+</span><span class=lnt id=hl-2-193><a style=outline:none;text-decoration:none;color:inherit href=#hl-2-193>193</a>
+</span><span class=lnt id=hl-2-194><a style=outline:none;text-decoration:none;color:inherit href=#hl-2-194>194</a>
+</span><span class=lnt id=hl-2-195><a style=outline:none;text-decoration:none;color:inherit href=#hl-2-195>195</a>
+</span><span class=lnt id=hl-2-196><a style=outline:none;text-decoration:none;color:inherit href=#hl-2-196>196</a>
+</span><span class=lnt id=hl-2-197><a style=outline:none;text-decoration:none;color:inherit href=#hl-2-197>197</a>
+</span><span class=lnt id=hl-2-198><a style=outline:none;text-decoration:none;color:inherit href=#hl-2-198>198</a>
+</span><span class=lnt id=hl-2-199><a style=outline:none;text-decoration:none;color:inherit href=#hl-2-199>199</a>
+</span><span class=lnt id=hl-2-200><a style=outline:none;text-decoration:none;color:inherit href=#hl-2-200>200</a>
+</span><span class=lnt id=hl-2-201><a style=outline:none;text-decoration:none;color:inherit href=#hl-2-201>201</a>
+</span><span class=lnt id=hl-2-202><a style=outline:none;text-decoration:none;color:inherit href=#hl-2-202>202</a>
+</span><span class=lnt id=hl-2-203><a style=outline:none;text-decoration:none;color:inherit href=#hl-2-203>203</a>
+</span><span class=lnt id=hl-2-204><a style=outline:none;text-decoration:none;color:inherit href=#hl-2-204>204</a>
+</span><span class=lnt id=hl-2-205><a style=outline:none;text-decoration:none;color:inherit href=#hl-2-205>205</a>
+</span><span class=lnt id=hl-2-206><a style=outline:none;text-decoration:none;color:inherit href=#hl-2-206>206</a>
+</span><span class=lnt id=hl-2-207><a style=outline:none;text-decoration:none;color:inherit href=#hl-2-207>207</a>
+</span><span class=lnt id=hl-2-208><a style=outline:none;text-decoration:none;color:inherit href=#hl-2-208>208</a>
+</span><span class=lnt id=hl-2-209><a style=outline:none;text-decoration:none;color:inherit href=#hl-2-209>209</a>
+</span><span class=lnt id=hl-2-210><a style=outline:none;text-decoration:none;color:inherit href=#hl-2-210>210</a>
+</span><span class=lnt id=hl-2-211><a style=outline:none;text-decoration:none;color:inherit href=#hl-2-211>211</a>
+</span><span class=lnt id=hl-2-212><a style=outline:none;text-decoration:none;color:inherit href=#hl-2-212>212</a>
+</span><span class=lnt id=hl-2-213><a style=outline:none;text-decoration:none;color:inherit href=#hl-2-213>213</a>
+</span><span class=lnt id=hl-2-214><a style=outline:none;text-decoration:none;color:inherit href=#hl-2-214>214</a>
+</span><span class=lnt id=hl-2-215><a style=outline:none;text-decoration:none;color:inherit href=#hl-2-215>215</a>
+</span><span class=lnt id=hl-2-216><a style=outline:none;text-decoration:none;color:inherit href=#hl-2-216>216</a>
+</span><span class=lnt id=hl-2-217><a style=outline:none;text-decoration:none;color:inherit href=#hl-2-217>217</a>
+</span><span class=lnt id=hl-2-218><a style=outline:none;text-decoration:none;color:inherit href=#hl-2-218>218</a>
+</span><span class=lnt id=hl-2-219><a style=outline:none;text-decoration:none;color:inherit href=#hl-2-219>219</a>
+</span><span class=lnt id=hl-2-220><a style=outline:none;text-decoration:none;color:inherit href=#hl-2-220>220</a>
+</span><span class=lnt id=hl-2-221><a style=outline:none;text-decoration:none;color:inherit href=#hl-2-221>221</a>
+</span><span class=lnt id=hl-2-222><a style=outline:none;text-decoration:none;color:inherit href=#hl-2-222>222</a>
+</span><span class=lnt id=hl-2-223><a style=outline:none;text-decoration:none;color:inherit href=#hl-2-223>223</a>
+</span><span class=lnt id=hl-2-224><a style=outline:none;text-decoration:none;color:inherit href=#hl-2-224>224</a>
+</span><span class=lnt id=hl-2-225><a style=outline:none;text-decoration:none;color:inherit href=#hl-2-225>225</a>
+</span><span class=lnt id=hl-2-226><a style=outline:none;text-decoration:none;color:inherit href=#hl-2-226>226</a>
+</span><span class=lnt id=hl-2-227><a style=outline:none;text-decoration:none;color:inherit href=#hl-2-227>227</a>
+</span><span class=lnt id=hl-2-228><a style=outline:none;text-decoration:none;color:inherit href=#hl-2-228>228</a>
+</span><span class=lnt id=hl-2-229><a style=outline:none;text-decoration:none;color:inherit href=#hl-2-229>229</a>
+</span><span class=lnt id=hl-2-230><a style=outline:none;text-decoration:none;color:inherit href=#hl-2-230>230</a>
+</span><span class=lnt id=hl-2-231><a style=outline:none;text-decoration:none;color:inherit href=#hl-2-231>231</a>
 </span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-c data-lang=c><span class=line><span class=cl><span class=cp>#include</span><span class=cpf>&lt;stdio.h&gt;</span><span class=cp>
 </span></span></span><span class=line><span class=cl><span class=cp></span>
 </span></span><span class=line><span class=cl><span class=kt>int</span> <span class=nf>main</span><span class=p>(</span><span class=kt>void</span><span class=p>)</span>
@@ -636,20 +635,20 @@ Sep 17, 2022
 </span></span><span class=line><span class=cl>  
 </span></span><span class=line><span class=cl>  <span class=k>return</span> <span class=mi>0</span><span class=p>;</span>
 </span></span><span class=line><span class=cl><span class=p>}</span>
-</span></span></code></pre></td></tr></table></div></div><p>执行返回的结果为:</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></span></code></pre></td></tr></table></div></div><p>执行返回的结果为:</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt id=hl-3-1><a style=outline:none;text-decoration:none;color:inherit href=#hl-3-1>1</a>
 </span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>ASIS{1fc1089e328eaf737373737c882ca0b10fcfe6}
-</span></span></code></pre></td></tr></table></div></div><p>看似正确, 但实际上有错误, 对比答案并调试后发现, 59 行处多次循环, 导致 flag 中 7373 处多了.<br>这个问题暂时没有想明白.</p><a href=#方法分析><h2 id=方法分析><span class=hanchor arialabel=Anchor># </span>方法分析</h2></a><p>利用程序开始的调用逻辑, 直接执行 flag 生成函数.</p><a href=#定位程序起始位置><h3 id=定位程序起始位置><span class=hanchor arialabel=Anchor># </span>定位程序起始位置</h3></a><p>在左侧函数表双击定位到 start</p><p><img src="/2_0_2-计算机科学/2_0_2_1_3_0-网络安全/二进制安全/逆向/writeup/z-attachments/Pasted image 20220917215125.png" width=auto></p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
-</span><span class=lnt>2
+</span></span></code></pre></td></tr></table></div></div><p>看似正确, 但实际上有错误, 对比答案并调试后发现, 59 行处多次循环, 导致 flag 中 7373 处多了.<br>这个问题暂时没有想明白.</p><a href=#方法分析><h2 id=方法分析><span class=hanchor arialabel=Anchor># </span>方法分析</h2></a><p>利用程序开始的调用逻辑, 直接执行 flag 生成函数.</p><a href=#定位程序起始位置><h3 id=定位程序起始位置><span class=hanchor arialabel=Anchor># </span>定位程序起始位置</h3></a><p>在左侧函数表双击定位到 start</p><p><img src="/2_0_2-计算机科学/2_0_2_1_3_0-网络安全/二进制安全/逆向/writeup/z-attachments/Pasted image 20220917215125.png" width=auto></p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt id=hl-4-1><a style=outline:none;text-decoration:none;color:inherit href=#hl-4-1>1</a>
+</span><span class=lnt id=hl-4-2><a style=outline:none;text-decoration:none;color:inherit href=#hl-4-2>2</a>
 </span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>参考1 [main() 函数在 Linux 上的启动过程分析 ](http://gokoucat.cn/2018/10/01/security/reverse/learning/main-function-startup-process-on-linux/)  
 </span></span><span class=line><span class=cl>参考2 [x86-64 框架下的参数传递](http://gokoucat.cn/2018/10/01/security/reverse/learning/64-calling-convention/)  
-</span></span></code></pre></td></tr></table></div></div><p>通过修改 <code>mov rdi, offset main ; main</code> 指令的目标位置, 即可控制程序跳转到 flag 生成函数.</p><a href=#函数位置记录><h3 id=函数位置记录><span class=hanchor arialabel=Anchor># </span>函数位置记录</h3></a><ul><li><code>mov rdi, offset main</code> 在 <code>0x4005dd</code></li><li><code>f_cal_flag</code> 在 <code>0x4006b6</code></li></ul><p>因此只要将 <code>mov rdi, offset main</code> 修改为 <code>mov rdi, 0x4006b6</code> 即可.</p><a href=#调试><h2 id=调试><span class=hanchor arialabel=Anchor># </span>调试</h2></a><a href=#gdb-操作复习><h3 id=gdb-操作复习><span class=hanchor arialabel=Anchor># </span>gdb 操作复习</h3></a><ul><li>开始调试 <code>gdb xxx</code></li><li>设置断点 <code>b *0x111111</code></li><li>查看断点: <code>i b</code></li><li>删除断点: <code>d xx</code></li><li>运行: <code>r</code></li><li>继续执行到断点: <code>c</code></li><li>查看寄存器: <code>i r</code> 或 <code>i registers</code></li><li>修改寄存器值: <code>set $REGISTER=VALUE</code></li></ul><a href=#开始调试><h3 id=开始调试><span class=hanchor arialabel=Anchor># </span>开始调试</h3></a><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
-</span><span class=lnt>2
-</span><span class=lnt>3
-</span><span class=lnt>4
-</span><span class=lnt>5
-</span><span class=lnt>6
-</span><span class=lnt>7
-</span><span class=lnt>8
+</span></span></code></pre></td></tr></table></div></div><p>通过修改 <code>mov rdi, offset main ; main</code> 指令的目标位置, 即可控制程序跳转到 flag 生成函数.</p><a href=#函数位置记录><h3 id=函数位置记录><span class=hanchor arialabel=Anchor># </span>函数位置记录</h3></a><ul><li><code>mov rdi, offset main</code> 在 <code>0x4005dd</code></li><li><code>f_cal_flag</code> 在 <code>0x4006b6</code></li></ul><p>因此只要将 <code>mov rdi, offset main</code> 修改为 <code>mov rdi, 0x4006b6</code> 即可.</p><a href=#调试><h2 id=调试><span class=hanchor arialabel=Anchor># </span>调试</h2></a><a href=#gdb-操作复习><h3 id=gdb-操作复习><span class=hanchor arialabel=Anchor># </span>gdb 操作复习</h3></a><ul><li>开始调试 <code>gdb xxx</code></li><li>设置断点 <code>b *0x111111</code></li><li>查看断点: <code>i b</code></li><li>删除断点: <code>d xx</code></li><li>运行: <code>r</code></li><li>继续执行到断点: <code>c</code></li><li>查看寄存器: <code>i r</code> 或 <code>i registers</code></li><li>修改寄存器值: <code>set $REGISTER=VALUE</code></li></ul><a href=#开始调试><h3 id=开始调试><span class=hanchor arialabel=Anchor># </span>开始调试</h3></a><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt id=hl-5-1><a style=outline:none;text-decoration:none;color:inherit href=#hl-5-1>1</a>
+</span><span class=lnt id=hl-5-2><a style=outline:none;text-decoration:none;color:inherit href=#hl-5-2>2</a>
+</span><span class=lnt id=hl-5-3><a style=outline:none;text-decoration:none;color:inherit href=#hl-5-3>3</a>
+</span><span class=lnt id=hl-5-4><a style=outline:none;text-decoration:none;color:inherit href=#hl-5-4>4</a>
+</span><span class=lnt id=hl-5-5><a style=outline:none;text-decoration:none;color:inherit href=#hl-5-5>5</a>
+</span><span class=lnt id=hl-5-6><a style=outline:none;text-decoration:none;color:inherit href=#hl-5-6>6</a>
+</span><span class=lnt id=hl-5-7><a style=outline:none;text-decoration:none;color:inherit href=#hl-5-7>7</a>
+</span><span class=lnt id=hl-5-8><a style=outline:none;text-decoration:none;color:inherit href=#hl-5-8>8</a>
 </span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-sh data-lang=sh><span class=line><span class=cl>gdb keylead            <span class=c1>## 进入调试环境</span>
 </span></span><span class=line><span class=cl>b *0x4005dd            <span class=c1>#设置断点</span>
 </span></span><span class=line><span class=cl>r                      <span class=c1>#运行程序</span>
