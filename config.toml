@@ -1,6 +1,7 @@
 baseURL = "https://harbor.mffseal.top/"
 # baseURL = "http://localhost:1313/"
 languageCode = "zh-cn"
+DefaultContentLanguage = "cn"
 googleAnalytics = "G-NV58SYWRZD"
 relativeURLs = false
 disablePathToLower = true
@@ -38,6 +39,7 @@ enableGitInfo = true
     [frontmatter]
         lastmod = ["updated", ":git"]
         # lastmod = [":lastmod", "updated"]
-        # publishDate = ["publishDate", "updated"]
+        publishDate = ["publishDate", "updated"]
     [markup.goldmark.renderer]
         unsafe = true
+    
