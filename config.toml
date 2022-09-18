@@ -6,15 +6,15 @@ googleAnalytics = "G-NV58SYWRZD"
 relativeURLs = false
 disablePathToLower = true
 ignoreFiles = [
-    "content/templates/",
-    "content/private/",
-    "content/.obsidian/",
-    "content/.trash/",
-    "content/0_0-收集/",
-    "content/0_1-私密/",
-    "content/z-oblib/z0-templates/",
-    "content/z-oblib/z1-from-templates/",
-    "content/z-oblib/z3-frames/"
+    "content/templates/*",
+    "content/private/*",
+    "content/.obsidian/*",
+    "content/.trash/*",
+    "content/0_0-收集/*",
+    "content/0_1-私密/*",
+    "content/z-oblib/z0-templates/*",
+    "content/z-oblib/z1-from-templates/*",
+    "content/z-oblib/z3-frames/*"
 ]
 summaryLength = 20
 paginate = 20
@@ -42,4 +42,3 @@ enableGitInfo = true
         publishDate = ["publishDate", "updated"]
     [markup.goldmark.renderer]
         unsafe = true
-    
