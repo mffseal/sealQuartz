@@ -1,0 +1,65 @@
+[404_message]
+other = "嗨，看来你在海豹湾迷路了。 你要找的海豹不存在 （或是不想见你）。"
+
+[404_back]
+other = "↳ 让我们回到码头吧。"
+
+[all_posts]
+other = "所有 {{.Title}}"
+
+[last_updated]
+other = "最后更新"
+
+[notes_count]
+other = "标签对应笔记"
+
+[first_10]
+other = "展示前10条"
+
+[tag]
+other = "标签"
+
+[backlinks]
+other = "反向链接"
+
+[no_backlinks]
+other = "无反向链接"
+
+[home]
+other = "港口"
+
+[light_mode]
+other = "亮色"
+
+[dark_mode]
+other = "暗色"
+
+[edit_source]
+other = "编辑源"
+
+[interactive_graph]
+other = "湾区地图"
+
+[search]
+other = "搜索"
+
+[search_icon]
+other = "搜索图标"
+
+[icon_search]
+other = "打开搜索图标"
+
+[recent_notes]
+other = "最新笔记"
+
+[first_3_notes]
+other = "前三项 {{ .notes }}"
+
+[search_for_something]
+other = "搜一搜..."
+
+[toc]
+other = "导航"
+
+[copyright]
+other = "由 {{ .name }} 使用 <a href=\"https://github.com/jackyzha0/quartz\">Quartz</a> 开发, © {{ .year }}"
