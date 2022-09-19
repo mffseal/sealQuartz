@@ -1,7 +1,7 @@
 ---
 title: 🦭海豹湾
 created: 2022-09-17 02:34:34
-updated: 2022-09-18 23:58:09
+updated: 2022-09-19 14:08:27
 ---
 
 **海豹港湾，第二大脑**
@@ -11,6 +11,8 @@ updated: 2022-09-18 23:58:09
 ---
 
 # 🦭海豹湾
+
+湾区建设状态：上传：[![Deploy to GitHub Pages](https://github.com/mffseal/sealQuartz/actions/workflows/deploy.yaml/badge.svg)](https://github.com/mffseal/sealQuartz/actions/workflows/deploy.yaml) | 构建：[![pages-build-deployment](https://github.com/mffseal/sealQuartz/actions/workflows/pages/pages-build-deployment/badge.svg)](https://github.com/mffseal/sealQuartz/actions/workflows/pages/pages-build-deployment)
 
 知识最小单位为 atom，由多个 atom 组合成 article，构建知识图谱，降低内容冗余度，不断精炼内容输出。
 
