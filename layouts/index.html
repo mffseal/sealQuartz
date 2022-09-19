@@ -12,8 +12,10 @@
         {{partial "toc.html" .}}
         {{partial "textprocessing.html" . }}
         {{partial "featured.html" . }}
+        <a href="/tags/featured">更多精选 →</a>
         {{if $.Site.Data.config.enableRecentNotes }}
           {{partial "recent.html" . }}
+          <a href="/tags/article">更多文章 →</a>
         {{end}}
     </article>
     {{partial "footerIndex.html" .}}
