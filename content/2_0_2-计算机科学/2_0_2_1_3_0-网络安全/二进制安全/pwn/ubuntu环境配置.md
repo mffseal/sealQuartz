@@ -1,7 +1,7 @@
 ---
 title: ubuntu环境配置
 created: 2022-09-06 22:49:14
-updated: 2022-09-18 20:46:19
+updated: 2022-09-20 04:04:57
 tags: 
 - article
 - featured
@@ -19,6 +19,12 @@ sudo apt update
 # pip 换源
 pip config set global.index-url https://pypi.tuna.tsinghua.edu.cn/simple
 
+sudo apt-get install git
+# git启用宿主机代理
+git config --global https.proxy socks5://192.168.204.1:1080
+git config --global https.proxy socks5://192.168.204.1:1080
+#git config --global --unset http.proxy
+#git config --global --unset https.proxy
 
 sudo apt-get update
 # sudo apt-get install python2.7-dev python-pip -y
@@ -45,7 +51,6 @@ echo "source ~/peda/peda.py" >> ~/.gdbinit
 # ./setupdbg.sh
 
 # zsh
-sudo apt-get install git
 sudo apt-get install zsh -y
 sudo chsh -s /usr/bin/zsh
 sudo sh -c "$(wget https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh -O -)"
