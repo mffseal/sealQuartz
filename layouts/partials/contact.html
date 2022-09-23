@@ -4,6 +4,15 @@
 <!-- Contact Info -->
 <div id="contact_buttons">
     <footer>
+        <p>
+            <a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/">
+                <img alt="Creative Commons Licence" style="border-width:0" src="https://i.creativecommons.org/l/by-nc/4.0/88x31.png" />
+            </a>
+            <br />
+            本博客的博主原创文章均遵循 <a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/">CC BY-NC(署名-非商业性使用) 4.0 国际协议</a>
+            <br />
+            转载请附上原文出处链接及本声明
+        </p>
         {{ $name := $data.name | default $.Site.Data.config.name }}
         {{ $year := dateFormat "2006" now }}
         <p>{{ i18n "copyright" (dict "name" $name "year" $year) | safeHTML}}</p>
