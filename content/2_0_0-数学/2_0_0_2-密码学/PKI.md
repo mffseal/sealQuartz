@@ -1,9 +1,9 @@
 ---
 title: PKI
 created: 2022-09-28 00:36:58
-updated: 2022-09-28 02:15:39
+updated: 2022-09-28 20:19:51
 tags: 
-- atom
+- article
 ---
 
 # PKI
