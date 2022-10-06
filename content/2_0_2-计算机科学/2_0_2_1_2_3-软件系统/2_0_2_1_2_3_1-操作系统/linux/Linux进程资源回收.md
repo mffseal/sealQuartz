@@ -17,4 +17,4 @@ tags:
 ![[2_0_2-计算机科学/2_0_2_1_2_3-软件系统/2_0_2_1_2_3_1-操作系统/linux/z-attachments/Pasted image 20221005164513.png]]
 
 
-wait等待的是子进程结束后发送的SIGCHLD信号
+wait等待的是子进程结束后发送的SIGCHLD信号。
