@@ -1,7 +1,7 @@
 ---
 title: gcc输出文件
 created: 2022-09-28 17:04:19
-updated: 2022-09-28 17:05:08
+updated: 2022-10-23 15:05:00
 tags: 
 - atom
 ---
