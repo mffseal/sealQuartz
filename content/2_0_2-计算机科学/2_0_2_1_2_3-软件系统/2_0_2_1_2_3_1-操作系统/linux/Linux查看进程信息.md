@@ -3,7 +3,7 @@ title: Linux查看进程信息
 created: 2022-10-05 01:21:43
 updated: 2022-10-05 01:21:51
 tags: 
-- aarticle
+- article
 ---
 
 # Linux查看进程信息
