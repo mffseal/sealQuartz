@@ -1,0 +1,559 @@
+<!doctype html><html lang=cn><head><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8920808282451934" crossorigin=anonymous></script><div id=cursor-chat-layer><input type=text id=cursor-chat-box></div><script src=https://unpkg.com/cursor-chat></script>
+<link rel=stylesheet type=text/css href=https://unpkg.com/cursor-chat/dist/style.css><meta charset=utf-8><meta name=description content="2023冬HWS babyre apk拖入jeb分析，入口点找到check()函数，一个简单加密+base64但是无法解出正确的答案。
+![[3-计算机科学/7-网络安全/比赛wp/z-attachments/Pasted image 20230109025910.png]]
+发现类b中有动态注入，分析代码发现会读取Assets的enc文件，异或后生成classes.dex文件:
+![[3-计算机科学/7-网络安全/比赛wp/z-attachments/Pasted image 20230109025921.png]]
+替换check()函数，按照流程提取出文件后逆向：
+![[3-计算机科学/7-网络安全/比赛wp/z-attachments/Pasted image 20230109025933.png]]
+是一个AES加密，再base64加密，逆向运算就能得到结果。
+代码 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48  import javax."><title>2023冬HWS</title><meta name=viewport content="width=device-width,initial-scale=1"><link rel="shortcut icon" type=image/png href=https://harbor.mffseal.top//icon.png><link href=https://harbor.mffseal.top/styles.73cf69c3fd63eaf27dde453f5aa109f7.min.css rel=stylesheet><link href=https://harbor.mffseal.top/styles/_light_syntax.86a48a52faebeaaf42158b72922b1c90.min.css rel=stylesheet id=theme-link><script src=https://harbor.mffseal.top/js/darkmode.9841b88d44c115f7419d485ee72d23a2.min.js></script>
+<script src=https://harbor.mffseal.top/js/util.9825137f5e7825e8553c68ce39ac9e44.min.js></script>
+<link rel=stylesheet href=https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.css integrity=sha384-R4558gYOUz8mP9YWpZJjofhk+zx0AS11p36HnD2ZKj/6JR5z27gSSULCNHIRReVs crossorigin=anonymous><script defer src=https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.js integrity=sha384-z1fJDqw8ZApjGO3/unPWUPsIymfsJmyrDVWC8Tv/a1HeOtGmkwNd/7xUS0Xcnvsx crossorigin=anonymous></script>
+<script defer src=https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/contrib/auto-render.min.js integrity=sha384-+XBljXPPiv+OzfbB3cVmLHf4hdUFHlWNZN5spNQ7rmHTXpd7WvJum6fIACpNNfIR crossorigin=anonymous></script>
+<script defer src=https://cdn.jsdelivr.net/npm/katex@0.16.2/dist/contrib/copy-tex.min.js integrity=sha384-ww/583aHhxWkz5DEVn6OKtNiIaLi2iBRNZXfJRiY1Ai7tnJ9UXpEsyvOITVpTl4A crossorigin=anonymous></script>
+<script src=https://unpkg.com/@floating-ui/core@0.7.3></script>
+<script src=https://unpkg.com/@floating-ui/dom@0.5.4></script>
+<script src=https://harbor.mffseal.top/js/popover.53ad9a087e3feeaaa12b63bfd02d923b.min.js></script>
+<script src=https://harbor.mffseal.top/js/code-title.b35124ad8db0ba37162b886afb711cbc.min.js></script>
+<script src=https://harbor.mffseal.top/js/clipboard.c20857734e53a3fb733b7443879efa61.min.js></script>
+<script src=https://harbor.mffseal.top/js/callouts.7723cac461d613d118ee8bb8216b9838.min.js></script>
+<script>const BASE_URL="https://harbor.mffseal.top/",fetchData=Promise.all([fetch("https://harbor.mffseal.top/indices/linkIndex.3d2d03102eda393ed53f6fd9593533e0.min.json").then(e=>e.json()).then(e=>({index:e.index,links:e.links})),fetch("https://harbor.mffseal.top/indices/contentIndex.438bdb361c1740e6d5eed3d1d9489bfe.min.json").then(e=>e.json())]).then(([{index:e,links:t},n])=>({index:e,links:t,content:n})),render=()=>{const e=new URL(BASE_URL),t=e.pathname,n=window.location.pathname,s=t==n;addCopyButtons(),addTitleToCodeBlocks(),addCollapsibleCallouts(),initPopover("https://harbor.mffseal.top",!0,!0);const o=document.getElementById("footer");if(o){const e=document.getElementById("graph-container");if(!e)return requestAnimationFrame(render);e.textContent="";const t=s&&!0;drawGraph("https://harbor.mffseal.top",t,[{"/moc":"#4388cc"}],t?{centerForce:1,depth:-1,enableDrag:!0,enableLegend:!1,enableZoom:!0,fontSize:.5,linkDistance:1,opacityScale:3,repelForce:1,scale:1.4}:{centerForce:1,depth:1,enableDrag:!0,enableLegend:!1,enableZoom:!0,fontSize:.6,linkDistance:1,opacityScale:3,repelForce:2,scale:1.2})}},init=(e=document)=>{addCopyButtons(),addTitleToCodeBlocks(),renderMathInElement(e.body,{delimiters:[{left:"$$",right:"$$",display:!0},{left:"$",right:"$",display:!1}],macros:{'’':"'"},throwOnError:!1})}</script><script type=module>
+    import { attachSPARouting } from "https:\/\/harbor.mffseal.top\/js\/router.9d4974281069e9ebb189f642ae1e3ca2.min.js"
+    attachSPARouting(init, render)
+  </script></head><script async src="https://www.googletagmanager.com/gtag/js?id=G-NV58SYWRZD"></script>
+<script>var doNotTrack=!1;if(!doNotTrack){window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date),gtag("config","G-NV58SYWRZD",{anonymize_ip:!1})}</script><body><div id=search-container><div id=search-space><input autocomplete=off id=search-bar name=search type=text aria-label=搜索 placeholder=搜一搜...><div id=results-container></div></div></div><script src=https://cdn.jsdelivr.net/npm/flexsearch@0.7.21/dist/flexsearch.bundle.js integrity="sha256-i3A0NZGkhsKjVMzFxv3ksk0DZh3aXqu0l49Bbh0MdjE=" crossorigin=anonymous defer></script>
+<script defer src=https://harbor.mffseal.top/js/full-text-search.24827f874defbbc6d529926cbfcfb493.min.js></script><div class=singlePage><header><h1 id=page-title><a href=https://harbor.mffseal.top/>🦭 港湾</a></h1><div class=spacer></div><div id=search-icon><p>搜索</p><svg tabindex="0" aria-labelledby="title desc" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 19.9 19.7"><title id="title">搜索图标</title><desc id="desc">打开搜索图标</desc><g class="search-path" fill="none"><path stroke-linecap="square" d="M18.5 18.3l-5.4-5.4"/><circle cx="8" cy="8" r="7"/></g></svg></div><div class=darkmode><input class=toggle id=darkmode-toggle type=checkbox tabindex=-1>
+<label id=toggle-label-light for=darkmode-toggle tabindex=-1><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" id="dayIcon" viewBox="0 0 35 35" style="enable-background:new 0 0 35 35"><title>亮色</title><path d="M6 17.5C6 16.672 5.328 16 4.5 16h-3C.672 16 0 16.672.0 17.5S.672 19 1.5 19h3C5.328 19 6 18.328 6 17.5zM7.5 26c-.414.0-.789.168-1.061.439l-2 2C4.168 28.711 4 29.086 4 29.5 4 30.328 4.671 31 5.5 31c.414.0.789-.168 1.06-.44l2-2C8.832 28.289 9 27.914 9 27.5 9 26.672 8.329 26 7.5 26zm10-20C18.329 6 19 5.328 19 4.5v-3C19 .672 18.329.0 17.5.0S16 .672 16 1.5v3C16 5.328 16.671 6 17.5 6zm10 3c.414.0.789-.168 1.06-.439l2-2C30.832 6.289 31 5.914 31 5.5 31 4.672 30.329 4 29.5 4c-.414.0-.789.168-1.061.44l-2 2C26.168 6.711 26 7.086 26 7.5 26 8.328 26.671 9 27.5 9zM6.439 8.561C6.711 8.832 7.086 9 7.5 9 8.328 9 9 8.328 9 7.5c0-.414-.168-.789-.439-1.061l-2-2C6.289 4.168 5.914 4 5.5 4 4.672 4 4 4.672 4 5.5c0 .414.168.789.439 1.06l2 2.001zM33.5 16h-3c-.828.0-1.5.672-1.5 1.5s.672 1.5 1.5 1.5h3c.828.0 1.5-.672 1.5-1.5S34.328 16 33.5 16zM28.561 26.439C28.289 26.168 27.914 26 27.5 26c-.828.0-1.5.672-1.5 1.5.0.414.168.789.439 1.06l2 2C28.711 30.832 29.086 31 29.5 31c.828.0 1.5-.672 1.5-1.5.0-.414-.168-.789-.439-1.061l-2-2zM17.5 29c-.829.0-1.5.672-1.5 1.5v3c0 .828.671 1.5 1.5 1.5s1.5-.672 1.5-1.5v-3C19 29.672 18.329 29 17.5 29zm0-22C11.71 7 7 11.71 7 17.5S11.71 28 17.5 28 28 23.29 28 17.5 23.29 7 17.5 7zm0 18c-4.136.0-7.5-3.364-7.5-7.5s3.364-7.5 7.5-7.5 7.5 3.364 7.5 7.5S21.636 25 17.5 25z"/></svg></label><label id=toggle-label-dark for=darkmode-toggle tabindex=-1><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" id="nightIcon" viewBox="0 0 100 100" style="enable-background='new 0 0 100 100'"><title>暗色</title><path d="M96.76 66.458c-.853-.852-2.15-1.064-3.23-.534-6.063 2.991-12.858 4.571-19.655 4.571C62.022 70.495 50.88 65.88 42.5 57.5 29.043 44.043 25.658 23.536 34.076 6.47c.532-1.08.318-2.379-.534-3.23-.851-.852-2.15-1.064-3.23-.534-4.918 2.427-9.375 5.619-13.246 9.491-9.447 9.447-14.65 22.008-14.65 35.369.0 13.36 5.203 25.921 14.65 35.368s22.008 14.65 35.368 14.65c13.361.0 25.921-5.203 35.369-14.65 3.872-3.871 7.064-8.328 9.491-13.246C97.826 68.608 97.611 67.309 96.76 66.458z"/></svg></label></div></header><article><h1>2023冬HWS</h1><p class=meta>最后更新
+Jan 9, 2023
+<a href="obsidian://open?vault=content&file=3-%e8%ae%a1%e7%ae%97%e6%9c%ba%e7%a7%91%e5%ad%a6%2f7-%e7%bd%91%e7%bb%9c%e5%ae%89%e5%85%a8%2f%e6%af%94%e8%b5%9bwp%2f2023%e5%86%acHWS.md" rel=noopener>编辑源</a></p><ul class=tags><li><a href=https://harbor.mffseal.top/tags/article/>Article</a></li></ul><div class=toc-wrapper><div class=mainTOC id=mainTOC><aside><header><h3>2023冬HWS</h3></header><nav id=TableOfContents><ol><li><a href=#babyre>babyre</a><ol><li><a href=#代码>代码</a></li></ol></li><li><a href=#numbers-game>Numbers Game</a><ol><li><a href=#代码-1>代码</a></li></ol></li></ol></nav></aside><a href=# id=toc-toggle></a></div></div><a href=#2023冬hws><h1 id=2023冬hws><span class=hanchor arialabel=Anchor># </span>2023冬HWS</h1></a><a href=#babyre><h2 id=babyre><span class=hanchor arialabel=Anchor># </span>babyre</h2></a><p>apk拖入jeb分析，入口点找到check()函数，一个简单加密+base64但是无法解出正确的答案。</p><p><img src="/3-计算机科学/7-网络安全/比赛wp/z-attachments/Pasted image 20230109025910.png" width=auto></p><p>发现类b中有动态注入，分析代码发现会读取Assets的enc文件，异或后生成classes.dex文件:</p><p><img src="/3-计算机科学/7-网络安全/比赛wp/z-attachments/Pasted image 20230109025921.png" width=auto></p><p>替换check()函数，按照流程提取出文件后逆向：</p><p><img src="/3-计算机科学/7-网络安全/比赛wp/z-attachments/Pasted image 20230109025933.png" width=auto></p><p>是一个AES加密，再base64加密，逆向运算就能得到结果。</p><a href=#代码><h3 id=代码><span class=hanchor arialabel=Anchor># </span>代码</h3></a><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt id=hl-0-1><a style=outline:none;text-decoration:none;color:inherit href=#hl-0-1> 1</a>
+</span><span class=lnt id=hl-0-2><a style=outline:none;text-decoration:none;color:inherit href=#hl-0-2> 2</a>
+</span><span class=lnt id=hl-0-3><a style=outline:none;text-decoration:none;color:inherit href=#hl-0-3> 3</a>
+</span><span class=lnt id=hl-0-4><a style=outline:none;text-decoration:none;color:inherit href=#hl-0-4> 4</a>
+</span><span class=lnt id=hl-0-5><a style=outline:none;text-decoration:none;color:inherit href=#hl-0-5> 5</a>
+</span><span class=lnt id=hl-0-6><a style=outline:none;text-decoration:none;color:inherit href=#hl-0-6> 6</a>
+</span><span class=lnt id=hl-0-7><a style=outline:none;text-decoration:none;color:inherit href=#hl-0-7> 7</a>
+</span><span class=lnt id=hl-0-8><a style=outline:none;text-decoration:none;color:inherit href=#hl-0-8> 8</a>
+</span><span class=lnt id=hl-0-9><a style=outline:none;text-decoration:none;color:inherit href=#hl-0-9> 9</a>
+</span><span class=lnt id=hl-0-10><a style=outline:none;text-decoration:none;color:inherit href=#hl-0-10>10</a>
+</span><span class=lnt id=hl-0-11><a style=outline:none;text-decoration:none;color:inherit href=#hl-0-11>11</a>
+</span><span class=lnt id=hl-0-12><a style=outline:none;text-decoration:none;color:inherit href=#hl-0-12>12</a>
+</span><span class=lnt id=hl-0-13><a style=outline:none;text-decoration:none;color:inherit href=#hl-0-13>13</a>
+</span><span class=lnt id=hl-0-14><a style=outline:none;text-decoration:none;color:inherit href=#hl-0-14>14</a>
+</span><span class=lnt id=hl-0-15><a style=outline:none;text-decoration:none;color:inherit href=#hl-0-15>15</a>
+</span><span class=lnt id=hl-0-16><a style=outline:none;text-decoration:none;color:inherit href=#hl-0-16>16</a>
+</span><span class=lnt id=hl-0-17><a style=outline:none;text-decoration:none;color:inherit href=#hl-0-17>17</a>
+</span><span class=lnt id=hl-0-18><a style=outline:none;text-decoration:none;color:inherit href=#hl-0-18>18</a>
+</span><span class=lnt id=hl-0-19><a style=outline:none;text-decoration:none;color:inherit href=#hl-0-19>19</a>
+</span><span class=lnt id=hl-0-20><a style=outline:none;text-decoration:none;color:inherit href=#hl-0-20>20</a>
+</span><span class=lnt id=hl-0-21><a style=outline:none;text-decoration:none;color:inherit href=#hl-0-21>21</a>
+</span><span class=lnt id=hl-0-22><a style=outline:none;text-decoration:none;color:inherit href=#hl-0-22>22</a>
+</span><span class=lnt id=hl-0-23><a style=outline:none;text-decoration:none;color:inherit href=#hl-0-23>23</a>
+</span><span class=lnt id=hl-0-24><a style=outline:none;text-decoration:none;color:inherit href=#hl-0-24>24</a>
+</span><span class=lnt id=hl-0-25><a style=outline:none;text-decoration:none;color:inherit href=#hl-0-25>25</a>
+</span><span class=lnt id=hl-0-26><a style=outline:none;text-decoration:none;color:inherit href=#hl-0-26>26</a>
+</span><span class=lnt id=hl-0-27><a style=outline:none;text-decoration:none;color:inherit href=#hl-0-27>27</a>
+</span><span class=lnt id=hl-0-28><a style=outline:none;text-decoration:none;color:inherit href=#hl-0-28>28</a>
+</span><span class=lnt id=hl-0-29><a style=outline:none;text-decoration:none;color:inherit href=#hl-0-29>29</a>
+</span><span class=lnt id=hl-0-30><a style=outline:none;text-decoration:none;color:inherit href=#hl-0-30>30</a>
+</span><span class=lnt id=hl-0-31><a style=outline:none;text-decoration:none;color:inherit href=#hl-0-31>31</a>
+</span><span class=lnt id=hl-0-32><a style=outline:none;text-decoration:none;color:inherit href=#hl-0-32>32</a>
+</span><span class=lnt id=hl-0-33><a style=outline:none;text-decoration:none;color:inherit href=#hl-0-33>33</a>
+</span><span class=lnt id=hl-0-34><a style=outline:none;text-decoration:none;color:inherit href=#hl-0-34>34</a>
+</span><span class=lnt id=hl-0-35><a style=outline:none;text-decoration:none;color:inherit href=#hl-0-35>35</a>
+</span><span class=lnt id=hl-0-36><a style=outline:none;text-decoration:none;color:inherit href=#hl-0-36>36</a>
+</span><span class=lnt id=hl-0-37><a style=outline:none;text-decoration:none;color:inherit href=#hl-0-37>37</a>
+</span><span class=lnt id=hl-0-38><a style=outline:none;text-decoration:none;color:inherit href=#hl-0-38>38</a>
+</span><span class=lnt id=hl-0-39><a style=outline:none;text-decoration:none;color:inherit href=#hl-0-39>39</a>
+</span><span class=lnt id=hl-0-40><a style=outline:none;text-decoration:none;color:inherit href=#hl-0-40>40</a>
+</span><span class=lnt id=hl-0-41><a style=outline:none;text-decoration:none;color:inherit href=#hl-0-41>41</a>
+</span><span class=lnt id=hl-0-42><a style=outline:none;text-decoration:none;color:inherit href=#hl-0-42>42</a>
+</span><span class=lnt id=hl-0-43><a style=outline:none;text-decoration:none;color:inherit href=#hl-0-43>43</a>
+</span><span class=lnt id=hl-0-44><a style=outline:none;text-decoration:none;color:inherit href=#hl-0-44>44</a>
+</span><span class=lnt id=hl-0-45><a style=outline:none;text-decoration:none;color:inherit href=#hl-0-45>45</a>
+</span><span class=lnt id=hl-0-46><a style=outline:none;text-decoration:none;color:inherit href=#hl-0-46>46</a>
+</span><span class=lnt id=hl-0-47><a style=outline:none;text-decoration:none;color:inherit href=#hl-0-47>47</a>
+</span><span class=lnt id=hl-0-48><a style=outline:none;text-decoration:none;color:inherit href=#hl-0-48>48</a>
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-java data-lang=java><span class=line><span class=cl><span class=kn>import</span> <span class=nn>javax.crypto.Cipher</span><span class=o>;</span>
+</span></span><span class=line><span class=cl><span class=kn>import</span> <span class=nn>javax.crypto.spec.IvParameterSpec</span><span class=o>;</span>
+</span></span><span class=line><span class=cl><span class=kn>import</span> <span class=nn>javax.crypto.spec.SecretKeySpec</span><span class=o>;</span>
+</span></span><span class=line><span class=cl><span class=kn>import</span> <span class=nn>java.io.*</span><span class=o>;</span>
+</span></span><span class=line><span class=cl><span class=kn>import</span> <span class=nn>java.nio.charset.StandardCharsets</span><span class=o>;</span>
+</span></span><span class=line><span class=cl><span class=kn>import</span> <span class=nn>java.util.*</span><span class=o>;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kd>public</span> <span class=kd>class</span> <span class=nc>Test1</span> <span class=o>{</span>
+</span></span><span class=line><span class=cl>    <span class=kd>static</span> <span class=kt>void</span> <span class=nf>getFile</span><span class=o>()</span> <span class=o>{</span>
+</span></span><span class=line><span class=cl>        <span class=n>File</span> <span class=n>inFile</span> <span class=o>=</span> <span class=k>new</span> <span class=n>File</span><span class=o>(</span><span class=s>&#34;enc&#34;</span><span class=o>);</span>
+</span></span><span class=line><span class=cl>        <span class=n>File</span> <span class=n>outFile</span> <span class=o>=</span> <span class=k>new</span> <span class=n>File</span><span class=o>(</span><span class=s>&#34;classes.dex&#34;</span><span class=o>);</span>
+</span></span><span class=line><span class=cl>        <span class=kt>byte</span><span class=o>[]</span> <span class=n>encBytes</span><span class=o>;</span>
+</span></span><span class=line><span class=cl>        <span class=k>try</span> <span class=o>(</span><span class=n>InputStream</span> <span class=n>inputStream</span> <span class=o>=</span> <span class=k>new</span> <span class=n>FileInputStream</span><span class=o>(</span><span class=n>inFile</span><span class=o>))</span> <span class=o>{</span>
+</span></span><span class=line><span class=cl>            <span class=n>encBytes</span> <span class=o>=</span> <span class=k>new</span> <span class=kt>byte</span><span class=o>[</span><span class=n>inputStream</span><span class=o>.</span><span class=na>available</span><span class=o>()];</span>
+</span></span><span class=line><span class=cl>            <span class=n>inputStream</span><span class=o>.</span><span class=na>read</span><span class=o>(</span><span class=n>encBytes</span><span class=o>);</span>
+</span></span><span class=line><span class=cl>            <span class=k>for</span> <span class=o>(</span><span class=kt>int</span> <span class=n>i</span><span class=o>=</span><span class=n>0</span><span class=o>;</span> <span class=n>i</span><span class=o>&lt;</span><span class=n>encBytes</span><span class=o>.</span><span class=na>length</span><span class=o>;</span> <span class=o>++</span><span class=n>i</span><span class=o>)</span> <span class=o>{</span>
+</span></span><span class=line><span class=cl>                <span class=n>encBytes</span><span class=o>[</span><span class=n>i</span><span class=o>]</span> <span class=o>=</span> <span class=o>(</span><span class=kt>byte</span><span class=o>)(</span><span class=n>encBytes</span><span class=o>[</span><span class=n>i</span><span class=o>]</span> <span class=o>^</span> <span class=n>52</span><span class=o>);</span>
+</span></span><span class=line><span class=cl>            <span class=o>}</span>
+</span></span><span class=line><span class=cl>        <span class=o>}</span> <span class=k>catch</span> <span class=o>(</span><span class=n>IOException</span> <span class=n>e</span><span class=o>)</span> <span class=o>{</span>
+</span></span><span class=line><span class=cl>            <span class=k>throw</span> <span class=k>new</span> <span class=n>RuntimeException</span><span class=o>(</span><span class=n>e</span><span class=o>);</span>
+</span></span><span class=line><span class=cl>        <span class=o>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>        <span class=k>try</span> <span class=o>(</span><span class=n>FileOutputStream</span> <span class=n>fileOutputStream</span> <span class=o>=</span> <span class=k>new</span> <span class=n>FileOutputStream</span><span class=o>(</span><span class=n>outFile</span><span class=o>))</span> <span class=o>{</span>
+</span></span><span class=line><span class=cl>            <span class=n>fileOutputStream</span><span class=o>.</span><span class=na>write</span><span class=o>(</span><span class=n>encBytes</span><span class=o>);</span>
+</span></span><span class=line><span class=cl>        <span class=o>}</span> <span class=k>catch</span> <span class=o>(</span><span class=n>IOException</span> <span class=n>e</span><span class=o>)</span> <span class=o>{</span>
+</span></span><span class=line><span class=cl>            <span class=k>throw</span> <span class=k>new</span> <span class=n>RuntimeException</span><span class=o>(</span><span class=n>e</span><span class=o>);</span>
+</span></span><span class=line><span class=cl>        <span class=o>}</span>
+</span></span><span class=line><span class=cl>    <span class=o>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=kd>static</span> <span class=n>String</span> <span class=nf>encode</span><span class=o>(</span><span class=n>String</span> <span class=n>input</span><span class=o>)</span> <span class=kd>throws</span> <span class=n>Exception</span> <span class=o>{</span>
+</span></span><span class=line><span class=cl>        <span class=n>Cipher</span> <span class=n>cipher</span> <span class=o>=</span> <span class=n>Cipher</span><span class=o>.</span><span class=na>getInstance</span><span class=o>(</span><span class=s>&#34;AES/CBC/PKCS5Padding&#34;</span><span class=o>);</span>
+</span></span><span class=line><span class=cl>        <span class=n>cipher</span><span class=o>.</span><span class=na>init</span><span class=o>(</span><span class=n>Cipher</span><span class=o>.</span><span class=na>ENCRYPT_MODE</span><span class=o>,</span> <span class=k>new</span> <span class=n>SecretKeySpec</span><span class=o>(</span><span class=s>&#34;FV8aOaQiak6txP09&#34;</span><span class=o>.</span><span class=na>getBytes</span><span class=o>(</span><span class=n>StandardCharsets</span><span class=o>.</span><span class=na>UTF_8</span><span class=o>),</span> <span class=s>&#34;AES&#34;</span><span class=o>),</span> <span class=k>new</span> <span class=n>IvParameterSpec</span><span class=o>(</span><span class=s>&#34;2Aq7SR5268ZzbouE&#34;</span><span class=o>.</span><span class=na>getBytes</span><span class=o>()));</span>
+</span></span><span class=line><span class=cl>        <span class=k>return</span> <span class=n>Base64</span><span class=o>.</span><span class=na>getEncoder</span><span class=o>().</span><span class=na>encodeToString</span><span class=o>(</span><span class=n>cipher</span><span class=o>.</span><span class=na>doFinal</span><span class=o>(</span><span class=n>input</span><span class=o>.</span><span class=na>getBytes</span><span class=o>()));</span>
+</span></span><span class=line><span class=cl>    <span class=o>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=kd>static</span> <span class=n>String</span> <span class=nf>decode</span><span class=o>(</span><span class=n>String</span> <span class=n>input</span><span class=o>)</span> <span class=kd>throws</span> <span class=n>Exception</span> <span class=o>{</span>
+</span></span><span class=line><span class=cl>        <span class=kt>byte</span><span class=o>[]</span> <span class=n>base64decodedBytes</span> <span class=o>=</span> <span class=n>Base64</span><span class=o>.</span><span class=na>getDecoder</span><span class=o>().</span><span class=na>decode</span><span class=o>(</span><span class=n>input</span><span class=o>);</span>
+</span></span><span class=line><span class=cl>        <span class=n>Cipher</span> <span class=n>cipher</span> <span class=o>=</span> <span class=n>Cipher</span><span class=o>.</span><span class=na>getInstance</span><span class=o>(</span><span class=s>&#34;AES/CBC/PKCS5Padding&#34;</span><span class=o>);</span>
+</span></span><span class=line><span class=cl>        <span class=n>cipher</span><span class=o>.</span><span class=na>init</span><span class=o>(</span><span class=n>Cipher</span><span class=o>.</span><span class=na>DECRYPT_MODE</span><span class=o>,</span> <span class=k>new</span> <span class=n>SecretKeySpec</span><span class=o>(</span><span class=s>&#34;FV8aOaQiak6txP09&#34;</span><span class=o>.</span><span class=na>getBytes</span><span class=o>(</span><span class=n>StandardCharsets</span><span class=o>.</span><span class=na>UTF_8</span><span class=o>),</span> <span class=s>&#34;AES&#34;</span><span class=o>),</span> <span class=k>new</span> <span class=n>IvParameterSpec</span><span class=o>(</span><span class=s>&#34;2Aq7SR5268ZzbouE&#34;</span><span class=o>.</span><span class=na>getBytes</span><span class=o>()));</span>
+</span></span><span class=line><span class=cl>        <span class=kt>byte</span><span class=o>[]</span> <span class=n>resultBytes</span> <span class=o>=</span> <span class=n>cipher</span><span class=o>.</span><span class=na>doFinal</span><span class=o>(</span><span class=n>base64decodedBytes</span><span class=o>);</span>
+</span></span><span class=line><span class=cl>        <span class=k>return</span> <span class=k>new</span> <span class=n>String</span><span class=o>(</span><span class=n>resultBytes</span><span class=o>);</span>
+</span></span><span class=line><span class=cl>    <span class=o>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=kd>public</span> <span class=kd>static</span> <span class=kt>void</span> <span class=nf>main</span><span class=o>(</span><span class=n>String</span><span class=o>[]</span> <span class=n>args</span><span class=o>)</span> <span class=kd>throws</span> <span class=n>Exception</span> <span class=o>{</span>
+</span></span><span class=line><span class=cl>        <span class=n>getFile</span><span class=o>();</span>
+</span></span><span class=line><span class=cl>        <span class=n>System</span><span class=o>.</span><span class=na>out</span><span class=o>.</span><span class=na>println</span><span class=o>(</span><span class=n>decode</span><span class=o>(</span><span class=s>&#34;9Kz3YlSdD3lB9KoxeKxXQT4YOEqJTVIuNU+IjW4iFQzjpU+NikF/UqCOsL+1g4eA&#34;</span><span class=o>));</span>
+</span></span><span class=line><span class=cl>    <span class=o>}</span>
+</span></span><span class=line><span class=cl><span class=o>}</span>
+</span></span></code></pre></td></tr></table></div></div><a href=#numbers-game><h2 id=numbers-game><span class=hanchor arialabel=Anchor># </span>Numbers Game</h2></a><p>python的随机bytes超过32位实际上是多次调用<code>random.getrandbits(32)</code>，例如题目中的<code>random.getrandbits(128)</code>则是调用4次<code>random.getrandbits(32)</code>。</p><p>题目给了624组32bytes的随机数结果，正好是python采用的随机算法MT19937的空间大小，通过已经产生624组随机数预测之后产生的随机数。</p><p>但是题目挖空的是前12组32位随机数，需要通过逆向twist过程来由后面的state推导前面的state。</p><p>则首先计算后面的state，再通过逆向的twist算法来得到前12个state值，再设置到random上，恢复现场后重新调用随机数生成即可。</p><p>参考文章：
+<a href=https://www.anquanke.com/post/id/205861#h2-5 rel=noopener>浅析MT19937伪随机数生成算法-安全客 - 安全资讯平台 (anquanke.com)</a></p><a href=#代码-1><h3 id=代码-1><span class=hanchor arialabel=Anchor># </span>代码</h3></a><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt id=hl-1-1><a style=outline:none;text-decoration:none;color:inherit href=#hl-1-1>  1</a>
+</span><span class=lnt id=hl-1-2><a style=outline:none;text-decoration:none;color:inherit href=#hl-1-2>  2</a>
+</span><span class=lnt id=hl-1-3><a style=outline:none;text-decoration:none;color:inherit href=#hl-1-3>  3</a>
+</span><span class=lnt id=hl-1-4><a style=outline:none;text-decoration:none;color:inherit href=#hl-1-4>  4</a>
+</span><span class=lnt id=hl-1-5><a style=outline:none;text-decoration:none;color:inherit href=#hl-1-5>  5</a>
+</span><span class=lnt id=hl-1-6><a style=outline:none;text-decoration:none;color:inherit href=#hl-1-6>  6</a>
+</span><span class=lnt id=hl-1-7><a style=outline:none;text-decoration:none;color:inherit href=#hl-1-7>  7</a>
+</span><span class=lnt id=hl-1-8><a style=outline:none;text-decoration:none;color:inherit href=#hl-1-8>  8</a>
+</span><span class=lnt id=hl-1-9><a style=outline:none;text-decoration:none;color:inherit href=#hl-1-9>  9</a>
+</span><span class=lnt id=hl-1-10><a style=outline:none;text-decoration:none;color:inherit href=#hl-1-10> 10</a>
+</span><span class=lnt id=hl-1-11><a style=outline:none;text-decoration:none;color:inherit href=#hl-1-11> 11</a>
+</span><span class=lnt id=hl-1-12><a style=outline:none;text-decoration:none;color:inherit href=#hl-1-12> 12</a>
+</span><span class=lnt id=hl-1-13><a style=outline:none;text-decoration:none;color:inherit href=#hl-1-13> 13</a>
+</span><span class=lnt id=hl-1-14><a style=outline:none;text-decoration:none;color:inherit href=#hl-1-14> 14</a>
+</span><span class=lnt id=hl-1-15><a style=outline:none;text-decoration:none;color:inherit href=#hl-1-15> 15</a>
+</span><span class=lnt id=hl-1-16><a style=outline:none;text-decoration:none;color:inherit href=#hl-1-16> 16</a>
+</span><span class=lnt id=hl-1-17><a style=outline:none;text-decoration:none;color:inherit href=#hl-1-17> 17</a>
+</span><span class=lnt id=hl-1-18><a style=outline:none;text-decoration:none;color:inherit href=#hl-1-18> 18</a>
+</span><span class=lnt id=hl-1-19><a style=outline:none;text-decoration:none;color:inherit href=#hl-1-19> 19</a>
+</span><span class=lnt id=hl-1-20><a style=outline:none;text-decoration:none;color:inherit href=#hl-1-20> 20</a>
+</span><span class=lnt id=hl-1-21><a style=outline:none;text-decoration:none;color:inherit href=#hl-1-21> 21</a>
+</span><span class=lnt id=hl-1-22><a style=outline:none;text-decoration:none;color:inherit href=#hl-1-22> 22</a>
+</span><span class=lnt id=hl-1-23><a style=outline:none;text-decoration:none;color:inherit href=#hl-1-23> 23</a>
+</span><span class=lnt id=hl-1-24><a style=outline:none;text-decoration:none;color:inherit href=#hl-1-24> 24</a>
+</span><span class=lnt id=hl-1-25><a style=outline:none;text-decoration:none;color:inherit href=#hl-1-25> 25</a>
+</span><span class=lnt id=hl-1-26><a style=outline:none;text-decoration:none;color:inherit href=#hl-1-26> 26</a>
+</span><span class=lnt id=hl-1-27><a style=outline:none;text-decoration:none;color:inherit href=#hl-1-27> 27</a>
+</span><span class=lnt id=hl-1-28><a style=outline:none;text-decoration:none;color:inherit href=#hl-1-28> 28</a>
+</span><span class=lnt id=hl-1-29><a style=outline:none;text-decoration:none;color:inherit href=#hl-1-29> 29</a>
+</span><span class=lnt id=hl-1-30><a style=outline:none;text-decoration:none;color:inherit href=#hl-1-30> 30</a>
+</span><span class=lnt id=hl-1-31><a style=outline:none;text-decoration:none;color:inherit href=#hl-1-31> 31</a>
+</span><span class=lnt id=hl-1-32><a style=outline:none;text-decoration:none;color:inherit href=#hl-1-32> 32</a>
+</span><span class=lnt id=hl-1-33><a style=outline:none;text-decoration:none;color:inherit href=#hl-1-33> 33</a>
+</span><span class=lnt id=hl-1-34><a style=outline:none;text-decoration:none;color:inherit href=#hl-1-34> 34</a>
+</span><span class=lnt id=hl-1-35><a style=outline:none;text-decoration:none;color:inherit href=#hl-1-35> 35</a>
+</span><span class=lnt id=hl-1-36><a style=outline:none;text-decoration:none;color:inherit href=#hl-1-36> 36</a>
+</span><span class=lnt id=hl-1-37><a style=outline:none;text-decoration:none;color:inherit href=#hl-1-37> 37</a>
+</span><span class=lnt id=hl-1-38><a style=outline:none;text-decoration:none;color:inherit href=#hl-1-38> 38</a>
+</span><span class=lnt id=hl-1-39><a style=outline:none;text-decoration:none;color:inherit href=#hl-1-39> 39</a>
+</span><span class=lnt id=hl-1-40><a style=outline:none;text-decoration:none;color:inherit href=#hl-1-40> 40</a>
+</span><span class=lnt id=hl-1-41><a style=outline:none;text-decoration:none;color:inherit href=#hl-1-41> 41</a>
+</span><span class=lnt id=hl-1-42><a style=outline:none;text-decoration:none;color:inherit href=#hl-1-42> 42</a>
+</span><span class=lnt id=hl-1-43><a style=outline:none;text-decoration:none;color:inherit href=#hl-1-43> 43</a>
+</span><span class=lnt id=hl-1-44><a style=outline:none;text-decoration:none;color:inherit href=#hl-1-44> 44</a>
+</span><span class=lnt id=hl-1-45><a style=outline:none;text-decoration:none;color:inherit href=#hl-1-45> 45</a>
+</span><span class=lnt id=hl-1-46><a style=outline:none;text-decoration:none;color:inherit href=#hl-1-46> 46</a>
+</span><span class=lnt id=hl-1-47><a style=outline:none;text-decoration:none;color:inherit href=#hl-1-47> 47</a>
+</span><span class=lnt id=hl-1-48><a style=outline:none;text-decoration:none;color:inherit href=#hl-1-48> 48</a>
+</span><span class=lnt id=hl-1-49><a style=outline:none;text-decoration:none;color:inherit href=#hl-1-49> 49</a>
+</span><span class=lnt id=hl-1-50><a style=outline:none;text-decoration:none;color:inherit href=#hl-1-50> 50</a>
+</span><span class=lnt id=hl-1-51><a style=outline:none;text-decoration:none;color:inherit href=#hl-1-51> 51</a>
+</span><span class=lnt id=hl-1-52><a style=outline:none;text-decoration:none;color:inherit href=#hl-1-52> 52</a>
+</span><span class=lnt id=hl-1-53><a style=outline:none;text-decoration:none;color:inherit href=#hl-1-53> 53</a>
+</span><span class=lnt id=hl-1-54><a style=outline:none;text-decoration:none;color:inherit href=#hl-1-54> 54</a>
+</span><span class=lnt id=hl-1-55><a style=outline:none;text-decoration:none;color:inherit href=#hl-1-55> 55</a>
+</span><span class=lnt id=hl-1-56><a style=outline:none;text-decoration:none;color:inherit href=#hl-1-56> 56</a>
+</span><span class=lnt id=hl-1-57><a style=outline:none;text-decoration:none;color:inherit href=#hl-1-57> 57</a>
+</span><span class=lnt id=hl-1-58><a style=outline:none;text-decoration:none;color:inherit href=#hl-1-58> 58</a>
+</span><span class=lnt id=hl-1-59><a style=outline:none;text-decoration:none;color:inherit href=#hl-1-59> 59</a>
+</span><span class=lnt id=hl-1-60><a style=outline:none;text-decoration:none;color:inherit href=#hl-1-60> 60</a>
+</span><span class=lnt id=hl-1-61><a style=outline:none;text-decoration:none;color:inherit href=#hl-1-61> 61</a>
+</span><span class=lnt id=hl-1-62><a style=outline:none;text-decoration:none;color:inherit href=#hl-1-62> 62</a>
+</span><span class=lnt id=hl-1-63><a style=outline:none;text-decoration:none;color:inherit href=#hl-1-63> 63</a>
+</span><span class=lnt id=hl-1-64><a style=outline:none;text-decoration:none;color:inherit href=#hl-1-64> 64</a>
+</span><span class=lnt id=hl-1-65><a style=outline:none;text-decoration:none;color:inherit href=#hl-1-65> 65</a>
+</span><span class=lnt id=hl-1-66><a style=outline:none;text-decoration:none;color:inherit href=#hl-1-66> 66</a>
+</span><span class=lnt id=hl-1-67><a style=outline:none;text-decoration:none;color:inherit href=#hl-1-67> 67</a>
+</span><span class=lnt id=hl-1-68><a style=outline:none;text-decoration:none;color:inherit href=#hl-1-68> 68</a>
+</span><span class=lnt id=hl-1-69><a style=outline:none;text-decoration:none;color:inherit href=#hl-1-69> 69</a>
+</span><span class=lnt id=hl-1-70><a style=outline:none;text-decoration:none;color:inherit href=#hl-1-70> 70</a>
+</span><span class=lnt id=hl-1-71><a style=outline:none;text-decoration:none;color:inherit href=#hl-1-71> 71</a>
+</span><span class=lnt id=hl-1-72><a style=outline:none;text-decoration:none;color:inherit href=#hl-1-72> 72</a>
+</span><span class=lnt id=hl-1-73><a style=outline:none;text-decoration:none;color:inherit href=#hl-1-73> 73</a>
+</span><span class=lnt id=hl-1-74><a style=outline:none;text-decoration:none;color:inherit href=#hl-1-74> 74</a>
+</span><span class=lnt id=hl-1-75><a style=outline:none;text-decoration:none;color:inherit href=#hl-1-75> 75</a>
+</span><span class=lnt id=hl-1-76><a style=outline:none;text-decoration:none;color:inherit href=#hl-1-76> 76</a>
+</span><span class=lnt id=hl-1-77><a style=outline:none;text-decoration:none;color:inherit href=#hl-1-77> 77</a>
+</span><span class=lnt id=hl-1-78><a style=outline:none;text-decoration:none;color:inherit href=#hl-1-78> 78</a>
+</span><span class=lnt id=hl-1-79><a style=outline:none;text-decoration:none;color:inherit href=#hl-1-79> 79</a>
+</span><span class=lnt id=hl-1-80><a style=outline:none;text-decoration:none;color:inherit href=#hl-1-80> 80</a>
+</span><span class=lnt id=hl-1-81><a style=outline:none;text-decoration:none;color:inherit href=#hl-1-81> 81</a>
+</span><span class=lnt id=hl-1-82><a style=outline:none;text-decoration:none;color:inherit href=#hl-1-82> 82</a>
+</span><span class=lnt id=hl-1-83><a style=outline:none;text-decoration:none;color:inherit href=#hl-1-83> 83</a>
+</span><span class=lnt id=hl-1-84><a style=outline:none;text-decoration:none;color:inherit href=#hl-1-84> 84</a>
+</span><span class=lnt id=hl-1-85><a style=outline:none;text-decoration:none;color:inherit href=#hl-1-85> 85</a>
+</span><span class=lnt id=hl-1-86><a style=outline:none;text-decoration:none;color:inherit href=#hl-1-86> 86</a>
+</span><span class=lnt id=hl-1-87><a style=outline:none;text-decoration:none;color:inherit href=#hl-1-87> 87</a>
+</span><span class=lnt id=hl-1-88><a style=outline:none;text-decoration:none;color:inherit href=#hl-1-88> 88</a>
+</span><span class=lnt id=hl-1-89><a style=outline:none;text-decoration:none;color:inherit href=#hl-1-89> 89</a>
+</span><span class=lnt id=hl-1-90><a style=outline:none;text-decoration:none;color:inherit href=#hl-1-90> 90</a>
+</span><span class=lnt id=hl-1-91><a style=outline:none;text-decoration:none;color:inherit href=#hl-1-91> 91</a>
+</span><span class=lnt id=hl-1-92><a style=outline:none;text-decoration:none;color:inherit href=#hl-1-92> 92</a>
+</span><span class=lnt id=hl-1-93><a style=outline:none;text-decoration:none;color:inherit href=#hl-1-93> 93</a>
+</span><span class=lnt id=hl-1-94><a style=outline:none;text-decoration:none;color:inherit href=#hl-1-94> 94</a>
+</span><span class=lnt id=hl-1-95><a style=outline:none;text-decoration:none;color:inherit href=#hl-1-95> 95</a>
+</span><span class=lnt id=hl-1-96><a style=outline:none;text-decoration:none;color:inherit href=#hl-1-96> 96</a>
+</span><span class=lnt id=hl-1-97><a style=outline:none;text-decoration:none;color:inherit href=#hl-1-97> 97</a>
+</span><span class=lnt id=hl-1-98><a style=outline:none;text-decoration:none;color:inherit href=#hl-1-98> 98</a>
+</span><span class=lnt id=hl-1-99><a style=outline:none;text-decoration:none;color:inherit href=#hl-1-99> 99</a>
+</span><span class=lnt id=hl-1-100><a style=outline:none;text-decoration:none;color:inherit href=#hl-1-100>100</a>
+</span><span class=lnt id=hl-1-101><a style=outline:none;text-decoration:none;color:inherit href=#hl-1-101>101</a>
+</span><span class=lnt id=hl-1-102><a style=outline:none;text-decoration:none;color:inherit href=#hl-1-102>102</a>
+</span><span class=lnt id=hl-1-103><a style=outline:none;text-decoration:none;color:inherit href=#hl-1-103>103</a>
+</span><span class=lnt id=hl-1-104><a style=outline:none;text-decoration:none;color:inherit href=#hl-1-104>104</a>
+</span><span class=lnt id=hl-1-105><a style=outline:none;text-decoration:none;color:inherit href=#hl-1-105>105</a>
+</span><span class=lnt id=hl-1-106><a style=outline:none;text-decoration:none;color:inherit href=#hl-1-106>106</a>
+</span><span class=lnt id=hl-1-107><a style=outline:none;text-decoration:none;color:inherit href=#hl-1-107>107</a>
+</span><span class=lnt id=hl-1-108><a style=outline:none;text-decoration:none;color:inherit href=#hl-1-108>108</a>
+</span><span class=lnt id=hl-1-109><a style=outline:none;text-decoration:none;color:inherit href=#hl-1-109>109</a>
+</span><span class=lnt id=hl-1-110><a style=outline:none;text-decoration:none;color:inherit href=#hl-1-110>110</a>
+</span><span class=lnt id=hl-1-111><a style=outline:none;text-decoration:none;color:inherit href=#hl-1-111>111</a>
+</span><span class=lnt id=hl-1-112><a style=outline:none;text-decoration:none;color:inherit href=#hl-1-112>112</a>
+</span><span class=lnt id=hl-1-113><a style=outline:none;text-decoration:none;color:inherit href=#hl-1-113>113</a>
+</span><span class=lnt id=hl-1-114><a style=outline:none;text-decoration:none;color:inherit href=#hl-1-114>114</a>
+</span><span class=lnt id=hl-1-115><a style=outline:none;text-decoration:none;color:inherit href=#hl-1-115>115</a>
+</span><span class=lnt id=hl-1-116><a style=outline:none;text-decoration:none;color:inherit href=#hl-1-116>116</a>
+</span><span class=lnt id=hl-1-117><a style=outline:none;text-decoration:none;color:inherit href=#hl-1-117>117</a>
+</span><span class=lnt id=hl-1-118><a style=outline:none;text-decoration:none;color:inherit href=#hl-1-118>118</a>
+</span><span class=lnt id=hl-1-119><a style=outline:none;text-decoration:none;color:inherit href=#hl-1-119>119</a>
+</span><span class=lnt id=hl-1-120><a style=outline:none;text-decoration:none;color:inherit href=#hl-1-120>120</a>
+</span><span class=lnt id=hl-1-121><a style=outline:none;text-decoration:none;color:inherit href=#hl-1-121>121</a>
+</span><span class=lnt id=hl-1-122><a style=outline:none;text-decoration:none;color:inherit href=#hl-1-122>122</a>
+</span><span class=lnt id=hl-1-123><a style=outline:none;text-decoration:none;color:inherit href=#hl-1-123>123</a>
+</span><span class=lnt id=hl-1-124><a style=outline:none;text-decoration:none;color:inherit href=#hl-1-124>124</a>
+</span><span class=lnt id=hl-1-125><a style=outline:none;text-decoration:none;color:inherit href=#hl-1-125>125</a>
+</span><span class=lnt id=hl-1-126><a style=outline:none;text-decoration:none;color:inherit href=#hl-1-126>126</a>
+</span><span class=lnt id=hl-1-127><a style=outline:none;text-decoration:none;color:inherit href=#hl-1-127>127</a>
+</span><span class=lnt id=hl-1-128><a style=outline:none;text-decoration:none;color:inherit href=#hl-1-128>128</a>
+</span><span class=lnt id=hl-1-129><a style=outline:none;text-decoration:none;color:inherit href=#hl-1-129>129</a>
+</span><span class=lnt id=hl-1-130><a style=outline:none;text-decoration:none;color:inherit href=#hl-1-130>130</a>
+</span><span class=lnt id=hl-1-131><a style=outline:none;text-decoration:none;color:inherit href=#hl-1-131>131</a>
+</span><span class=lnt id=hl-1-132><a style=outline:none;text-decoration:none;color:inherit href=#hl-1-132>132</a>
+</span><span class=lnt id=hl-1-133><a style=outline:none;text-decoration:none;color:inherit href=#hl-1-133>133</a>
+</span><span class=lnt id=hl-1-134><a style=outline:none;text-decoration:none;color:inherit href=#hl-1-134>134</a>
+</span><span class=lnt id=hl-1-135><a style=outline:none;text-decoration:none;color:inherit href=#hl-1-135>135</a>
+</span><span class=lnt id=hl-1-136><a style=outline:none;text-decoration:none;color:inherit href=#hl-1-136>136</a>
+</span><span class=lnt id=hl-1-137><a style=outline:none;text-decoration:none;color:inherit href=#hl-1-137>137</a>
+</span><span class=lnt id=hl-1-138><a style=outline:none;text-decoration:none;color:inherit href=#hl-1-138>138</a>
+</span><span class=lnt id=hl-1-139><a style=outline:none;text-decoration:none;color:inherit href=#hl-1-139>139</a>
+</span><span class=lnt id=hl-1-140><a style=outline:none;text-decoration:none;color:inherit href=#hl-1-140>140</a>
+</span><span class=lnt id=hl-1-141><a style=outline:none;text-decoration:none;color:inherit href=#hl-1-141>141</a>
+</span><span class=lnt id=hl-1-142><a style=outline:none;text-decoration:none;color:inherit href=#hl-1-142>142</a>
+</span><span class=lnt id=hl-1-143><a style=outline:none;text-decoration:none;color:inherit href=#hl-1-143>143</a>
+</span><span class=lnt id=hl-1-144><a style=outline:none;text-decoration:none;color:inherit href=#hl-1-144>144</a>
+</span><span class=lnt id=hl-1-145><a style=outline:none;text-decoration:none;color:inherit href=#hl-1-145>145</a>
+</span><span class=lnt id=hl-1-146><a style=outline:none;text-decoration:none;color:inherit href=#hl-1-146>146</a>
+</span><span class=lnt id=hl-1-147><a style=outline:none;text-decoration:none;color:inherit href=#hl-1-147>147</a>
+</span><span class=lnt id=hl-1-148><a style=outline:none;text-decoration:none;color:inherit href=#hl-1-148>148</a>
+</span><span class=lnt id=hl-1-149><a style=outline:none;text-decoration:none;color:inherit href=#hl-1-149>149</a>
+</span><span class=lnt id=hl-1-150><a style=outline:none;text-decoration:none;color:inherit href=#hl-1-150>150</a>
+</span><span class=lnt id=hl-1-151><a style=outline:none;text-decoration:none;color:inherit href=#hl-1-151>151</a>
+</span><span class=lnt id=hl-1-152><a style=outline:none;text-decoration:none;color:inherit href=#hl-1-152>152</a>
+</span><span class=lnt id=hl-1-153><a style=outline:none;text-decoration:none;color:inherit href=#hl-1-153>153</a>
+</span><span class=lnt id=hl-1-154><a style=outline:none;text-decoration:none;color:inherit href=#hl-1-154>154</a>
+</span><span class=lnt id=hl-1-155><a style=outline:none;text-decoration:none;color:inherit href=#hl-1-155>155</a>
+</span><span class=lnt id=hl-1-156><a style=outline:none;text-decoration:none;color:inherit href=#hl-1-156>156</a>
+</span><span class=lnt id=hl-1-157><a style=outline:none;text-decoration:none;color:inherit href=#hl-1-157>157</a>
+</span><span class=lnt id=hl-1-158><a style=outline:none;text-decoration:none;color:inherit href=#hl-1-158>158</a>
+</span><span class=lnt id=hl-1-159><a style=outline:none;text-decoration:none;color:inherit href=#hl-1-159>159</a>
+</span><span class=lnt id=hl-1-160><a style=outline:none;text-decoration:none;color:inherit href=#hl-1-160>160</a>
+</span><span class=lnt id=hl-1-161><a style=outline:none;text-decoration:none;color:inherit href=#hl-1-161>161</a>
+</span><span class=lnt id=hl-1-162><a style=outline:none;text-decoration:none;color:inherit href=#hl-1-162>162</a>
+</span><span class=lnt id=hl-1-163><a style=outline:none;text-decoration:none;color:inherit href=#hl-1-163>163</a>
+</span><span class=lnt id=hl-1-164><a style=outline:none;text-decoration:none;color:inherit href=#hl-1-164>164</a>
+</span><span class=lnt id=hl-1-165><a style=outline:none;text-decoration:none;color:inherit href=#hl-1-165>165</a>
+</span><span class=lnt id=hl-1-166><a style=outline:none;text-decoration:none;color:inherit href=#hl-1-166>166</a>
+</span><span class=lnt id=hl-1-167><a style=outline:none;text-decoration:none;color:inherit href=#hl-1-167>167</a>
+</span><span class=lnt id=hl-1-168><a style=outline:none;text-decoration:none;color:inherit href=#hl-1-168>168</a>
+</span><span class=lnt id=hl-1-169><a style=outline:none;text-decoration:none;color:inherit href=#hl-1-169>169</a>
+</span><span class=lnt id=hl-1-170><a style=outline:none;text-decoration:none;color:inherit href=#hl-1-170>170</a>
+</span><span class=lnt id=hl-1-171><a style=outline:none;text-decoration:none;color:inherit href=#hl-1-171>171</a>
+</span><span class=lnt id=hl-1-172><a style=outline:none;text-decoration:none;color:inherit href=#hl-1-172>172</a>
+</span><span class=lnt id=hl-1-173><a style=outline:none;text-decoration:none;color:inherit href=#hl-1-173>173</a>
+</span><span class=lnt id=hl-1-174><a style=outline:none;text-decoration:none;color:inherit href=#hl-1-174>174</a>
+</span><span class=lnt id=hl-1-175><a style=outline:none;text-decoration:none;color:inherit href=#hl-1-175>175</a>
+</span><span class=lnt id=hl-1-176><a style=outline:none;text-decoration:none;color:inherit href=#hl-1-176>176</a>
+</span><span class=lnt id=hl-1-177><a style=outline:none;text-decoration:none;color:inherit href=#hl-1-177>177</a>
+</span><span class=lnt id=hl-1-178><a style=outline:none;text-decoration:none;color:inherit href=#hl-1-178>178</a>
+</span><span class=lnt id=hl-1-179><a style=outline:none;text-decoration:none;color:inherit href=#hl-1-179>179</a>
+</span><span class=lnt id=hl-1-180><a style=outline:none;text-decoration:none;color:inherit href=#hl-1-180>180</a>
+</span><span class=lnt id=hl-1-181><a style=outline:none;text-decoration:none;color:inherit href=#hl-1-181>181</a>
+</span><span class=lnt id=hl-1-182><a style=outline:none;text-decoration:none;color:inherit href=#hl-1-182>182</a>
+</span><span class=lnt id=hl-1-183><a style=outline:none;text-decoration:none;color:inherit href=#hl-1-183>183</a>
+</span><span class=lnt id=hl-1-184><a style=outline:none;text-decoration:none;color:inherit href=#hl-1-184>184</a>
+</span><span class=lnt id=hl-1-185><a style=outline:none;text-decoration:none;color:inherit href=#hl-1-185>185</a>
+</span><span class=lnt id=hl-1-186><a style=outline:none;text-decoration:none;color:inherit href=#hl-1-186>186</a>
+</span><span class=lnt id=hl-1-187><a style=outline:none;text-decoration:none;color:inherit href=#hl-1-187>187</a>
+</span><span class=lnt id=hl-1-188><a style=outline:none;text-decoration:none;color:inherit href=#hl-1-188>188</a>
+</span><span class=lnt id=hl-1-189><a style=outline:none;text-decoration:none;color:inherit href=#hl-1-189>189</a>
+</span><span class=lnt id=hl-1-190><a style=outline:none;text-decoration:none;color:inherit href=#hl-1-190>190</a>
+</span><span class=lnt id=hl-1-191><a style=outline:none;text-decoration:none;color:inherit href=#hl-1-191>191</a>
+</span><span class=lnt id=hl-1-192><a style=outline:none;text-decoration:none;color:inherit href=#hl-1-192>192</a>
+</span><span class=lnt id=hl-1-193><a style=outline:none;text-decoration:none;color:inherit href=#hl-1-193>193</a>
+</span><span class=lnt id=hl-1-194><a style=outline:none;text-decoration:none;color:inherit href=#hl-1-194>194</a>
+</span><span class=lnt id=hl-1-195><a style=outline:none;text-decoration:none;color:inherit href=#hl-1-195>195</a>
+</span><span class=lnt id=hl-1-196><a style=outline:none;text-decoration:none;color:inherit href=#hl-1-196>196</a>
+</span><span class=lnt id=hl-1-197><a style=outline:none;text-decoration:none;color:inherit href=#hl-1-197>197</a>
+</span><span class=lnt id=hl-1-198><a style=outline:none;text-decoration:none;color:inherit href=#hl-1-198>198</a>
+</span><span class=lnt id=hl-1-199><a style=outline:none;text-decoration:none;color:inherit href=#hl-1-199>199</a>
+</span><span class=lnt id=hl-1-200><a style=outline:none;text-decoration:none;color:inherit href=#hl-1-200>200</a>
+</span><span class=lnt id=hl-1-201><a style=outline:none;text-decoration:none;color:inherit href=#hl-1-201>201</a>
+</span><span class=lnt id=hl-1-202><a style=outline:none;text-decoration:none;color:inherit href=#hl-1-202>202</a>
+</span><span class=lnt id=hl-1-203><a style=outline:none;text-decoration:none;color:inherit href=#hl-1-203>203</a>
+</span><span class=lnt id=hl-1-204><a style=outline:none;text-decoration:none;color:inherit href=#hl-1-204>204</a>
+</span><span class=lnt id=hl-1-205><a style=outline:none;text-decoration:none;color:inherit href=#hl-1-205>205</a>
+</span><span class=lnt id=hl-1-206><a style=outline:none;text-decoration:none;color:inherit href=#hl-1-206>206</a>
+</span><span class=lnt id=hl-1-207><a style=outline:none;text-decoration:none;color:inherit href=#hl-1-207>207</a>
+</span><span class=lnt id=hl-1-208><a style=outline:none;text-decoration:none;color:inherit href=#hl-1-208>208</a>
+</span><span class=lnt id=hl-1-209><a style=outline:none;text-decoration:none;color:inherit href=#hl-1-209>209</a>
+</span><span class=lnt id=hl-1-210><a style=outline:none;text-decoration:none;color:inherit href=#hl-1-210>210</a>
+</span><span class=lnt id=hl-1-211><a style=outline:none;text-decoration:none;color:inherit href=#hl-1-211>211</a>
+</span><span class=lnt id=hl-1-212><a style=outline:none;text-decoration:none;color:inherit href=#hl-1-212>212</a>
+</span><span class=lnt id=hl-1-213><a style=outline:none;text-decoration:none;color:inherit href=#hl-1-213>213</a>
+</span><span class=lnt id=hl-1-214><a style=outline:none;text-decoration:none;color:inherit href=#hl-1-214>214</a>
+</span><span class=lnt id=hl-1-215><a style=outline:none;text-decoration:none;color:inherit href=#hl-1-215>215</a>
+</span><span class=lnt id=hl-1-216><a style=outline:none;text-decoration:none;color:inherit href=#hl-1-216>216</a>
+</span><span class=lnt id=hl-1-217><a style=outline:none;text-decoration:none;color:inherit href=#hl-1-217>217</a>
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-py data-lang=py><span class=line><span class=cl><span class=kn>import</span> <span class=nn>hashlib</span>  
+</span></span><span class=line><span class=cl><span class=kn>import</span> <span class=nn>random</span>  
+</span></span><span class=line><span class=cl><span class=kn>from</span> <span class=nn>random</span> <span class=kn>import</span> <span class=n>Random</span>  
+</span></span><span class=line><span class=cl><span class=kn>from</span> <span class=nn>randcrack</span> <span class=kn>import</span> <span class=n>RandCrack</span>  
+</span></span><span class=line><span class=cl>  
+</span></span><span class=line><span class=cl>  
+</span></span><span class=line><span class=cl><span class=k>def</span> <span class=nf>test_random</span><span class=p>():</span>  
+</span></span><span class=line><span class=cl>    <span class=n>r</span> <span class=o>=</span> <span class=n>random</span><span class=o>.</span><span class=n>getrandbits</span><span class=p>(</span><span class=mi>128</span><span class=p>)</span>  
+</span></span><span class=line><span class=cl>    <span class=nb>print</span><span class=p>(</span><span class=n>r</span><span class=p>)</span>  
+</span></span><span class=line><span class=cl>    <span class=n>hr</span> <span class=o>=</span> <span class=nb>hex</span><span class=p>(</span><span class=n>r</span><span class=p>)[</span><span class=mi>2</span><span class=p>:]</span><span class=o>.</span><span class=n>zfill</span><span class=p>(</span><span class=mi>32</span><span class=p>)</span>  
+</span></span><span class=line><span class=cl>    <span class=nb>print</span><span class=p>(</span><span class=n>hr</span><span class=p>)</span>  
+</span></span><span class=line><span class=cl>    <span class=nb>print</span><span class=p>(</span><span class=nb>int</span><span class=p>(</span><span class=n>hr</span><span class=p>,</span> <span class=mi>16</span><span class=p>))</span>  
+</span></span><span class=line><span class=cl>  
+</span></span><span class=line><span class=cl>  
+</span></span><span class=line><span class=cl><span class=k>def</span> <span class=nf>invert_right</span><span class=p>(</span><span class=n>m</span><span class=p>,</span> <span class=n>l</span><span class=p>,</span> <span class=n>val</span><span class=o>=</span><span class=s1>&#39;&#39;</span><span class=p>):</span>  
+</span></span><span class=line><span class=cl>    <span class=n>length</span> <span class=o>=</span> <span class=mi>32</span>  
+</span></span><span class=line><span class=cl>    <span class=n>mx</span> <span class=o>=</span> <span class=mh>0xffffffff</span>  
+</span></span><span class=line><span class=cl>    <span class=k>if</span> <span class=n>val</span> <span class=o>==</span> <span class=s1>&#39;&#39;</span><span class=p>:</span>  
+</span></span><span class=line><span class=cl>        <span class=n>val</span> <span class=o>=</span> <span class=n>mx</span>  
+</span></span><span class=line><span class=cl>    <span class=n>i</span><span class=p>,</span> <span class=n>res</span> <span class=o>=</span> <span class=mi>0</span><span class=p>,</span> <span class=mi>0</span>  
+</span></span><span class=line><span class=cl>    <span class=k>while</span> <span class=n>i</span> <span class=o>*</span> <span class=n>l</span> <span class=o>&lt;</span> <span class=n>length</span><span class=p>:</span>  
+</span></span><span class=line><span class=cl>        <span class=n>mask</span> <span class=o>=</span> <span class=p>(</span><span class=n>mx</span> <span class=o>&lt;&lt;</span> <span class=p>(</span><span class=n>length</span> <span class=o>-</span> <span class=n>l</span><span class=p>)</span> <span class=o>&amp;</span> <span class=n>mx</span><span class=p>)</span> <span class=o>&gt;&gt;</span> <span class=n>i</span> <span class=o>*</span> <span class=n>l</span>  
+</span></span><span class=line><span class=cl>        <span class=n>tmp</span> <span class=o>=</span> <span class=n>m</span> <span class=o>&amp;</span> <span class=n>mask</span>  
+</span></span><span class=line><span class=cl>        <span class=n>m</span> <span class=o>=</span> <span class=n>m</span> <span class=o>^</span> <span class=n>tmp</span> <span class=o>&gt;&gt;</span> <span class=n>l</span> <span class=o>&amp;</span> <span class=n>val</span>  
+</span></span><span class=line><span class=cl>        <span class=n>res</span> <span class=o>+=</span> <span class=n>tmp</span>  
+</span></span><span class=line><span class=cl>        <span class=n>i</span> <span class=o>+=</span> <span class=mi>1</span>  
+</span></span><span class=line><span class=cl>    <span class=k>return</span> <span class=n>res</span>  
+</span></span><span class=line><span class=cl>  
+</span></span><span class=line><span class=cl>  
+</span></span><span class=line><span class=cl><span class=k>def</span> <span class=nf>invert_left</span><span class=p>(</span><span class=n>m</span><span class=p>,</span> <span class=n>l</span><span class=p>,</span> <span class=n>val</span><span class=p>):</span>  
+</span></span><span class=line><span class=cl>    <span class=n>length</span> <span class=o>=</span> <span class=mi>32</span>  
+</span></span><span class=line><span class=cl>    <span class=n>mx</span> <span class=o>=</span> <span class=mh>0xffffffff</span>  
+</span></span><span class=line><span class=cl>    <span class=n>i</span><span class=p>,</span> <span class=n>res</span> <span class=o>=</span> <span class=mi>0</span><span class=p>,</span> <span class=mi>0</span>  
+</span></span><span class=line><span class=cl>    <span class=k>while</span> <span class=n>i</span> <span class=o>*</span> <span class=n>l</span> <span class=o>&lt;</span> <span class=n>length</span><span class=p>:</span>  
+</span></span><span class=line><span class=cl>        <span class=n>mask</span> <span class=o>=</span> <span class=p>(</span><span class=n>mx</span> <span class=o>&gt;&gt;</span> <span class=p>(</span><span class=n>length</span> <span class=o>-</span> <span class=n>l</span><span class=p>)</span> <span class=o>&amp;</span> <span class=n>mx</span><span class=p>)</span> <span class=o>&lt;&lt;</span> <span class=n>i</span> <span class=o>*</span> <span class=n>l</span>  
+</span></span><span class=line><span class=cl>        <span class=n>tmp</span> <span class=o>=</span> <span class=n>m</span> <span class=o>&amp;</span> <span class=n>mask</span>  
+</span></span><span class=line><span class=cl>        <span class=n>m</span> <span class=o>^=</span> <span class=n>tmp</span> <span class=o>&lt;&lt;</span> <span class=n>l</span> <span class=o>&amp;</span> <span class=n>val</span>  
+</span></span><span class=line><span class=cl>        <span class=n>res</span> <span class=o>|=</span> <span class=n>tmp</span>  
+</span></span><span class=line><span class=cl>        <span class=n>i</span> <span class=o>+=</span> <span class=mi>1</span>  
+</span></span><span class=line><span class=cl>    <span class=k>return</span> <span class=n>res</span>  
+</span></span><span class=line><span class=cl>  
+</span></span><span class=line><span class=cl>  
+</span></span><span class=line><span class=cl><span class=k>def</span> <span class=nf>invert_temper</span><span class=p>(</span><span class=n>m</span><span class=p>):</span>  
+</span></span><span class=line><span class=cl>    <span class=n>m</span> <span class=o>=</span> <span class=n>invert_right</span><span class=p>(</span><span class=n>m</span><span class=p>,</span> <span class=mi>18</span><span class=p>)</span>  
+</span></span><span class=line><span class=cl>    <span class=n>m</span> <span class=o>=</span> <span class=n>invert_left</span><span class=p>(</span><span class=n>m</span><span class=p>,</span> <span class=mi>15</span><span class=p>,</span> <span class=mi>4022730752</span><span class=p>)</span>  
+</span></span><span class=line><span class=cl>    <span class=n>m</span> <span class=o>=</span> <span class=n>invert_left</span><span class=p>(</span><span class=n>m</span><span class=p>,</span> <span class=mi>7</span><span class=p>,</span> <span class=mi>2636928640</span><span class=p>)</span>  
+</span></span><span class=line><span class=cl>    <span class=n>m</span> <span class=o>=</span> <span class=n>invert_right</span><span class=p>(</span><span class=n>m</span><span class=p>,</span> <span class=mi>11</span><span class=p>)</span>  
+</span></span><span class=line><span class=cl>    <span class=k>return</span> <span class=n>m</span>  
+</span></span><span class=line><span class=cl>  
+</span></span><span class=line><span class=cl>  
+</span></span><span class=line><span class=cl><span class=k>def</span> <span class=nf>recover_state</span><span class=p>(</span><span class=n>record</span><span class=p>):</span>  
+</span></span><span class=line><span class=cl>    <span class=n>state</span> <span class=o>=</span> <span class=p>[</span><span class=n>invert_temper</span><span class=p>(</span><span class=n>i</span><span class=p>)</span> <span class=k>for</span> <span class=n>i</span> <span class=ow>in</span> <span class=n>record</span><span class=p>]</span>  
+</span></span><span class=line><span class=cl>    <span class=n>state</span> <span class=o>=</span> <span class=n>reverse_twist</span><span class=p>([</span><span class=mi>0</span><span class=p>]</span> <span class=o>*</span> <span class=mi>12</span> <span class=o>+</span> <span class=n>state</span><span class=p>)</span>  
+</span></span><span class=line><span class=cl>    <span class=k>return</span> <span class=n>state</span><span class=p>[</span><span class=mi>0</span><span class=p>:</span><span class=mi>624</span><span class=p>]</span>  
+</span></span><span class=line><span class=cl>  
+</span></span><span class=line><span class=cl>  
+</span></span><span class=line><span class=cl><span class=k>def</span> <span class=nf>clone_mt</span><span class=p>(</span><span class=n>record</span><span class=p>):</span>  
+</span></span><span class=line><span class=cl>    <span class=n>state</span> <span class=o>=</span> <span class=n>recover_state</span><span class=p>(</span><span class=n>record</span><span class=p>)[</span><span class=mi>0</span><span class=p>:</span><span class=mi>624</span><span class=p>]</span>  
+</span></span><span class=line><span class=cl>    <span class=n>gen</span> <span class=o>=</span> <span class=n>Random</span><span class=p>()</span>  
+</span></span><span class=line><span class=cl>    <span class=n>gen</span><span class=o>.</span><span class=n>setstate</span><span class=p>((</span><span class=mi>3</span><span class=p>,</span> <span class=nb>tuple</span><span class=p>(</span><span class=n>state</span> <span class=o>+</span> <span class=p>[</span><span class=mi>0</span><span class=p>]),</span> <span class=kc>None</span><span class=p>))</span>  
+</span></span><span class=line><span class=cl>    <span class=k>return</span> <span class=n>gen</span>  
+</span></span><span class=line><span class=cl>  
+</span></span><span class=line><span class=cl>  
+</span></span><span class=line><span class=cl><span class=k>def</span> <span class=nf>to_hex32</span><span class=p>(</span><span class=n>dec</span><span class=p>):</span>  
+</span></span><span class=line><span class=cl>    <span class=k>return</span> <span class=nb>hex</span><span class=p>(</span><span class=n>dec</span><span class=p>)[</span><span class=mi>2</span><span class=p>:]</span><span class=o>.</span><span class=n>zfill</span><span class=p>(</span><span class=mi>32</span><span class=p>)</span>  
+</span></span><span class=line><span class=cl>  
+</span></span><span class=line><span class=cl>  
+</span></span><span class=line><span class=cl><span class=k>def</span> <span class=nf>to_hex64</span><span class=p>(</span><span class=n>dec</span><span class=p>):</span>  
+</span></span><span class=line><span class=cl>    <span class=k>return</span> <span class=nb>hex</span><span class=p>(</span><span class=n>dec</span><span class=p>)[</span><span class=mi>2</span><span class=p>:]</span><span class=o>.</span><span class=n>zfill</span><span class=p>(</span><span class=mi>64</span><span class=p>)</span>  
+</span></span><span class=line><span class=cl>  
+</span></span><span class=line><span class=cl>  
+</span></span><span class=line><span class=cl><span class=k>def</span> <span class=nf>reverse_twist</span><span class=p>(</span><span class=n>cur</span><span class=p>):</span>  
+</span></span><span class=line><span class=cl>    <span class=n>high</span> <span class=o>=</span> <span class=mh>0x80000000</span>  
+</span></span><span class=line><span class=cl>    <span class=n>low</span> <span class=o>=</span> <span class=mh>0x7fffffff</span>  
+</span></span><span class=line><span class=cl>    <span class=n>mask</span> <span class=o>=</span> <span class=mh>0x9908b0df</span>  
+</span></span><span class=line><span class=cl>    <span class=n>state</span> <span class=o>=</span> <span class=n>cur</span>  
+</span></span><span class=line><span class=cl>    <span class=k>for</span> <span class=n>i</span> <span class=ow>in</span> <span class=nb>range</span><span class=p>(</span><span class=mi>11</span><span class=p>,</span> <span class=o>-</span><span class=mi>1</span><span class=p>,</span> <span class=o>-</span><span class=mi>1</span><span class=p>):</span>  
+</span></span><span class=line><span class=cl>        <span class=n>tmp</span> <span class=o>=</span> <span class=n>state</span><span class=p>[</span><span class=n>i</span> <span class=o>+</span> <span class=mi>624</span><span class=p>]</span> <span class=o>^</span> <span class=n>state</span><span class=p>[</span><span class=n>i</span> <span class=o>+</span> <span class=mi>397</span><span class=p>]</span>  
+</span></span><span class=line><span class=cl>        <span class=c1># recover Y,tmp = Y  </span>
+</span></span><span class=line><span class=cl>        <span class=k>if</span> <span class=n>tmp</span> <span class=o>&amp;</span> <span class=n>high</span> <span class=o>==</span> <span class=n>high</span><span class=p>:</span>  
+</span></span><span class=line><span class=cl>            <span class=n>tmp</span> <span class=o>^=</span> <span class=n>mask</span>  
+</span></span><span class=line><span class=cl>            <span class=n>tmp</span> <span class=o>&lt;&lt;=</span> <span class=mi>1</span>  
+</span></span><span class=line><span class=cl>            <span class=n>tmp</span> <span class=o>|=</span> <span class=mi>1</span>  
+</span></span><span class=line><span class=cl>        <span class=k>else</span><span class=p>:</span>  
+</span></span><span class=line><span class=cl>            <span class=n>tmp</span> <span class=o>&lt;&lt;=</span> <span class=mi>1</span>  
+</span></span><span class=line><span class=cl>        <span class=c1># recover highest bit  </span>
+</span></span><span class=line><span class=cl>        <span class=n>res</span> <span class=o>=</span> <span class=n>tmp</span> <span class=o>&amp;</span> <span class=n>high</span>  
+</span></span><span class=line><span class=cl>        <span class=c1># recover other 31 bits,when i =0,it just use the method again it so beautiful!!!!  </span>
+</span></span><span class=line><span class=cl>        <span class=n>tmp</span> <span class=o>=</span> <span class=n>state</span><span class=p>[</span><span class=n>i</span> <span class=o>-</span> <span class=mi>1</span> <span class=o>+</span> <span class=mi>624</span><span class=p>]</span> <span class=o>^</span> <span class=n>state</span><span class=p>[</span><span class=n>i</span> <span class=o>+</span> <span class=mi>396</span><span class=p>]</span>  
+</span></span><span class=line><span class=cl>        <span class=c1># recover Y,tmp = Y  </span>
+</span></span><span class=line><span class=cl>        <span class=k>if</span> <span class=n>tmp</span> <span class=o>&amp;</span> <span class=n>high</span> <span class=o>==</span> <span class=n>high</span><span class=p>:</span>  
+</span></span><span class=line><span class=cl>            <span class=n>tmp</span> <span class=o>^=</span> <span class=n>mask</span>  
+</span></span><span class=line><span class=cl>            <span class=n>tmp</span> <span class=o>&lt;&lt;=</span> <span class=mi>1</span>  
+</span></span><span class=line><span class=cl>            <span class=n>tmp</span> <span class=o>|=</span> <span class=mi>1</span>  
+</span></span><span class=line><span class=cl>        <span class=k>else</span><span class=p>:</span>  
+</span></span><span class=line><span class=cl>            <span class=n>tmp</span> <span class=o>&lt;&lt;=</span> <span class=mi>1</span>  
+</span></span><span class=line><span class=cl>        <span class=n>res</span> <span class=o>|=</span> <span class=p>(</span><span class=n>tmp</span><span class=p>)</span> <span class=o>&amp;</span> <span class=n>low</span>  
+</span></span><span class=line><span class=cl>        <span class=n>state</span><span class=p>[</span><span class=n>i</span><span class=p>]</span> <span class=o>=</span> <span class=n>res</span>  
+</span></span><span class=line><span class=cl>    <span class=k>return</span> <span class=n>state</span>  
+</span></span><span class=line><span class=cl>  
+</span></span><span class=line><span class=cl>  
+</span></span><span class=line><span class=cl><span class=k>def</span> <span class=nf>solve</span><span class=p>():</span>  
+</span></span><span class=line><span class=cl>    <span class=n>rs128s</span> <span class=o>=</span> <span class=p>[</span><span class=s1>&#39;d5d97afad7ef619b4badd8d2da10ee24&#39;</span><span class=p>,</span> <span class=s1>&#39;67f4660a8335fb9f4152a9fbc44c9c77&#39;</span><span class=p>,</span>  
+</span></span><span class=line><span class=cl>              <span class=s1>&#39;8cd43c85ebe9cc7036a37f47ccd1d1e4&#39;</span><span class=p>,</span> <span class=s1>&#39;ee3e8c62e8b0100027589d6de82677ef&#39;</span><span class=p>,</span>  
+</span></span><span class=line><span class=cl>              <span class=s1>&#39;463bb2f3731ad0e786302bf78da08330&#39;</span><span class=p>,</span> <span class=s1>&#39;e245b1852a3b92734e46eb3421bd76c9&#39;</span><span class=p>,</span>  
+</span></span><span class=line><span class=cl>              <span class=s1>&#39;0b74736786b4ab94651e3b706a548e55&#39;</span><span class=p>,</span> <span class=s1>&#39;79cb596b28c2b4e02738f93b5bfbe0d3&#39;</span><span class=p>,</span>  
+</span></span><span class=line><span class=cl>              <span class=s1>&#39;5a9c46837952952045564b5b395acad1&#39;</span><span class=p>,</span> <span class=s1>&#39;d3c2d90a05d1a059fbeba4a05a608798&#39;</span><span class=p>,</span>  
+</span></span><span class=line><span class=cl>              <span class=s1>&#39;4da0306c8ab58097d2fef9114e6fcb6d&#39;</span><span class=p>,</span> <span class=s1>&#39;9707fabbd3c96de66917f15998ac9201&#39;</span><span class=p>,</span>  
+</span></span><span class=line><span class=cl>              <span class=s1>&#39;9dd3e46fc930abfb523fe31e8ee8a658&#39;</span><span class=p>,</span> <span class=s1>&#39;3716a8fd05f7388e7151d09431e61ee1&#39;</span><span class=p>,</span>  
+</span></span><span class=line><span class=cl>              <span class=s1>&#39;9acf027679a6d7a674a43dee4f5bea35&#39;</span><span class=p>,</span> <span class=s1>&#39;78702a2b125a940519337b1bf50aff8a&#39;</span><span class=p>,</span>  
+</span></span><span class=line><span class=cl>              <span class=s1>&#39;262cf3b8c8072a602048a24756c83fcf&#39;</span><span class=p>,</span> <span class=s1>&#39;092f8d227ec583c4734a6f449de521a3&#39;</span><span class=p>,</span>  
+</span></span><span class=line><span class=cl>              <span class=s1>&#39;712aa300302b57fed458553426348fce&#39;</span><span class=p>,</span> <span class=s1>&#39;834d4a0ea451cc04b469636b18c56435&#39;</span><span class=p>,</span>  
+</span></span><span class=line><span class=cl>              <span class=s1>&#39;754b5284b14402c61e3b1e56cb2d41e9&#39;</span><span class=p>,</span> <span class=s1>&#39;51d742ca6a341032afcb5dc645f54bfa&#39;</span><span class=p>,</span>  
+</span></span><span class=line><span class=cl>              <span class=s1>&#39;c1a33d104f47e33d6932905b483a2018&#39;</span><span class=p>,</span> <span class=s1>&#39;3def7c2a14cff6b2864a2100956df07f&#39;</span><span class=p>,</span>  
+</span></span><span class=line><span class=cl>              <span class=s1>&#39;7e3606e4ec1c99fe5a8593ae44f25a70&#39;</span><span class=p>,</span> <span class=s1>&#39;404c6139570883dbab8e5a299d7a5017&#39;</span><span class=p>,</span>  
+</span></span><span class=line><span class=cl>              <span class=s1>&#39;f07597079e1b68ebb4e2d16b83b7b484&#39;</span><span class=p>,</span> <span class=s1>&#39;0723daf5c65f8ba6cd6e43fcdf9d18dc&#39;</span><span class=p>,</span>  
+</span></span><span class=line><span class=cl>              <span class=s1>&#39;4c54db12829f165837384b66978e8438&#39;</span><span class=p>,</span> <span class=s1>&#39;cd056e64e1f31461cab2e66ece9d3278&#39;</span><span class=p>,</span>  
+</span></span><span class=line><span class=cl>              <span class=s1>&#39;2f6ae16fab122cbce240e32464a1ab57&#39;</span><span class=p>,</span> <span class=s1>&#39;f86e0e9ee23498340f62d8617f6f5218&#39;</span><span class=p>,</span>  
+</span></span><span class=line><span class=cl>              <span class=s1>&#39;af4ebe2535885c783c89f8d8c4815076&#39;</span><span class=p>,</span> <span class=s1>&#39;c8eae5b5c7aca2c5fdb4f284e2cf65c5&#39;</span><span class=p>,</span>  
+</span></span><span class=line><span class=cl>              <span class=s1>&#39;bec0d8ecabedd9811a8ecb6052b21d8c&#39;</span><span class=p>,</span> <span class=s1>&#39;731bd3421b6517aa101357fe1c49caf3&#39;</span><span class=p>,</span>  
+</span></span><span class=line><span class=cl>              <span class=s1>&#39;344f4a26cdaf1a782d9b32208e1a3e92&#39;</span><span class=p>,</span> <span class=s1>&#39;892b1741d304878461dd0774a335ea3d&#39;</span><span class=p>,</span>  
+</span></span><span class=line><span class=cl>              <span class=s1>&#39;56e2a484ca40f43e059bf5f0bd822bdc&#39;</span><span class=p>,</span> <span class=s1>&#39;d7c0762df71b31c14654147fb9a0595c&#39;</span><span class=p>,</span>  
+</span></span><span class=line><span class=cl>              <span class=s1>&#39;57016a179ba5509f6b04a161ac628b34&#39;</span><span class=p>,</span> <span class=s1>&#39;e49a2d573522c1ee3e8348ceca0295a4&#39;</span><span class=p>,</span>  
+</span></span><span class=line><span class=cl>              <span class=s1>&#39;4b0f49c7e6469e82832e9cc90b9e17c0&#39;</span><span class=p>,</span> <span class=s1>&#39;eadc9d0c8b75127fe0a7f71881de1ea7&#39;</span><span class=p>,</span>  
+</span></span><span class=line><span class=cl>              <span class=s1>&#39;db9fe5537768207bd8cdf770bcd42dfa&#39;</span><span class=p>,</span> <span class=s1>&#39;ba2f57578752628d1ecac419b3a8bc36&#39;</span><span class=p>,</span>  
+</span></span><span class=line><span class=cl>              <span class=s1>&#39;3752e70b5d2b578a8d412d84aab43705&#39;</span><span class=p>,</span> <span class=s1>&#39;54e97795df8781c776cbb1ce4f5f31fc&#39;</span><span class=p>,</span>  
+</span></span><span class=line><span class=cl>              <span class=s1>&#39;32794880abc9f68102c24e92ad9c7cd5&#39;</span><span class=p>,</span>  
+</span></span><span class=line><span class=cl>              <span class=s1>&#39;b5eb7e651ca298f6873694c47d1cd3da&#39;</span><span class=p>,</span> <span class=s1>&#39;a188934777d2c67e3d59692135005497&#39;</span><span class=p>,</span>  
+</span></span><span class=line><span class=cl>              <span class=s1>&#39;34c308fa1644b387169ea88c1b575490&#39;</span><span class=p>]</span>  
+</span></span><span class=line><span class=cl>    <span class=n>rs256s</span> <span class=o>=</span> <span class=p>[</span><span class=s1>&#39;2eebed894580fb900c3615d4866150e68322ff4d48e7509f85ff4543969b0cf6&#39;</span><span class=p>,</span>  
+</span></span><span class=line><span class=cl>              <span class=s1>&#39;017aefd63b4ce14eb376161902d92894a15f680e7b055ce25c3b02c6b49db0a6&#39;</span><span class=p>,</span>  
+</span></span><span class=line><span class=cl>              <span class=s1>&#39;e12d945904032887c967ae03a48c8b096abc79dc64134d872693599d4f6c91cc&#39;</span><span class=p>,</span>  
+</span></span><span class=line><span class=cl>              <span class=s1>&#39;0f8957f365f53a7209baa852905c5da5dba54ddb403ab17a4c9b3a051540d49c&#39;</span><span class=p>,</span>  
+</span></span><span class=line><span class=cl>              <span class=s1>&#39;091e3e41815cd32f482f2cf54ac3338fc918c2a657896af1aa1b23ea528664f4&#39;</span><span class=p>,</span>  
+</span></span><span class=line><span class=cl>              <span class=s1>&#39;5916cd18e8c48c545232112f2179aa7a722350a8a0ced4f1363cc61bc9d83630&#39;</span><span class=p>,</span>  
+</span></span><span class=line><span class=cl>              <span class=s1>&#39;37702710d47a1c17278743253123f6eac85b16d9393432ec65100143bc8657e8&#39;</span><span class=p>,</span>  
+</span></span><span class=line><span class=cl>              <span class=s1>&#39;c3a7006293c48957cba5c010f945483cfdc47650a79d0e8a8a9a52c174244a10&#39;</span><span class=p>,</span>  
+</span></span><span class=line><span class=cl>              <span class=s1>&#39;e1a90a475dd21da64d64ea1dd50a82a622061d08e9d4b3016982c4a0b42f1251&#39;</span><span class=p>,</span>  
+</span></span><span class=line><span class=cl>              <span class=s1>&#39;2f40ff85024765e58ed175927c53e0a279cda96ce755b602f89bfc171108ba3d&#39;</span><span class=p>,</span>  
+</span></span><span class=line><span class=cl>              <span class=s1>&#39;f4f8337dd7267d02638a9cc531c8a02fe0316dd5ff6f8c8aec898c060c6fb217&#39;</span><span class=p>,</span>  
+</span></span><span class=line><span class=cl>              <span class=s1>&#39;0df2f3fe1eb976944a2de5729fca4a12b83c8329b4f514869856ebb94b7d7bf9&#39;</span><span class=p>,</span>  
+</span></span><span class=line><span class=cl>              <span class=s1>&#39;abb2f1277b1cb5ad07254b7f7ed346bcdb73282b306123ce0b5befe42a9e796d&#39;</span><span class=p>,</span>  
+</span></span><span class=line><span class=cl>              <span class=s1>&#39;6ef31ed6a2a465bcd146c2438bf391bfd9f3187cf54afae512220a7a94714bf3&#39;</span><span class=p>,</span>  
+</span></span><span class=line><span class=cl>              <span class=s1>&#39;6981f99ba288923a5cd68908ecc8795bf301f1e7d081ac6580a63902fd52da01&#39;</span><span class=p>,</span>  
+</span></span><span class=line><span class=cl>              <span class=s1>&#39;b6b07975697de1c0342e3711b59165b849125794ef2541c6c60dcf40e689df7b&#39;</span><span class=p>,</span>  
+</span></span><span class=line><span class=cl>              <span class=s1>&#39;20e3af3a2bcedfd15199975cc9edcde14cb13fdff3ea0607a4747601e500aede&#39;</span><span class=p>,</span>  
+</span></span><span class=line><span class=cl>              <span class=s1>&#39;606aa1daf188b9dd5fd6141312f1828846f92baa519e70e5c6923a352421fe2f&#39;</span><span class=p>,</span>  
+</span></span><span class=line><span class=cl>              <span class=s1>&#39;1dc6a60112e99c5b884c0bb5430a7a54eba8aef34fada9cb96bce79a22456cf2&#39;</span><span class=p>,</span>  
+</span></span><span class=line><span class=cl>              <span class=s1>&#39;fd81e36f576119a19185cd12e87544b42f9fcc3dcb5e7ba282b1a128d73d63c5&#39;</span><span class=p>,</span>  
+</span></span><span class=line><span class=cl>              <span class=s1>&#39;7a01e947ca012a5c9a8dd20e693a7788cd6157a5c3fce5fa7c7e09014ea3266e&#39;</span><span class=p>,</span>  
+</span></span><span class=line><span class=cl>              <span class=s1>&#39;ccd162b182c773062514ffc3551ed47f32293700083782d902efc55b1e9795c6&#39;</span><span class=p>,</span>  
+</span></span><span class=line><span class=cl>              <span class=s1>&#39;dbb6115aefd2638eebf44d3be6e9525e09ff036269d954469a0f925b496327a7&#39;</span><span class=p>,</span>  
+</span></span><span class=line><span class=cl>              <span class=s1>&#39;ac08696fe64bb5e58cd3e558463213ca08ab7805e33f45459ae14b35fc5858c6&#39;</span><span class=p>,</span>  
+</span></span><span class=line><span class=cl>              <span class=s1>&#39;6e1594596ad1c656635af29d14b22a5ed10e545442eea5f4e056e20d11aa33b3&#39;</span><span class=p>,</span>  
+</span></span><span class=line><span class=cl>              <span class=s1>&#39;4afd17e64562603c66ce0ca42d544ca48511c3d560f9180c231a9ccb28a0e55e&#39;</span><span class=p>,</span>  
+</span></span><span class=line><span class=cl>              <span class=s1>&#39;06b2d2b24ca626e18fdcb3196e989e3b05150500815511f48200ddea9aacda48&#39;</span><span class=p>,</span>  
+</span></span><span class=line><span class=cl>              <span class=s1>&#39;947a11e8258fd161d02b0eb1b2e8fcd9ff1684a7c75f7c506ddee91f08316f56&#39;</span><span class=p>,</span>  
+</span></span><span class=line><span class=cl>              <span class=s1>&#39;a0e58b15736cab055be1d03860dedb6b8136f6739308c2e0ef6a7490c6b4a1f1&#39;</span><span class=p>,</span>  
+</span></span><span class=line><span class=cl>              <span class=s1>&#39;31476f64f96d72a398e7eb789068b8cfd61ed9cac95d76824a2bbf5b682ea72d&#39;</span><span class=p>,</span>  
+</span></span><span class=line><span class=cl>              <span class=s1>&#39;974259198846a4849d318afd325d860a6e40dfd39e1ed8c7b6d87c990e35efcf&#39;</span><span class=p>,</span>  
+</span></span><span class=line><span class=cl>              <span class=s1>&#39;e93d02ba7079c488c30e377794b4fcc62eeafb6c3f02197f1ebc059e3e5f7f07&#39;</span><span class=p>,</span>  
+</span></span><span class=line><span class=cl>              <span class=s1>&#39;ded96eec0d25c05a54671a001bcd99f5c6d3991d2fdf80afb8f0861a44f3fd64&#39;</span><span class=p>,</span>  
+</span></span><span class=line><span class=cl>              <span class=s1>&#39;86f34c1da65f07634de7c302a6df306dd545806022411a318900bd33b0aff9bd&#39;</span><span class=p>,</span>  
+</span></span><span class=line><span class=cl>              <span class=s1>&#39;59baf4cf3d3b85fcdefd1a9b60c3d78926ff73650ac375c616b30fe9063b377d&#39;</span><span class=p>,</span>  
+</span></span><span class=line><span class=cl>              <span class=s1>&#39;02f2ee251ecc19fa52dd42c0e0b609bc2e7a8ae11ce6ca35396a4bc74d12ac63&#39;</span><span class=p>,</span>  
+</span></span><span class=line><span class=cl>              <span class=s1>&#39;597d09b4c43012b1b4b040d8c62d5fb02d1c4249de4eea06e1447000ba53f50c&#39;</span><span class=p>,</span>  
+</span></span><span class=line><span class=cl>              <span class=s1>&#39;bb87bd8e1903db2df41c349914e9f3591bb032400be6e86ed10e7d292243a374&#39;</span><span class=p>,</span>  
+</span></span><span class=line><span class=cl>              <span class=s1>&#39;cec38960069fdc8090cfbdd166e15ec8a77ce5b4d6b350805a63d2b54cbf0187&#39;</span><span class=p>,</span>  
+</span></span><span class=line><span class=cl>              <span class=s1>&#39;1439d35a9c0caa9cacabe8e6179a02d51ebb9fb51125d5eeaba47ff6b8abcc97&#39;</span><span class=p>,</span>  
+</span></span><span class=line><span class=cl>              <span class=s1>&#39;820d72d49e0fd86ef47b022a3091b326be8b0d2a42f87cbc918737b9972ea62f&#39;</span><span class=p>,</span>  
+</span></span><span class=line><span class=cl>              <span class=s1>&#39;e625e82100031fa4a4410700034859cd4b35c086f5ac2870c6909c16a6831bfc&#39;</span><span class=p>,</span>  
+</span></span><span class=line><span class=cl>              <span class=s1>&#39;f0e22f5167d29331351e1718c17b5420f6a29d84357273e1bfb24c2ff34fa675&#39;</span><span class=p>,</span>  
+</span></span><span class=line><span class=cl>              <span class=s1>&#39;a5a7991f0c5c6a44f68c5c18661611057dbabeff7847623315ce784095645f75&#39;</span><span class=p>,</span>  
+</span></span><span class=line><span class=cl>              <span class=s1>&#39;07cd3f5c5c690214af5feda27b3aec257543a8f96bc509805028a0e95c5d98c6&#39;</span><span class=p>,</span>  
+</span></span><span class=line><span class=cl>              <span class=s1>&#39;6e5dd4405c1b446b9530e4d9356c05b71d1bfcf8a79778588143c3b6fec3fded&#39;</span><span class=p>,</span>  
+</span></span><span class=line><span class=cl>              <span class=s1>&#39;a33f821d277e6f73c09a5ecd14cef80bac29ffe2b917225c27725d2447ac0489&#39;</span><span class=p>,</span>  
+</span></span><span class=line><span class=cl>              <span class=s1>&#39;c18a4a02dd1f7ee65bf5596c53549c286a754afb0e3b90b2369cdd1e43c0b986&#39;</span><span class=p>,</span>  
+</span></span><span class=line><span class=cl>              <span class=s1>&#39;6b8df66aa27b40ca275bc133958b5d543167edf919e7e623a496c9afbf7594d6&#39;</span><span class=p>,</span>  
+</span></span><span class=line><span class=cl>              <span class=s1>&#39;c48124eeef995c7bb705bd240a26dbf6bdbe42ba29addf7ac78fa28dbed3debe&#39;</span><span class=p>,</span>  
+</span></span><span class=line><span class=cl>              <span class=s1>&#39;040eef11dc6e0f3bb3e58e12d2a57ee274071a9c6224f27db70e19a8aa7d4df2&#39;</span><span class=p>,</span>  
+</span></span><span class=line><span class=cl>              <span class=s1>&#39;4ecd0a955e52657fab8dfdac2df4d805f1d08b031df8bce22ac01fe20ca72c5b&#39;</span><span class=p>]</span>  
+</span></span><span class=line><span class=cl>    <span class=n>record</span> <span class=o>=</span> <span class=p>[]</span>  
+</span></span><span class=line><span class=cl>    <span class=k>for</span> <span class=n>i</span> <span class=ow>in</span> <span class=nb>range</span><span class=p>(</span><span class=mi>52</span><span class=p>):</span>  
+</span></span><span class=line><span class=cl>        <span class=n>rs128</span> <span class=o>=</span> <span class=n>rs128s</span><span class=p>[</span><span class=n>i</span><span class=p>]</span>  
+</span></span><span class=line><span class=cl>        <span class=n>rs128</span> <span class=o>=</span> <span class=nb>int</span><span class=p>(</span><span class=n>rs128</span><span class=p>,</span> <span class=mi>16</span><span class=p>)</span>  
+</span></span><span class=line><span class=cl>        <span class=n>record</span><span class=o>.</span><span class=n>append</span><span class=p>(</span><span class=n>rs128</span> <span class=o>&amp;</span> <span class=p>(</span><span class=mi>2</span> <span class=o>**</span> <span class=mi>32</span> <span class=o>-</span> <span class=mi>1</span><span class=p>))</span>  
+</span></span><span class=line><span class=cl>        <span class=n>record</span><span class=o>.</span><span class=n>append</span><span class=p>((</span><span class=n>rs128</span> <span class=o>&amp;</span> <span class=p>(</span><span class=mi>2</span> <span class=o>**</span> <span class=mi>64</span> <span class=o>-</span> <span class=mi>1</span><span class=p>))</span> <span class=o>&gt;&gt;</span> <span class=mi>32</span><span class=p>)</span>  
+</span></span><span class=line><span class=cl>        <span class=n>record</span><span class=o>.</span><span class=n>append</span><span class=p>((</span><span class=n>rs128</span> <span class=o>&amp;</span> <span class=p>(</span><span class=mi>2</span> <span class=o>**</span> <span class=mi>96</span> <span class=o>-</span> <span class=mi>1</span><span class=p>))</span> <span class=o>&gt;&gt;</span> <span class=mi>64</span><span class=p>)</span>  
+</span></span><span class=line><span class=cl>        <span class=n>record</span><span class=o>.</span><span class=n>append</span><span class=p>(</span><span class=n>rs128</span> <span class=o>&gt;&gt;</span> <span class=mi>96</span><span class=p>)</span>  
+</span></span><span class=line><span class=cl>  
+</span></span><span class=line><span class=cl>        <span class=n>rs256</span> <span class=o>=</span> <span class=n>rs256s</span><span class=p>[</span><span class=n>i</span><span class=p>]</span>  
+</span></span><span class=line><span class=cl>        <span class=n>rs256</span> <span class=o>=</span> <span class=nb>int</span><span class=p>(</span><span class=n>rs256</span><span class=p>,</span> <span class=mi>16</span><span class=p>)</span>  
+</span></span><span class=line><span class=cl>        <span class=n>record</span><span class=o>.</span><span class=n>append</span><span class=p>(</span><span class=n>rs256</span> <span class=o>&amp;</span> <span class=p>(</span><span class=mi>2</span> <span class=o>**</span> <span class=mi>32</span> <span class=o>-</span> <span class=mi>1</span><span class=p>))</span>  
+</span></span><span class=line><span class=cl>        <span class=n>record</span><span class=o>.</span><span class=n>append</span><span class=p>((</span><span class=n>rs256</span> <span class=o>&amp;</span> <span class=p>(</span><span class=mi>2</span> <span class=o>**</span> <span class=mi>64</span> <span class=o>-</span> <span class=mi>1</span><span class=p>))</span> <span class=o>&gt;&gt;</span> <span class=mi>32</span><span class=p>)</span>  
+</span></span><span class=line><span class=cl>        <span class=n>record</span><span class=o>.</span><span class=n>append</span><span class=p>((</span><span class=n>rs256</span> <span class=o>&amp;</span> <span class=p>(</span><span class=mi>2</span> <span class=o>**</span> <span class=mi>96</span> <span class=o>-</span> <span class=mi>1</span><span class=p>))</span> <span class=o>&gt;&gt;</span> <span class=mi>64</span><span class=p>)</span>  
+</span></span><span class=line><span class=cl>        <span class=n>record</span><span class=o>.</span><span class=n>append</span><span class=p>((</span><span class=n>rs256</span> <span class=o>&amp;</span> <span class=p>(</span><span class=mi>2</span> <span class=o>**</span> <span class=mi>128</span> <span class=o>-</span> <span class=mi>1</span><span class=p>))</span> <span class=o>&gt;&gt;</span> <span class=mi>96</span><span class=p>)</span>  
+</span></span><span class=line><span class=cl>        <span class=n>record</span><span class=o>.</span><span class=n>append</span><span class=p>((</span><span class=n>rs256</span> <span class=o>&amp;</span> <span class=p>(</span><span class=mi>2</span> <span class=o>**</span> <span class=mi>160</span> <span class=o>-</span> <span class=mi>1</span><span class=p>))</span> <span class=o>&gt;&gt;</span> <span class=mi>128</span><span class=p>)</span>  
+</span></span><span class=line><span class=cl>        <span class=n>record</span><span class=o>.</span><span class=n>append</span><span class=p>((</span><span class=n>rs256</span> <span class=o>&amp;</span> <span class=p>(</span><span class=mi>2</span> <span class=o>**</span> <span class=mi>192</span> <span class=o>-</span> <span class=mi>1</span><span class=p>))</span> <span class=o>&gt;&gt;</span> <span class=mi>160</span><span class=p>)</span>  
+</span></span><span class=line><span class=cl>        <span class=n>record</span><span class=o>.</span><span class=n>append</span><span class=p>((</span><span class=n>rs256</span> <span class=o>&amp;</span> <span class=p>(</span><span class=mi>2</span> <span class=o>**</span> <span class=mi>224</span> <span class=o>-</span> <span class=mi>1</span><span class=p>))</span> <span class=o>&gt;&gt;</span> <span class=mi>192</span><span class=p>)</span>  
+</span></span><span class=line><span class=cl>        <span class=n>record</span><span class=o>.</span><span class=n>append</span><span class=p>(</span><span class=n>rs256</span> <span class=o>&gt;&gt;</span> <span class=mi>224</span><span class=p>)</span>  
+</span></span><span class=line><span class=cl>  
+</span></span><span class=line><span class=cl>    <span class=n>g</span> <span class=o>=</span> <span class=n>clone_mt</span><span class=p>(</span><span class=n>record</span><span class=p>[:</span><span class=mi>624</span><span class=p>])</span>  
+</span></span><span class=line><span class=cl>    <span class=c1># for i in range(624):  </span>
+</span></span><span class=line><span class=cl>    <span class=c1>#     g.getrandbits(32) #产生前624个随机数，让state状态到生成flag前  </span>
+</span></span><span class=line><span class=cl>  
+</span></span><span class=line><span class=cl>    <span class=n>flag</span> <span class=o>=</span> <span class=n>hashlib</span><span class=o>.</span><span class=n>md5</span><span class=p>((</span><span class=n>to_hex32</span><span class=p>(</span><span class=n>g</span><span class=o>.</span><span class=n>getrandbits</span><span class=p>(</span><span class=mi>128</span><span class=p>))</span> <span class=o>+</span> <span class=n>to_hex64</span><span class=p>(</span><span class=n>g</span><span class=o>.</span><span class=n>getrandbits</span><span class=p>(</span><span class=mi>256</span><span class=p>)))</span><span class=o>.</span><span class=n>encode</span><span class=p>())</span><span class=o>.</span><span class=n>hexdigest</span><span class=p>()</span>  
+</span></span><span class=line><span class=cl>    <span class=nb>print</span><span class=p>(</span><span class=s1>&#39;flag{</span><span class=si>%s</span><span class=s1>}&#39;</span> <span class=o>%</span> <span class=n>flag</span><span class=p>)</span>  
+</span></span><span class=line><span class=cl>  
+</span></span><span class=line><span class=cl>  
+</span></span><span class=line><span class=cl><span class=k>def</span> <span class=nf>test</span><span class=p>():</span>  
+</span></span><span class=line><span class=cl>    <span class=k>for</span> <span class=n>i</span> <span class=ow>in</span> <span class=nb>range</span><span class=p>(</span><span class=mi>624</span><span class=p>):</span>  
+</span></span><span class=line><span class=cl>        <span class=nb>print</span><span class=p>(</span><span class=n>random</span><span class=o>.</span><span class=n>getrandbits</span><span class=p>(</span><span class=mi>32</span><span class=p>))</span>  
+</span></span><span class=line><span class=cl>    <span class=nb>print</span><span class=p>(</span><span class=n>random</span><span class=o>.</span><span class=n>getrandbits</span><span class=p>(</span><span class=mi>32</span><span class=p>))</span>  
+</span></span><span class=line><span class=cl>  
+</span></span><span class=line><span class=cl>  
+</span></span><span class=line><span class=cl><span class=k>if</span> <span class=vm>__name__</span> <span class=o>==</span> <span class=s1>&#39;__main__&#39;</span><span class=p>:</span>  
+</span></span><span class=line><span class=cl>    <span class=n>solve</span><span class=p>()</span>
+</span></span></code></pre></td></tr></table></div></div></article><hr><div class=page-end id=footer><div class=backlinks-container><h3>反向链接</h3><ul class=backlinks><li>无反向链接</li></ul></div><div><script src=https://cdn.jsdelivr.net/npm/d3@6.7.0/dist/d3.min.js integrity="sha256-+7jaYCp29O1JusNWHaYtgUn6EhuP0VaFuswhNV06MyI=" crossorigin=anonymous></script><h3>湾区地图</h3><div id=graph-container></div><style>:root{--g-node:var(--secondary);--g-node-active:var(--primary);--g-node-inactive:var(--visited);--g-link:var(--outlinegray);--g-link-active:#5a7282}</style><script src=https://harbor.mffseal.top/js/graph.abd4bc2af3869a96524d7d23b76152c7.js></script></div></div><div id=contact_buttons><footer><p><a rel=license href=http://creativecommons.org/licenses/by-nc/4.0/><img alt="Creative Commons Licence" style=border-width:0 src=https://i.creativecommons.org/l/by-nc/4.0/88x31.png></a><br>本博客的博主原创文章均遵循 <a rel=license href=http://creativecommons.org/licenses/by-nc/4.0/>CC BY-NC(署名-非商业性使用) 4.0 国际协议</a><br>转载请附上原文出处链接及本声明</p><p>由 mffseal 使用 <a href=https://github.com/jackyzha0/quartz>Quartz</a> 开发, © 2023</p><ul><li><a href=https://harbor.mffseal.top/>港口</a></li><li><a href=https://github.com/mffseal>Github</a></li></ul></footer></div></div></body></html>
