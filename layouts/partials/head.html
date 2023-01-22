@@ -2,12 +2,12 @@
 {{ $config := cond (eq $.Site.Language.Lang "en") "config" (printf "config.%s" $.Site.Language.Lang) }}
 {{ $data := index $.Site.Data $config }}
 <head>
+  <!-- baidu -->
+  <meta name="baidu-site-verification" content="codeva-qMAjqdfVJc" />
   <!-- google ads -->
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8920808282451934"
      crossorigin="anonymous"></script>
      {{partial "chat.html" .}}
-  <!-- baidu -->
-  <meta name="baidu-site-verification" content="codeva-qMAjqdfVJc" />
   <!-- Meta tags -->
   <meta charset="UTF-8" />
   <meta
