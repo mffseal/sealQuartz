@@ -1,8 +1,3 @@
-<!--
- * @Author: mffseal mffseal@outlook.com
- * @Description: 
- * Copyright (c) 2023 by mffseal mffseal@outlook.com, All Rights Reserved. 
--->
 ---
 title: 🦭海豹湾
 created: 2022-09-17 02:34:34
