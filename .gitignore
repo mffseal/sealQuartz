@@ -12,3 +12,11 @@ content/0*
 content/z-oblib/*
 !content/z-oblib/z2-attachments
 
+.DS_Store
+public
+resources
+.idea
+content/.obsidian
+assets/indices/linkIndex.json
+assets/indices/contentIndex.json
+linkmap

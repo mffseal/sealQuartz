@@ -1,15 +1,9 @@
-{{ if (and $.Site.Data.config.enableToc (ne .Params.enableToc false) (gt .WordCount 250)) }}
-<div class="mainTOC" id="mainTOC">
-<aside>
-    <header>
-    <h3>{{.Title}}</h3>
-    </header>
-    {{ $emtLiPtrn := "(?s)<ul>\\s<li>\\s<ul>(.*)</li>\\s</ul>" }}
-    {{ $rplcEmtLi := "<ul>$1" }}
-    {{ .TableOfContents | replaceRE $emtLiPtrn $rplcEmtLi | safeHTML }}
-    <!-- https://github.com/gohugoio/hugo/issues/1778#issuecomment-483880269 -->
-    <!-- {{.TableOfContents}} -->
+{{ $hasHeaders := gt (len (findRE "<h\\d.*?>(.|\n)*?</h\\d>" .Content)) 0 }}
+{{ if (or (and (not $.Site.Data.config.enableToc) .Params.enableToc) (and $.Site.Data.config.enableToc (ne .Params.enableToc false) $hasHeaders)) }}
+<aside class="mainTOC">
+    <details {{ if $.Site.Data.config.openToc }}open {{ end }}>
+        <summary>{{ i18n "toc" }}</summary>
+        {{ .TableOfContents }}
+    </details>
 </aside>
-<a href="#" id="toc-toggle"></a>
-</div>
 {{end}}
