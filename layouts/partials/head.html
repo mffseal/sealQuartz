@@ -2,11 +2,20 @@
 {{ $config := cond (eq $.Site.Language.Lang "en") "config" (printf "config.%s" $.Site.Language.Lang) }}
 {{ $data := index $.Site.Data $config }}
 <head>
+  {{/*  {{partial "chat.html" .}}  */}}
+
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-6PZ4T4J4G8"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-6PZ4T4J4G8');
+  </script>
   <!-- baidu -->
-  <meta name="baidu-site-verification" content="codeva-qMAjqdfVJc" />
-  <!-- google ads -->
-  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8920808282451934" crossorigin="anonymous"></script>
-  {{partial "chat.html" .}}
+  <meta name="baidu-site-verification" content="codeva-gnZgwv8wOq" />
+  
   <!-- Meta tags -->
   <meta charset="UTF-8" />
   <meta
