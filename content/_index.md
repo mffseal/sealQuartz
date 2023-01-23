@@ -1,3 +1,8 @@
+<!--
+ * @Author: mffseal mffseal@outlook.com
+ * @Description: 
+ * Copyright (c) 2023 by mffseal mffseal@outlook.com, All Rights Reserved. 
+-->
 ---
 title: 🦭海豹湾
 created: 2022-09-17 02:34:34
@@ -18,4 +23,4 @@ updated: 2022-09-19 14:08:27
 
 知识最小单位为 atom，由多个 atom 组合成 article，构建知识图谱，降低内容冗余度，不断精炼内容输出。
 
-[所有article文章](https://harbor.mffseal.top/tags/article) | [所有atom项](https://harbor.mffseal.top/tags/atom)
+[所有article文章](https://mffseal.top/tags/article) | [所有atom项](https://mffseal.top/tags/atom)
