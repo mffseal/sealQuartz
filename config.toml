@@ -1,4 +1,4 @@
-baseURL = "https://harbor.mffseal.top/"
+baseURL = "https://mffseal.top/"
 # baseURL = "http://localhost:1313/"
 languageCode = "zh-cn"
 DefaultContentLanguage = "cn"
