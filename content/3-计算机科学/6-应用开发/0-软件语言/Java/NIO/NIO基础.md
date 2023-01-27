@@ -1114,7 +1114,7 @@ SelectionKey key = channel.register(selector, 绑定事件);
 int count = selector.select();
 ```
 
-> select方法底层调用的是操作系统的[[3-计算机科学/3-操作系统/Linux/epoll|epoll]] 中epoll_wait接口，读取有状态的IO的阻塞方法，可设置超时。
+> select方法底层调用的是操作系统的[[3-计算机科学/3-操作系统/Linux/原理/epoll|epoll]] 中epoll_wait接口，读取有状态的IO的阻塞方法，可设置超时。
 
 方法2，阻塞直到绑定事件发生，或是超时（时间单位为 ms）
 
@@ -1206,7 +1206,7 @@ public class ChannelDemo6 {
 
 #### 💡 事件发生后能否不处理
 
-> 事件发生后，要么处理，要么取消（cancel），不能什么都不做，否则下次该事件仍会触发，这是因为 nio 底层使用的是[[3-计算机科学/3-操作系统/Linux/epoll#水平触发|水平触发]]
+> 事件发生后，要么处理，要么取消（cancel），不能什么都不做，否则下次该事件仍会触发，这是因为 nio 底层使用的是[[3-计算机科学/3-操作系统/Linux/原理/epoll#水平触发|水平触发]]
 
 ### 4.4 处理 read 事件
 
